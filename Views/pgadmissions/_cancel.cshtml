@@ -1,0 +1,27 @@
+﻿@model PgApplicant
+@using static EDSU_SYSTEM.Models.Enum
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCourseware">Cancel Application</h5>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Cancel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <h6>Are you sure you want to Cancel this application?</h6>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger" data-save="modal">Confirm</button>
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+                    </div>
+                 </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+

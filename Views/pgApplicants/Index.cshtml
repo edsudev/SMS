@@ -1,0 +1,115 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.PgApplicant>
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+<p>
+    <a asp-action="Create">Apply Now</a>
+</p>
+
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="d-flex">
+            <!-- Content -->
+            <div class="mx-auto">
+                List of Applicants for 2022/2023
+                <div class="widget-content widget-content-area br-6">
+                    <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Pic</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>UTME</th>
+                                <th>Mode of Entry</th>
+                                <th>Screened</th>
+                                <th>Admitted</th>
+                                <th class="dt-no-sorting">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var a = "~/files/applicantuploads/passports/" + item.Passport;
+                                <tr>
+                                    <td class="">
+                                        <a class="profile-img" href="javascript: void(0);">
+                                            <img src="~/files/applicantuploads/passports/@item.Passport" alt="avatar" style="height:30px; width:30px" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                        @Html.DisplayFor(modelItem => item.OtherName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.UTMENumber)
+                                    </td>*@
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.ModeOfEntry)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Screened)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-primary" asp-action="details" asp-controller="admissions" asp-route-id="@item.id">View</a>
+                                    </td>
+                                    @* <td class="text-center">
+                                <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                                <a class="dropdown-item" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Admit/{item.ApplicantId}")">
+                                Admission
+                                </a>
+                                @if (item.Status == EDSU_SYSTEM.Models.Enum.MainStatus.Approved)
+                                {
+                                <a class="dropdown-item" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Clearance/{item.ApplicantId}")">
+                                Clearance
+                                </a>
+                                }
+                                <a class="dropdown-item" asp-action="Step1" asp-route-id="@item.ApplicantId">Edit</a>
+                                <a class="dropdown-item" asp-action="Letter" asp-route-id="@item.ApplicantId">Cancel Admission</a>
+
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ApplicantId">Delete</a>
+
+                                </div>
+                                </div>
+                                </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mx-auto">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupVerticalDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i data-feather="chevron-down"></i><span class="icon-name"> Applicants per Session</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                        @foreach (var item in ViewBag.sessions)
+                        {
+                            <a asp-action="list" asp-route-id="@item.Name" asp-controller="admissions" class="mx-auto">@item.Name</a>
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

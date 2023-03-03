@@ -1,0 +1,137 @@
+﻿@model EDSU_SYSTEM.Models.AdmissionLetter
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+    <div>
+        <div class="row layout-top-spacing" id="cancel-row">
+            <div class="col-xl-6 col-lg-6 col-sm-6 mx-auto layout-spacing">
+                <div class="widget-content widget-content-area br-6">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="~/logo.png" style="height:100px" />
+                            </div>
+                            <div class="col-10 mt-5">
+                                <h4 class="text-center">EDO STATE UNIVERSITY UZAIRUE</h4>
+                                <p class="text-center">Km7, Auchi-Abuja Road, Iyamho-Uzairue Edo State, Nigeria.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="bg-danger">
+                                Ref
+                            </div>
+                            <div class="bg-info">
+                                Pic
+                            </div>
+                        </div>
+                        <div class="row">
+                                <p>Dear Sanni Abdulfatai EneOjoh,</p>
+                                <div class="form-group col-12">
+                                    <input asp-for="Header" class="form-control" placeholder="Letter heading" />
+                                    <span asp-validation-for="Header" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-12">
+                                    <textarea asp-for="Body" class="form-control"></textarea>
+                                    <span asp-validation-for="Body" class="text-danger"></span>
+                                </div>
+                        </div>
+                        <div class="">
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Name: </span>
+                                <span class="col-7">Sanni Abdulfatai Eneojoh </span>
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Student ID: </span>
+                                @*<span class="col-8">@ViewBag.UTME </span>*@
+
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">JAMB Registration Number: </span>
+                                @*<span class="col-8">@ViewBag.Department </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Faculty: </span>
+                                @*<span class="col-8">@ViewBag.Session </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Department: </span>
+                                @*<span class="col-8">N @ViewBag.Amount </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Degree: </span>
+                                @*<span class="col-8">@ViewBag.Description </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Duration of Course: </span>
+                                @*<span class="col-8">@ViewBag.Date </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Mode of Entry: </span>
+                                @*<span class="col-8">@ViewBag.Date </span>*@
+                            </div>
+                            <div class="ml-1 mb-2 row">
+                                <span class="col-5">Level of Entry: </span>
+                                @*<span class="col-8">@ViewBag.Date </span>*@
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label asp-for="DepartmentId" class="control-label"></label>
+                                <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FacultyId" class="control-label"></label>
+                                <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Var1" class="control-label"></label>
+                                <input asp-for="Var1" class="form-control" />
+                                <span asp-validation-for="Var1" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Var2" class="control-label"></label>
+                                <input asp-for="Var2" class="form-control" />
+                                <span asp-validation-for="Var2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Var3" class="control-label"></label>
+                                <input asp-for="Var3" class="form-control" />
+                                <span asp-validation-for="Var3" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <input asp-for="Note" class="form-control" />
+                                <span asp-validation-for="Note" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <strong>
+                                Thank you.<br />
+                                Signed:  
+                            <div class="form-group">
+                                <input asp-for="Registrar" class="form-control" />
+                                <span asp-validation-for="Registrar" class="text-danger"></span>
+                            </div>
+                                Ag. Registrar
+                            </strong>
+                        </div>
+                         <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+  

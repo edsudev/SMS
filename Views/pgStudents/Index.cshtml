@@ -1,0 +1,215 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.PgStudent>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Religion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AltPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationalities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.States)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LGAs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermanentHomeAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaritalStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextOfkinName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextOfKinRelationship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextOfKinPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextOfKinAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolEmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Faculties)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Levels)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModeOfAdmission)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfAdmission)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sessions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cleared)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staffs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Picture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Religion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AltPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationalities.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.States.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LGAs.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermanentHomeAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextOfkinName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextOfKinRelationship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextOfKinPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextOfKinAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolEmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Faculties.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Levels.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModeOfAdmission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfAdmission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departments.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sessions.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cleared)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staffs.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

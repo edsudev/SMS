@@ -1,0 +1,85 @@
+﻿    @model IEnumerable<EDSU_SYSTEM.Models.TimeTable>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="seperator-header">
+                        <h6 class="text-center">Edo State University Students Biodata/Profile</h6>
+                    </div>
+                    <a asp-action="create" class="btn btn-dark">Create</a>
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover non-hover" style="z-index: 1000">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Course Title
+                                    </th>
+                                    <th>
+                                        Course Code
+                                    </th>
+                                    <th>
+                                        Lecturer
+                                    </th>
+                                    <th>
+                                        Venue
+                                    </th>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        Day
+                                    </th>
+                                   
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Courses.Courses.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Courses.Courses.Code)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Staffs.Staff.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Venue)
+                                        </td>
+                                        <td>
+                                            @item.Time
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Day)
+                                        </td>
+                                        
+                                        <td>
+                                            <a asp-action="edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="delete" asp-route-id="@item.Id">Delete</a> 
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

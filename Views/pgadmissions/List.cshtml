@@ -1,0 +1,94 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.PgApplicant>
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+<p>
+    <a asp-action="Create">Apply Now</a>
+</p>
+
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="d-flex">
+            <!-- Content -->
+            <div class="mx-auto">
+                List of PG Applicants for @ViewBag.currentSession
+                <div class="widget-content widget-content-area br-6">
+                    <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Pic</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Program</th>
+                                <th>Current Qualification</th>
+                                <th>Screened</th>
+                                <th>Admitted</th>
+                                <th class="dt-no-sorting">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var a = "~/files/applicantuploads/passports/" + item.Passport;
+                                <tr>
+                                    <td class="">
+                                        <a class="profile-img" href="javascript: void(0);">
+                                            <img src="~/files/applicantuploads/passports/@item.Passport" alt="avatar" style="height:30px; width:30px" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                        @Html.DisplayFor(modelItem => item.OtherName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProgramApplyingFor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CurrentQualification)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Screened)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-primary" asp-action="details" asp-controller="admissions" asp-route-id="@item.id">View</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mx-auto">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupVerticalDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i data-feather="chevron-down"></i><span class="icon-name"> Applicants per Session</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                        @foreach (var item in ViewBag.sessions)
+                        {
+                            <a asp-action="list" asp-route-id="@item.Name" asp-controller="pgadmissions" class="mx-auto">@item.Name</a>
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

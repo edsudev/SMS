@@ -1,0 +1,136 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+
+@{
+    ViewData["Title"] = "SSCE";
+}
+
+<div class="collapsable-menu starterkit admin-header">
+    <div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content widget-content-area text-center">
+                <nav class="breadcrumb-two" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.id">Personal Info.</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step2" asp-route-id="@Model.id">SSCE</a></li>
+                        <li class="breadcrumb-item active"><a asp-action="Step3" asp-route-id="@Model.id">Next of Kin</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step4" asp-route-id="@Model.id">Upload</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.id">Summary</a></li>
+                    </ol>
+                </nav>
+                
+         </div>
+        </div>
+    </div>
+    <!--  BEGIN MAIN CONTAINER  -->
+    
+    <!--  BEGIN CONTENT AREA  -->
+    <div class="admin-data-content layout-top-spacing">
+
+        <div class="row layout-top-spacing">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-6 mx-auto layout-spacing">
+                <div class="widget-content-area br-4 p-4">
+                    <div class="widget-one">
+                        <form class="needs-validation" novalidate asp-action="Step3">
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="FullNameOfNextOfKin" class="form-control" placeholder="Fullname of Next of Kin" />
+                                        <span asp-validation-for="FullNameOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="AddressOfNextOfKin" class="form-control" placeholder="Address of Next of Kin" />
+                                        <span asp-validation-for="AddressOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="PhoneNumberOfNextOfKin" class="form-control" placeholder="Phone Number of Next of Kin" />
+                                        <span asp-validation-for="PhoneNumberOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="AlternatePhoneNumberOfNextOfKin" class="form-control" placeholder="Alternate Phone Number of Next of Kin" />
+                                        <span asp-validation-for="AlternatePhoneNumberOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="EmailOfNextOfKin" class="form-control" placeholder="Email of Next of kin" />
+                                        <span asp-validation-for="EmailOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <input asp-for="OccupationOfNextOfKin" class="form-control" placeholder="Occupation of Next of Kin" />
+                                        <span asp-validation-for="OccupationOfNextOfKin" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" type="submit">Next</button>
+                            @*<a asp-action="Step33" asp-route-id="@item.id">Edit</a>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!--  END CONTENT AREA  -->
+</div>
+    <!-- END MAIN CONTAINER -->
+
+   
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="index.js"></script> -->
+      <script>
+            $(document).ready(function(){
+            //When number of ssce sittings is checked
+            $("select[name='sscesittings']").on("change", function(){
+                var ssceSittingss = $(this).val();
+                var ssce2nd = $("#SecondSitingSsce");
+                if(ssceSittingss == 1){
+                    ssce2nd.hide();
+                } else {
+                    ssce2nd.show(500);
+                }
+            })
+
+            });
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+            

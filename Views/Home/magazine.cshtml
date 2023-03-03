@@ -1,0 +1,61 @@
+﻿<partial name="_Nav" />
+
+<section class="news">
+
+    <div class="heading">
+        <h1>EDSU Magazine</h1>
+    </div>
+
+</section>
+
+<section class="latest-news">
+    <div class="building-gallery">
+       
+        <div class="building-gallery-grid">
+            <div class="field">
+                <img src="~/portal/images/about/footballpitch.png" alt="a wide picture of the school's football pitch">
+            </div>
+            <div class="signboard">
+                <img src="~/portal/images/about/signboard.png" alt="a board with the inscription edo state university">
+            </div>
+        </div>
+
+        @foreach (var item in ViewBag.magazine)
+        {
+            <div class="widget-content widget-content-area">
+
+                <div class="card component-card_9">
+                    <img src="assets/img/400x300.jpg" class="card-img-top" alt="widget-card-2">
+                    <div class="card-body">
+                        <p class="meta-date">@item.CreatedAt.ToLongDateString()</p>
+
+                        <h5 class="card-title">@item.Title</h5>
+
+                        <div class="meta-info">
+                            <div class="meta-user">
+                                <div class="user-name">@item.LectureName</div>
+                            </div>
+
+                            <div class="meta-action">
+                                <div class="meta-likes">
+                                    @*@item.Faculty.Name, @item.Department.ShortCode, @item.Level*@
+                                </div>
+                                <div class="meta-view bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        }
+    </div>
+
+</section>
+
+<app-newsletter></app-newsletter>
+<partial name="_Footer"/>

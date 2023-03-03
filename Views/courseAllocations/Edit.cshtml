@@ -1,0 +1,58 @@
+﻿@model EDSU_SYSTEM.Models.CourseAllocation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6 p-3">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input asp-for="Id" hidden/>
+                            <div class="form-group">
+                                <label asp-for="CourseId" class="control-label">Course</label>
+                                <select asp-for="CourseId" class="form-control basic" asp-items="ViewBag.CourseId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LecturerId" class="control-label">Lecturer</label>
+                                <select asp-for="LecturerId" class="form-control basic" asp-items="ViewBag.LecturerId"></select>
+                                <span asp-validation-for="LecturerId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CourseLecturerRole" class="control-label">Role of lecturer</label>
+                                <select asp-for="CourseLecturerRole" class="form-control basic" asp-items="ViewBag.LecturerId">
+                                    <option>-- Choose --</option>
+                                    <option value="Adjunct Lecturer">Adjunct Lecturer</option>
+                                    <option value="Chief Lecturer">Chief Lecturer</option>
+                                    <option class="Co Lecturer">Co Lecturer</option>
+                                </select>
+                                <span asp-validation-for="CourseLecturerRole" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

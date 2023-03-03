@@ -1,0 +1,206 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.BursaryClearance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StudentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            
+            <div class="row invoice layout-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 mx-auto">
+
+                    <div class="doc-container">
+
+                        <div class="row">
+
+                            <div class="col-xl-12">
+
+                                <div class="invoice-container">
+                                    <div class="invoice-inbox">
+                                        <div id="ct" class="">
+                                            <div class="invoice-00001">
+                                                <div class="content-section">
+                                                    <div class="inv--head-section inv--detail-section">
+                                                        <div class="d-flex">
+                                                            <div class=" mx-auto">
+                                                                <div class="d-flex">
+                                                                    <img src="~/logo.png" style="width:100px; height:100px" class="mx-auto" alt="Logo" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <h2 class="in-heading">EDO STATE UNIVERSITY UZAIRUE</h2><br />
+                                                                </div>
+                                                            </div>
+                                                            <div class=" mx-auto">
+                                                                <div class="d-flex">
+                                                                    <img src="~/logo.png" style="width:100px; height:100px" class="mx-auto" alt="Passport" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">@ViewBag.session SESSION</span></p>
+                                                            </div>
+
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">DATE: @DateTime.Now.ToLongDateString().ToUpper()</span></p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">Name:</span></p>
+                                                                <p><span class=" inv-subtitle">Email:</span></p>
+                                                                <p><span class=" inv-subtitle">Mat Number:</span></p>
+                                                                <p><span class=" inv-subtitle">Department:</span></p>
+                                                                <p><span class=" inv-subtitle">Programme: </span></p>
+                                                                <p><span class=" inv-subtitle">Level: </span></p>
+                                                            </div>
+
+                                                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">@ViewBag.name</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.email</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.mat</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.dept</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.programme </span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.level </span></p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--product-table-section">
+                                                        <div class="col-12">
+                                                            <p class="inv-to text-center">BURSARY CLEARANCE ITEM(S)</p>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead class="">
+                                                                    <tr>
+                                                                        <th scope="col">S.No</th>
+                                                                        <th scope="col">Transaction ID</th>
+                                                                        <th scope="col">Payment Type</th>
+                                                                        <th scope="col">Date of Payment</th>
+                                                                        <th scope="col">Payment Mode</th>
+                                                                        <th scope="col">Amount</th>
+                                                                        <th scope="col">Session</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                1
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.Ref)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.Type)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.PaymentDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.Mode)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.Amount)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Payments.Sessions.Name)
+                                                                            </td>
+                                                                           
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="inv--total-amounts">
+
+                                                        <div class="row mt-4">
+                                                            <div class="col-sm-5 col-12 order-sm-0 order-1">
+                                                            </div>
+                                                            <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                                                <div class="text-sm-right">
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--note">
+
+                                                        <div class="row mt-4">
+                                                            <div class="col-sm-12 col-12 order-sm-0 order-1">
+                                                                <p>POWERED BY: EDSU ICT UNIT.</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-12">
+
+                                <div class="invoice-actions-btn">
+
+                                    <div class="invoice-action-btn">
+
+                                        <div class="row">
+
+                                            <div class="col-xl-6 col-md-3 col-sm-6">
+                                                <a href="javascript:void(0);" class="btn btn-secondary btn-print  action-print">Print</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        
+        </div>
+        
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <h5 class="text-center">Update Students level and sessions</h5>
+                        <table id="html5-extension" class="table table-hover non-hover" style="z-index: 1000">
+                            <thead>
+                                <tr>
+                                    <th class="checkbox-column dt-no-sorting"> Department ID. </th>
+
+                                    <th>
+                                        Department Name
+                                    </th>
+
+                                    <td>
+                                        Actions
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <h4>@item.Id</h4>
+                                        </td>
+                                        <td>
+                                            <h4>@item.Name<h4>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" asp-action="update" asp-route-id="@item.ShortCode">Update</a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

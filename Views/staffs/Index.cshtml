@@ -1,0 +1,62 @@
+﻿@model StudentDashboardVM
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- BEGIN LOADER -->
+<!--  END LOADER -->
+<div class="main-container" id="container">
+
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one">
+                        <div class="widget-heading">
+                            <h5 class="">Chats</h5>
+                            <div class="task-action">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" href="#" role="button" id="pendingTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pendingTask" style="will-change: transform;">
+                                        <a class="dropdown-item" href="javascript:void(0);">Weekly</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Monthly</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Yearly</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-chart-one">
+                        <h5>Notifications</h5>
+                        <div class="widget-content">
+                            <div>
+                                Pending Works' Request <span class="badge badge-danger ml-2">@ViewBag.worksPending</span><br/>
+                                Works in progress <span class="badge badge-warning ml-2">@ViewBag.worksInProgress</span>
+                            </div>
+                            <div>
+                                Pending Exeats <span class="badge badge-danger ml-2">@ViewBag.exeat</span>
+                            </div>
+                            <div>
+                                Unread Mails <span class="badge badge-danger ml-2">@ViewBag.exeat</span>
+                            </div>
+                            <div>
+                                Pending Course Reg. <span class="badge badge-danger ml-2">@ViewBag.worksInProgress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+
+<!-- END MAIN CONTAINER -->

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto">
+                    <a asp-action="create" class="btn btn-dark">Create</a>
+                    @if (Model.Any())
+                    {
+                        <div class="widget-content widget-content-area br-6">
+                            <table id="html5-extension" class="table table-hover non-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Role ID</th>
+                                        <th>Name</th>
+
+                                        <th class="dt-no-sorting">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var role in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => role.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => role.Name)
+                                            </td>
+                                            <td class="">
+                                                <a class="" asp-action="Edit" asp-route-id="@role.Id">Edit</a> |
+                                                <a class="" asp-action="EditUserRole" asp-route-id="@role.Id">Add or Remove Users</a> |
+                                                <a class="" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <h6>No Roles Yet</h6>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

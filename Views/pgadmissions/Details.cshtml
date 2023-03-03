@@ -1,0 +1,105 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div id="PlaceHolderHere"></div>
+
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one p-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Surname: @Model.Surname
+                                </div>
+                                <div class="col-md-3">
+                                    FirstName: @Model.FirstName
+                                </div>
+                                <div class="col-md-3">
+                                    Othername: @Model.OtherName
+                                </div>
+                                <div class="col-md-3">
+                                    DOB: @Model.OtherName
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="~/files/applicantUploads/jamb/">
+                                        <span class="badge badge-success"> Highest Degree</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="~/files/ca.xlsx">
+                                        <span class="badge badge-success"> NYSC Cert</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="~/files/ca.xlsx">
+                                        <span class="badge badge-success"> Birth Cert.</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="~/files/ca.xlsx">
+                                        <span class="badge badge-success"> Reference</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="~/files/ca.xlsx">
+                                        <span class="badge badge-success"> LGA Uplaod</span>
+                                    </a>
+                                </div>
+                                </div>
+                                <hr />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Accept Application" data-url="@Url.Action($"Admit/{Model.id}")">
+                                        Accept
+                                    </a>
+                                </div>
+                                @if (Model.Status == EDSU_SYSTEM.Models.Enum.MainStatus.Approved)
+                                {
+                                    <div class="col-md-2">
+                                        <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Clear Applicant" data-url="@Url.Action($"Clearance/{Model.id}")">
+                                            Clearance
+                                        </a>
+                                    </div>
+                                }
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Reject Application" data-url="@Url.Action($"Reject/{Model.id}")">
+                                        Reject
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Cancel Application" data-url="@Url.Action($"Cancel/{Model.id}")">
+                                        Cancel
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Delete Application" data-url="@Url.Action($"Delete/{Model.id}")">
+                                        Delete
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary" asp-action="index">
+                                        Back to list
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

@@ -1,0 +1,115 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!--  BEGIN CONTENT AREA  -->
+<partial name="_Nav" />
+<div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+    <div class="widget-content-area br-4">
+        <div class="widget-one">
+            <div class="admin-data-content layout-top-spacing  p-3">
+                <h2 class="text-center">POST GRADUATE APPLICATION</h2>
+                    
+                    <div class="col-xl-10 col-lg-10 col-sm-10 mx-auto alert alert-arrow-right alert-icon-right alert-light-info mb-4" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg>
+                    <h6 class="text-danger">Please NOTE:</h6>
+                    <p class="text-danger">
+                        - The phone number and email you provide
+                        must be valid and active as EDSU will communicate with you via the details provided
+                    </p>
+                    <p class="text-danger">- The email and password you provide in this form will be used to access your admission dashboard.</p>
+                    <h6 class="text-danger">-
+                        After submitting this form, you will be redirected to your
+                        dashboard where you will complete the application process, after which, you will be invited for screening!
+                    </h6>
+                    <p class="signup-link">I already have an account! <a asp-controller="pgadmissions" asp-action="login">Log In</a></p>
+                    <h6>Goodluck👍</h6>
+                    </div>
+                <form class="needs-validation" novalidate asp-action="create">
+                    <div class="row layout-top-spacing d-flex justify-content-center">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                        <h5 class="text-center">Personal Data</h5>
+                            <div class="form-group">
+                                <label asp-for="Surname">Surname</label>
+                                <input asp-for="Surname" class="form-control" />
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FirstName">Firstname</label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OtherName">Othername</label>
+                                <input asp-for="OtherName" class="form-control" />
+                                <span asp-validation-for="OtherName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber">Phone Number</label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                            <h5 class="text-center">Admission Data</h5>
+                            <div class="form-group">
+                                <label asp-for="ProgramApplyingFor">Program Applying for</label>
+                                <input asp-for="ProgramApplyingFor" class="form-control" />
+                                <span asp-validation-for="ProgramApplyingFor" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PreviousInstitution">Previous Institution</label>
+                                <input asp-for="PreviousInstitution" class="form-control" />
+                                <span asp-validation-for="PreviousInstitution" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CurrentQualification">Current Qualification</label>
+                                <input asp-for="CurrentQualification" class="form-control" />
+                                <span asp-validation-for="CurrentQualification" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="YearGraduated">What Year did you Graduate?</label>
+                                <input asp-for="YearGraduated" class="form-control" />
+                                <span asp-validation-for="YearGraduated" class="text-danger"></span>
+                            </div>
+                                   
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                            <h5 class="text-center">Account Data</h5>
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" placeholder="e.g john@doe.com" type="email"/>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password">Password</label>
+                                <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password">Confirm Password</label>
+                                <input asp-for="Password" class="form-control" placeholder="Re-enter Password" type="password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-5">
+                                <button class="btn btn-primary form-control" type="submit">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_Footer" />
+<!--  END CONTENT AREA  -->
+   
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

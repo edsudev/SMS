@@ -1,0 +1,103 @@
+﻿@model EDSU_SYSTEM.Models.Vacancy
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+<div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
+    <div class="statbox widget box box-shadow">
+        <div class="text-center">
+            <nav class="breadcrumb-two" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.Id">Personal Info.</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="Step2" asp-route-id="@Model.Id">Discipline</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.Id">Upload</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.Id">Summary</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+@*SECTION*@
+ <div class="admin-data-content layout-top-spacing">
+    <div class="row layout-top-spacing">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+            <div class="widget-content-area br-4 p-3">
+                <div class="widget-one">
+                    <form class="needs-validation" novalidate  asp-action="Step2" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="HighestQualification" class="control-label">Highest Qualification</label>
+                                <input asp-for="HighestQualification" class="form-control" placeholder="PhD, BSc, HND, etc..."/>
+                                <span asp-validation-for="HighestQualification" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="FieldOfStudy" class="control-label">Field Of Study</label>
+                                    <input asp-for="FieldOfStudy" class="form-control" />
+                                    <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="AreaOfSpecialization" class="control-label">Area Of Specialization</label>
+                                    <input asp-for="AreaOfSpecialization" class="form-control" placeholder="Audit, Data Analysis"/>
+                                    <span asp-validation-for="AreaOfSpecialization" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group form-check">
+                                    <label class="form-check-label">
+                                            <label asp-for="WorkedInHigherInstuition" class="control-label">Have you worked in an Higer institution?</label>
+                                            <input class="form-check-input form-control" asp-for="WorkedInHigherInstuition" />
+                                            
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="CurrentPlaceOfWork" class="control-label">Current Place Of Work</label>
+                                    <input asp-for="CurrentPlaceOfWork" class="form-control" />
+                                    <span asp-validation-for="CurrentPlaceOfWork" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="PositionAtCurrentPlaceOfWork" class="control-label">Position At Current Place Of Work</label>
+                                    <input asp-for="PositionAtCurrentPlaceOfWork" class="form-control" placeholder="Lecturer, System Analyst, Driver"/>
+                                    <span asp-validation-for="PositionAtCurrentPlaceOfWork" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-4">
+                                <div class="form-group">
+                                    <label asp-for="YearsOfExperience" class="control-label">Years Of Experience</label>
+                                    <input asp-for="YearsOfExperience" class="form-control" />
+                                    <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <button class="btn btn-primary mt-3" type="submit">Proceed</button>
+                            
+                    </form>
+                </div>
+            </div>
+        </div>
+                
+    </div>
+                                
+</div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

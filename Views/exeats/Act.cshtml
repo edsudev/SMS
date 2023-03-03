@@ -1,0 +1,308 @@
+﻿@using static EDSU_SYSTEM.Models.Enum
+@model EDSU_SYSTEM.Models.Exeat
+@*@using EDSU_SYSTEM.Authorization*@
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore
+@using static EDSU_SYSTEM.Models.Enum
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<div id="PlaceHolderHere"></div>
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+
+    <div class="layout-px-spacing">
+        <div class="education layout-spacing ">
+            <h3 class="">Exeat Details</h3>
+            <div class="widget-content widget-content-area row">
+                <div class="timeline-alter col-md-4">
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Name</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Name)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Email</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Email)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Department</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Department)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Mat Number</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.MatNo)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Hall</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Hostels.Name)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Destination</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Destination)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Depature Date</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.DepartureDate)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Arrival Date</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.ArrivalDate)</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="timeline-alter col-md-4">
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Reason</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Reason)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Phone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Parent Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.ParentPhone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Alt. Parent Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.AltParentPhone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Days</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.NoOfDays)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Date Applied</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.CreatedAt)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Status</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Dean)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-alter col-md-4">
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Chief Portal</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.ChiefPortalStatus)</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Hall Master</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.HallMasterStatus)</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Dean</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.Dean)</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+            </div>
+            
+        </div>
+      
+
+        <div class="row layout-spacing">
+            <!-- Content -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-6 mx-auto layout-spacing">
+                <div class="widget-content-area br-4">
+                    <div class="widget-one mx-auto p-3">
+                        @if (Model.ChiefPortalStatus == ChiefPortalStatus.Pending || Model.ChiefPortalStatus == ChiefPortalStatus.Reject)
+                        {
+                            <form style="display:inline;" method="post">
+                                <input hidden name="Id" value="@Model.Id">
+                                <input hidden asp-for="ChiefPortalStatus" name="cheifPortalStatus" value="@ChiefPortalStatus.Recommended">
+                                <button type="submit" class="btn btn-xs btn-success">Recommend</button>
+                            </form>
+                        }
+                        @if (Model.ChiefPortalStatus == ChiefPortalStatus.Recommended)
+                        {
+                            <form style="display:inline;" method="post">
+                                <input hidden name="Id" value="@Model.Id">
+                                <input hidden asp-for="ChiefPortalStatus" name="cheifPortalStatus" value="@ChiefPortalStatus.Reject">
+                                <button type="submit" class="btn btn-xs btn-danger">Reject</button>
+                            </form>
+                        }
+                        
+                       
+                        <div class="form-row">
+                            @if (Model.HallMasterStatus == MainStatus.Approved || Model.Dean == MainStatus.Approved)
+                            {
+
+                                <div class="col-md-3 mb-4">
+                                    <div class="form-group">
+                                        <label asp-for="ExeatId" class="control-label"></label>
+                                        <h6>@Html.DisplayFor(model => model.ExeatId)</h6>
+                                        <a asp-action="Pass" asp-route-id="@Model.ExeatId" class="btn btn-primary">QR Code</a>
+                                    </div>
+                                </div>
+                            }
+
+                            
+                            @if (Model.NoOfDays <= 3 && Model.ChiefPortalStatus == ChiefPortalStatus.Recommended)
+                            {
+                                @if (Model.HallMasterStatus != MainStatus.Approved)
+                                {
+                                    <form style="display:inline;" method="post">
+                                        <input hidden name="Id" value="@Model.Id">
+                                        <input hidden asp-for="HallMasterStatus" name="status" value="@MainStatus.Approved">
+                                        <button type="submit" class="btn btn-xs btn-success">Approve</button>
+                                    </form>
+                                }
+                                @if (Model.HallMasterStatus != MainStatus.Declined)
+                                {
+                                    <form style="display:inline;" method="post">
+                                        <input hidden name="Id" value="@Model.Id">
+                                        <input hidden asp-for="HallMasterStatus" name="status" value="@MainStatus.Declined">
+                                        <button type="submit" class="btn btn-xs btn-danger">Decline</button>
+                                    </form>
+                                }
+
+                            }
+                            else if (Model.NoOfDays > 3 && Model.ChiefPortalStatus == ChiefPortalStatus.Recommended)
+                            {
+                                @if (Model.Dean != MainStatus.Approved)
+                                {
+                                    <form style="display:inline;" method="post">
+                                        <input hidden name="Id" value="@Model.Id">
+                                        <input hidden asp-for="Dean" name="status" value="@MainStatus.Approved">
+                                        <button type="submit" class="btn btn-xs btn-success">Approve</button>
+                                    </form>
+                                }
+                                @if (Model.Dean != MainStatus.Declined)
+                                {
+                                    <form style="display:inline;" method="post">
+                                        <input hidden name="Id" value="@Model.Id">
+                                        <input hidden asp-for="Dean" name="status" value="@MainStatus.Declined">
+                                        <button type="submit" class="btn btn-xs btn-danger">Decline</button>
+                                    </form>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!--  END CONTENT AREA  -->
+    </div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+          

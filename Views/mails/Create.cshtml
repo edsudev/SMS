@@ -1,0 +1,76 @@
+﻿@model EDSU_SYSTEM.Models.Mail
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+<partial name="_CssLinks" />
+<div class="admin-data-content layout-top-spacing">
+    <div class="row layout-top-spacing" id="cancel-row">
+        <div id="fs2Basic" class="col-lg-12 layout-spacing">
+            <div class="statbox box box-shadow">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Compose mail</h4>
+                    </div>
+                </div>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="From" class="control-label">From:</label>
+                            <input asp-for="From" disabled value="@ViewBag.email" class="form-control basic" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="To" class="control-label">To:</label>
+                            <select asp-for="To" class="form-control basic" asp-items="ViewBag.LecturerId"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Through" class="control-label">Through (Optional):</label>
+                            <select asp-for="Through" class="form-control basic" asp-items="ViewBag.LecturerId"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Through2" class="control-label">Through (Optional):</label>
+                            <select asp-for="Through2" class="form-control basic" asp-items="ViewBag.LecturerId"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Through3" class="control-label">Through (Optional):</label>
+                            <select asp-for="Through3" class="form-control basic" asp-items="ViewBag.LecturerId"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Subject" class="control-label">Subject:</label>
+                            <input asp-for="Subject" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="File" class="control-label">Attach File:</label>
+                            <input asp-for="File" class="form-control" type="file" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message" class="control-label">Message:</label>
+                        <textarea asp-for="Message" class="form-control" ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-warning" />
+                        <input type="submit" value="Discard" class="btn btn-danger" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_JsLinks" />
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

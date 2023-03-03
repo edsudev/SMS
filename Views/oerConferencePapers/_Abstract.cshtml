@@ -1,0 +1,24 @@
+﻿@model EDSU_SYSTEM.Models.OerConferencePaper
+<div class="modal fade" id="showAbstract">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="showAbstract">Complete Abstract</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Abstact">
+               <div class="form-row">
+              <div class="form-group">
+             <label asp-for="Abstract" class="control-label"></label>
+             <h6>@ViewBag.Abstract</h6>
+             </div>
+             </div>
+            
+         </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>

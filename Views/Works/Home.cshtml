@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Work>
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h6>List of complaints</h6>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@*Need tondisplay the latest first*@
+<div class="row">
+        @foreach (var item in Model) {
+    <div class="col-lg-6">
+        <blockquote class="blockquote media-object">
+            <div class="media">
+                <div class="media-body align-self-center">
+                    <p class="d-inline">@item.Complain</p><br/>
+                    <p class="d-inline">Location: @item.Location</p>
+                </div>
+            </div>
+                <small class="text-right">@item.Dept <cite title="Source Title">@item.CreatedAt</cite></small>
+                @if (item.Status == WorksStatus.Completed)
+                {
+                    <span class="text-right badge badge-success">Completed</span>
+                }
+                else if (item.Status == WorksStatus.In_Progress)
+                {
+                    <span class="badge badge-warning"> In Progress </span>
+                }
+                else
+                {
+                    <span class="badge badge-danger"> Pending </span>
+                }
+                
+                
+                
+        </blockquote>
+        </div>
+        }
+</div>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.UgProgress>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StudentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <a class="btn btn-dark" asp-controller="projectprogress" asp-action="create">+</a>
+                    <div class="widget-content widget-content-area br-6">
+                        <h5 class="text-center">Edo State University Students' Biodata/Profile</h5>
+                        <table id="html5-extension" class="table table-hover non-hover" style="z-index: 1000">
+                            <thead>
+                                <tr>
+
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Program
+                                    </th>
+                                    <th>
+                                        File
+                                    </th>
+                                    <th>
+                                        Supervisor
+                                    </th>
+                                    <th>
+                                        Student
+                                    </th>
+
+                                    <th>Ranking</th>
+                                    <th>Comment</th>
+                                    <th>Submitted on</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Programs.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FileName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Supervisors.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Ranking)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                        </td>
+                                        
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

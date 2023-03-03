@@ -1,0 +1,411 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using EDSU_SYSTEM.Data;
+using EDSU_SYSTEM.Models;
+using System.Collections;
+using Microsoft.AspNetCore.Identity;
+using static EDSU_SYSTEM.Models.Enum;
+
+namespace EDSU_SYSTEM.Controllers
+{
+    public class StudentsController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public StudentsController(UserManager<ApplicationUser> userManager, IWebHostEnvironment hostingEnvironment, ApplicationDbContext context)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
+            _context = context;
+        }
+
+        // GET: students
+        public async Task<IActionResult> Index()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+            var student = (from c in _context.Students where c.Id == userId select c).Include(i => i.Applicants).FirstOrDefault();
+            var wallet = (from c in _context.UgMainWallets where c.Id == student.ApplicantId select c).Include(i=>i.Applicants).ThenInclude(i => i.Departments).FirstOrDefault();
+            var approvedCourses = (from c in _context.CourseRegistrations
+                                   where c.StudentId == userId &&
+                            c.Status == MainStatus.Approved &&
+                            c.SessionId == student.CurrentSession
+                                   select c).Include(c => c.Courses).ToList();
+            var timetable = (from c in _context.TimeTables where c.Courses.Courses.DepartmentId == student.Department && c.Courses.Courses.Level ==
+                             student.Level
+                                   select c).Include(c => c.Courses).ThenInclude(c => c.Courses).Include(c => c.Staffs).ThenInclude(c => c.Staff).ToList();
+            var model = new StudentDashboardVM
+            {
+                MainWallet = wallet,
+                Courses = approvedCourses,
+                TimeTables = timetable
+            };
+
+            return View(model);
+           
+        }
+        public async Task<IActionResult> Allstudents()
+        {
+            var applicationDbContext = _context.Students.Include(s => s.Departments)
+                .Include(s => s.Levels);
+            return View(await applicationDbContext.ToListAsync());
+           
+        }
+
+        public async Task<IActionResult> MyStudents()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StaffId;
+            var HOD = (from i in _context.Staffs where i.Id == userId select i).FirstOrDefault();
+            var applicationDbContext = _context.Students.Where(i => i.Department == HOD.DepartmentId).Include(s => s.Departments)
+                .Include(s => s.Levels);
+            return View(await applicationDbContext.ToListAsync());
+
+        }
+        public async Task<IActionResult> UpdateStudents()
+        {
+            return _context.Departments != null ?
+                           View(await _context.Departments.ToListAsync()) :
+                           Problem("Entity set 'ApplicationDbContext.Students'  is null.");
+        }
+        //This module updates students session and level 
+        //and it is done based on department
+
+        public async Task<IActionResult> update(string id, UgSubWallet myWallet)
+        {
+            Console.WriteLine("This is the department" + id);
+            var dpt = (from d in _context.Departments where d.ShortCode == id select d.Id).FirstOrDefault();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var students = (from s in _context.Students where s.Department == dpt select s).ToList();
+                foreach (var item in students)
+                {
+                    //var StudentId = item.Id;
+                    var Session = (from s in _context.Sessions where s.IsActive == true select s).FirstOrDefault();
+                    
+                        item.CurrentSession = Session.Id;
+                        var level = item.Level + 1;
+                        item.Level = level;
+                        await _context.SaveChangesAsync();
+
+                    if (item.Level == 1)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level1).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    else if (item.Level == 2)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level2).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    else if (item.Level == 3)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level3).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    else if (item.Level == 4)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level4).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    else if (item.Level == 5)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level5).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    else if (item.Level == 6)
+                    {
+                        var TuitionFee = (from t in _context.Fees
+                                          where t.DepartmentId == item.Department
+                                          select t.Level6).Sum();
+                        myWallet.Tuition = TuitionFee;
+                    }
+                    //myWallet.StudentId = item.Id;
+                    myWallet.Name = item.Fullname;
+                    myWallet.Department = item.Department;
+                    myWallet.RegNo = item.UTMENumber;
+                    myWallet.EDHIS = (decimal)20000.00;
+                    myWallet.LMS = (decimal)25000.00;
+                    myWallet.SRC = (decimal)2500.00;
+                    myWallet.Debit = myWallet.Tuition + myWallet.Tuition2 + myWallet.LMS + myWallet.SRC;
+                    myWallet.FortyPercent = myWallet.Tuition * 40 / 100;
+                    myWallet.SixtyPercent = myWallet.Tuition * 60 / 100;
+                    myWallet.CreditBalance = 0;
+                    myWallet.WalletId = item.UTMENumber;
+                    myWallet.DateCreated = DateTime.Now;
+                    myWallet.Status = true;
+                    myWallet.Level = item.Level;
+                    myWallet.Pic = item.Picture;
+                    myWallet.ApplicantId = item.Id;
+                    //Next line updates the bulk wallet
+                    //var bulkwallet = await _context.MainWallets.FirstOrDefaultAsync(i => i.WalletId == myWallet.WalletId);
+                    //var newBulkDebit = bulkwallet.BulkDebitBalanace + myWallet.Debit;
+                    //bulkwallet.BulkDebitBalanace = newBulkDebit;
+
+                    _context.Add(myWallet);
+                    await _context.SaveChangesAsync();
+                }
+
+                return RedirectToAction("Index", "Students");
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+
+            }
+            return View();
+        }
+        // GET: students/Details/5
+        public async Task<IActionResult> Profile()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+
+            var student = (from s in _context.Students where s.Id == userId select s)    
+                .Include(s => s.Departments)
+                .Include(s => s.Faculties)
+                .Include(s => s.LGAs)
+                .Include(s => s.Levels)
+                .Include(s => s.Nationalities)
+                .Include(s => s.States)
+                .Include(s => s.Sessions)
+                .FirstOrDefault();
+            //Console.WriteLine(student.Fullname);
+            return View(student);
+        } 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Students == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students
+                .Include(s => s.Departments)
+                .Include(s => s.Faculties)
+                .Include(s => s.LGAs)
+                .Include(s => s.Levels)
+                .Include(s => s.Nationalities)
+                .Include(s => s.Sessions)
+                .Include(s => s.States)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
+        }
+
+        // GET: students/Create
+        public IActionResult Create()
+        {
+            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Id");
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Id");
+            ViewData["LGAId"] = new SelectList(_context.Lgas, "Id", "Id");
+            ViewData["Level"] = new SelectList(_context.Levels, "Id", "Id");
+            ViewData["NationalityId"] = new SelectList(_context.Countries, "Id", "Id");
+            ViewData["CurrentSession"] = new SelectList(_context.Sessions, "Id", "Id");
+            ViewData["StateOfOriginId"] = new SelectList(_context.States, "Id", "Id");
+            return View();
+        }
+
+        // POST: students/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Picture,Fullname,Sex,DOB,Religion,Phone,AltPhoneNumber,Email,NationalityId,StateOfOriginId,LGAId,PlaceOfBirth,PermanentHomeAddress,ContactAddress,MaritalStatus,ParentName,ParentOccupation,ParentPhone,ParentAltPhone,ParentEmail,ParentAddress,SchoolEmailAddress,UTMENumber,MatNumber,Faculty,Level,ModeOfAdmission,YearOfAdmission,Department,CurrentSession,CreatedAt,Cleared,ClearedBy")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Id", student.Department);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Id", student.Faculty);
+            ViewData["LGAId"] = new SelectList(_context.Lgas, "Id", "Id", student.LGAId);
+            ViewData["Level"] = new SelectList(_context.Levels, "Id", "Id", student.Level);
+            ViewData["NationalityId"] = new SelectList(_context.Countries, "Id", "Id", student.NationalityId);
+            ViewData["CurrentSession"] = new SelectList(_context.Sessions, "Id", "Id", student.CurrentSession);
+            ViewData["StateOfOriginId"] = new SelectList(_context.States, "Id", "Id", student.StateOfOriginId);
+            return View(student);
+        }
+
+        // GET: students/Edit/5
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || _context.Students == null)
+            {
+                return NotFound();
+            }
+
+            var student = (from c in _context.Students where c.Id == id select c).Include(i => i.Staffs).FirstOrDefault();
+            if (student == null)
+            {
+                return NotFound();
+            }
+            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Name", student.Department);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", student.Faculty);
+            ViewData["LGAId"] = new SelectList(_context.Lgas, "Id", "Name", student.LGAId);
+            ViewData["Level"] = new SelectList(_context.Levels, "Id", "Name", student.Level);
+            ViewData["NationalityId"] = new SelectList(_context.Countries, "Id", "Name", student.NationalityId);
+            ViewData["CurrentSession"] = new SelectList(_context.Sessions, "Id", "Name", student.CurrentSession);
+            ViewData["StateOfOriginId"] = new SelectList(_context.States, "Id", "Name", student.StateOfOriginId);
+            return PartialView("_editPartial",student);
+        }
+
+        // POST: students/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Student student)
+        {
+            if (id != student.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    student.Cleared = true;
+                    _context.Update(student);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!StudentExists(student.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Profile));
+            }
+            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Id", student.Department);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Id", student.Faculty);
+            ViewData["LGAId"] = new SelectList(_context.Lgas, "Id", "Id", student.LGAId);
+            ViewData["Level"] = new SelectList(_context.Levels, "Id", "Id", student.Level);
+            ViewData["NationalityId"] = new SelectList(_context.Countries, "Id", "Id", student.NationalityId);
+            ViewData["CurrentSession"] = new SelectList(_context.Sessions, "Id", "Id", student.CurrentSession);
+            ViewData["StateOfOriginId"] = new SelectList(_context.States, "Id", "Id", student.StateOfOriginId);
+            return RedirectToAction("profile");
+        }
+        public async Task<IActionResult> Upload(IFormFile passport, int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (passport != null && passport.Length > 0)
+            {
+                var uploadDir = @"files/applicantUploads/passports";
+                var fileName = Path.GetFileNameWithoutExtension(passport.FileName);
+                var extension = Path.GetExtension(passport.FileName);
+                var webRootPath = _hostingEnvironment.WebRootPath;
+                fileName = student.UTMENumber + extension;
+
+                //fileName = fileName + extension;
+                var path = Path.Combine(webRootPath, uploadDir, fileName);
+                using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                {
+                    passport.CopyTo(fs);
+                    student.Picture = fileName;
+
+                }
+               
+                try
+                {
+                   // await TryUpdateModelAsync<Student>(student);
+                    _context.Update(student);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                    return RedirectToAction("badreq", "error");
+                }
+            }
+            return RedirectToAction(nameof(Profile));
+        }
+
+        // GET: students/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Students == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students
+                .Include(s => s.Departments)
+                .Include(s => s.Faculties)
+                .Include(s => s.LGAs)
+                .Include(s => s.Levels)
+                .Include(s => s.Nationalities)
+                .Include(s => s.Sessions)
+                .Include(s => s.States)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
+        }
+
+        // POST: students/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            
+            if (_context.Students == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Students'  is null.");
+            }
+            var student = await _context.Students.FindAsync(id);
+            if (student != null)
+            {
+                _context.Students.Remove(student);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+       
+        public async Task<IActionResult> Dashboard()
+        {
+            return View();
+        }
+        private bool StudentExists(int? id)
+        {
+          return _context.Students.Any(e => e.Id == id);
+        }
+    }
+}

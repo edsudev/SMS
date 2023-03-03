@@ -1,0 +1,97 @@
+﻿@model EDSU_SYSTEM.Models.Exeat
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<div id="PlaceHolderHere"></div>
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row mt-10 layout-spacing">
+
+            <!-- Content -->
+            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+                <div class="alert alert-arrow-right alert-icon-right alert-light-info mb-4" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg>
+                    <strong>Note!</strong> <br /><br />
+                    - HALL 1 - 08076546864 <br /><br />
+                    - HALL 2 - 08076546864 <br /><br />
+                    - HALL 3 - 08076546864 <br /><br />
+                    - HALL 4 - 08076546864 <br /><br />
+                </div>
+
+                <div class="widget-content widget-content-area br-6">
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <img src="~/images/exeat.png" style="height:350px; width:350px; margin-top:20px" />
+                        </div>
+                        <div class="col-md-8">
+                            <form asp-action="Apply">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="Hall" class="control-label">Hall of Residence</label>
+                                        <select asp-for="Hall" class="form-control" asp-items="ViewBag.HallId">
+                                            <option value="0">-- SELECT --</option>
+                                        </select>
+                                        <span asp-validation-for="Hall" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="Destination" class="control-label"></label>
+                                        <input asp-for="Destination" class="form-control" />
+                                        <span asp-validation-for="Destination" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="DepartureDate" class="control-label">Departure Date</label>
+                                        <input asp-for="DepartureDate" class="form-control" />
+                                        <span asp-validation-for="DepartureDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="ArrivalDate" class="control-label">Arrival Date</label>
+                                        <input asp-for="ArrivalDate" class="form-control" />
+                                        <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="Reason" class="control-label">Reason for exeat</label>
+                                        <textarea asp-for="Reason" class="form-control"></textarea>
+                                        <span asp-validation-for="Reason" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="Phone" class="control-label"></label>
+                                        <input asp-for="Phone" class="form-control" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="ParentPhone" class="control-label">Parent Phone No.</label>
+                                        <input asp-for="ParentPhone" class="form-control" />
+                                        <span asp-validation-for="ParentPhone" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin-top:30px">
+                                        <input type="submit" value="Create" class="btn btn-primary form-control" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

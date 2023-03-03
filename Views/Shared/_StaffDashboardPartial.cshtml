@@ -1,0 +1,504 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="header-container fixed-top">
+    <header class="header navbar navbar-expand-sm">
+
+        <ul class="navbar-item theme-brand flex-row  text-center">
+            <li class="nav-item theme-logo">
+                <a asp-action="index" asp-controller="home">
+
+                    <img src="~/logo.png" class="navbar-logo" alt="logo" />
+                </a>
+            </li>
+            <li class="nav-item theme-text">
+                <a asp-action="index" asp-controller="home" class="nav-link"> EDO STATE UNIVERSITY UZAIRUE </a>
+            </li>
+        </ul>
+    </header>
+</div>
+<!--  END NAVBAR  -->
+<!--  BEGIN NAVBAR  -->
+<div class="sub-header-container">
+    <header class="header navbar navbar-expand-sm">
+        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+        <ul class="navbar-nav flex-row">
+            <li>
+                <div class="page-header">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Staff</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>@User.Identity?.Name</span></li>
+                            </ol>
+                        </nav>
+                    }
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav flex-row ml-auto ">
+            <li class="nav-item more-dropdown">
+                <div class="dropdown  custom-dropdown-icon">
+                    <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Settings</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="customDropdown">
+                        <a class="dropdown-item" data-value="Settings" href="javascript:void(0);">Settings</a>
+                        <a class="dropdown-item" data-value="Mail" href="javascript:void(0);">Mail</a>
+                        <a class="dropdown-item" data-value="Print" href="javascript:void(0);">Print</a>
+                        <a class="dropdown-item" data-value="Download" href="javascript:void(0);">Download</a>
+                        <a class="dropdown-item" data-value="Share" href="javascript:void(0);">Share</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+</div>
+<!--  END NAVBAR  -->
+<!--  BEGIN MAIN CONTAINER  -->
+
+
+<div class="overlay"></div>
+<div class="search-overlay"></div>
+
+<!--  BEGIN SIDEBAR  -->
+<div class="sidebar-wrapper sidebar-theme">
+
+    <nav id="sidebar">
+        <div class="shadow-bottom"></div>
+        <ul class="list-unstyled menu-categories" id="accordionExample">
+            <li class="menu">
+                <a href="#dashboard" data-active="true" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span>Dashboard</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#accordionExample">
+                    <li class="active">
+                        <a asp-controller="staffs" asp-action="index"> Dashboard </a>
+                    </li>
+                    <li>
+                        <a asp-controller="staffs" asp-action="profile"> Profile </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu">
+                <a href="#applicants" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="user-plus"></i>
+                        <span>Application</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="applicants" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="admissions" asp-action="index"> Undergraduate </a>
+                    </li>
+                    <li>
+                        <a asp-controller="pgadmissions" asp-action="index"> Post Graduate </a>
+                    </li>
+                    <li>
+                        <a asp-controller="conversionadmissions" asp-action="index"> Conversion  </a>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="vacancies" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="user-plus"></i><span>Vacancies</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="entreprenureships" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="user-plus"></i><span>ENT Vacancies</span>
+                    </div>
+                </a>
+            </li>
+            
+            <li class="menu">
+                <a href="#students" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="users"></i><span>UG Students</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="students" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="Students" asp-action="allstudents"> Manage Students </a>
+                    </li>
+                    <li>
+                        <a asp-controller="students" asp-action="mystudents"> My Students </a>
+                    </li>
+                    <li>
+                        <a asp-controller="studentsupervisors" asp-action="index"> Allocate Supervisor  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="projectprogress" asp-action="index"> Project Report  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="students" asp-action="index"> Graduates. </a>
+                    </li>
+                    <li>
+                        <a asp-controller="students" asp-action="index"> Expelled/Rusticate. </a>
+                    </li>
+                </ul>
+            </li>           
+            <li class="menu">
+                <a href="#pgstudents" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="users"></i><span>PG Students</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="pgstudents" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="pgstudents" asp-action="allstudents"> All Students </a>
+                    </li>
+                    <li>
+                        <a asp-controller="pgstudentsupervisors" asp-action="index"> Allocate Supervisor  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="pgprogresses" asp-action="index"> Project Report  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="pgstudents" asp-action="index"> Graduates. </a>
+                    </li>
+                    <li>
+                        <a asp-controller="pgstudents" asp-action="index"> Expelled/Rusticate. </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a asp-action="allstaffs" asp-controller="staffs" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="users"></i><span>Staffs</span>
+                    </div>
+                </a>
+            </li>
+            
+            <li class="menu">
+                <a href="#elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="star"></i><span>Results</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="elements" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="results" asp-action="index"> My Students </a>
+                    </li>
+                    <li>
+                        <a asp-controller="results" asp-action="mycourses"> My Courses </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="book"></i>
+                        <span>Courses</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="courses" asp-action="create"> Create Course </a>
+                    </li>
+                    <li>
+                        <a asp-controller="courses" asp-action="index"> All Courses </a>
+                    </li>
+                    <li>
+                        <a asp-controller="courses" asp-action="index"> My Courses </a>
+                    </li>
+                    <li>
+                        <a asp-controller="creditunits" asp-action="index"> Credit Unit </a>
+                    </li>
+                    @*<li>
+                        <a asp-controller="courseallocations" asp-action="history"> Course Allocation</a>
+                    </li>*@
+                    <li>
+                        <a href="#appInvoice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Course Allocation <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
+                        <ul class="collapse list-unstyled sub-submenu" id="appInvoice" data-parent="#app">
+                            <li>
+                                <a asp-controller="courseallocations" asp-action="index"> Under Graduate </a>
+                            </li>
+                            <li>
+                                <a asp-controller="courseallocations" asp-action="second"> Post Graduate</a>
+                            </li>
+                            <li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="menu">
+                <a href="#pagess" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                        <span>Clearance</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="pagess" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="bursaryclearances" asp-action="index"> Bursary Clearance </a>
+                    </li>
+                    <li>
+                        <a asp-controller="finalclearance" asp-action="index"> Final Clearance  </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="administration" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        <span>Roles</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="parents" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="target"></i><span>Manage Parents</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="stats" asp-controller="staffs" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                        <span>People Stats</span>
+                    </div>
+                </a>
+            </li>
+            
+            <li class="menu">
+                <a asp-action="index" asp-controller="timetables" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        <span>Time Table</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="leveladvisers" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="target"></i><span>Manage Level Adviser</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="exeats" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        <span>Exeat</span>
+                    </div>
+                </a>
+            </li>
+             <li class="menu">
+                <a href="#reg" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                        <span>Course Reg</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="reg" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="courseregistrations" asp-action="pending"> Pending  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="courseregistrations" asp-action="approved"> Approved Students </a>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li class="menu">
+                <a href="#works" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="edit"></i><span>Works Complaints</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="works" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="works" asp-action="create"> Work Request  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="works" asp-action="index"> Previous Requests  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="works" asp-action="all"> All Requests  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="works" asp-action="pending"> Pending Request  </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu">
+                <a href="#ict" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="edit"></i><span>ICT Complaints</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="ict" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="ictcomplaints" asp-action="create"> Make Request  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ictcomplaints" asp-action="index"> Previous Requests  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ictcomplaints" asp-action="all"> All Requests  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ictcomplaints" asp-action="pending"> Pending Request  </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="mails" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="mail"></i><span>Mail Box</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu">
+                <a asp-action="index" asp-controller="transcripts" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="clipboard"></i> <span>Transcripts</span>
+                    </div>
+                </a>
+            </li>
+            
+
+            <li class="menu">
+                <a href="#datatables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        <span>OER</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="datatables" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="oercoursewares" asp-action="myuploads"> Courseware </a>
+                    </li>
+                    <li>
+                        <a asp-controller="oerconferencepapers" asp-action="myuploads"> Conference Paper  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="oerjournalarticles" asp-action="myuploads"> Journal Article  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="oerstudentprojects" asp-action="myuploads"> Student Project  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="oertextbooks" asp-action="myuploads"> Textbooks  </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
+                <a href="#fees" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="dollar-sign"></i><span class="icon-name"> Fees</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="fees" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="fees" asp-action="index"> Tuition </a>
+                    </li>
+                    <li>
+                        <a asp-controller="hostels" asp-action="index"> Hostel  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="otherfees" asp-action="index"> Other(s)  </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a href="#sessions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                        <span>Session et. al</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="sessions" data-parent="#accordionExample">
+                    <li>
+                        <a asp-controller="sessions" asp-action="index"> Session </a>
+                    </li>
+                    <li>
+                        <a asp-controller="levels" asp-action="index"> Level  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="semesters" asp-action="index"> Semester  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="subdepartments" asp-action="index"> Sub-Department  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="departments" asp-action="index"> Department  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="faculties" asp-action="index"> Faculty  </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu">
+                <a asp-controller="evaluations" asp-action="index" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="trending-down"></i><span>Evaluation</span>
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</div>
+<!--  END SIDEBAR  -->
+<!--  BEGIN CONTENT AREA  -->
+<!--  END CONTENT AREA  -->
+<!-- END MAIN CONTAINER -->
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->

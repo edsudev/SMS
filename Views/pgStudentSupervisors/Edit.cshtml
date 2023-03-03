@@ -1,0 +1,63 @@
+﻿@model EDSU_SYSTEM.Models.PgStudentSupervisor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="admin-data-content layout-top-spacing">
+    <div class="row layout-top-spacing" id="cancel-row">
+        <div id="fs2Basic" class="col-lg-12 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4>Post Graduate Supervisor and Student Allocation</h4>
+                        </div>
+                    </div>
+                </div>
+                <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Student" class="control-label">Student</label>
+                        <select asp-for="Student" class="form-control basic" asp-items="ViewBag.Student"></select>
+                        <span asp-validation-for="Student" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supervisor" class="control-label">Supervisor</label>
+                        <select asp-for="Supervisor" class="form-control basic" asp-items="ViewBag.Supervisor"></select>
+                        <span asp-validation-for="Supervisor" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorRole" class="control-label">Role of Supervisor</label>
+                        <select asp-for="SupervisorRole" class="form-control basic" asp-items="ViewBag.Student">
+                            <option>-- Choose --</option>
+                            <option value="Adjunct Lecturer">Adjunct Lecturer</option>
+                            <option value="Chief Lecturer">Chief Lecturer</option>
+                            <option class="Co Lecturer">Co Lecturer</option>
+                        </select>
+                        <span asp-validation-for="SupervisorRole" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

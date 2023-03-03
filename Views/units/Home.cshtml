@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Unit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">WELCOME TO @ViewBag.unitName UNIT</h1>
+
+
+@foreach (var item in Model) {
+    @if (item.IsDirector == true && item.IsActive == true){
+                <div class="container">
+                    <div class="row widget-content widget-content-area">
+                        <div class="col-8">
+                            <h6 style="margin-top:60px; font-weight:bold">WELCOME MESSAGE</h6>
+                            <h6 style="line-height: 1.6;">
+                                @item.Message
+                            </h6>
+                        </div>
+                        <div class="col-4">
+                            @*var b = "/files/dean/" + dean.Picture;*@
+                            <div class="widget-content widget-content-area shadow-lg h-75" style="margin-top:60px">
+                                @*<img class="item-center" src="@b" width="100%" style="max-height:80%" />*@
+                                <div class="text-center">
+
+                                    <h6>@item.Title @item.Name</h6>
+                                    <h6>@item.Email</h6>
+                                    <p>Ag. Dir</p>
+                                    @if (item.IsActive == true)
+                                    {
+                                        <span class="badge badge-success"> Active </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger"> Inactive </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+     
+    }@if (item.IsDirector == false){
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-top-spacing">
+            <div class="widget-content widget-content-area" style="overflow:hidden">
+                @*<img class="item-center" src="@b" height="150" width="100%" />*@
+                <div class="text-center">
+                    <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                    @Html.DisplayFor(modelItem => item.Phone)<br />
+                    @Html.DisplayFor(modelItem => item.Positions.Name) - @Html.DisplayFor(modelItem => item.Units.Name)
+                </div>
+            </div>
+        </div>
+    }
+       
+}
+    </tbody>
+</table>

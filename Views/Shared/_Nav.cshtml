@@ -1,0 +1,123 @@
+﻿
+<nav class="nav">
+    <a href="/">
+        <div class="logo">
+            <img src="~/portal/images/nav/logo 1.png" alt="">
+            <h3>
+                Edo State <br> University Uzairue
+            </h3>
+        </div>
+    </a>
+    <ul>
+        <li class="nav-item">
+            <a class="" href="/" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Home
+            </a>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    About
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    <a class="dropdown-item" asp-controller="home" asp-action="about">About-Us</a>
+                    <a class="dropdown-item" asp-controller="home" asp-action="programs">Programs</a>
+                    <a class="dropdown-item" asp-controller="home" asp-action="contact">Contact-Us</a>
+                </div>
+            </div>
+        </li>
+       
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Academics
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    <a class="dropdown-item" asp-controller="PgProgresses" asp-action="index">Science</a>
+                    <a class="dropdown-item" asp-controller="PgProgresses" asp-action="index">College</a>
+                    @* @foreach (var item in Model.Faculties)
+                    {
+                    <a class="dropdown-item" asp-controller="PgProgresses" asp-action="index">@item.Name</a>
+                    }*@
+                </div>
+            </div>
+        </li>
+        
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Admissions
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    
+                    <a class="dropdown-item" asp-controller="admissions" asp-action="login">Undergraduate</a>
+                    <a class="dropdown-item" asp-controller="pgadmissions" asp-action="login">Post Graduate</a>
+                    <a class="dropdown-item" asp-controller="conversions" asp-action="index">Conversion</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Vacancies
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    <a class="dropdown-item" asp-controller="vacancies" asp-action="academic_apply">Academic</a>
+                    <a class="dropdown-item" asp-controller="vacancies" asp-action="nonacademic_apply">Non Academic</a>
+                    <a class="dropdown-item" asp-controller="entreprenureships" asp-action="create">Entrepreunership</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Media
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    <a class="dropdown-item" asp-controller="home" asp-action="news">Campus News</a>
+                    <a class="dropdown-item" asp-controller="home" asp-action="magazine">EDSU Magazine</a>
+                    <a class="dropdown-item" asp-controller="home" asp-action="event">Event Gallery</a>
+                    <a class="dropdown-item" asp-controller="home" asp-action="gallery">Building Gallery</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    OER
+                    <i data-feather="chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                    <a class="dropdown-item" asp-controller="oerconferencepapers" asp-action="index">Conference Papers</a>
+                    <a class="dropdown-item" asp-controller="oercoursewares" asp-action="index">Coursewares</a>
+                    <a class="dropdown-item" asp-controller="oerjournalarticles" asp-action="index">Journal Articles</a>
+                    <a class="dropdown-item" asp-controller="oerstudentprojects" asp-action="index">Students Projects</a>
+                    <a class="dropdown-item" asp-controller="oertextbooks" asp-action="index">Textbooks</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Journal
+                </a>
+            </div>
+        </li>
+    </ul>
+    <partial name="_LoginPartial" />
+</nav>
+
+<script src="~/portal/js/Nav-component.js"></script>
+<script src="~/portal/js/Footer-component.js"></script>
+<script src="~/portal/js/Components.js"></script>

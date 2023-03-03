@@ -1,0 +1,266 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+
+@{
+    ViewData["Title"] = "Parent/Guardian";
+}
+<div class="collapsable-menu starterkit admin-header">
+    <div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content widget-content-area text-center">
+                <nav class="breadcrumb-two" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.id">Personal Info.</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step2" asp-route-id="@Model.id">SSCE</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.id">Next of Kin</a></li>
+                        <li class="breadcrumb-item active"><a asp-action="Step4" asp-route-id="@Model.id">Upload</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.id">Summary</a></li>
+                    </ol>
+                </nav>
+                
+            </div>
+        </div>
+    </div>
+</div>
+                            
+<div class="admin-data-content layout-top-spacing">
+    <div class="row layout-top-spacing">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-8 layout-spacing mx-auto">
+            <div class="widget-content-area br-4">
+                <div class="widget-one">
+                    <h6 class="text-danger">If you have more than one sitting in SSCE, Kindly merge them and upload</h6>
+                    <div class="row">
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.Passport == "" || Model.Passport == null)
+                                {
+                                    <span class="text-danger">✕</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Passport" class="control-label">PASSPORT</label>
+                                    <input asp-for="Passport" type="file" class="form-control" name="passport" />
+                                    <span asp-validation-for="Passport" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.HigherDegrees == "" || Model.HigherDegrees == null)
+                                {
+                                    <span class="text-danger">✕</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="HigherDegrees" class="control-label">Highest Degree</label>
+                                    <input asp-for="HigherDegrees" type="file" class="form-control" name="higerdegree" />
+                                    <span asp-validation-for="HigherDegrees" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.Ssce1 == "" || Model.Ssce1 == null)
+                                {
+                                    <span class="text-danger">✕</span>
+
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Ssce1" class="control-label">SSCE CERTIFICATE</label>
+                                    <input asp-for="Ssce1" type="file" class="form-control" name="ssce" />
+                                    <span asp-validation-for="Ssce1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.BirthCertificate == "" || Model.BirthCertificate == null)
+                                {
+                                    <span class="text-danger">✕</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="BirthCertificate" class="control-label">BIRTH CERTIFICATE (Cobine both, if more than one sitting)</label>
+                                    <input asp-for="BirthCertificate" type="file" class="form-control" name="birtCertificate" />
+                                    <span asp-validation-for="BirthCertificate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.LGAUpload == "" || Model.LGAUpload == null)
+                                {
+                                    <span class="text-danger">✕</span>
+
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="LGAUpload" class="control-label">LGA UPLOAD</label>
+                                    <input asp-for="LGAUpload" type="file" class="form-control" name="lga" />
+                                    <span asp-validation-for="LGAUpload" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+
+                            </div>
+
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.NYSC == "" || Model.NYSC == null)
+                                {
+                                    <span class="text-danger">✕</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="NYSC" class="control-label">NYSC</label>
+                                    <input asp-for="NYSC" type="file" class="form-control" name="nysc" />
+                                    <span asp-validation-for="NYSC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.Ref1 == "" || Model.Ref1 == null)
+                                {
+                                    <span class="text-danger">✕</span>
+
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Ref1" class="control-label">Upload the 1st Reference Letter</label>
+                                    <input asp-for="Ref1" type="file" class="form-control" name="ref1" />
+                                    <span asp-validation-for="Ref1" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+
+                            </div>
+
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.Ref2 == "" || Model.Ref2 == null)
+                                {
+                                    <span class="text-danger">✕</span>
+
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Ref2" class="control-label">Upload the 2nd Reference Letter</label>
+                                    <input asp-for="Ref2" type="file" class="form-control" name="ref2" />
+                                    <span asp-validation-for="Ref2" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+
+                            </div>
+
+                        </form>
+                        <form class="needs-validation col-md-6" novalidate asp-action="Step5" enctype="multipart/form-data" method="post">
+                            <div class="col-md-2 mt-2">
+                                @if (Model.Ref3 == "" || Model.Ref3 == null)
+                                {
+                                    <span class="text-danger">✕</span>
+
+                                }
+                                else
+                                {
+                                    <span class="text-success">✓</span>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Ref3" class="control-label">Upload the 3rd Reference Letter</label>
+                                    <input asp-for="Ref3" type="file" class="form-control" name="ref3" />
+                                    <span asp-validation-for="Ref3" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+  

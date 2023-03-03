@@ -1,0 +1,84 @@
+﻿@model OerConferencePaper
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Add Conference Paper </h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                
+                <form asp-action="Create" class="needs-validation" novalidate enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                        <label asp-for="Authors" class="control-label"></label>
+                        <input asp-for="Authors" class="form-control" />
+                        <span asp-validation-for="Authors" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="Keywords" class="control-label"></label>
+                        <input asp-for="Keywords" class="form-control" />
+                        <span asp-validation-for="Keywords" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="Abstract" class="control-label"></label>
+                        <textarea asp-for="Abstract" class="form-control"></textarea>
+                        <span asp-validation-for="Abstract" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="PublicationDate" class="control-label">Publication Date</label>
+                        <input asp-for="PublicationDate" class="form-control" />
+                        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="PublisherName" class="control-label">Publisher</label>
+                        <input asp-for="PublisherName" class="form-control" />
+                        <span asp-validation-for="PublisherName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="NoOfPages" class="control-label">No of Pages</label>
+                            <input asp-for="NoOfPages" type="date" class="form-control" />
+                        <span asp-validation-for="NoOfPages" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="Upload" class="control-label"> Upload The Full Paper </label>
+                        <input asp-for="Upload" name="fullArticle" class="form-control" type="file" />
+                        <span asp-validation-for="Upload" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="IsPublished" class="control-label"> Is Published?</label>
+                        <select class="form-control" asp-for="IsPublished">
+                            <option value="">Select Status</option>
+                            <option value="false">false</option>
+                            <option value="true">true</option>
+
+                        </select>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="Volume" class="control-label"></label>
+                        <input asp-for="Volume" type="number" class="form-control" />
+                        <span asp-validation-for="Volume" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                        <label asp-for="Issue" class="control-label"></label>
+                        <input asp-for="Issue" type="date" class="form-control" />
+                        <span asp-validation-for="Issue" class="text-danger"></span>
+                        </div>
+                        </div>
+                   </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-save="modal">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

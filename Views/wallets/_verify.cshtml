@@ -1,0 +1,34 @@
+﻿@model EDSU_SYSTEM.Models.Payment
+<div id="modalVerticallyCentered addCourseware" class="col-lg-12 layout-spacing">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Verify Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <form asp-action="Verify">
+                    <div class="modal-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="WalletId" class="control-label">Wallet ID</label>
+                            <input asp-for="WalletId" class="form-control" />
+                            <span asp-validation-for="WalletId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Ref" class="control-label">Transaction ID</label>
+                            <input asp-for="Ref" class="form-control" />
+                            <span asp-validation-for="Ref" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                        <button type="submit" class="btn btn-primary">Verify</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@model EDSU_SYSTEM.Models.Evaluation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget-content widget-content-area p-3">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <select asp-for="LecturerId" asp-items="@ViewBag.LecturerId">
+                                   <option>
+                                       Select Lecturer
+                                   </option>
+                            </select>
+                        <div class="row my-2">
+                            <div class="col-md-6">
+                                    <label class="control-label">Punctuality in lectures delivery</label>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                    <div class="">
+                                        <span>Strongly Agree</span>
+                                        <span>Agree</span>
+                                        <span>Somewhat Agree</span>
+                                        <span>Disagree</span>
+                                        <span>Strongly Disagree</span>
+                                    </div>
+                                <span class="d-flex">
+                                        <input type="radio" class="form-control" name="grade1" value="1" />
+                                        <input type="radio" class="form-control" name="grade1" value="2" />
+                                        <input type="radio" class="form-control" name="grade1" value="3" />
+                                        <input type="radio" class="form-control" name="grade1" value="4"  />
+                                        <input type="radio" class="form-control" name="grade1" value="5" />
+                                </span>
+                            </div>      
+                        </div>
+                            <div class="row mb-2">
+                            <div class="col-md-6">
+                                    <label class="control-label">Appropriate use of examples</label>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                <span class="d-flex">
+                                    <input type="radio" class="form-control" name="grade2" />
+                                    <input type="radio" class="form-control" name="grade2" />
+                                    <input type="radio" class="form-control" name="grade2" />
+                                    <input type="radio" class="form-control" name="grade2" />
+                                    <input type="radio" class="form-control" name="grade2" />
+                                </span>
+                            </div>      
+                        </div>
+                            <div class="row mb-2">
+                            <div class="col-md-6">
+                                    <label class="control-label">Appropriate use of teaching aids (e.g. Powerpoint, Videos, Projector, Smartboard)</label>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                <span class="d-flex">
+                                    <input type="radio" class="form-control" name="grade3" />
+                                    <input type="radio" class="form-control" name="grade3" />
+                                    <input type="radio" class="form-control" name="grade3" />
+                                    <input type="radio" class="form-control" name="grade3" />
+                                    <input type="radio" class="form-control" name="grade3" />
+                                </span>
+                            </div>      
+                        </div>
+                            <div class="row mb-2">
+                            <div class="col-md-6">
+                                    <label class="control-label">Stimulation of your interest in the subject?</label>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                <span class="d-flex">
+                                    <input type="radio" class="form-control" name="grade4" />
+                                    <input type="radio" class="form-control" name="grade4" />
+                                    <input type="radio" class="form-control" name="grade4" />
+                                    <input type="radio" class="form-control" name="grade4" />
+                                    <input type="radio" class="form-control" name="grade4" />
+                                </span>
+                            </div>      
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <label class="control-label">Clarity of presentation</label>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                <span class="d-flex">
+                                    <input type="radio" class="form-control" name="grade" />
+                                    <input type="radio" class="form-control" name="grade" />
+                                    <input type="radio" class="form-control" name="grade" />
+                                    <input type="radio" class="form-control" name="grade" />
+                                    <input type="radio" class="form-control" name="grade" />
+                                </span>
+                            </div>      
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+    </div>
+<!-- END MAIN CONTAINER -->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

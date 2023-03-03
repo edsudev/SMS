@@ -1,0 +1,105 @@
+﻿@model Staff
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="addCourseware">@Model.Name's Publication Profiles</h6>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Publication">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label asp-for="ORCID" class="control-label">https://orcid.org/register</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">ORCID</span>
+                                </div>
+                                <input asp-for="ORCID" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="ORCID" class="text-danger"></span>
+                        </div> 
+                        <div class="col-md-12">
+                            <label asp-for="ResearcherId" class="control-label">www.researcherid.com</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">ResearcherID</span>
+                                </div>
+                                <input asp-for="ResearcherId" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="ResearcherId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="GoogleScholar" class="control-label">https://scholar.google.com/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">Google Scholar</span>
+                                </div>
+                                <input asp-for="GoogleScholar" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="GoogleScholar" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="ResearchGate" class="control-label">https://www.researchgate.net/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">Research Gate</span>
+                                </div>
+                                <input asp-for="ResearchGate" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="ResearchGate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Academia" class="control-label">https://www.academia.edu/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">Academia</span>
+                                </div>
+                                <input asp-for="Academia" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="Academia" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="LinkedIn" class="control-label">https://ng.linkedin.com/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">LinkedIN</span>
+                                </div>
+                                <input asp-for="LinkedIn" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="LinkedIn" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Mendeley" class="control-label">https://www.mendeley.com/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">Mendeley</span>
+                                </div>
+                                <input asp-for="Mendeley" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="Mendeley" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Scopus" class="control-label">https://www.scopus.com/</label>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">Scopus</span>
+                                </div>
+                                <input asp-for="Scopus" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Paste profile link here">
+                            </div>
+                            <span asp-validation-for="Scopus" class="text-danger"></span>
+                        </div>
+                        
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal" style="margin-left:300px">Save</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

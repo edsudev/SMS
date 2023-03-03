@@ -1,0 +1,78 @@
+﻿@model OerStudentProject
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Add Student Project</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameOfStudent" class="control-label">Name of student</label>
+                        <input asp-for="NameOfStudent" class="form-control" />
+                        <span asp-validation-for="NameOfStudent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MatNo" class="control-label">Matriculation No.</label>
+                        <input asp-for="MatNo" class="form-control" />
+                        <span asp-validation-for="MatNo" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group">
+                        <label asp-for="Faculty" class="control-label"></label>
+                        <select asp-for="Faculty" class="form-control" asp-items="@(new SelectList(ViewBag.faculty,"Id","Name"))">
+                        </select>
+                        <span asp-validation-for="Faculty" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="SessionOfAdmission" class="control-label">Session Admitted</label>
+                        <input asp-for="SessionOfAdmission" class="form-control" />
+                        <span asp-validation-for="SessionOfAdmission" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ModeOfStudy" class="control-label">Mode of Study</label>
+                        <input asp-for="ModeOfStudy" class="form-control" />
+                        <span asp-validation-for="ModeOfStudy" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Abstract" class="control-label"></label>
+                        <textarea asp-for="Abstract" class="form-control" />
+                        <span asp-validation-for="Abstract" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PublicationDate" class="control-label">Publication Date</label>
+                        <input asp-for="PublicationDate" class="form-control" />
+                        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Upload" class="control-label">Project Upload</label>
+                        <input asp-for="Upload" class="form-control" type="file" name="file" />
+                        <span asp-validation-for="Upload" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Synopsis" class="control-label">Synopsis Upload</label>
+                        <input asp-for="Synopsis" class="form-control" type="file" name="synopsis" />
+                        <span asp-validation-for="Synopsis" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsPublished" /> @Html.DisplayNameFor(model => model.IsPublished)
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

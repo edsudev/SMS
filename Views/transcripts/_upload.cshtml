@@ -1,0 +1,38 @@
+﻿@model Transcript
+@using static EDSU_SYSTEM.Models.Enum
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Upload Files</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Admit">
+                    <div class="col-md-4 ">
+                        <div class="form-group">
+                            <label asp-for="NotificationOfResult" class="control-label">Notification of result</label>
+                            <input asp-for="NotificationOfResult" class="form-control" type="file" name="file" />
+                            <span asp-validation-for="NotificationOfResult" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Receipt" class="control-label"></label>
+                            <input asp-for="Receipt" class="form-control" type="file" name="receipt" />
+                            <span asp-validation-for="Receipt" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

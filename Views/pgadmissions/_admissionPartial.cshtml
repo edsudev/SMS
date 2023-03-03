@@ -1,0 +1,44 @@
+﻿@model PgApplicant
+@using static EDSU_SYSTEM.Models.Enum
+<div id="PlaceHolderHere"></div>
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Admit Student</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Admit">
+                    <div class="form-group">
+                        <label asp-for="AdmittedInto" class="control-label">Department</label>
+                        <select asp-for="AdmittedInto" class="form-control" asp-items="ViewBag.DepartmentId"> 
+                            <option value="null">-- Department --</option>
+                        </select>
+                        <span asp-validation-for="AdmittedInto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProgramApplyingFor" class="control-label">Programme</label>
+                        <select asp-for="ProgramApplyingFor" class="form-control"> 
+                            <option value="null">-- Programme --</option>
+                        </select>
+                        <span asp-validation-for="ProgramApplyingFor" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LevelAdmittedTo" class="control-label">Level</label>
+                        <select asp-for="LevelAdmittedTo" class="form-control" asp-items="ViewBag.LevelId">
+                            <option value="null">-- Level --</option>
+                        </select>
+                        <span asp-validation-for="LevelAdmittedTo" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary" data-save="modal">Admit Applicant</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                 </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+

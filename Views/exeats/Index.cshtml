@@ -1,0 +1,90 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Exeat>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!--  BEGIN CONTENT AREA  -->
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="row layout-spacing">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget">
+                        <div class="widget-content widget-content-area">
+                            <!-- Content -->
+                            <table id="html5-extension" class="table table-hover non-hover">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Name</th>
+                                        <th>Reason</th>
+                                        <th>Destinstion</th>
+                                        <th>Phone</th>
+                                        <th>Alt. Parent Phone</th>
+                                        <th>Parent Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Reason)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Destination)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Phone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ParentPhone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ParentPhone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Dean)
+                                            </td>
+
+                                            <td>
+                                                <a asp-action="act" asp-route-id="@item.ExeatId" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Act on exeat">
+                                                    <div class="icon-container">
+                                                        <i data-feather="edit"></i>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+
+<script>
+    const targetDiv = document.getElementById("third");
+    const btn = document.getElementById("toggle");
+    btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+        } else {
+            targetDiv.style.display = "block";
+        }
+    };
+</script>

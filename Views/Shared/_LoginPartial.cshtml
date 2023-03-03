@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="d-flex">
+@if (SignInManager.IsSignedIn(User))
+{
+    
+    <li class="">
+            @{
+                var user = UserManager.GetUserAsync(ViewContext.HttpContext.User).Result;
+            }
+            @if (user != null && user.Type == 1)
+            {
+                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="students">Dashboard</a>
+            }@if (user != null && user.Type == 2)
+            {
+                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="staffs">Dashboard</a>
+            }@if (user != null && user.Type == 3)
+            {
+                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="pgstudents">Dashboard</a>
+            }@if (user != null && user.Type == 4)
+            {
+                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="parents">Dashboard</a>
+            }
+        
+        @*<a  class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>*@
+    </li>
+    <li class="">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="btn btn-link text-dark">Logout!</button>
+        </form>
+    </li>
+}
+else
+{
+        <li class="mr-3">
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+        <li class="">
+            <a class="btn btn-success" href="edouniversity.instructure.com">LMS</a>
+        </li>
+}
+</ul>

@@ -1,0 +1,46 @@
+﻿@model List<UserRoleVM>
+
+@{
+    var roleId = ViewBag.roleId;
+    var roleName = ViewBag.roleName;
+}
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget">
+                        <form method="post" asp-action="EditUserRole">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Add or Remove User from this role</h4>
+                                </div>
+                                <div class="card-body">
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        <div class="form-group p-3">
+                                            <input asp-for="@Model[i].UserId" type="hidden" class="form-check-input" />
+                                            <input asp-for="@Model[i].UserName" type="hidden" class="form-check-input" />
+                                            <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                            <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                                                @Model[i].UserName
+                                            </label>
+
+                                        </div>
+                                    }
+                                </div>
+                                <input type="submit" value="Submit" class="btn btn-primary col-3" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->               

@@ -1,0 +1,136 @@
+﻿<div class="row">
+    <div class="col-2" style="height:100vh; background-color:#060818">
+        <div>
+            <div class="row">
+                <img src="~/logo.png" style="width:100px; height:100px" class="mx-auto mt-3" />
+                <h5 class="text-center text-light mx-auto">Edo State Universiry<br />Uzairu</h5>
+            </div>
+            <div class="mt-3">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="col-auto pb-1">
+                        <h5 class="text-light">
+                            <i class="far fa-user"></i>
+                            Dashboard
+                        </h5>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <div class="dropdown nav-link ">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <div class="pb-1">
+                            <h5 class="text-light">
+                                <i class="far fa-list-alt"></i>
+                                Courses <i data-feather="chevron-down"></i>
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                        <a class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action("Index","courseregistrations")">Registered Courses.</a>
+                        <a class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action("First","courseregistrations")">First Semester Reg.</a>
+                        <a class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action("Second","courseregistrations")">Second Semester Reg.</a>
+                        <a class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action($"Summary/{ViewBag.studentID}")">Approved Courses</a>
+                    </div>
+                </div>
+            </div>
+            <div> 
+                <div class="dropdown nav-link ">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <div class="pb-1">
+                            <h5 class="text-light">
+                                <i class="far fa-money-bill-alt"></i>
+                                Wallet <i data-feather="chevron-down"></i>
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                        <a class="dropdown-item" data-toggle="ajax-modal"
+                           data-url="@Url.Action("index","wallets")">My wallet</a>
+                        @*<a class="dropdown-item" asp-controller="wallets" asp-action="index">My wallet</a>*@
+                        <a class="dropdown-item" asp-controller="PgApplicants" asp-action="index">E-Clearance</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="col-auto pb-3">
+                        <h5 class="text-light">
+                            <i data-feather="award"></i>
+                            Results
+                        </h5>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="col-auto pb-3">
+                        <h5 class="text-light">
+                            <i class="far fa-envelope"></i>
+                            Mail Box
+                        </h5>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <div class="dropdown nav-link ">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <div class="pb-1">
+                            <h5 class="text-light">
+                                <i class="far fa-edit"></i>
+                                Exeat <i data-feather="chevron-down"></i>
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                        <div class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action("Create","exeats")">
+                            <small>
+                                Apply
+                            </small>
+                        </div>
+                        <a class="dropdown-item" data-toggle="ajax-modal" data-url="@Url.Action("Create","courseregistrations")">History</a>
+                        @*<a class="dropdown-item" asp-controller="AdmissionLetters" asp-action="index">Course Reg. History</a>*@
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="col-auto pb-3">
+                        <h5 class="text-light">
+                            <i data-feather="trending-up"></i>
+                            Project Progress
+                        </h5>
+                    </div>
+                </a>
+            </div>
+            <div>
+               <div class="col-auto pb-3" data-toggle="ajax-modal" data-url="@Url.Action("Create","courseregistrations")">
+                    <h5 class="text-light">
+                        <i data-feather="trending-up"></i>
+                        Evaluation
+                    </h5>
+                </div>
+            </div> 
+            
+            <div>
+                <div class="dropdown nav-link ">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <div class="pb-1">
+                            <h5 class="text-light">
+                                <i data-feather="settings"></i>
+                                Account <i data-feather="chevron-down"></i>
+                            </h5>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                        <a class="dropdown-item" asp-controller="admissions" asp-action="login">Settings</a>
+                        <a class="dropdown-item" asp-controller="PgApplicants" asp-action="index">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-10" id="PlaceHolderHere"></div>
+</div>

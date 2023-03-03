@@ -1,0 +1,196 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+
+@{
+    ViewData["Title"] = "Personal Info.";
+}
+<div class="collapsable-menu starterkit admin-header">
+    <div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content widget-content-area text-center">
+                <nav class="breadcrumb-two" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active"><a asp-action="Step1" asp-route-id="@Model.id">Personal Info.</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step2" asp-route-id="@Model.id">SSCE</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.id">Next of Kin</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step4" asp-route-id="@Model.id">Upload</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.id">Summary</a></li>
+                    </ol>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <!--  BEGIN MAIN CONTAINER  -->
+    
+    <!--  BEGIN CONTENT AREA  -->
+        
+        <div class="admin-data-content layout-top-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                    <div class="widget-content-area br-4 p-4">
+                        <div class="widget-one">
+                            <form class="needs-validation" novalidate asp-action="Step1">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Surname" class="control-label"></label>
+                                            <input asp-for="Surname" class="form-control" />
+                                            <span asp-validation-for="Surname" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="FirstName" class="control-label">First Name</label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="OtherName" class="control-label">Other Name(s)</label>
+                                            <input asp-for="OtherName" class="form-control" />
+                                            <span asp-validation-for="OtherName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Sex" class="control-label"></label>
+                                            <select asp-for="Sex" class="form-control">
+                                                <option value="">-- Choose --</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                            <span asp-validation-for="Sex" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="DOB" class="control-label"></label>
+                                            <input asp-for="DOB" class="form-control" />
+                                            <span asp-validation-for="DOB" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="MaritalStatus" class="control-label">Marital Status</label>
+                                            <select asp-for="MaritalStatus" class="form-control">
+                                                <option value="">-- Choose --</option>
+                                                <option value="Single">Single</option>
+                                                <option value="Married">Married</option>
+                                                <option value="Divorced">Divorced</option>
+                                            </select>
+                                            <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="PlaceOfBirth" class="control-label">Place of Birth</label>
+                                            <input asp-for="PlaceOfBirth" class="form-control" />
+                                            <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="ContactAddress" class="control-label">Contact Address</label>
+                                            <input asp-for="ContactAddress" class="form-control" />
+                                            <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="PermanentHomeAddress" class="control-label">Permanent Home Address</label>
+                                            <input asp-for="PermanentHomeAddress" class="form-control" />
+                                            <span asp-validation-for="PermanentHomeAddress" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Nationality" class="control-label">Nationality</label>
+                                        <select asp-for="Nationality" class="form-control" asp-items="ViewBag.CountryId"></select>
+                                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                        <label asp-for="StateOfOrigin" class="control-label">State</label>
+                                        <select asp-for="StateOfOrigin" class="form-control" asp-items="ViewBag.StateId"></select>
+                                        <span asp-validation-for="StateOfOrigin" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="LGA" class="control-label">LGA</label>
+                                        <select asp-for="LGA" class="form-control" asp-items="ViewBag.LgaId"></select>
+                                            <span asp-validation-for="LGA" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="control-label">Phone</label>
+                                            <input asp-for="PhoneNumber" class="form-control" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" class="form-control" value="@User.Identity?.Name" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="PrimarySchool" class="control-label">Primary School</label>
+                                            <input asp-for="PrimarySchool" class="form-control" />
+                                            <span asp-validation-for="PrimarySchool" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="SecondarySchool" class="control-label">Secondary School</label>
+                                            <input asp-for="SecondarySchool" class="form-control" />
+                                            <span asp-validation-for="SecondarySchool" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-4 ">
+                                        <div class="form-group">
+                                                               
+                                            <label asp-for="Indigine" class="control-label">Are you an indigine of Edo state</label>
+                                            <input asp-for="Indigine" class="form-control" />
+                                            <span asp-validation-for="Indigine" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="ModeOfEntry" class="control-label">Mode of application</label>
+                                            <input asp-for="ModeOfEntry" class="form-control" />
+                                            <span asp-validation-for="ModeOfEntry" class="text-danger"></span>
+                                        </div>
+                                    </div>*@
+                                </div>
+
+                                <button class="btn btn-primary mt-3" type="submit">Next</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                            
+                      
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->

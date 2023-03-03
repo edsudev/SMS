@@ -1,0 +1,83 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Payment>
+@{
+    ViewData["Title"] = "Details";
+}
+@*All Transactions Done on this wallet*@
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row layout-top-spacing">
+           
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget">
+                    <div class="widget-content widget-content-area">
+                        <table id="html5-extension" class="table table-hover non-hover">
+                            <thead>
+                                <tr>
+                                    <th>Desc.</th>
+                                    <th>Amount</th>
+                                    <th>Ref</th>
+                                    <th>Status</th>
+                                    <th>Session</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @item.Type
+                                        </td>
+                                        <td>
+                                            @item.Amount
+                                        </td>
+                                        <td>
+                                            @item.Ref
+                                        </td>
+
+                                        <td>
+                                            @item.Status
+                                        </td>
+                                        <td>
+                                            @item.Sessions.Name
+                                        </td>
+                                        <td>
+                                            @item.PaymentDate
+                                        </td>
+                                       
+                                        <td>
+                                            <a class="btn btn-primary" asp-action="Verify" asp-route-id="@item.Ref"> Receipt</a>
+                                           
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+    </div>
+<!-- END MAIN CONTAINER -->
+
+<script>
+    const targetDiv = document.getElementById("third");
+    const btn = document.getElementById("toggle");
+    btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+        } else {
+            targetDiv.style.display = "block";
+        }
+    };
+</script>

@@ -1,0 +1,49 @@
+﻿@model EDSU_SYSTEM.Models.LevelAdviser
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <h4>Create Level Adviser</h4>
+                    <div class="widget-content widget-content-area br-6 p-3">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="StaffId" class="control-label">Staff</label>
+                                <select asp-for="StaffId" class="form-control basic" asp-items="ViewBag.StaffId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LevelId" class="control-label">Level to advice</label>
+                                <select asp-for="LevelId" class="form-control basic" asp-items="ViewBag.LevelId"></select>
+                                <span asp-validation-for="LevelId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Status" class="control-label">Status</label>
+                                <select asp-for="Status" class="form-control basic" asp-items="Html.GetEnumSelectList<Status>()">
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </form> 
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

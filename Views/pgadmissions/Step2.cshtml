@@ -1,0 +1,436 @@
+﻿@model EDSU_SYSTEM.Models.PgApplicant
+
+@{
+    ViewData["Title"] = "SSCE";
+}
+
+<div class="collapsable-menu starterkit admin-header">
+    <div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content widget-content-area text-center">
+                <nav class="breadcrumb-two" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.id">Personal Info.</a></li>
+                        <li class="breadcrumb-item active"><a asp-action="Step2" asp-route-id="@Model.id">SSCE</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.id">Next of Kin</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Step4" asp-route-id="@Model.id">Upload</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.id">Summary</a></li>
+                    </ol>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <!--  BEGIN MAIN CONTAINER  -->
+    <!--  BEGIN CONTENT AREA  -->
+
+    <div class="admin-data-content layout-top-spacing">
+        <div class="row layout-top-spacing">
+            <div class="col-xl-10 col-lg-10 col-md-10 col-12 mx-auto layout-spacing">
+                <div class="col-2">
+                    <label>No. of sittings</label>
+                    <select asp-for="NoOfSittings" name="sscesittings" class="form-control">
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="admin-data-content layout-top-spacing">
+                    <form class="needs-validation" novalidate asp-action="Step3">
+                        <div class="row layout-top-spacing d-flex justify-content-center">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-6 layout-spacing">
+                                <div class="widget-content-area br-4  p-4">
+                                    <div class="widget-one">
+                                        <div class="layout-top-spacing">
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <select asp-for="Ssce1Type" class="form-control">
+                                                            <option value="null">Type of SSCE</option>
+                                                            <option value="WAEC">WAEC</option>
+                                                            <option value="NECO">NECO</option>
+                                                            <option value="GCE">GCE</option>
+                                                        </select>
+                                                        <span asp-validation-for="Ssce1Type" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <select asp-for="Ssce1Year" class="form-control">
+                                                            <option value="null">Year of exams</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2020">2020</option>
+                                                        </select>
+                                                        <span asp-validation-for="Ssce1Type" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <input asp-for="Ssce1Number" class="form-control" placeholder="Examination Number" />
+                                                        <span asp-validation-for="Ssce1Number" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h6>Awaiting Result Candidate can now apply by selecting (AR as grade)</h6>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+                                                <select asp-for="Ssce1Subject1" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce1Subject1" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject1Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+                                               <select asp-for="Ssce1Subject2" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce1Subject2" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-group">
+                                               <select asp-for="Ssce1Subject2Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                                <span asp-validation-for="Ssce1Subject2Grade" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+
+                                                <select asp-for="Ssce1Subject3" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce1Subject3" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-group">
+                                               <select asp-for="Ssce1Subject3Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                                <span asp-validation-for="Ssce1Subject3Grade" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce1Subject4" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject4Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce1Subject5" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject5Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                           <select asp-for="Ssce1Subject6" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject6Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce1Subject7" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject7Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce1Subject8" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject8Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce1Subject9" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce1Subject9Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <div class="valid-feedback">Example valid custom select feedback</div>
+                                            <div class="invalid-feedback">
+                                                Please Select the field
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="SecondSitingSsce" style="display:none" class="col-xl-6 col-lg-6 col-md-6 col-6 layout-spacing">
+                                <div class="widget-content-area br-4 p-4">
+                                    <div class="widget-one">
+                                        <div class="layout-top-spacing">
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <select asp-for="Ssce2Type" class="form-control">
+                                                            <option value="null">Type of SSCE</option>
+                                                            <option value="WAEC">WAEC</option>
+                                                            <option value="NECO">NECO</option>
+                                                            <option value="GCE">GCE</option>
+                                                        </select>
+                                                        <span asp-validation-for="Ssce2Type" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <select asp-for="Ssce2Year" class="form-control">
+                                                            <option value="null">Year of exams</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2020">2020</option>
+                                                        </select>
+                                                        <span asp-validation-for="Ssce2Year" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="form-group">
+                                                        <input asp-for="Ssce2Number" class="form-control" placeholder="Examination Number" />
+                                                        <span asp-validation-for="Ssce2Number" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h6>Awaiting Result Candidate can now apply by selecting (AR as grade)</h6>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+                                                <select asp-for="Ssce2Subject1" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce2Subject1" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+
+                                            <select asp-for="Ssce2Subject1Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+                                               <select asp-for="Ssce2Subject2" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce2Subject2" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-group">
+                                               <select asp-for="Ssce2Subject2Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                                <span asp-validation-for="Ssce2Subject2Grade" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <div class="form-group">
+
+                                                <select asp-for="Ssce2Subject3" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                                <span asp-validation-for="Ssce2Subject3" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="form-group">
+                                                <select asp-for="Ssce2Subject3Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                                <span asp-validation-for="Ssce2Subject3Grade" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce2Subject4" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject4" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                           <select asp-for="Ssce2Subject4Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject4Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                           <select asp-for="Ssce2Subject5" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject5" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce2Subject5Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject5Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                           <select asp-for="Ssce2Subject6" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject6" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce2Subject6Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject6Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                            <select asp-for="Ssce2Subject7" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject7" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce2Subject7Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject7Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                           <select asp-for="Ssce2Subject8" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject8" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce2Subject8Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject8Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-8 mb-4">
+                                           <select asp-for="Ssce2Subject9" class="form-control" asp-items="ViewBag.SSCESubjectId"></select>
+                                            <span asp-validation-for="Ssce2Subject9" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <select asp-for="Ssce2Subject9Grade" class="form-control" asp-items="ViewBag.SSCEGradeId"></select>
+                                            <span asp-validation-for="Ssce2Subject9Grade" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Next</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+
+
+<script>
+    $(document).ready(function () {
+        App.init();
+    });
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script src="index.js"></script> -->
+<script>
+    $(document).ready(function () {
+        //When number of ssce sittings is checked
+        $("select[name='sscesittings']").on("change", function () {
+            var ssceSittingss = $(this).val();
+            var ssce2nd = $("#SecondSitingSsce");
+            if (ssceSittingss == 1) {
+                ssce2nd.hide();
+            } else {
+                ssce2nd.show(500);
+            }
+        })
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Fee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="admin-data-content layout-top-spacing">
+
+    <div class="row layout-top-spacing" id="cancel-row">
+        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+            <div class="widget-content widget-content-area br-6">
+                <table id="example" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                               Department
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level3)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level4)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level5)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level6)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pgd)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Msc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Phd)
+                            </th>
+                           @* <th>
+                                @Html.DisplayNameFor(model => model.Department)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FortyPercent)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SixtyPercent)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Session)
+                            </th>*@
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Departments.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level1)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level2)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level3)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level4)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level5)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Level6)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Pgd)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Msc)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Phd)</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Department
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level3)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level4)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level5)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level6)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pgd)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Msc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Phd)
+                            </th>
+                           
+                            <th></th>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

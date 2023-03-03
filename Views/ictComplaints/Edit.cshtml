@@ -1,0 +1,64 @@
+﻿@model EDSU_SYSTEM.Models.IctComplaint
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="widget">
+    <h4>What is the progress of the stated complaint?</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Complain" class="control-label"></label>
+                    <textarea asp-for="Complain" disabled class="form-control"></textarea>
+                    <span asp-validation-for="Complain" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label"></label>
+                    <input asp-for="Location" disabled class="form-control"/>
+                    <span asp-validation-for="Complain" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Response" class="control-label"></label>
+                    <textarea asp-for="Response" class="form-control"></textarea>
+                    <span asp-validation-for="Response" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<WorksStatus>()">
+                        <option value="">Status</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 mx-auto" style="margin-top:-20px">
+            <img src="~/images/maintenance.gif" />
+        </div>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function chk() 
+    {
+        if ( $("#avail").val() == "" ) {
+            $("#quantt").attr("hide", true)
+        } else {
+            $("#quantt").attr("hide", false)
+        }
+    }
+</script>

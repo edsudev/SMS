@@ -1,0 +1,123 @@
+﻿@model EDSU_SYSTEM.Models.Fee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h4>Fee</h4>
+    <div class="admin-data-content layout-top-spacing">
+
+        <div class="row layout-top-spacing" id="cancel-row">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <div class="widget-content widget-content-area br-6">
+                    <table id="example" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Name)*@
+                                    @Html.DisplayNameFor(model => model.DepartmentId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level1)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level2)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level3)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level4)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level5)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level6)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Pgd)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Msc)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Phd)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SessionId)
+                                </th>
+                            </tr>
+                        </thead>
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                        <tbody>
+                            <tr>
+                                <td><input class="form-control" asp-for="DepartmentId"></td>
+                                <td><input class="form-control" asp-for="Level1"></td>
+                                <td><input class="form-control" asp-for="Level2"></td>
+                                <td><input class="form-control" asp-for="Level3"></td>
+                                <td><input class="form-control" asp-for="Level4"></td>
+                                <td><input class="form-control" asp-for="Level5"></td>
+                                <td><input class="form-control" asp-for="Level6"></td>
+                                <td><input class="form-control" asp-for="Pgd"></td>
+                                <td><input class="form-control" asp-for="Msc"></td>
+                                <td><input class="form-control" asp-for="Phd"></td>
+                                <td><input class="form-control" asp-for="SessionId"></td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </form>
+                        <tfoot>
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Name)*@
+                                @Html.DisplayNameFor(model => model.DepartmentId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level3)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level4)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level5)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Level6)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pgd)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Msc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Phd)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sessions.Name)
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

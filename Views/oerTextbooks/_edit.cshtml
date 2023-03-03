@@ -1,0 +1,87 @@
+﻿@model OerTextbook
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Add Textbook</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create" class="needs-validation" novalidate enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label asp-for="Text" class="control-label"></label>
+                            <input asp-for="Text" class="form-control" />
+                            <span asp-validation-for="Text" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Author" class="control-label"></label>
+                            <input asp-for="Author" class="form-control" />
+                            <span asp-validation-for="Author" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label asp-for="Contributors" class="control-label"></label>
+                            <input asp-for="Contributors" class="form-control" />
+                            <span asp-validation-for="Contributors" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Publisher" class="control-label"></label>
+                            <input asp-for="Publisher" class="form-control" />
+                            <span asp-validation-for="Publisher" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                        <label asp-for="Summary" class="control-label"></label>
+                        <input asp-for="Summary" class="form-control" />
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Edition" class="control-label"></label>
+                        <input asp-for="Edition" class="form-control" />
+                        <span asp-validation-for="Edition" class="text-danger"></span>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label asp-for="ISBN" class="control-label"></label>
+                            <input asp-for="ISBN" class="form-control" />
+                            <span asp-validation-for="ISBN" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="PublicationYear" class="control-label">Publication Year</label>
+                            <input asp-for="PublicationYear" class="form-control" />
+                            <span asp-validation-for="PublicationYear" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label asp-for="NoOfPages" class="control-label">No of Pages</label>
+                            <input asp-for="NoOfPages" class="form-control" />
+                            <span asp-validation-for="NoOfPages" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-4">
+                            <label asp-for="FieldOfStudy" class="control-label">Field of Study</label>
+                            <input asp-for="FieldOfStudy" class="form-control" />
+                            <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-4">
+                            <label asp-for="Upload" class="control-label"></label>
+                            <input asp-for="Upload" class="form-control" type="file" name="FullTextbook" />
+                            <span asp-validation-for="Upload" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

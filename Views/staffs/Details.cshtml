@@ -1,0 +1,375 @@
+﻿@model EDSU_SYSTEM.Models.Staff
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div id="PlaceHolderHere"></div>
+
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one p-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Surname: @Model.Name
+                                </div>
+                                <div class="col-md-3">
+                                    FirstName: @Model.SchoolEmail
+                                </div>
+                                <div class="col-md-3">
+                                    Othername: @Model.Email
+                                </div>
+                                <div class="col-md-3">
+                                    DOB: @Model.DOB
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Type: @Model.Type
+                                </div>
+                                <div class="col-md-3">
+                                    Position: @Model.Position
+                                </div>
+                                <div class="col-md-3">
+                                    Phone: @Model.Phone 
+                                </div>
+                                <div class="col-md-3">
+                                    Contact: @Model.ContactAddress
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Highest Degree: @Model.HighestQualification
+                                </div>
+                                <div class="col-md-3">
+                                    Field of Study: @Model.FieldOfStudy
+                                </div>
+                                <div class="col-md-3">
+                                    AOS: @Model.AreaOfSpecialization 
+                                </div>
+                                <div class="col-md-3">
+                                    Current Place of Work: @Model.CurrentPlaceOfWork
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    ORCID: @Model.ORCID
+                                </div>
+                                <div class="col-md-3">
+                                   Researcher ID: @Model.ResearcherId
+                                </div>
+                                <div class="col-md-3">
+                                    Google Scholar: @Model.GoogleScholar 
+                                </div>
+                                <div class="col-md-3">
+                                    Research Gate: @Model.ResearchGate
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    ORCID: @Model.Academia
+                                </div>
+                                <div class="col-md-3">
+                                   Researcher ID: @Model.LinkedIn
+                                </div>
+                                <div class="col-md-3">
+                                    Google Scholar: @Model.Mendeley 
+                                </div>
+                                <div class="col-md-3">
+                                    Research Gate: @Model.Scopus
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="~/files/applicantUploads/jamb/@Model.CertUpload">
+                                        <span class="badge badge-success"> Curriculum Vitae</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="~/files/ca.xlsx">
+                                        <span class="badge badge-success"> Certificate</span>
+                                    </a>
+                                </div>
+                                
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Accept Application" data-url="@Url.Action($"Employ/{Model.Id}")">
+                                        Employ
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Reject Application" data-url="@Url.Action($"Reject/{Model.Id}")">
+                                        Reject
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Cancel Application" data-url="@Url.Action($"Cancel/{Model.Id}")">
+                                        Cancel
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class=" btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Delete Application" data-url="@Url.Action($"Delete/{Model.Id}")">
+                                        Delete
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary" asp-action="allstaffs" asp-controller="staffs">
+                                        Back to list
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+
+
+<div>
+    <h4>Staff</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Faculties)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Faculties.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Departments)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Departments.Id)
+        </dd>
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SchoolEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SchoolEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sex)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sex)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nationalities)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nationalities.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.States)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.States.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LGAs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LGAs.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContactAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HighestQualification)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HighestQualification)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FieldOfStudy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FieldOfStudy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AreaOfSpecialization)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AreaOfSpecialization)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkedInHigherInstuition)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WorkedInHigherInstuition)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrentPlaceOfWork)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CurrentPlaceOfWork)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PositionAtCurrentPlaceOfWork)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PositionAtCurrentPlaceOfWork)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YearsOfExperience)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.YearsOfExperience)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CertUpload)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CertUpload)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CVUpload)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CVUpload)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsEmployed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsEmployed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployedBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployedBy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ORCID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ORCID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResearcherId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResearcherId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GoogleScholar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GoogleScholar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResearchGate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResearchGate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Academia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Academia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LinkedIn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LinkedIn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mendeley)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mendeley)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Scopus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Scopus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

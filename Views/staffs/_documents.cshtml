@@ -1,0 +1,40 @@
+﻿@model Staff
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="addCourseware">@Model.Name's Document</h6>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Publication">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label asp-for="Picture" class="control-label">Upload Passport Photograph</label>
+                            <input asp-for="Picture" type="file" name="passport" class="form-control">
+                            <span asp-validation-for="Picture" class="text-danger"></span>
+                        </div> 
+                        <div class="col-md-12">
+                            <label asp-for="CVUpload" class="control-label">Upload Curriculum Vitae</label>
+                            <input asp-for="CVUpload" type="file" name="cv" class="form-control">
+                            <span asp-validation-for="CVUpload" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="CertUpload" class="control-label">Upload Certificate</label>
+                            <input asp-for="CertUpload" type="file" name="certificate" class="form-control">
+                            <span asp-validation-for="CertUpload" class="text-danger"></span>
+                        </div>
+                       
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal" style="margin-left:300px">Save</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

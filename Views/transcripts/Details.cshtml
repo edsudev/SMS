@@ -1,0 +1,523 @@
+﻿@model EDSU_SYSTEM.Models.Transcript
+@*@using EDSU_SMS.Authorization*@
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore
+@using static EDSU_SYSTEM.Models.Enum
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+
+
+<style>
+
+        /* 
+            Note: If you are using this demo without activity sidebar then you have to make some changes by applying the .admin-data-content css inside structure.css
+        */
+
+        .admin-data-content {
+            height: calc(100vh - 132px);
+            max-width: 100%;
+            margin: 0;
+        }
+        .admin-header .header-container {
+            margin: 0;
+            max-width: 100%;
+        }
+        .footer-wrapper {
+            max-width: 100%;
+            margin: 0;
+        }
+
+
+        /* User Profile Dropdown*/
+        .admin-header .header-container .nav-item.user-profile-dropdown {
+            align-self: center;
+            padding: 0;
+            border-radius: 8px;
+            margin-left: 22px;
+            margin-right: 0;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-toggle {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 20px 0 16px;
+            transition: .5s;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-toggle:after {
+            display: none;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-toggle svg {
+            color: #515365;
+            width: 15px;
+            height: 15px;
+            align-self: center;
+            margin-left: 6px;
+            stroke-width: 1.7px;
+            -webkit-transition: -webkit-transform .2s ease-in-out;
+            transition: -webkit-transform .2s ease-in-out;
+            transition: transform .2s ease-in-out;
+            transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown.show .dropdown-toggle svg {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media {
+            margin: 0;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media img {
+            width: 33px;
+            height: 33px;
+            border-radius: 6px;
+            box-shadow: 0 0px 0.9px rgba(0, 0, 0, 0.07), 0 0px 7px rgba(0, 0, 0, 0.14); 
+            margin-right: 13px;
+            border: none;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media .media-body {
+            flex: auto;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media .media-body h6 {
+            color: #4361ee;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media .media-body h6 span {
+            color: #515365;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown a.user .media .media-body p {
+            color: #bfc9d4;
+            font-size: 10px;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .nav-link.user {
+            padding: 0 0;
+            font-size: 25px;
+        }
+        .admin-header .header-container .nav-item.dropdown.user-profile-dropdown .nav-link:after { display: none; }
+
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu {
+            z-index: 9999;
+            max-width: 13rem;
+            padding: 0 11px;
+            top: 166%!important;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu.show {
+            top: 42px!important;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section {
+            padding: 16px 14px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            margin-right: -12px;
+            margin-left: -12px;
+            background: rgb(96 152 149);
+            margin-top: -1px;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section .media {
+            margin: 0;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section .media img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 3px solid rgb(224 230 237 / 58%);
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section .media .media-body {
+            align-self: center;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section .media .media-body h5 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: #fafafa;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section .media .media-body p {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: #e0e6ed;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item {
+            padding: 0;
+            background: transparent;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item a {
+            display: block;
+            color: #3b3f5c;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 14px;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item a:hover {
+            color: #000
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item.active,
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item:active {
+            background-color: transparent;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item:not(:last-child) {
+            border-bottom: 1px solid #ebedf2;
+        }
+        .admin-header .header-container .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item svg {
+            width: 17px;
+            margin-right: 7px;
+            height: 17px;
+            color: #009688;
+            fill: rgb(0 150 136 / 13%);
+        }
+
+        #content .col-left {
+            margin-right: 0;
+        }
+        
+        /*
+            The below code is for DEMO purpose --- Use it if you are using this demo otherwise, Remove it
+        */
+        .navbar .navbar-item.navbar-dropdown {
+            margin-left: auto;
+        }
+        .layout-px-spacing {
+            min-height: calc(100vh - 145px)!important;
+        }
+
+    </style>
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+<h1>Transcript Application</h1>
+ 
+<hr />
+<div class="collapsable-menu starterkit admin-header">
+    
+    <!-- BEGIN LOADER -->
+ @*   <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>*@
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container sidebar-closed sbar-open" id="container">
+
+        <div class="search-overlay"></div>
+
+        
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+                
+                <div class="content-container">
+
+                    <div class="col-left layout-top-spacing">
+                        <div class="col-left-content">
+
+                            <div class="header-container">
+                                <header class="header navbar navbar-expand-sm">                                    
+                                    <div class="d-flex">
+                                        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                            <div class="bt-menu-trigger">
+                                                <span></span>
+                                            </div>
+                                        </a>
+                                        <div class="page-header">
+                                            <div class="page-title">
+                                                <h3> Transcript</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="header-actions">
+
+                                        <div class="nav-item dropdown user-profile-dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                                                <div class="media">
+                                                    @*<img src="assets/img/90x90.jpg" class="img-fluid" alt="admin-profile">*@
+                                                    <div class="media-body align-self-center">
+                                                        <!-- Username -->
+                                                        <h6>John</h6>
+                                                    </div>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                            </a>
+                                            <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                                                <div class="user-profile-section">
+                                                    <div class="media mx-auto">
+                                                        <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="avatar">
+                                                        <div class="media-body">
+                                                            <!-- Username and level -->
+                                                            <h5>Inu John</h5>
+                                                            <p>400 Level</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <a href="user_profile.html">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>My Profile</span>
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <a href="apps_mailbox.html">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> <span>My Inbox</span>
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <a href="auth_lockscreen.html">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> <span>Lock Screen</span>
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <a href="auth_login.html">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Log Out</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </header>
+                            </div>
+
+                            <div class="admin-data-content layout-top-spacing">
+
+                                <div class="row layout-top-spacing">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                                        <div class="widget-content-area br-4">
+                                            <div class="widget-one">
+                                                <h2>Personal Details</h2>
+                                                
+                                                    <div class="form-row">
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                             <label asp-for="Title" class="control-label"></label>
+                                                             <h2>@Html.DisplayFor(model => model.Title)</h2>
+                                                        </div>
+                                                        </div>
+                                                       <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Surname" class="control-label"></label>
+                                                            <h2>@Html.DisplayFor(model => model.Surname)</h2>
+                                                        </div>
+                                                        </div>
+                                                       <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Firstname" class="control-label"></label>
+                                                           <h2>@Html.DisplayFor(model => model.Firstname)</h2>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Othername" class="control-label"></label>
+                                                            <h2>@Html.DisplayFor(model => model.Othername)</h2>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                       <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="MatNo" class="control-label">Matriculation No.</label>
+                                                            <h6>@Html.DisplayFor(model => model.MatNo)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Email" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Email)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="PhoneNumber" class="control-label">Phone</label>
+                                                            <h6>@Html.DisplayFor(model => model.PhoneNumber)</h6>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Programme" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Programme)</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">  
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="GraduationDate" class="control-label">Graduation Date</label>
+                                                            <h6>@Html.DisplayFor(model => model.GraduationDate)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="AppliedBefore" class="control-label">Have you applied for a Transcript before?</label>
+                                                            <h6>@Html.DisplayFor(model => model.AppliedBefore)</h6>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="IfYes" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.IfYes)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Status" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Status)</h6>
+                                                            </div>
+                                                        </div>
+                                                   </div>
+                                                    <h2>Destination Details</h2>
+                                                    <div class="form-row">
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="DestinationName" class="control-label">Name</label>
+                                                           <h6>@Html.DisplayFor(model => model.DestinationName)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="DestinationEmail" class="control-label">Email</label>
+                                                           <h6>@Html.DisplayFor(model => model.DestinationEmail)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                           <div class="form-group">
+                                                            <label asp-for="Address1" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Address1)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                           <div class="form-group">
+                                                            <label asp-for="Address2" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Address2)</h6>
+                                                        </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <div class="form-row">
+                                                         <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="City" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.City)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                           <div class="form-group">
+                                                            <label asp-for="ZipCode" class="control-label">Zip Code</label>
+                                                            <h6>@Html.DisplayFor(model => model.ZipCode)</h6>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Country" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Country)</h6>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-md-3 ">
+                                                           <div class="form-group">
+                                                            <label asp-for="TranscriptLabel" class="control-label">Transcript Label(If Applicable)</label>
+                                                            <h6>@Html.DisplayFor(model => model.TranscriptLabel)</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="ReceiptNumber" class="control-label">Receipt No.</label>
+                                                            <h6>@Html.DisplayFor(model => model.ReceiptNumber)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Receipt" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Receipt)</h6>
+                                                            </div>
+                                                        </div>
+                                                       <div class="col-md-3 mb-4">
+                                                           <div class="form-group">
+                                                            <label asp-for="NotificationOfResult" class="control-label">Notification Of Result</label>
+                                                            <h6>@Html.DisplayFor(model => model.NotificationOfResult)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="Others" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.Others)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="CreatedAt" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.CreatedAt)</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="form-group">
+                                                            <label asp-for="UpdatedAt" class="control-label"></label>
+                                                            <h6>@Html.DisplayFor(model => model.UpdatedAt)</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                                @{
+    
+                                      //var isAuthorized = await AuthorizationService.AuthorizeAsync(
+				                                  //  User, Model, ApplicationOperations.Declined);
+
+	                                    //@if (isAuthorized.Succeeded)
+	                                    //{
+		                                   // @if (Model.Status != ApplicationStatus.Approved)
+		                                   // {
+			                                  //  <form style="display:inline;" method="post">
+				                                 //   <input hidden name="id" value="@Model.Id">
+				                                 //   <input hidden name="status" value="@ApplicationStatus.Approved">
+				                                 //   <button type="submit" class="btn btn-xs btn-success">Approve</button>
+			                                  //  </form>
+		                                   // }
+
+		                                   // @if (Model.Status != ApplicationStatus.Declined)
+		                                   // {
+			                                  //  <form style="display:inline;" method="post">
+				                                 //   <input hidden name="id" value="@Model.Id">
+				                                 //   <input hidden name="status" value="@ApplicationStatus.Declined">
+				                                 //   <button type="submit" class="btn btn-xs btn-danger">Decline</button>
+			                                  //  </form>
+		                                   // }
+                                     //      <button class="btn btn-xs btn-info">@Html.ActionLink("Download", "DownloadFile", new{FileName = Model.NotificationOfResult})</button> 
+	                                    //}
+                                    }
+
+                                   @* <div>
+                                        @if(isAuthorized.Succeeded==false)
+                                        {
+                                          <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
+                                        }
+                                        <a asp-action="Index">Back to List</a>
+                                    </div>*@
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+        
+    </div>
+   
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    
+</div>

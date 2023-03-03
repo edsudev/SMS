@@ -1,0 +1,105 @@
+﻿@model EDSU_SYSTEM.Models.Vacancy
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Create";
+}
+<partial name="_Nav"/>
+<!--  BEGIN CONTENT AREA  -->
+
+<div id="fs2Basic" class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+    <div class="widget-content-area br-4">
+        <div class="widget-one p-3">
+            <div class="admin-data-content layout-top-spacing">
+                <h6 class="text-danger">Please NOTE:</h6>
+                <p class="text-danger">
+                    - The phone number and email you provide
+                    must be valid and active as EDSU will communicate with you via them.
+                </p>
+                <p class="text-danger">- The email and password you provide in this form will be used to access your vacancy application dashboard.</p>
+                <form class="needs-validation" novalidate asp-action="create">
+                    <div class="row layout-top-spacing d-flex justify-content-center p-4">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                            <h5 class="text-center">Personal Data</h5>
+                            <div class="form-group">
+                                <label asp-for="LastName">Surname</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FirstName">Firstname</label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OtherName">Othername</label>
+                                <input asp-for="OtherName" class="form-control" />
+                                <span asp-validation-for="OtherName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone">Phone Number</label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                            <h5 class="text-center">Application Data</h5>
+                            <div class="form-group">
+                                <label asp-for="Type">Category</label>
+                                <input asp-for="Type" value="Acadamic" class="form-control" />
+                                <span asp-validation-for="Type" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DepartmentId">Department</label>
+                                <select asp-for="DepartmentId" class="form-control basic" asp-items="ViewBag.Department">
+                                    <option>Select</option>
+                                </select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Position">Position you wish to apply for</label>
+                                <select asp-for="Position" class="form-control basic" asp-items="ViewBag.position">
+                                    <option>Select</option>
+                                </select>
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                            <h5 class="text-center">Account Data</h5>
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email" class="form-control" Placeholder="e.g john@doe.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" placeholder="Password"/>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" Placeholder="Re-enter Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                         
+                            <div class="form-group mt-5">
+                                <button class="btn btn-primary form-control" type="submit">Create</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <h6 class="text-danger">
+                        Please NOTE that after submitting this form, you will be redirected to your
+                        dashboard where you will complete the application process, after which, you will be invited for screening!
+                    </h6>
+                    <p class="signup-link">I already have an account! <a asp-controller="applicants" asp-action="login">Log In</a></p>
+                    <h6>Goodluck👍</h6>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+<partial name="_Footer"/>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

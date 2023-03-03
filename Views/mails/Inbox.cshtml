@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Mail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+
+                <!-- Content -->
+                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6 d-flex">
+                        <div class="border-right">
+                            <div class="col-md-12 col-sm-12 col-12 text-center mail-btn-container">
+                                <a class="btn btn-dark my-4" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Create")">
+                                    <i data-feather="plus"></i>
+                                </a>
+                                <div class="mail-sidebar-scroll">
+                                    <ul class="nav nav-pills d-block" id="pills-tab" role="tablist">
+                                        <li class="pb-2 pt-1 border-bottom border-top text-primary text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Inbox")" class="nav-link list-actions" id="mailInbox">
+                                                <i data-feather="inbox"></i><br /><span class="icon-name"> Inbox</span>
+                                            </a>
+                                        </li>
+                                        <li class="py-2 border-bottom text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Important")" class="nav-link list-actions" id="important">
+                                                <i data-feather="star"></i><br /><span class="icon-name">Important</span>
+                                            </a>
+                                        </li>
+                                        <li class="py-2 border-bottom text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Draft")" class="nav-link list-actions" id="draft"><i data-feather="mail"></i><br /><span class="icon-name"> Draft</span></a>
+                                        </li>
+                                        <li class="py-2 border-bottom text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Sent")" class="nav-link list-actions" id="sentmail"><i data-feather="send"></i><br /><span class="icon-name"> Sent Mail</span></a>
+                                        </li>
+                                        <li class="py-2 border-bottom text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Create")" class="nav-link list-actions" id="spam"><i data-feather="alert-octagon"></i><br /><span class="icon-name"> Spam</span></a>
+                                        </li>
+                                        <li class="py-2 text-center">
+                                            <a href="#" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Create")" class="nav-link list-actions" id="trashed"><i data-feather="trash"></i><br /><span class="icon-name"> Trash</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div id="PlaceHolder"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

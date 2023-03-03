@@ -1,0 +1,186 @@
+﻿@model Staff
+
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog  modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Edit Staff Info</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <input asp-for="Id" hidden/>
+                    <div class="form-group">
+                        <img class="" src="~/files/vacancyUploads/passport/@Model.Picture" height="150" />
+                        <input asp-for="Picture" type="file"  class="form-control" />
+                        <h6>@Model.Name's Information </h6>
+                    </div>
+                    <h5>PERSONAL INFORMATION:</h5>
+                    <div class="form-row">
+                        
+                        <div class="col-md-4">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="DOB" class="control-label"></label>
+                            <input asp-for="DOB" class="form-control" />
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Sex" class="control-label"></label>
+                            <input asp-for="Sex" class="form-control" />
+                            <span asp-validation-for="Sex" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="SchoolEmail" class="control-label">School Email</label>
+                            <input asp-for="SchoolEmail" class="form-control" />
+                            <span asp-validation-for="SchoolEmail" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="ContactAddress" class="control-label">Contact Address</label>
+                            <input asp-for="ContactAddress" class="form-control" />
+                            <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="NationalityId" class="control-label">Nationality</label>
+                            <select asp-for="NationalityId" class="form-control basic" asp-items="@ViewBag.NationalityId"></select>
+                            <span asp-validation-for="NationalityId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="StateId" class="control-label">State</label>
+                            <select asp-for="StateId" class="form-control basic" asp-items="@ViewBag.StateId"></select>
+                            <span asp-validation-for="StateId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="LGAId" class="control-label">LGA</label>
+                            <select asp-for="LGAId" class="form-control basic" asp-items="@ViewBag.LGAId"></select>
+                            <span asp-validation-for="LGAId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <h5>EMPLOYMENT INFORMATION:</h5>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="Type" class="control-label"></label>
+                            <input asp-for="Type" class="form-control" />
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FacultyId" class="control-label">Faculty</label>
+                            <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId"></select>
+                            <span asp-validation-for="FacultyId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="DepartmentId" class="control-label">Department</label>
+                            <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.DepartmentId"></select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                        
+                    </div>
+                    <h5>Qualifications:</h5>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="HighestQualification" class="control-label">High Qualification</label>
+                            <input asp-for="HighestQualification" class="form-control" />
+                            <span asp-validation-for="HighestQualification" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FieldOfStudy" class="control-label">Field Of Study</label>
+                            <input asp-for="FieldOfStudy" class="form-control" />
+                            <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="AreaOfSpecialization" class="control-label">Area of Specialization</label>
+                            <input asp-for="AreaOfSpecialization" class="form-control" />
+                            <span asp-validation-for="AreaOfSpecialization" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="WorkedInHigherInstuition" class="control-label"></label>
+                            <input asp-for="AreaOfSpecialization" class="form-control" />
+                            <span asp-validation-for="AreaOfSpecialization" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="CurrentPlaceOfWork" class="control-label">Current Place of work</label>
+                            <input asp-for="CurrentPlaceOfWork" class="form-control" />
+                            <span asp-validation-for="CurrentPlaceOfWork" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="PositionAtCurrentPlaceOfWork" class="control-label">Current Position</label>
+                            <input asp-for="PositionAtCurrentPlaceOfWork" class="form-control" />
+                            <span asp-validation-for="PositionAtCurrentPlaceOfWork" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="YearsOfExperience" class="control-label">Years of Experience</label>
+                            <input asp-for="YearsOfExperience" class="form-control" />
+                            <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <h5>Research Profiles:</h5>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="ORCID" class="control-label"></label>
+                            <input asp-for="ORCID" class="form-control" />
+                            <span asp-validation-for="ORCID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="ResearcherId" class="control-label">Researcher ID</label>
+                            <input asp-for="ResearcherId" class="form-control" />
+                            <span asp-validation-for="ResearcherId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="GoogleScholar" class="control-label">Google Scholar</label>
+                            <input asp-for="GoogleScholar" class="form-control" />
+                            <span asp-validation-for="GoogleScholar" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="ResearchGate" class="control-label">Research Gate</label>
+                            <input asp-for="ResearchGate" class="form-control" />
+                            <span asp-validation-for="ResearchGate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Academia" class="control-label"></label>
+                            <input asp-for="Academia" class="form-control" />
+                            <span asp-validation-for="Academia" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="LinkedIn" class="control-label"></label>
+                            <input asp-for="LinkedIn" class="form-control" />
+                            <span asp-validation-for="LinkedIn" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Mendeley" class="control-label"></label>
+                            <input asp-for="Mendeley" class="form-control" />
+                            <span asp-validation-for="Mendeley" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="EmployedBy" class="control-label">Employed By:</label>
+                        <h6>@Model.EmployedBy</h6> on <h6>@Model.CreatedAt</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-save="modal">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

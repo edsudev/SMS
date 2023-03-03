@@ -1,0 +1,52 @@
+﻿@model IctComplaint
+@using static EDSU_SYSTEM.Models.Enum
+
+
+<div class="modal fade" id="addItem">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="fs2Basic">
+           @* <div class="modal-header">
+                <h4 class="modal-title" id="addItem">Add Courseware</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>*@
+             <div class="modal-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="modal"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <h6>What is the progress of the stated complaint?</h6>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Complain" class="control-label"></label>
+                        <textarea asp-for="Complain" disabled class="form-control"></textarea>
+                        <span asp-validation-for="Complain" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Location" class="control-label"></label>
+                        <input asp-for="Location" disabled class="form-control" />
+                        <span asp-validation-for="Complain" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Response" class="control-label"></label>
+                        <textarea asp-for="Response" class="form-control"></textarea>
+                        <span asp-validation-for="Response" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<WorksStatus>()">
+                            
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-primary" data-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-success" data-save="modal">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

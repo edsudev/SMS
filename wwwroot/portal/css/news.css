@@ -1,0 +1,258 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+@media screen and (min-width:760px){
+    .news {
+        margin-top: 2rem;
+    }
+    
+    .news .heading h1 {
+        color: #06040A;
+        font-family: 'Oswald', sans-serif;
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .news .news-details {
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+    }
+    
+    .news .news-details .featured {
+        align-items: center;
+    }
+    
+    .news .news-details .featured img {
+        width: 50%;
+        height: 27rem;
+    }
+    
+    .news .news-details .featured {
+        width: 85%;
+        height: 27rem;
+        background-color: #203B93;
+        display: flex;
+    }
+    
+    .news .news-details .featured .profile {
+        display: block;
+        margin-left: 2rem;
+    }
+    
+    .news .news-details .featured .profile .profile-name {
+        display: flex;
+        align-items: center;
+    }
+    
+    .news .news-details .featured .profile .profile-name img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .news .news-details .featured .profile .profile-name p {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: large;
+        color: white;
+        padding-left: 10px;
+    }
+    
+    .news .news-details .featured .profile .profile-description {
+        font-family: 'Poppins', sans-serif;
+        font-size: x-large;
+        color: white;
+        font-weight: 500;
+        width: 80%;
+        padding: 20px 0;
+    }
+    
+    .news .news-details .featured .profile .profile-text {
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        color: white;
+        padding-bottom: 20px;
+    }
+    
+    .news .news-details .featured .profile .estimate {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    
+    .news .news-details .featured .profile .estimate p {
+        font-family: 'Poppins', sans-serif;
+        padding-right: 15px;
+        color: white;
+        font-size: x-small;
+    }
+    
+    .news .news-details .featured .profile .estimate .round {
+        width: 4px;
+        height: 4px;
+        background-color: white;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    
+    .news .news-details .featured .profile .estimate .desc {
+        background-color: rgba(255, 255, 255, 0.2);
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        font-size: x-small;
+        border-radius: 20px;
+        padding: 5px 12px;
+        cursor: pointer;
+    }
+    
+    .news .news-details .featured .profile button {
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        color: rgba(249, 249, 250, 1);
+        background-color: #64DD17;
+        padding: 15px 30px;
+        font-weight: bold;
+        font-size: 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .news .news-details .featured .profile button:hover {
+        background-color: #73e42e;
+        transition: 0.7s ease-in;
+    }
+    
+    .latest-news {
+        margin: 3rem auto 3rem auto;
+        width: 85%;
+    }
+    
+    .latest-news-heading {
+        font-family: 'Oswald', sans-serif;
+        font-size: large;
+        color: #06040A;
+    }
+    
+    .latest-news-card {
+        margin-top: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .latest-news-card .latest-news-card-body {
+        border: none;
+        border-radius: 10px;
+        background-color: #fff;
+        width: 32%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    
+    .latest-news-card .latest-news-card-body img {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .latest-news-card .latest-news-card-body h1{
+        font-family: 'Poppins', sans-serif;
+        padding: 10px 20px;
+        color: #203B93;
+    }
+    
+    .latest-news-card .latest-news-card-body .tag{
+        font-family: 'Poppins', sans-serif;
+        padding: 10px 20px;
+        color: #203B93;
+        font-weight: 700;
+        /* font-size: 17px; */
+    }
+    
+    .latest-news-card .latest-news-card-body .text-heading {
+        font-family: 'Oswald', sans-serif;
+        padding-left: 20px;
+        /* padding-right: 20px; */
+        padding-bottom: 10px;
+        font-size: 23px;
+        font-weight: 500;
+        color: #06040A;
+    }
+    
+    .latest-news-card .latest-news-card-body .text-details {
+        font-family: 'Poppins', sans-serif;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: small;
+        padding-bottom: 20px;
+        color: #06040A;
+    }
+}
+
+@media screen and (max-width:480px) and (min-width:320px){
+    .latest-news-card {
+        margin-top: 3rem;
+        /* display: flex; */
+        /* align-items: center; */
+        /* gap: 15px; */
+        /* flex-wrap: wrap; */
+    }
+    .latest-news-card .latest-news-card-body {
+        border: none;
+        border-radius: 10px;
+        background-color: #fff;
+        /* width: 80%; */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+        padding: 10px;
+
+    }
+    
+    .latest-news-card .latest-news-card-body img {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .latest-news-card .latest-news-card-body h1{
+        font-family: 'Poppins', sans-serif;
+        /* padding: 10px 20px; */
+        color: #203B93;
+    }
+    
+    .latest-news-card .latest-news-card-body .tag{
+        font-family: 'Poppins', sans-serif;
+        /* padding: 10px 20px; */
+        color: #203B93;
+        font-weight: 700;
+        /* font-size: 17px; */
+        display: none;
+    }
+    
+    .latest-news-card .latest-news-card-body .text-heading {
+        font-family: 'Oswald', sans-serif;
+        /* padding-left: 20px; */
+        /* padding-right: 20px; */
+        /* padding-bottom: 10px; */
+        font-size: 25px;
+        font-weight: 500;
+        color: #06040A;
+    }
+    
+    .latest-news-card .latest-news-card-body .text-details {
+        font-family: 'Poppins', sans-serif;
+        /* padding-left: 20px; */
+        /* padding-right: 20px; */
+        font-size: small;
+        padding-bottom: 20px;
+        color: #06040A;
+    }
+}

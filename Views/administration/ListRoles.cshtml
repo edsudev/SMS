@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+<h4>List of Roles</h4>
+@if (Model.Any())
+{
+    foreach (var role in Model)
+    {
+        <h5>@role.Name</h5>
+    }
+}
+else
+{
+    <h6>No Roles Yet</h6>
+}

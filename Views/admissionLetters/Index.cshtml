@@ -1,0 +1,123 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.AdmissionLetter>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+    <div class="row layout-top-spacing" id="cancel-row">
+        @foreach (var item in Model)
+        {
+        <div class="col-xl-6 col-lg-6 col-sm-6 layout-spacing">
+            <div class="widget-content widget-content-area br-6">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="~/logo.png" style="height:100px" />
+                    </div>
+                    <div class="col-10 mt-3">
+                        <h4 class="text-center">EDO STATE UNIVERSITY UZAIRUE</h4>
+                        <p class="text-center">Km7, Auchi-Abuja Road, Iyamho-Uzairue Edo State, Nigeria.</p>
+                        <p class="text-center">www.edouniversity.edu.ng</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="">
+                        OUR REF: @Html.DisplayFor(modelItem => item.Ref)
+                    </div>
+                    <div class="bg-info">
+                        Pic
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="">
+                        <p>Dear Sanni Abdulfatai EneOjoh,</p>
+                            <h6 class="text-center">@Html.DisplayFor(modelItem => item.Header)</h6>
+                        <div>
+                            <p>
+                              @Html.DisplayFor(modelItem => item.Body)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Name: </span>
+                        <span class="col-7">John Doe</span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Student ID: </span>
+                        <span class="col-7">EDSU-00000</span>
+
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">JAMB Registration Number: </span>
+                        <span class="col-7">202200000000000AB</span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Faculty: </span>
+                            <span class="col-7">@Html.DisplayFor(modelItem => item.Faculties.Name)</span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Department: </span>
+                            <span class="col-7">@Html.DisplayFor(modelItem => item.Departments.Name)</span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Degree: </span>
+                        <span class="col-7">BSc</span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Duration of Course: </span>
+                        <span class="col-7">4 Years </span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Mode of Entry: </span>
+                        <span class="col-7">UTME </span>
+                    </div>
+                    <div class="ml-1 mb-2 row">
+                        <span class="col-5">Level of Entry: </span>
+                        <span class="col-7">100L</span>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        To enable the University process your Admission Letter on
+                        JAMB Central Admission Processing System (CAPS), you are required to meet the following conditions:
+                    </p>
+                    <div>
+                        <p>
+                            1. Change your JAMB First Choice University to Edo State University, Uzairue (formerly Edo University Iyamho)
+                            if you have not done so and send a scanned copy of the change of institution to admissions@edouniversity.edu.ng.
+                        </p>
+                        <p>
+                            Pay ₦25,000 (twenty five thousand naira) acceptance fee immediately
+                            and send scanned copy to admissions@edouniversity.edu.ng and bursary@edouniversity.edu.ng
+                        </p>
+                        <p>
+                            Pay at least 60% of the school fees for the department of Physiology and 100% accommodation fee for the hostel category of your choice.
+                            Send scanned copies of the evidence of payment to admissions@edouniversity.edu.ng and bursary@edouniversity.edu.ng.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                                NOTE: @Html.DisplayFor(modelItem => item.Note)
+                        </p>
+                    </div>
+                    <div class="">
+                        <strong>
+                            Thank you.<br />
+                                Signed:<span class="col-8">@Html.DisplayFor(modelItem => item.Registrar)</span><br />
+                            Ag. Registrar
+                        </strong>
+                    </div>
+                    <div class="">
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>
