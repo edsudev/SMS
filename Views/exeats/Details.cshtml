@@ -1,0 +1,225 @@
+﻿@using static EDSU_SYSTEM.Models.Enum
+@model EDSU_SYSTEM.Models.Exeat
+@*@using EDSU_SYSTEM.Authorization*@
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore
+@using static EDSU_SYSTEM.Models.Enum
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <div class="education layout-spacing ">
+            <h3 class="">Exeat Details</h3>
+            <div class="widget-content widget-content-area row">
+                <div class="timeline-alter col-md-4">
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Name</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Name)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Email</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Email)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Department</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Department)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Mat Number</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.MatNo)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Hall</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Hostels.Name)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Destination</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Destination)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Depature Date</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.DepartureDate)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Arrival Date</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.ArrivalDate)</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="timeline-alter col-md-4">
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Reason</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Reason)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Phone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Parent Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.ParentPhone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Alt. Parent Phone</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.AltParentPhone)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Days</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.NoOfDays)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Date Applied</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.CreatedAt)</p>
+                        </div>
+                    </div>
+                    <div class="item-timeline">
+                        <div class="t-meta-date">
+                            <p class="">Status</p>
+                        </div>
+                        <div class="t-dot">
+                        </div>
+                        <div class="t-text">
+                            <p>@Html.DisplayFor(model => model.Dean)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-alter col-md-4">
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Chief Portal</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.ChiefPortalStatus)</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Hall Master</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.HallMasterStatus)</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Dean</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@Html.DisplayFor(model => model.Dean)</p>
+                            </div>
+                        </div>
+                        @if (Model.HallMasterStatus == MainStatus.Approved || Model.Dean == MainStatus.Approved)
+                        {
+                            <div class="col-md-6 mb-4">
+                                <a asp-action="Pass" asp-route-id="@Model.ExeatId" class="btn btn-primary">QR Code</a>
+                            </div>
+                        }
+                        <a asp-action="history" >Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+          

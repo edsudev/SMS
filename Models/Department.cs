@@ -11,7 +11,7 @@ namespace EDSU_SYSTEM.Models
 
         public string? Name { get; set; }
         public string? ShortCode { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         [ForeignKey("Faculties")]
         public int? FacultyId { get; set; }
         public Faculty? Faculties { get; set; }

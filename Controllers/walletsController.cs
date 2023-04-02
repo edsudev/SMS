@@ -552,12 +552,12 @@ namespace EDSU_SYSTEM.Controllers
                 var PaymentToUpdate = await _context.Payments.FirstOrDefaultAsync(x => x.Ref == Ref);
                 //var OtherRef = Ref;
                 
-                if (await TryUpdateModelAsync<Payment>(PaymentToUpdate, "", c => c.Email, c => c.Type))
+                if (await TryUpdateModelAsync<Payment>(PaymentToUpdate, "", c => c.Email, c => c.OtherFeesDesc))
                 {
                     try
                     {
                         await _context.SaveChangesAsync();
-                        var othersText = (from o in _context.OtherFees where o.Id.ToString() == PaymentToUpdate.Type select o.Amount).Sum();
+                        var othersText = (from o in _context.OtherFees where o.Id == PaymentToUpdate.OtherFeesDesc select o.Amount).Sum();
                         PaymentToUpdate.Amount = (double?)othersText;
                         await _context.SaveChangesAsync();
 
@@ -706,6 +706,60 @@ namespace EDSU_SYSTEM.Controllers
 
         }
 
+        public async Task<IActionResult> HostelUpdate(string data, BursaryClearance bursaryClearance)
+        {
+            try
+            {
+                var hostelPaymentToUpdate = _context.HostelPayments.Where(x => x.Ref == data).Include(x => x.HostelFees).FirstOrDefault();
+                var session = (from s in _context.Sessions where s.Id == hostelPaymentToUpdate.SessionId select s).FirstOrDefault();
+                var wlt = (from e in _context.UgSubWallets where e.Id == hostelPaymentToUpdate.WalletId select e).FirstOrDefault();
+                var department = (from d in _context.Departments where d.Id == wlt.Department select d.Name).FirstOrDefault();
+
+                hostelPaymentToUpdate.Status = "Approved";
+                hostelPaymentToUpdate.ReceiptNo = "BSA-" + DateTime.Now.Year.ToString().Substring(2);
+                _context.SaveChangesAsync();
+
+
+                var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+                if (loggedInUser != null)
+                {
+                    var user = loggedInUser.StudentsId;
+                    bursaryClearance.StudentId = user;
+                }
+                else
+                {
+                    //bursaryClearance.StudentId = ;
+                }
+                bursaryClearance.ClearanceId = Guid.NewGuid().ToString();
+                bursaryClearance.HostelId = hostelPaymentToUpdate.Id;
+                bursaryClearance.SessionId = session.Id;
+                bursaryClearance.CreatedAt = DateTime.Now;
+                _context.BursaryClearances.Add(bursaryClearance);
+                await _context.SaveChangesAsync();
+
+                TempData["PaymentSession"] = session.Name;
+                TempData["PaymentRef"] = hostelPaymentToUpdate.Ref;
+                TempData["ReceiptNo"] = hostelPaymentToUpdate.ReceiptNo;
+                TempData["PaymentDate"] = hostelPaymentToUpdate.PaymentDate;
+                TempData["PaymentDepartment"] = department;
+                TempData["PaymentUTME"] = wlt.RegNo;
+                TempData["PaymentName"] = wlt.Name;
+                TempData["PaymentEmail"] = hostelPaymentToUpdate.Email;
+                //Tempdata doesnt have the capability to accept objects or to serialize objects.
+                //As a result, you need to do this yourself
+                TempData["PaymentAmount"] = JsonConvert.SerializeObject(hostelPaymentToUpdate.Amount);
+                TempData["PaymentDescription"] = hostelPaymentToUpdate.HostelFees.Name;
+                TempData["PaymentWalletId"] = wlt.WalletId;
+                return RedirectToAction("Index", "Wallets");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+
+        }
         //Updating the payment record and creating tempdata for receipt
         public async Task<IActionResult> UpdatePayment(string data, BursaryClearance bursaryClearance)
         {
@@ -913,6 +967,7 @@ namespace EDSU_SYSTEM.Controllers
         //Payment Receipt
         public IActionResult Receipt()
         {
+            //var d = _context.HostelPayments.Where(x => x.Ref == Ref).FirstOrDefault();
             ViewBag.PaymentRef = TempData["PaymentRef"];
             ViewBag.ReceiptNo = TempData["ReceiptNo"];
             ViewBag.Date = TempData["PaymentDate"];

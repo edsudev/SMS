@@ -17,6 +17,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
+
+builder.Services.AddControllersWithViews()
+          .AddNewtonsoftJson();
+builder.Services.AddMvc()
+          .AddRazorRuntimeCompilation();
+//builder.Services.AddMvc()
+//            .AddCharts();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

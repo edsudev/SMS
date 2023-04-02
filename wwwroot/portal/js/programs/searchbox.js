@@ -14,7 +14,7 @@ class Searchbox extends HTMLElement {
               <option value="7">Faculty of Science</option>
           </select>
         </div>
-        <img id="img" src="./images/programs/icons/separator.png"/>
+        <img id="img" src="~/portal/images/programs/icons/separator.png"/>
         <div class="custom-select" style="width:200px;">
             <select>
               <option value="0">Title</option>
@@ -23,10 +23,10 @@ class Searchbox extends HTMLElement {
               <option value="3">Masters Degree</option>
           </select>
         </div>
-        <img id="img" src="./images/programs/icons/separator.png"/>
+        <img id="img" src="~/portal/images/programs/icons/separator.png"/>
         <span>
             <input type="search" placeholder="Search">
-            <img class="img" src="./images/programs/icons/search.png">
+            <img class="img" src="~/portal/images/programs/icons/search.png">
         </span>
     </div>
         `

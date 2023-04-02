@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.VacancyList>
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Create";
+}
+<partial name="_Nav"/>
+<!--  BEGIN CONTENT AREA  -->
+
+<div id="fs2Basic" class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+    <div class="widget-content-area br-4">
+        <div class="widget-one p-3">
+            <div class="admin-data-content layout-top-spacing">
+                
+                <table id="html5-extension" class="table table-hover non-hover table-bordered">
+                    <thead>
+                        <tr>
+                            
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Faculty</th>
+                            <th class="dt-no-sorting">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                               
+                                <td>@Html.DisplayFor(modelItem => item.Positions.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Departments.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Departments.Faculties.Name)</td>
+                                <td class="">
+                                    <a asp-action="academic_apply" asp-controller="vacancies" class="btn btn-outline-primary">Apply</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+<partial name="_Footer"/>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

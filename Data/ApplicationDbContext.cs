@@ -92,7 +92,10 @@ namespace EDSU_SYSTEM.Data
         public DbSet<EDSU_SYSTEM.Models.TimeTable>? TimeTables { get; set; }
         public DbSet<EDSU_SYSTEM.Models.IctComplaint>? IctComplaints { get; set; }
         public DbSet<EDSU_SYSTEM.Models.BursaryClearance>? BursaryClearances { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.BursaryClearedStudents>? BursaryClearedStudents { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.BursaryClearanceFresher>? BursaryClearancesFreshers { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Parent> Parent { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ParentWard> ParentWards { get; set; }
         public DbSet<EDSU_SYSTEM.Models.SubDepartment> SubDepartments { get; set; }
         public DbSet<EDSU_SYSTEM.Models.HostelPayment> HostelPayments { get; set; }
         public DbSet<EDSU_SYSTEM.Models.VacancyList> VacancyLists { get; set; }

@@ -34,7 +34,9 @@ namespace EDSU_SYSTEM.Controllers
             var transactionID = (from v in _context.Payments where v.Ref == id && v.Status == "approved" select v).FirstOrDefault();
             if (transactionID == null)
             {
-                return NotFound();
+                ViewBag.Nullerror = "There was an error in the Transaction ID";
+                ViewBag.Nullerror2 = "Check and Try again or contact the ICT unit.";
+                return View();
             }
             else
             {
@@ -51,7 +53,15 @@ namespace EDSU_SYSTEM.Controllers
             }
             
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Ward(string id)
+        {
+            var wardList = (from s in _context.ParentWards where s.Parents.ParentId == id select s).Include(s => s.Students).ThenInclude(s => s.Departments).
+                Include(s => s.Students).ThenInclude(s => s.Departments).ToList();
+            var wards = new SelectList(wardList, "Id", "Fullname");
+
+            return View(wards);
+        }
+         public async Task<IActionResult> Index()
         {
               return View(await _context.Parent.ToListAsync());
         }
@@ -75,6 +85,22 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: parents/Create
+        public IActionResult Addward()
+        {
+            ViewData["parent"] = new SelectList(_context.Parent, "Id", "Name");
+            ViewData["student"] = new SelectList(_context.Students, "Id", "MatNumber");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Addward(ParentWard pw)
+        {
+            pw.CreatedAt = DateTime.Now;
+            _context.ParentWards.Add(pw);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+           
+        }
         public IActionResult Create()
         {
             return View();

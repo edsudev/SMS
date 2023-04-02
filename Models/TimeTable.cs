@@ -16,6 +16,12 @@ namespace EDSU_SYSTEM.Models
         public CourseAllocation? Staffs { get; set; }
         public string? Time { get; set; }
         public DaysOfTheWeek? Day { get; set; }
+        [ForeignKey("Departments")]
+        public int? DepartmetId { get; set; }
+        public Department? Departments { get; set; }
+        [ForeignKey("Levels")]
+        public int? LevelId { get; set; }
+        public Level? Levels { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

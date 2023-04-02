@@ -1,68 +1,95 @@
-﻿@model IEnumerable<EDSU_SYSTEM.Models.Student>
+﻿<div id="chart"></div>
 
-@{
-    ViewData["Title"] = "Index";
-}
-<div class="main-container" id="container">
-    <partial name="_StudentDashboardPartial" />
-    <!--  BEGIN CONTENT AREA  -->
-    <div id="content" class="main-content">
-        <div class="layout-px-spacing">
-            <div class="row layout-spacing">
-                <!-- Content -->
-                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
-                    <h4>MY STUDENTS</h4>
-                    ⚠️ Preview a student and Send his/her result to the Parent/Guardian using the action button in the table below
-                    <div class="widget-content widget-content-area br-6">
-                        <table id="html5-extension" class="table table-hover" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Matriculation No.</th>
-                                    <th>Email</th>
 
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
+<script>
+    var options = {
+        chart: {
+        height: 350,
+        outerWidth: 350,
+        type: 'bar',
+        toolbar: {
+          show: true,
+        }
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'  
+        },
+    },
+    // colors: ['#888ea8', '#4361ee'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    series: [{
+        name: 'Test Score',
+        data: @Html.Raw(ViewBag.grade)
+    }, {
+        name: 'Attendance',
+        data: @Html.Raw(ViewBag.grade)
+    }],
+    xaxis: {
+        categories: @Html.Raw(ViewBag.courses)
+    },
+    yaxis: {
+        title: {
+            text: 'Percentage(%)'
+        },
+        min: 0,
+        max: 100
+    },
+    fill: {
+        opacity: 1
 
-                                    <tr>
-                                        <td>@item.Fullname</td>
-                                        <td>@item.MatNumber</td>
-                                        <td>@item.SchoolEmailAddress</td>
+    },
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return  val + "%"
+            }
+        }
+    }
+    }
+    //    chart: {
+    //        type: 'bar',
+    //        height: 350
+    //    },
+    //    plotOptions: {
+    //        bar: {
+    //            horizontal: false,
+    //            columnWidth: '55%',
+    //            endingShape: 'rounded'
+    //        },
+    //    },
+    //    dataLabels: {
+    //        enabled: false
+    //    },
+    //    series: [{
+    //        name: 'Score',
+    //        data: @Html.Raw(ViewBag.grade)
+    //    }],
+    //    xaxis: {
+    //        categories: @Html.Raw(ViewBag.courses)
+    //        },
+    //yaxis: {
+    //    title: {
+    //        text: 'Grade (Percentage)'
+    //    },
+    //     min: 0,
+    //    max: 100
+    //},
+    //fill: {
+    //    colors: ['#4CAF50']
+    //}
+    //    };
 
-                                        <td class="text-center">
-                                            @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Level Adviser"))
-                                        {*@
-                                            <a asp-action="preview" asp-route-id="@item.Id" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Preview">
-                                                <div class="icon-container">
-                                                    <i data-feather="eye"></i>
-                                                </div>
-                                            </a>
-                                            @*}*@
-
-                                        </td>
-                                    </tr>
-                                }
-
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Matriculation No</th>
-                                    <th>Email</th>
-
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--  END CONTENT AREA  -->
-</div>
-<!-- END MAIN CONTAINER -->
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+    //console.log(@Html.Raw(ViewBag.courses))
+</script>

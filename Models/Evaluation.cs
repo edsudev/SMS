@@ -66,18 +66,7 @@ namespace EDSU_SYSTEM.Models
         public EvaluationGrade? Grades20 { get; set; }
         [ForeignKey("Grades20")]
         public int? Grade20 { get; set; }
-        public EvaluationGrade? Grades21 { get; set; }
-        [ForeignKey("Grades21")]
-        public int? Grade21 { get; set; }
-        public EvaluationGrade? Grades22 { get; set; }
-        [ForeignKey("Grades22")]
-        public int? Grade22 { get; set; }
-        public EvaluationGrade? Grades23 { get; set; }
-        [ForeignKey("Grades23")]
-        public int? Grade23 { get; set; }
-        public EvaluationQuestion? Questions { get; set; }
-        [ForeignKey("Questions")]
-        public int? QuestionId { get; set; }
+        
         public Staff? Lecturers { get; set; }
         [ForeignKey("Lecturers")]
         public int? LecturerId { get; set; }

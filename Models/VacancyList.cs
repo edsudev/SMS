@@ -15,7 +15,7 @@ namespace EDSU_SYSTEM.Models
         [ForeignKey("Departments")]
         public int DepartmentId { get; set; }
         public Department? Departments { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
        
     }
 }

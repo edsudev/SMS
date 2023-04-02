@@ -13,8 +13,8 @@
                 
                 <!-- Content -->
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
-                    <h4>MY STUDENTS</h4>
-                    ⚠️ Preview a student and Send his/her result to the Parent/Guardian using the action button in the table below
+                    <h4>List of works Complaints</h4>
+                    
                     <div class="widget-content widget-content-area br-6">
                         <table id="html5-extension" class="table table-hover non-hover">
                             <thead>
@@ -67,11 +67,14 @@
                                             @if (item.Status == WorksStatus.Pending)
                                             {
 
-                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Edit" data-target="#addItem tooltip" data-url="@Url.Action($"Edit/{item.Id}")">
+                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Edit" data-url="@Url.Action($"Edit/{item.Id}")">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                 </a>
                                                 <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Delete" data-target="#addItem tooltip" data-url="@Url.Action($"Delete/{item.Id}")">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                </a>
+                                                <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Reject" data-url="@Url.Action($"Edit/{item.Id}")">
+                                                    Reject
                                                 </a>
                                                 
                                             }

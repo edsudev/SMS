@@ -37,6 +37,10 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.PgApplicants;
             return View(await applicationDbContext.ToListAsync());
         }
+        public IActionResult Postgraduate()
+        {
+            return View();
+        }
         public async Task<IActionResult> List(string? id)
         {
             ViewBag.currentSession = id;

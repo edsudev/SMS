@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EDSU_SYSTEM.Models.BursaryClearance>
+﻿
+@model IEnumerable<EDSU_SYSTEM.Models.Student>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,19 +19,20 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ClearanceId)
+                                        @Html.DisplayNameFor(model => model.Fullname)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Payments.Ref)
+                                        @Html.DisplayNameFor(model => model.MatNumber)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Students)
+                                        Department
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Payments)
+                                        Level
                                     </th>
+                                    
                                     <th>
-                                        @Html.DisplayNameFor(model => model.CreatedAt)
+                                        Status
                                     </th>
                                     <th></th>
                                 </tr>
@@ -40,21 +42,22 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ClearanceId)
+                                            @Html.DisplayFor(modelItem => item.Fullname)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Students.Fullname)
+                                            @Html.DisplayFor(modelItem => item.MatNumber)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Payments.Id)
+                                            @Html.DisplayFor(modelItem => item.Departments.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                            @Html.DisplayFor(modelItem => item.Levels.Name)
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                            <span class="badge alert-warning">Pending</span>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.SchoolEmailAddress" class="btn btn-primary">View</a>
                                         </td>
                                     </tr>
                                 }

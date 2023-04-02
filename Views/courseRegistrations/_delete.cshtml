@@ -1,0 +1,26 @@
+﻿@model CourseRegistration
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCourseware">Delete Course</h5>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <h6>Reason: @Model.Comment</h6>
+                   
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger" data-save="modal">Confirm</button>
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

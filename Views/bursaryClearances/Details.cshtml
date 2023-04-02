@@ -1,4 +1,4 @@
-﻿@model EDSU_SYSTEM.Models.BursaryClearance
+﻿@model IEnumerable<EDSU_SYSTEM.Models.BursaryClearance>
 
 @{
     ViewData["Title"] = "Details";
@@ -6,37 +6,78 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>BusaryClearance</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClearanceId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClearanceId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Students)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Students.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Payments)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Payments.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-    </dl>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    @ViewBag.student's Approved Payments
+                    <a href="#" class="btn btn-primary">Clear Student</a>
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover non-hover">
+                            <thead>
+                                <tr>
+                                   @* <th>
+                                        S/N
+                                    </th>*@
+                                    <th>
+                                        Type
+                                    </th>
+                                    <th>
+                                       Date 
+                                    </th>
+                                    <th>
+                                        Ref
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>
+                                            1
+                                        </td>*@
+                                        @if (item.Payments.Type==null)
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Payments.OtherFees.Name)
+                                            </td>
+                                        }else
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Payments.Type)
+                                            </td>
+                                        }
+                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Payments.PaymentDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Payments.Ref)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Payments.Status)
+                                        </td>
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--  END CONTENT AREA  -->
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<!-- END MAIN CONTAINER -->

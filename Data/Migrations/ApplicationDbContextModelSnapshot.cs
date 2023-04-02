@@ -16,7 +16,7 @@ namespace EDSU_SYSTEM.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.13")
+                .HasAnnotation("ProductVersion", "6.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Activities", b =>
@@ -43,7 +43,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Year")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("isActive")
+                    b.Property<bool>("isActive")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
@@ -529,7 +529,84 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int?>("HostelId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HostelId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("BursaryClearances");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.BursaryClearanceFresher", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClearanceId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("HostelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HostelId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("BursaryClearancesFreshers");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.BursaryClearedStudents", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Remark")
                         .HasColumnType("int");
 
                     b.Property<int?>("SessionId")
@@ -540,13 +617,11 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentId");
-
                     b.HasIndex("SessionId");
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("BursaryClearances");
+                    b.ToTable("BursaryClearedStudents");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Countries", b =>
@@ -730,7 +805,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Active")
+                    b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int?>("FacultyId")
@@ -844,15 +919,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("Grade20")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Grade21")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Grade22")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Grade23")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Grade3")
                         .HasColumnType("int");
 
@@ -875,9 +941,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("LecturerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SemesterId")
@@ -919,12 +982,6 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasIndex("Grade20");
 
-                    b.HasIndex("Grade21");
-
-                    b.HasIndex("Grade22");
-
-                    b.HasIndex("Grade23");
-
                     b.HasIndex("Grade3");
 
                     b.HasIndex("Grade4");
@@ -940,8 +997,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("Grade9");
 
                     b.HasIndex("LecturerId");
-
-                    b.HasIndex("QuestionId");
 
                     b.HasIndex("SemesterId");
 
@@ -990,11 +1045,20 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CoverImg")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("MyProperty")
-                        .HasColumnType("int");
+                    b.Property<string>("EventID")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Images")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -1267,7 +1331,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("isActive")
+                    b.Property<bool>("isActive")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
@@ -1777,6 +1841,33 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parent");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ParentWard", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("students")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("students");
+
+                    b.ToTable("ParentWards");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Payment", b =>
@@ -2587,8 +2678,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CA")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("CA")
+                        .HasColumnType("double");
 
                     b.Property<string>("CourseId")
                         .HasColumnType("varchar(255)");
@@ -2596,8 +2687,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Exam")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("Exam")
+                        .HasColumnType("double");
 
                     b.Property<string>("Grade")
                         .HasColumnType("longtext");
@@ -2611,11 +2702,11 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Total")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("Total")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Upgrade")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("Upgrade")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -2790,8 +2881,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Picture")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Position")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("Position")
+                        .HasColumnType("int");
 
                     b.Property<string>("PositionAtCurrentPlaceOfWork")
                         .HasColumnType("longtext");
@@ -2841,6 +2932,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("LGAId");
 
                     b.HasIndex("NationalityId");
+
+                    b.HasIndex("Position");
 
                     b.HasIndex("StateId");
 
@@ -3048,7 +3141,13 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("Day")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DepartmetId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("LecturerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LevelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Time")
@@ -3067,7 +3166,11 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasIndex("CourseId");
 
+                    b.HasIndex("DepartmetId");
+
                     b.HasIndex("LecturerId");
+
+                    b.HasIndex("LevelId");
 
                     b.ToTable("TimeTables");
                 });
@@ -3245,7 +3348,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Active")
+                    b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int?>("DepartmentId")
@@ -3622,7 +3725,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int>("PositionId")
@@ -3907,6 +4010,10 @@ namespace EDSU_SYSTEM.Data.Migrations
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.BursaryClearance", b =>
                 {
+                    b.HasOne("EDSU_SYSTEM.Models.HostelPayment", "Hostels")
+                        .WithMany()
+                        .HasForeignKey("HostelId");
+
                     b.HasOne("EDSU_SYSTEM.Models.Payment", "Payments")
                         .WithMany()
                         .HasForeignKey("PaymentId");
@@ -3919,7 +4026,51 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("StudentId");
 
+                    b.Navigation("Hostels");
+
                     b.Navigation("Payments");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.BursaryClearanceFresher", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.HostelPayment", "Hostels")
+                        .WithMany()
+                        .HasForeignKey("HostelId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Payment", "Payments")
+                        .WithMany()
+                        .HasForeignKey("PaymentId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Hostels");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.BursaryClearedStudents", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Sessions");
 
@@ -4077,18 +4228,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Grade20");
 
-                    b.HasOne("EDSU_SYSTEM.Models.EvaluationGrade", "Grades21")
-                        .WithMany()
-                        .HasForeignKey("Grade21");
-
-                    b.HasOne("EDSU_SYSTEM.Models.EvaluationGrade", "Grades22")
-                        .WithMany()
-                        .HasForeignKey("Grade22");
-
-                    b.HasOne("EDSU_SYSTEM.Models.EvaluationGrade", "Grades23")
-                        .WithMany()
-                        .HasForeignKey("Grade23");
-
                     b.HasOne("EDSU_SYSTEM.Models.EvaluationGrade", "Grades3")
                         .WithMany()
                         .HasForeignKey("Grade3");
@@ -4120,10 +4259,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasOne("EDSU_SYSTEM.Models.Staff", "Lecturers")
                         .WithMany()
                         .HasForeignKey("LecturerId");
-
-                    b.HasOne("EDSU_SYSTEM.Models.EvaluationQuestion", "Questions")
-                        .WithMany()
-                        .HasForeignKey("QuestionId");
 
                     b.HasOne("EDSU_SYSTEM.Models.Semester", "Semesters")
                         .WithMany()
@@ -4165,12 +4300,6 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.Navigation("Grades20");
 
-                    b.Navigation("Grades21");
-
-                    b.Navigation("Grades22");
-
-                    b.Navigation("Grades23");
-
                     b.Navigation("Grades3");
 
                     b.Navigation("Grades4");
@@ -4186,8 +4315,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Grades9");
 
                     b.Navigation("Lecturers");
-
-                    b.Navigation("Questions");
 
                     b.Navigation("Semesters");
 
@@ -4356,6 +4483,21 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasForeignKey("SessionId");
 
                     b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ParentWard", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Parent", "Parents")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
+                        .WithMany()
+                        .HasForeignKey("students");
+
+                    b.Navigation("Parents");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Payment", b =>
@@ -4616,6 +4758,10 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("NationalityId");
 
+                    b.HasOne("EDSU_SYSTEM.Models.Position", "Positions")
+                        .WithMany()
+                        .HasForeignKey("Position");
+
                     b.HasOne("EDSU_SYSTEM.Models.States", "States")
                         .WithMany()
                         .HasForeignKey("StateId");
@@ -4627,6 +4773,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("LGAs");
 
                     b.Navigation("Nationalities");
+
+                    b.Navigation("Positions");
 
                     b.Navigation("States");
                 });
@@ -4715,11 +4863,23 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CourseId");
 
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmetId");
+
                     b.HasOne("EDSU_SYSTEM.Models.CourseAllocation", "Staffs")
                         .WithMany()
                         .HasForeignKey("LecturerId");
 
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("LevelId");
+
                     b.Navigation("Courses");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("Levels");
 
                     b.Navigation("Staffs");
                 });

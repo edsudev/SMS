@@ -36,7 +36,12 @@
                                         <td class="text-center d-flex justify-content-around">
                                             @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Level Adviser"))
                                         {*@
-                                            <a asp-action="upload" asp-route-id="@item.Id" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Upload result">
+                                            <a asp-action="upload" asp-route-id="@item.Courses.Code" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Upload result">
+                                                <div class="icon-container">
+                                                    <i data-feather="edit-3"></i>
+                                                </div>
+                                            </a>
+                                            <a asp-action="uploadexams" asp-route-id="@item.Courses.Code" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Upload Exams">
                                                 <div class="icon-container">
                                                     <i data-feather="edit-3"></i>
                                                 </div>

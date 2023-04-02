@@ -1,0 +1,94 @@
+﻿@*@model Work
+
+
+<div class="modal fade" id="addItem">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+             <div class="modal-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="modal"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                
+                <form asp-action="Edit">
+                    <div class="form-group">
+                        <label asp-for="UserId" class="control-label">From: </label>
+                        <input asp-for="UserId" class="form-control" disabled value="@User.Identity?.Name" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CC" class="control-label">CC: </label>
+                        <input asp-for="CC" class="form-control" value="vc@edouniversity.edu.ng" disabled />
+                        <span asp-validation-for="CC" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Dept" class="control-label">Department</label>
+                        <select asp-for="Dept" class="form-control basic" asp-items="ViewBag.deptId"></select>
+                        <span asp-validation-for="Dept" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Location" class="control-label"></label>
+                        <input asp-for="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div><div class="form-group">
+                        <textarea asp-for="Complain" class="form-control" placeholder="What is your complaint?"></textarea>
+                        <span asp-validation-for="Complain" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-primary" data-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-success" data-save="modal">Send</button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+*@
+
+
+
+@model Work
+@using static EDSU_SYSTEM.Models.Enum
+<div id="PlaceHolderHere"></div>
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Admit Student</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            @*<div class="modal-body">
+                <form asp-action="Admit">
+                    <div class="form-group">
+                        <label asp-for="AdmittedInto" class="control-label">Department</label>
+                        <select asp-for="AdmittedInto" class="form-control" asp-items="ViewBag.DepartmentId">
+                            <option value="null">-- Department --</option>
+                        </select>
+                        <span asp-validation-for="AdmittedInto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProgrameId" class="control-label">Programme</label>
+                        <select asp-for="ProgrameId" class="form-control" asp-items="ViewBag.ProgramId">
+                            <option value="null">-- Programme --</option>
+                        </select>
+                        <span asp-validation-for="ProgrameId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LevelAdmittedTo" class="control-label">Level</label>
+                        <select asp-for="LevelAdmittedTo" class="form-control" asp-items="ViewBag.LevelId">
+                            <option value="null">-- Level --</option>
+                        </select>
+                        <span asp-validation-for="LevelAdmittedTo" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary" data-save="modal">Admit Student</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>*@
+
+        </div>
+    </div>
+</div>
+

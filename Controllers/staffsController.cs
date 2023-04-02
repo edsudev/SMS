@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -26,20 +28,68 @@ namespace EDSU_SYSTEM.Controllers
         // GET: staffs
         public async Task<IActionResult> Index()
         {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StaffId;
             //Checks works table and get where status == pending or in progress   
             var worksPending = (from c in _context.Works where c.Status == Models.Enum.WorksStatus.Pending select c).ToList();
             var worksInProgress = (from c in _context.Works where c.Status == Models.Enum.WorksStatus.In_Progress select c).ToList();
             ViewBag.worksPending = worksPending.Count();
             ViewBag.worksInProgress = worksInProgress.Count();
-                
-                
-            var exeat = (from c in _context.Exeats where c.HallMasterStatus == Models.Enum.MainStatus.Pending select c).ToList();
-            ViewBag.exeat = exeat.Count();
-            return View();  
+            
+            var ICTPending = (from c in _context.IctComplaints where c.Status == Models.Enum.WorksStatus.Pending select c).ToList();
+            var ICTInProgress = (from c in _context.IctComplaints where c.Status == Models.Enum.WorksStatus.In_Progress select c).ToList();
+            ViewBag.ictPending = ICTPending.Count();
+            ViewBag.ictInProgress = ICTInProgress.Count();
+
+            var ChiefPortalpendingReq = (from s in _context.Exeats where s.ChiefPortalStatus == Models.Enum.ChiefPortalStatus.Pending select s).ToList();
+            var HallMasterPendingReq = (from s in _context.Exeats where s.HallMasterStatus == Models.Enum.MainStatus.Pending select s).ToList();
+            ViewBag.portalPending = ChiefPortalpendingReq.Count();
+            ViewBag.HMPending = HallMasterPendingReq.Count();
+
+            var LevelAdviser = (from l in _context.LevelAdvisers where l.StaffId == userId select l).ToList();
+            //Console.Write(LevelAdviser.Count());
+            foreach (var item in LevelAdviser)
+            {
+                var pendingCourseReg = (from s in _context.CourseRegistrations where s.Students.Level == item.LevelId && s.Status == Models.Enum.MainStatus.Pending select s).ToList();
+                ViewBag.pendingCourseReg = pendingCourseReg.Count();
+                Console.Write(item.StaffId);
+            }
+
+            
+            //Staff Evaluation
+            var staffCourses = (from s in _context.CourseAllocations where s.LecturerId == userId select s).Include(i => i.Courses).ToList();
+            var json22 = JsonSerializer.Serialize(staffCourses);
+            Console.Write(json22);
+
+            var sortedCourses = staffCourses.OrderBy(x => x.Courses.Code);
+            var courses = (from c in sortedCourses select c.Courses.Code).ToList();
+            var json = JsonSerializer.Serialize(courses);
+            ViewBag.courses = json;
+
+            Console.Write(ViewBag.courses);
+
+            var totalGradesList = new List<int>();
+            var StaffEvaluations = _context.Evaluations.Where(x => x.LecturerId == userId).ToList();
+            var sortedEvaluations = StaffEvaluations.OrderBy(x => x.CourseId);
+            var evaluations = (from s in sortedEvaluations select s).ToList();
+            foreach (var evaluation in evaluations)
+            {
+                // After suming all grades, we go ahead to convert them to percentage
+                var totalSum = new[] { evaluation.Grade1, evaluation.Grade2, evaluation.Grade3, evaluation.Grade4, evaluation.Grade5, 
+                    evaluation.Grade6, evaluation.Grade7, evaluation.Grade8, evaluation.Grade9, evaluation.Grade10,
+                    evaluation.Grade11, evaluation.Grade12, evaluation.Grade13, evaluation.Grade14, evaluation.Grade15, 
+                    evaluation.Grade16, evaluation.Grade17, evaluation.Grade18, evaluation.Grade19, evaluation.Grade20 }.Sum();
+                var result = totalSum * 20 / 100;
+                totalGradesList.Add((int)result);
+            }
+            var json2 = JsonConvert.SerializeObject(totalGradesList);
+            Console.WriteLine(json2);
+            ViewBag.Percentage = json2;
+            return View();
         }
         public async Task<IActionResult> AllStaffs()
         {
-            var applicationDbContext = _context.Staffs;
+            var applicationDbContext = _context.Staffs.Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
         }
         public async Task<IActionResult> Stats()
@@ -192,10 +242,10 @@ namespace EDSU_SYSTEM.Controllers
 
                     }
                 }
-                var StaffToUpdate = await _context.Staffs
-                .FirstOrDefaultAsync(c => c.Id == id);
+                //var StaffToUpdate = await _context.Staffs
+                //.FirstOrDefaultAsync(c => c.Id == id);
 
-                if (await TryUpdateModelAsync<Staff>(StaffToUpdate, "", 
+                if (await TryUpdateModelAsync<Staff>(applicants, "", 
                     c => c.Picture, c => c.Name, c => c.DOB, c => c.Sex, 
                     c => c.Phone, c => c.Email, c => c.SchoolEmail,
                     c => c.ContactAddress, c => c.NationalityId, c => c.StateId, 
@@ -227,11 +277,12 @@ namespace EDSU_SYSTEM.Controllers
             }
             catch (Exception ex)
             {
+               
                 ex.ToString();
-
+                return RedirectToAction("badreq", "error");
             }
-            return View();
-           
+            return RedirectToAction("profile", "staffs", new { id });
+
         }
 
         // GET: staffs/Delete/5

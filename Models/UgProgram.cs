@@ -9,7 +9,7 @@ namespace EDSU_SYSTEM.Models
     {
         public int? Id { get; set; }
         public string? NameOfProgram { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         [ForeignKey("Departments")]
         public int? DepartmentId { get; set; }
         public Department? Departments { get; set; }

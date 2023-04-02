@@ -9,7 +9,7 @@
         public string? Month { get; set; }
         public string? Year { get; set; }
         public string? Image { get; set; }
-        public bool? isActive { get; set; }
+        public bool isActive { get; set; }
 
     }
 }

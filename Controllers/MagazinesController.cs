@@ -56,13 +56,13 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IFormFile file, Magazine magazine)
+        public async Task<IActionResult> Create(IFormFile file, IFormFile img, Magazine magazine)
         {
             try
             {
                 if (file != null && file.Length > 0)
                 {
-                    var uploadDir = @"portal/images/index";
+                    var uploadDir = @"files/magazines/file";
                     var fileName = Path.GetFileNameWithoutExtension(file.FileName);
                     var extension = Path.GetExtension(file.FileName);
                     var webRootPath = _hostingEnvironment.WebRootPath;
@@ -73,6 +73,23 @@ namespace EDSU_SYSTEM.Controllers
                     using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
                     {
                         file.CopyTo(fs);
+                        magazine.File = fileName;
+
+                    }
+                }
+                if (img != null && img.Length > 0)
+                {
+                    var uploadDir = @"files/magazines/image";
+                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    var extension = Path.GetExtension(file.FileName);
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+                    //fileName = applicants.UTMENumber + extension;
+
+                    fileName = fileName + extension;
+                    var path = Path.Combine(webRootPath, uploadDir, fileName);
+                    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                    {
+                        img.CopyTo(fs);
                         magazine.Image = fileName;
 
                     }

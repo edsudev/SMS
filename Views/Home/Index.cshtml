@@ -15,19 +15,6 @@
             </div>
             first = false;
         }
-            
-            @*<div class="carousel-item">
-            <img class="d-block w-100" style="max-height:85vh" src="~/portal/images/index/Frame2.JPG" alt="Second slide">
-                
-            </div>
-            <div class="carousel-item">
-            <img class="d-block w-100" style="max-height:85vh" src="~/portal/images/index/Frame3.JPG" alt="Second slide">
-                
-            </div> 
-            <div class="carousel-item">
-            <img class="d-block w-100" style="max-height:85vh" src="~/portal/images/index/Frame4.JPG" alt="Second slide">
-               
-            </div>*@
            
         </div>
         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -100,38 +87,28 @@
             </div>
 
             <div class="activity-button">
-                <a href="./activity.html" target="_blank">
+                <a asp-action="activities" asp-controller="home" target="_blank">
                     Load More
                 </a>
             </div>
         </div>
 
         <div class="upcoming-activity-card">
-            <div class="activity-card">
-                <img src="~/portal/images/index/convocation.png" alt="edo university background image">
-                <div class="activity-card-text">
-                    <h3>Opening a New Academic Session</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore
-                        eu <a href="/">Continue Reading...</a>
-                    </p>
+        @foreach (var item in ViewBag.Activities)
+        {
+                <div class="activity-card">
+                    <img src="~/portal/images/index/convocation.png" alt="edo university background image">
+                    <div class="activity-card-text">
+                    <h3>@item.Text</h3>
+                        <p>
+                        @item.Body
+                        </p>
+                    </div>
                 </div>
-            </div>
+             }
+            
 
-            <div class="activity-card">
-            <img src="~/portal/images/index/convocation.png" alt="edo university background image">
-                <div class="activity-card-text">
-                    <h3>Opening a New Academic Session</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore
-                        eu <a href="/">Continue Reading...</a>
-                    </p>
-                </div>
-            </div>
+            
         </div>
     </div>
 
@@ -159,53 +136,26 @@
             </div>
 
             <div class="activity-button">
-                <a href="news.html" target="_blank">
+            <a asp-action ="news" asp-controller="home" target="_blank">
                     Load More
                 </a>
             </div>
         </div>
         <div class="latest-news-card">
+        @foreach (var item in ViewBag.News)
+        {
             <div class="latest-news-card-body">
                 <img src="./images/news/group-picture.png" alt="">
-                <p class="tag">UNIVERSITY</p>
-                <h3 class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</h3>
+                <p class="tag">Date Posted: @item.CreatedAt.ToLongDateString()</p>
+                <h3 class="text-heading">@item.Title.ToUpper()</h3>
                 <p class="text-details">
-                    Edo State University Uzuaire has
-                    bagged A Most Innovative Top Best Valuable
-                    University in Nigeria, 2017, award.
-                    The award was given to the University by the
-                    "Northern Achievers International Magazine"
-                    in Kaduna.
+                    @item.Body
                 </p>
             </div>
+        }
+            
 
-            <div class="latest-news-card-body">
-                <img src="./images/news/group-picture.png" alt="">
-                <p class="tag">UNIVERSITY</p>
-                <h3 class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</h3>
-                <p class="text-details">
-                    Edo State University Uzuaire has
-                    bagged A Most Innovative Top Best Valuable
-                    University in Nigeria, 2017, award.
-                    The award was given to the University by the
-                    "Northern Achievers International Magazine"
-                    in Kaduna.
-                </p>
-            </div>
-
-            <div class="latest-news-card-body">
-                <img src="./images/news/group-picture.png" alt="">
-                <p class="tag">UNIVERSITY</p>
-                <h3 class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</h3>
-                <p class="text-details">
-                    Edo State University Uzuaire has
-                    bagged A Most Innovative Top Best Valuable
-                    University in Nigeria, 2017, award.
-                    The award was given to the University by the
-                    "Northern Achievers International Magazine"
-                    in Kaduna.
-                </p>
-            </div>
+            
         </div>
     </section>
 

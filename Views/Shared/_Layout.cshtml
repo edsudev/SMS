@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.25.1/dist/apexcharts.min.css" />
 
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
@@ -31,6 +32,11 @@
     <link href="~/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/apps/invoice-preview.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/pages/faq/faq.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/pages/faq/faq2.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/apps/mailbox.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/components/tabs-accordian/custom-tabs.css" rel="stylesheet" type="text/css" />
     @*Datatable*@
     <link href="~/plugins/table/datatable/datatables.css" rel="stylesheet" type="text/css" />
     <link href="~/plugins/table/datatable/custom_dt_html5.css" rel="stylesheet" type="text/css" />
@@ -38,7 +44,12 @@
     <link href="~/assets/css/authentication/form-2.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/forms/theme-checkbox-radio.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/forms/switches.css" rel="stylesheet" type="text/css" />
-    
+    @*Calender*@
+    <link href="~/plugins/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/fullcalendar/custom-fullcalendar.advance.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+
     @*Portal Links*@
     <link rel="stylesheet" href="~/portal/css/about.css" type="text/css">
     <link rel="stylesheet" href="~/portal/css/programs.css" type="text/css">
@@ -47,6 +58,7 @@
     <link rel="stylesheet" href="~/portal/css/nav.css" type="text/css">
     <link rel="stylesheet" href="~/portal/css/newsletter.css">
     <link rel="stylesheet" href="~/portal/css/news.css">
+    <link rel="stylesheet" href="~/portal/css/activitiy.css" type="text/css" />
 </head>
 <body>
     <div class="">
@@ -70,17 +82,19 @@
     <script src="~/assets/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
-
+    <script src="~/plugins/fullcalendar/moment.min.js"></script>
+    <script src="~/plugins/flatpickr/flatpickr.js"></script>
+    <script src="~/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/plugins/fullcalendar/custom-fullcalendar.advance.js"></script>
     <script src="~/assets/js/scrollspyNav.js"></script>
-<script src="~/assets/js/authentication/form-2.js"></script>
-<script src="~/assets/js/clipboard/clipboard.min.js"></script>
-<script src="~/assets/js/forms/custom-clipboard.js"></script>
-<script src="~/plugins/select2/select2.min.js"></script>
-<script src="~/plugins/select2/custom-select2.js"></script>
-<script src="~/assets/js/apps/invoice-preview.js"></script>
+    <script src="~/assets/js/authentication/form-2.js"></script>
+    <script src="~/assets/js/clipboard/clipboard.min.js"></script>
+    <script src="~/assets/js/forms/custom-clipboard.js"></script>
+    <script src="~/plugins/select2/select2.min.js"></script>
+    <script src="~/plugins/select2/custom-select2.js"></script>
+    <script src="~/assets/js/apps/invoice-preview.js"></script>
+    <script src="~/plugins/highlight/highlight.pack.js"></script>
    
-
-
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="~/plugins/apex/apexcharts.min.js"></script>
 <script src="~/assets/js/dashboard/dash_1.js"></script>
@@ -98,11 +112,12 @@
 @*PORTAL FOOTER COMPONENT*@
 
 <script src="~/portal/js/Nav-component.js"></script>
+    <script src="~/portal/js/programs/select.js"></script>
     <script src="~/portal/js/programs/programs.js"></script>
     <script src="~/portal/js/programs/searchbox.js"></script>
     <script src="~/portal/js/Components.js"></script>
     <script src="~/portal/js/Footer-component.js"></script>
-
+    <script src="~/portal/js/activity/activity.js"></script>
 
     <!-- FONT AWESOME -->
     <script src="https://kit.fontawesome.com/4b654629d7.js" crossorigin="anonymous"></script>
@@ -163,7 +178,10 @@
 </script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/paystack.js" asp-append-version="true"></script>
+<script src="~/js/hostelpayment.js" asp-append-version="true"></script>
 <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="~/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/plugins/apex/custom-apexcharts.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

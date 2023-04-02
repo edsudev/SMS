@@ -49,13 +49,17 @@
                                 @Html.DisplayFor(modelItem => item.ParentPhone)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ChiefPortalStatus)
+                                @Html.DisplayFor(modelItem => item.Dean)
                             </td>
 
                             <td>
-                                <a asp-action="edit" asp-route-id="@item.ExeatId">Edit</a> |
-                                <a asp-action="details" asp-route-id="@item.ExeatId">Details</a> |
-                                <a asp-action="delete" asp-route-id="@item.ExeatId">Delete</a>
+                                  <a asp-action="edit" asp-route-id="@item.ExeatId">Edit</a> |
+                                  <a asp-action="details" asp-route-id="@item.ExeatId">Details</a> |
+                                  @if (item.Dean != EDSU_SYSTEM.Models.Enum.MainStatus.Approved)
+                                {
+                                    <a asp-action="delete" asp-route-id="@item.ExeatId">Delete</a>
+                                }
+                                  
                             </td>
                         </tr>
 

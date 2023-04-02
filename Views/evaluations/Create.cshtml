@@ -7,109 +7,923 @@
 <div class="main-container" id="container">
 <partial name="_StudentDashboardPartial" />
 <!--  BEGIN CONTENT AREA  -->
-<div id="content" class="main-content">
-    <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT PART  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <select asp-for="LecturerId" asp-items="@ViewBag.LecturerId">
+                    <option>
+                        Select Lecturer
+                    </option>
+                </select>
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
 
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                <div class="widget-content widget-content-area p-3">
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <select asp-for="LecturerId" asp-items="@ViewBag.LecturerId">
-                                   <option>
-                                       Select Lecturer
-                                   </option>
-                            </select>
-                        <div class="row my-2">
-                            <div class="col-md-6">
-                                    <label class="control-label">Punctuality in lectures delivery</label>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                    <div class="">
-                                        <span>Strongly Agree</span>
-                                        <span>Agree</span>
-                                        <span>Somewhat Agree</span>
-                                        <span>Disagree</span>
-                                        <span>Strongly Disagree</span>
-                                    </div>
-                                <span class="d-flex">
-                                        <input type="radio" class="form-control" name="grade1" value="1" />
-                                        <input type="radio" class="form-control" name="grade1" value="2" />
-                                        <input type="radio" class="form-control" name="grade1" value="3" />
-                                        <input type="radio" class="form-control" name="grade1" value="4"  />
-                                        <input type="radio" class="form-control" name="grade1" value="5" />
-                                </span>
-                            </div>      
-                        </div>
-                            <div class="row mb-2">
-                            <div class="col-md-6">
-                                    <label class="control-label">Appropriate use of examples</label>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                <span class="d-flex">
-                                    <input type="radio" class="form-control" name="grade2" />
-                                    <input type="radio" class="form-control" name="grade2" />
-                                    <input type="radio" class="form-control" name="grade2" />
-                                    <input type="radio" class="form-control" name="grade2" />
-                                    <input type="radio" class="form-control" name="grade2" />
-                                </span>
-                            </div>      
-                        </div>
-                            <div class="row mb-2">
-                            <div class="col-md-6">
-                                    <label class="control-label">Appropriate use of teaching aids (e.g. Powerpoint, Videos, Projector, Smartboard)</label>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                <span class="d-flex">
-                                    <input type="radio" class="form-control" name="grade3" />
-                                    <input type="radio" class="form-control" name="grade3" />
-                                    <input type="radio" class="form-control" name="grade3" />
-                                    <input type="radio" class="form-control" name="grade3" />
-                                    <input type="radio" class="form-control" name="grade3" />
-                                </span>
-                            </div>      
-                        </div>
-                            <div class="row mb-2">
-                            <div class="col-md-6">
-                                    <label class="control-label">Stimulation of your interest in the subject?</label>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                <span class="d-flex">
-                                    <input type="radio" class="form-control" name="grade4" />
-                                    <input type="radio" class="form-control" name="grade4" />
-                                    <input type="radio" class="form-control" name="grade4" />
-                                    <input type="radio" class="form-control" name="grade4" />
-                                    <input type="radio" class="form-control" name="grade4" />
-                                </span>
-                            </div>      
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                    <label class="control-label">Clarity of presentation</label>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                <span class="d-flex">
-                                    <input type="radio" class="form-control" name="grade" />
-                                    <input type="radio" class="form-control" name="grade" />
-                                    <input type="radio" class="form-control" name="grade" />
-                                    <input type="radio" class="form-control" name="grade" />
-                                    <input type="radio" class="form-control" name="grade" />
-                                </span>
-                            </div>      
-                        </div>
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 1</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Punctuality in lectures delivery</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question1">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question1">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question1">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question1">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question1">
+                                                </td>
+                                            </tr>
 
-                        <div class="form-group">
-                            <input type="submit" value="Submit" class="btn btn-primary" />
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-               
-            </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 2</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Appropriate use of examples</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question2">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question2">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 3</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Appropriate use of teaching aids (e.g. Powerpoint, Videos, Projector, Smartboard)</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question3">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question3">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 4</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Stimulation of your interest in the subject?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question4">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question4">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 5</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Clarity of presentation</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question5">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question5">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question5">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question5">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question5">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 6</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Response to questions</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question6">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question6">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question6">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question6">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question6">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 7</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Encouragement of students to think creatively</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question7">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question7">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question7">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question7">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question7">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 8</th>
+                                               <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>How participatory have the classes been?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question8">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question8">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question8">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question8">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question8">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 9</th>
+                                               <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>How would you rate the overall quality of the lectures?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question9">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question9">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question9">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question9">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question9">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 10</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Assignment(s) and feedback</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question10">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question10">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question10">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question10">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question10">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 11</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Completion of the course syllabus?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question11">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question11">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question11">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question11">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question11">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 12</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Mastery of the course by the lecturer?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question12">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question12">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question12">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question12">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question12">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 13</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Clarity of presentation</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question13">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question13">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question13">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question13">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question13">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 14</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Appropriate use of teaching aids (e.g. Power point, Smartboard) ?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question14">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question14">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question14">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question14">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question14">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 15</th>
+                                               <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Innovative teaching methods?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question15">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question15">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question15">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question15">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question15">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 16</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Effective class control?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question16">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question16">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question16">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question16">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question16">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 17</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Clarity of lecture notes/materials?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question17">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question17">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question17">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question17">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question17">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 18</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Overall quality of the lectures?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question18">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question18">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question18">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question18">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question18">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 19</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Stimulation of your interest in the course?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question19">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question19">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question19">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question19">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question19">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                        <div class="widget widget-content-area br-4">
+                            <div class="widget-one">
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Question 20</th>
+                                                <th scope="col" class="text-center">Strongly Agree</th>
+                                                <th scope="col" class="text-center">Agree</th>
+                                                <th scope="col" class="text-center">Somewhat Agree</th>
+                                                <th scope="col" class="text-center">Disagree</th>
+                                                <th scope="col" class="text-center">Strongly Disagree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Encouragement of students to think creatively?</th>
+                                                <td class="text-center">
+                                                    <input type="radio" value="1" name="question20">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="2" name="question20">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="3" name="question20">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="4" name="question20">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="radio" value="5" name="question20">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+                <input type="submit" value="Submit" class="btn btn-primary" />
+
+            </form>
         </div>
     </div>
 </div>
-<!--  END CONTENT AREA  -->
-    </div>
 <!-- END MAIN CONTAINER -->
 
 @section Scripts {

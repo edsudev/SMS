@@ -45,7 +45,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.SchoolEmail)</td>
                                         <td>@Html.DisplayFor(modelItem => item.SchoolEmail)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Position)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Positions.Name)</td>
                                         <td>
                                             <a class="btn btn-outline-primary" asp-action="details" asp-controller="staffs" asp-route-id="@item.Id">View</a>
                                         </td>

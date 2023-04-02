@@ -6,10 +6,10 @@ namespace EDSU_SYSTEM.Models
     {
         public int? Id { get; set; }
         public string? ResultId { get; set; }
-        public string? CA { get; set; }
-        public string? Exam { get; set; }
-        public string? Total { get; set; }
-        public string? Upgrade { get; set; }
+        public double? CA { get; set; }
+        public double? Exam { get; set; }
+        public double? Total { get; set; }
+        public double? Upgrade { get; set; }
         public string? Grade { get; set; }
         [ForeignKey("Sessions")]
         public int? SessionId { get; set; }

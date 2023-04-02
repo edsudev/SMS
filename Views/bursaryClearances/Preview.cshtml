@@ -92,7 +92,7 @@
                                                             <table class="table">
                                                                 <thead class="">
                                                                     <tr>
-                                                                        <th scope="col">S.No</th>
+                                                                        @*<th scope="col">S.No</th>*@
                                                                         <th scope="col">Transaction ID</th>
                                                                         <th scope="col">Payment Type</th>
                                                                         <th scope="col">Date of Payment</th>
@@ -105,15 +105,30 @@
                                                                     @foreach (var item in Model)
                                                                     {
                                                                         <tr>
-                                                                            <td>
-                                                                                1
-                                                                            </td>
+                                                                           @* <td>
+                                                                                ViewBag.n
+                                                                            </td>*@
                                                                             <td>
                                                                                 @Html.DisplayFor(modelItem => item.Payments.Ref)
                                                                             </td>
-                                                                            <td>
-                                                                                @Html.DisplayFor(modelItem => item.Payments.Type)
-                                                                            </td>
+                                                                            @if (item.Payments.Type == null)
+                                                                            {
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.Payments.OtherFees.Name)
+                                                                                </td>
+                                                                            }
+                                                                            else if (item.Payments.OtherFeesDesc == null)
+                                                                            {
+                                                                               <td>
+                                                                                    @Html.DisplayFor(modelItem => item.Payments.Type)
+                                                                                </td>     
+                                                                            }else
+                                                                            {
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.Hostels.HostelType)
+                                                                                </td>
+                                                                            }
+                                                                            
                                                                             <td>
                                                                                 @Html.DisplayFor(modelItem => item.Payments.PaymentDate)
                                                                             </td>

@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EDSU_SYSTEM.Controllers
 {
     public class creditUnitsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public creditUnitsController(ApplicationDbContext context)
+        public creditUnitsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: creditUnits
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CreditUnits.Include(c => c.Departments).Include(c => c.Levels).Include(c => c.Semesters).Include(c => c.Sessions);
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StaffId;
+            var staff = _context.Staffs.Where(x => x.Id == userId).Select(x => x.DepartmentId).FirstOrDefault();
+            var applicationDbContext = _context.CreditUnits.Where(x => x.DepartmentId == staff).Include(c => c.Departments).Include(c => c.Levels).Include(c => c.Semesters).Include(c => c.Sessions);
             return View(await applicationDbContext.ToListAsync());
         }
 

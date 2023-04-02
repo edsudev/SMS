@@ -118,5 +118,12 @@ namespace EDSU_SYSTEM.Models
             Divorced,
             Widowed
         }
+        public enum ClearanceRemark
+        {
+            Cleared,
+            Partial,
+            NotCleared
+
+        }
     }
 }

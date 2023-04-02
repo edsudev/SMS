@@ -35,12 +35,29 @@ namespace EDSU_SYSTEM.Controllers
         // GET: exeats
         public async Task<IActionResult> History()
         {
-            //var StudenExeats = (from f in _context.Exeats where f.)
-              return View(await _context.Exeats.ToListAsync());
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var studentId = loggedInUser.StudentsId;
+            var email = _context.Students.Where(x => x.Id == studentId).Select(x => x.SchoolEmailAddress).First();
+            var StudentExeats = (from f in _context.Exeats where f.Email == email select f).ToList();
+            return View(StudentExeats);
         }
 
         // GET: exeats/Details/5
-        public async Task<IActionResult> Act(string? id)
+        public IActionResult Details(string? id)
+        {
+            if (id == null || _context.Exeats == null)
+            {
+                return NotFound();
+            }
+            var exeat = (from e in _context.Exeats where e.ExeatId == id select e).Include(h => h.Hostels).FirstOrDefault();
+            if (exeat == null)
+            {
+                return NotFound();
+            }
+
+            return View(exeat);
+        }
+        public IActionResult Act(string? id)
         {
             if (id == null || _context.Exeats == null)
             {
@@ -64,7 +81,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             exeat.Dean = status;
             exeat.HallMasterStatus = status;
-            exeat.ChiefPortalStatus = cheifPortalStatus;
+            exeat.ChiefPortalStatus = ChiefPortalStatus.Recommended;
             _context.Exeats.Update(exeat);
 
             await _context.SaveChangesAsync();
@@ -83,30 +100,27 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,ExeatId,Name,Email,MatNo,Hall,Department,Destination,NoOfDays,DepartureDate,ArrivalDate,Reason,Phone,ParentPhone,AltParentPhone,ChiefPortalStatus,HallMasterStatus,Dean,GatePass,CreatedAt")] Exeat exeat)
+        public async Task<IActionResult> Apply(Exeat exeat)
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
-            if (ModelState.IsValid)
-            {
-                var studentId = loggedInUser.StudentsId;
-                var students = (from s in _context.Students where s.Id == studentId select s).ToList();
-                foreach (var item in students)
-                {
-                    exeat.Name = item.Fullname;
-                    exeat.Department = item.Departments.Name;
-                    exeat.Email = item.Email;
-                    exeat.MatNo = item.MatNumber;
-                    exeat.AltParentPhone = item.ParentPhone;
-                    exeat.ExeatId = Guid.NewGuid().ToString();
-                }
-                exeat.NoOfDays = (exeat.ArrivalDate.Date - exeat.DepartureDate.Date).Days;
-                _context.Add(exeat);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-                ViewData["HallId"] = new SelectList(_context.Hostels, "Id", "Name", exeat.Hall);
-
-            return View(exeat);
+            var studentId = loggedInUser.StudentsId;
+            var student = (from s in _context.Students where s.Id == studentId select s).Include(i => i.Departments).FirstOrDefault();
+               
+            exeat.Name = student.Fullname;
+            exeat.Department = student.Departments.Name;
+            exeat.Email = student.SchoolEmailAddress;
+            exeat.MatNo = student.MatNumber;
+            exeat.AltParentPhone = student.ParentPhone;
+            exeat.ExeatId = Guid.NewGuid().ToString();
+            exeat.ChiefPortalStatus = ChiefPortalStatus.Pending;
+            exeat.HallMasterStatus = MainStatus.Pending;
+            exeat.Dean = MainStatus.Pending;
+            exeat.GatePass = MainStatus.Pending;
+            exeat.NoOfDays = (exeat.ArrivalDate.Date - exeat.DepartureDate.Date).Days;
+            _context.Add(exeat);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(History));
+           
         }
         public async Task<IActionResult> Pass(string? id)
         {

@@ -12,6 +12,7 @@
             <div class="row layout-spacing">
                 <!-- Content -->
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <a class="btn btn-dark" asp-action="create">Add Child</a>
                     Parent/Guardian's Profile
                     <div class="widget-content widget-content-area br-6">
                         <table id="html5-extension" class="table table-hover non-hover">
@@ -59,7 +60,7 @@
                                         <td>
                                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                                             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                            <a asp-action="ward" asp-route-id="@item.ParentId">Child/Ward</a>
                                         </td>
                                     </tr>
                                 }

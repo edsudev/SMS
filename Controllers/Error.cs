@@ -22,6 +22,10 @@ namespace EDSU_SYSTEM.Controllers
         {
             return View();
         }
+        public ActionResult Nocourses()
+        {
+            return View();
+        }
 
         // GET: Error/Details/5
         public ActionResult Details(int id)

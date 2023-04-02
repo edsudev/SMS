@@ -10,6 +10,7 @@ using EDSU_SYSTEM.Models;
 using System.Collections;
 using Microsoft.AspNetCore.Identity;
 using static EDSU_SYSTEM.Models.Enum;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -46,7 +47,23 @@ namespace EDSU_SYSTEM.Controllers
                 Courses = approvedCourses,
                 TimeTables = timetable
             };
+            //After getting the courses from coursereg and Scores from Results table, we sorted them using the course code before serializing them
+            //so that the courses can align with the courses since they are coming from the same table.
+            var grades = (from g in _context.Results where g.StudentId == student.MatNumber select g).ToList();
+            var sortedCourses = approvedCourses.OrderBy(s => s.Courses.Code);
+            var sortedGrades = grades.OrderBy(c => c.CourseId);
 
+            var CourseCode = (from c in sortedCourses select c.Courses.Code).ToList();
+            var TestScores = (from v in sortedGrades select v.CA).ToList();
+
+            var json = JsonSerializer.Serialize(CourseCode);
+            var json2 = JsonSerializer.Serialize(TestScores);
+
+
+            ViewBag.courses = json;
+            ViewBag.grade = json2;
+
+           
             return View(model);
            
         }

@@ -10,7 +10,7 @@ using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using static EDSU_SYSTEM.Models.Enum;
-
+using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace EDSU_SYSTEM.Controllers
 {
     public class CourseRegistrationsController : Controller
@@ -29,9 +29,9 @@ namespace EDSU_SYSTEM.Controllers
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var userId = loggedInUser.StudentsId;
-            var courses = (from c in _context.CourseRegistrations where c.StudentId == userId select c).Include(c => c.Courses).Include(c => c.Students);
+            var courses = (from c in _context.CourseRegistrations where c.StudentId == userId select c).Include(c => c.Courses).ThenInclude(c => c.Semesters).Include(c => c.Students);
             ViewData["student"] = userId;
-
+            
             return View(await courses.ToListAsync());
         }
         public async Task<IActionResult> History()
@@ -48,9 +48,13 @@ namespace EDSU_SYSTEM.Controllers
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var id = loggedInUser.StaffId;
             var staff = (from c in _context.Staffs where c.Id == id select c.DepartmentId).FirstOrDefault();
-            var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l.LevelId).FirstOrDefault();
-            var Levelstudents = (from c in _context.Students where c.Department == staff && c.Level == AdviserLevel select c).ToList();
-            
+            var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l).ToList();
+            var Levelstudents = new List<Student>();
+            foreach (var item in AdviserLevel)
+            {
+                var students = (from c in _context.Students where c.Department == staff && c.Level == item.LevelId select c).ToList();
+                Levelstudents.AddRange(students);
+            }
             return View(Levelstudents);
         }
         public async Task<IActionResult> Approved()
@@ -58,15 +62,22 @@ namespace EDSU_SYSTEM.Controllers
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var id = loggedInUser.StaffId;
             var staff = (from c in _context.Staffs where c.Id == id select c.DepartmentId).FirstOrDefault();
-            var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l.LevelId).FirstOrDefault();
-            var Levelstudents = (from c in _context.Students where c.Department == staff && c.Level == AdviserLevel select c).ToList();
-            
+            var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l).ToList();
+            var Levelstudents = new List<Student>();
+            foreach (var item in AdviserLevel)
+            {
+                var students = (from c in _context.Students where c.Department == staff && c.Level == item.LevelId select c).ToList();
+                Levelstudents.AddRange(students);
+            }
             return View(Levelstudents);
+
         }
         public async Task<IActionResult> Summary(string id)
         {
             try
             {
+                
+
                 var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
                 var studentId = loggedInUser.StudentsId;
                 var student = (from s in _context.Students where s.Id == studentId select s)
@@ -92,9 +103,17 @@ namespace EDSU_SYSTEM.Controllers
 
                 var TotalCredit = (from c in approvedCourses select c.Courses.CreditUnit).ToList();
                 ViewBag.sum = TotalCredit.Sum();
+                
+                //for (int i = 1; i <= approvedCourses; i++)
+                //{
+                //    ViewBag.SerialNumbers = i;
+                //    Console.Write(ViewBag.SerialNumbers);
+                //    //serialNumbers.Add(i);
+                //}
+                
                 if (approvedCourses.Count() == 0)
                 {
-                    return RedirectToAction("resourcenotfound", "error");
+                    return RedirectToAction("badreq", "error");
                 }
                 else
                 {
@@ -104,29 +123,32 @@ namespace EDSU_SYSTEM.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("badreq", "error");
+                return RedirectToAction("nocourses", "error");
                 throw;
             }
             
         }
-        public IActionResult Pendingreg(int id)
+        public IActionResult Pendingreg(string id)
         {
-            var students = (from c in _context.CourseRegistrations where c.StudentId == id && c.Status == MainStatus.Pending select c).Include(c => c.Courses).Include(c => c.Students).ToList();
-            return View(students);
+            TempData["studentEmail"] = id;
+            var student = _context.Students.Where(x => x.SchoolEmailAddress == id).Select(x => x.Id).FirstOrDefault();
+            var studentCourses   = (from c in _context.CourseRegistrations where c.StudentId == student && c.Status == MainStatus.Pending select c).Include(c => c.Courses).ThenInclude(c => c.Semesters).Include(c => c.Students).ToList();
+            return View(studentCourses);
         }
         public IActionResult Approvedreg(int id)
         {
             var students = (from c in _context.CourseRegistrations where c.StudentId == id && c.Status == MainStatus.Approved select c).Include(c => c.Courses).ThenInclude(i => i.Semesters).Include(c => c.Students).ToList();
             return View(students);
         }
-        public async Task<IActionResult> RejectCourse(int id)
+        public async Task<IActionResult> RejectCourse(int? id)
         {
-
+            var code = (from s in _context.CourseRegistrations where s.Id == id select s.Students.SchoolEmailAddress).FirstOrDefault();
             if (id == null || _context.CourseRegistrations == null)
             {
                 return NotFound();
             }
-            var courseRegistration = await _context.CourseRegistrations.FindAsync(id);
+            var courseRegistration = (from s in _context.CourseRegistrations where s.Id == id select s).Include(i => i.Students).Include(c => c.Courses).FirstOrDefault();
+            
             if (courseRegistration == null)
             {
                 return NotFound();
@@ -135,19 +157,19 @@ namespace EDSU_SYSTEM.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reject(int id)
+        public async Task<IActionResult> Reject(int? id, CourseRegistration course)
         {
-            var course = await _context.CourseRegistrations.FindAsync(id);
+            var coursereg = await _context.CourseRegistrations.FindAsync(id);
+            var courseRegistration = (from s in _context.CourseRegistrations where s.Id == id select s).Include(i => i.Students).Include(c => c.Courses).FirstOrDefault();
+
+            //await _context.CourseRegistrations.FirstOrDefaultAsync(i => i.Courses.Code == code && i.Students.SchoolEmailAddress == student);
             if (id == null)
             {
                 return NotFound();
             }
-            try
+            if (await TryUpdateModelAsync<CourseRegistration>(coursereg, "", c => c.Comment))
             {
-                var courseToUpdate = await _context.CourseRegistrations
-                .FirstOrDefaultAsync(c => c.Id == id);
-
-                if (await TryUpdateModelAsync<CourseRegistration>(courseToUpdate, "", c => c.Comment))
+                try
                 {
                     course.Status = MainStatus.Declined;
                     try
@@ -157,57 +179,51 @@ namespace EDSU_SYSTEM.Controllers
                     catch (DbUpdateConcurrencyException)
                     {
 
-                        ModelState.AddModelError("", "Unable to save changes. " +
-                            "Try again, and if the problem persists, " +
-                            "see your system administrator.");
+                        return RedirectToAction("badreq", "error");
                     }
-                    return RedirectToAction("pendingreg", "courseregistrations", new {id});
+
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+
                 }
             }
-            catch (Exception ex)
-            {
-                ex.ToString();
-
-            }
-            return RedirectToAction("pendingreg", "courseregistrations", new { id });
+            //var iid = courseRegistration.Students.SchoolEmailAddress;
+            return RedirectToAction("pending", "courseregistrations");
         }
         
-        public async Task<IActionResult> Approve(int? id)
+        public async Task<IActionResult> Approve(string code, string student)
         {
-            var course = await _context.CourseRegistrations.FindAsync(id);
-            if (id == null)
+             
+            var course = await _context.CourseRegistrations.FirstOrDefaultAsync(i => i.Courses.Code == code && i.Students.SchoolEmailAddress == student);
+            if (code == null)
             {
                 return NotFound();
             }
             try
             {
-                var courseToUpdate = await _context.CourseRegistrations
-                .FirstOrDefaultAsync(c => c.Id == id);
-
-                if (await TryUpdateModelAsync<CourseRegistration>(courseToUpdate, ""))
+                
+                course.Status = MainStatus.Approved;
+                try
                 {
-                    
-                    course.Status = MainStatus.Approved;
-                    try
-                    {
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-
-                        ModelState.AddModelError("", "Unable to save changes. " +
-                            "Try again, and if the problem persists, " +
-                            "see your system administrator.");
-                    }
-                    return RedirectToAction("pending", "courseregistrations");
+                    await _context.SaveChangesAsync();
                 }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                    return RedirectToAction("badreq", "error");
+                }
+                    //return RedirectToAction("pendingreg", "courseregistrations", new { id });
+                
             }
             catch (Exception ex)
             {
                 ex.ToString();
 
             }
-            return RedirectToAction("index", "courseregistrations");
+           var id = (string)TempData["studentEmail"];
+            return RedirectToAction("pendingreg", "courseregistrations", new { id });
         }
             
         // GET: courseRegistrations/Details/5
@@ -252,13 +268,20 @@ namespace EDSU_SYSTEM.Controllers
             ViewBag.sumLeft = ViewBag.max - ViewBag.sum;
             TempData["sum"] = ViewBag.sumLeft;
 
-            return View(await courses.ToListAsync());
+                string errorMessage = (string)TempData["error"];
+                string errorMessage2 = (string)TempData["maxcredit"];
+                ViewBag.ErrorMessage = errorMessage;
+                ViewBag.ErrorMessage2 = errorMessage2;
+                return View(await courses.ToListAsync());
+               
             }
             catch (Exception)
             {
-                return RedirectToAction("badreq", "Error");
+                
+                return RedirectToAction("badreq", "error");
                 throw;
             }
+            
         }
         public async Task<IActionResult> Second()
         {
@@ -282,6 +305,10 @@ namespace EDSU_SYSTEM.Controllers
                 ViewBag.sumLeft = ViewBag.max - ViewBag.sum;
                 TempData["sum"] = ViewBag.sumLeft;
 
+                string errorMessage = (string)TempData["error"];
+                string errorMessage2 = (string)TempData["maxcredit"];
+                ViewBag.ErrorMessage = errorMessage;
+                ViewBag.ErrorMessage2 = errorMessage2;
                 return View(await courses.ToListAsync());
             }
             catch (Exception)
@@ -337,15 +364,17 @@ namespace EDSU_SYSTEM.Controllers
                 ViewBag.courseunit = courseRegistration.Courses.CreditUnit;
                 if (ViewBag.courseunit > (int)TempData["sum"])
                 {
-                    return BadRequest("Credit unit cannot be more than what is left");
+                    TempData["maxcredit"] = "There was an attempt to exceed the maximum credit load";
+                    return Redirect(Request.Headers["Referer"].ToString());
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(First));
+                return Redirect(Request.Headers["Referer"].ToString());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return RedirectToAction("badreq", "Error");
-                throw;
+                TempData["error"] = "The course you clicked has been registered!";
+                return Redirect(Request.Headers["Referer"].ToString());
+                //throw;
             }
             
         }
@@ -421,7 +450,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
 
-            return View(courseRegistration);
+            return PartialView("_delete",courseRegistration);
         }
 
         // POST: courseRegistrations/Delete/5

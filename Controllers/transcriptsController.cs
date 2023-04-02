@@ -35,7 +35,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: transcripts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Transcripts == null)
             {
@@ -43,7 +43,7 @@ namespace EDSU_SYSTEM.Controllers
             }
 
             var transcript = await _context.Transcripts
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TranscriptId == id);
             if (transcript == null)
             {
                 return NotFound();
@@ -51,40 +51,46 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(transcript);
         }
+        public IActionResult Requirements()
+        {
+            return View();
+        }
         public IActionResult Apply()
         {
+
+            ViewData["programme"] = new SelectList(_context.Programs, "Id", "NameOfProgram");
             return View();
         }
 
     // POST: transcripts/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Transcript transcript)
+        public async Task<IActionResult> Apply(Transcript transcript)
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var userId = loggedInUser.StudentsId;
-            if (ModelState.IsValid)
-            {
-                transcript.TranscriptId = Guid.NewGuid().ToString();
-                transcript.UserId = userId.ToString();
-                _context.Add(transcript);
-                await _context.SaveChangesAsync();
-                return View(transcript);
-            }
-            return View(transcript);
+           
+            transcript.TranscriptId = Guid.NewGuid().ToString();
+            transcript.UserId = userId.ToString();
+            _context.Add(transcript);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(History));
+            
         }
 
         // GET: transcripts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(string? id)
         {
             if (id == null || _context.Transcripts == null)
             {
                 return NotFound();
             }
 
-            var transcript = await _context.Transcripts.FindAsync(id);
+            var transcript = _context.Transcripts.FirstOrDefault(d => d.TranscriptId == id);
+            
+            ViewData["programme"] = new SelectList(_context.Programs, "Id", "NameOfProgram");
             if (transcript == null)
             {
                 return NotFound();
@@ -97,9 +103,9 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Surname,Firstname,Othername,MatNo,Email,PhoneNumber,Status,CreatedAt,UpdatedAt,Programme,GraduationDate,AppliedBefore,IfYes,DestinationName,DestinationEmail,Address1,Address2,City,ZipCode,Country,TranscriptLabel,Receipt,ReceiptNumber,NotificationOfResult,Others,UserId")] Transcript transcript)
+        public async Task<IActionResult> Edit(string id, Transcript transcript)
         {
-            if (id != transcript.Id)
+            if (id != transcript.TranscriptId)
             {
                 return NotFound();
             }
@@ -113,7 +119,7 @@ namespace EDSU_SYSTEM.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TranscriptExists(transcript.Id))
+                    if (!TranscriptExists(transcript.TranscriptId))
                     {
                         return NotFound();
                     }
@@ -128,7 +134,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: transcripts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null || _context.Transcripts == null)
             {
@@ -136,7 +142,7 @@ namespace EDSU_SYSTEM.Controllers
             }
 
             var transcript = await _context.Transcripts
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TranscriptId == id);
             if (transcript == null)
             {
                 return NotFound();
@@ -148,13 +154,13 @@ namespace EDSU_SYSTEM.Controllers
         // POST: transcripts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string? id)
         {
             if (_context.Transcripts == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Transcripts'  is null.");
             }
-            var transcript = await _context.Transcripts.FindAsync(id);
+            var transcript = await _context.Transcripts.FirstOrDefaultAsync(i => i.TranscriptId == id);
             if (transcript != null)
             {
                 _context.Transcripts.Remove(transcript);
@@ -164,9 +170,9 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TranscriptExists(int? id)
+        private bool TranscriptExists(string? id)
         {
-          return _context.Transcripts.Any(e => e.Id == id);
+          return _context.Transcripts.Any(e => e.TranscriptId == id);
         }
     }
 }

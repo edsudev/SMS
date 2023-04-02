@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div id="PlaceHolderHere"></div>
 <div class="main-container" id="container">
 <partial name="_StudentDashboardPartial" />
 <!--  BEGIN CONTENT AREA  -->
@@ -33,7 +34,7 @@
                                         <td>@item.Courses.Code</td>
                                         <td>@item.Courses.Title</td>
                                         <td>@item.Courses.CreditUnit</td>
-                                        <td>@item.Courses.Semester</td>
+                                        <td>@item.Courses.Semesters.Name</td>
                                         <td>@item.CreatedAt</td>
                                         <td>@item.Status</td>
                                         <td class="text-center">
@@ -48,9 +49,10 @@
                                             }
                                             @if (item.Status != EDSU_SYSTEM.Models.Enum.MainStatus.Approved)
                                             {
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                                                </a>
+                                                    <a class="bs-tooltip" data-toggle="ajax-modal" data-target="#addItem tooltip" data-url="@Url.Action($"Delete/{item.Id}")" data-placement="top" title="" data-original-title="Delete">
+                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                    </a>
+                                                
                                             }
                                         </td>
                                     </tr>

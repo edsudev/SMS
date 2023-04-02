@@ -117,7 +117,7 @@ namespace EDSU_SYSTEM.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_edit",work);
+            return PartialView("_edit");
         }
         // GET: works/Edit/5
         public async Task<IActionResult> Act(int? id)

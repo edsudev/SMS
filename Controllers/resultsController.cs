@@ -10,20 +10,22 @@ using EDSU_SYSTEM.Models;
 using OfficeOpenXml;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Microsoft.AspNetCore.Identity;
+using static EDSU_SYSTEM.Models.Enum;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.Data.SqlClient;
 
 namespace EDSU_SYSTEM.Controllers
 {
     public class ResultsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly UserManager<ApplicationUser> _userManager;
         public ResultsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
         }
-        public async Task<List<Result>> Import(int id, IFormFile file, Result result)
+        public async Task<List<Result>> ImportCA(string id, IFormFile file, Result result)
         {
             var list = new List<Result>();
             using (var stream = new MemoryStream())
@@ -36,22 +38,72 @@ namespace EDSU_SYSTEM.Controllers
                     //The row is starting from 2 because the first row is the header
                     for (int i = 2; i <= rowcount; i++)
                     {
-                        var course = (from c in _context.Courses where c.Id == id select c).FirstOrDefault();
-                        var mt = new Result
+                        var session = (from c in _context.Sessions where c.IsActive == true select c.Id).FirstOrDefault();
+                        try
                         {
-                            StudentId = (string)(worksheet.Cells[i, 1].Value ?? string.Empty),
-                            //CA = ((double)worksheet.Cells[i, 2].Value),
-                            //Exam = ((double)worksheet.Cells[i, 3].Value),
-                            CreatedAt = DateTime.Now,
-                            CourseId = course.Title
-
-                            //Exam = ((double)worksheet.Cells[i, 4].Value),
-                            //Upgrade = ((double)worksheet.Cells[i, 5].Value),
-                            //Total = ((double)worksheet.Cells[i, 6].Value),
-                            //Grade = (string)(worksheet.Cells[i, 7].Value ?? string.Empty),
+                            var test = new Result
+                            {
+                                StudentId = (string)(worksheet.Cells[i, 1].Value ?? string.Empty),
+                                CA = ((double)worksheet.Cells[i, 2].Value),
+                                CreatedAt = DateTime.Now,
+                                CourseId = id,
+                                SessionId = session,
+                                ResultId = Guid.NewGuid().ToString(),
                         };
-                        _context.Results.Add(mt);
-                        _context.SaveChanges();
+                            _context.Results.Add(test);
+                            _context.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                       
+                    }
+                }
+
+            }
+            return list;
+        }
+        public IActionResult UploadExams(string id)
+        {
+            var result = (from d in _context.Results where d.CourseId == id select d).ToList();
+            //var records = _context.Results.Where
+            return View(result);
+        }
+        public async Task<List<Result>> ImportEXAM(string id, IFormFile file, Result result)
+        {
+            var session = (from s in _context.Sessions where s.IsActive == true select s.Id).FirstOrDefault();
+            var records = (from c in _context.Results where c.CourseId == id && c.SessionId == session select c).ToList();
+            var list = new List<Result>();
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                    var rowcount = worksheet.Dimension.Rows;
+                    //The row is starting from 2 because the first row is the header
+                    for (int i = 2; i <= rowcount; i++)
+                    {
+                        var course = (from c in _context.Courses where c.Code == id select c).FirstOrDefault();
+                        try
+                        {
+                            var test = new Result
+                            {
+                                Exam = ((double)worksheet.Cells[i, 1].Value),
+                                CreatedAt = DateTime.Now,
+                                CourseId = course.Code,
+                            };
+                           // _context.Results.Add(test);
+                            _context.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                       
                     }
                 }
 
@@ -88,14 +140,36 @@ namespace EDSU_SYSTEM.Controllers
         // GET: results/Create
         public IActionResult Upload()
         {
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id");
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id");
             return View();
         }
-        public IActionResult Assessment()
+        public async Task<IActionResult> Assessment()
         {
-           
-            return RedirectToAction("resourcenotfound","error");
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+            var student = (from c in _context.Students where c.Id == userId select c).Include(i => i.Applicants).FirstOrDefault();
+            var approvedCourses = (from c in _context.CourseRegistrations
+                                   where c.StudentId == userId &&
+                                   c.Status == MainStatus.Approved &&
+                                   c.SessionId == student.CurrentSession
+                                   select c).Include(i => i.Courses).ToList();
+            //After getting the courses from coursereg and Scores from Results table, we sorted them using the course code before serializing them
+            //so that the courses can align with the courses since they are coming from the same table.
+            var grades = (from g in _context.Results where g.StudentId == student.MatNumber select g).ToList();
+            var sortedCourses = approvedCourses.OrderBy(s => s.Courses.Code);
+            var sortedGrades = grades.OrderBy(c => c.CourseId);
+
+            var CourseCode = (from c in sortedCourses select c.Courses.Code).ToList();
+            var TestScores = (from v in sortedGrades select v.CA).ToList();
+
+            var json = JsonSerializer.Serialize(CourseCode);
+            var json2 = JsonSerializer.Serialize(TestScores);
+
+
+            ViewBag.courses = json;
+            ViewBag.grade = json2;
+            
+            Console.WriteLine(ViewBag.courses);
+            return View();
         }
         public IActionResult Myresult()
         {

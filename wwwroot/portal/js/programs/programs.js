@@ -362,5 +362,4 @@ class Programs extends HTMLElement {
         `
     }
 }
-
-//customElements.define('app-programs', Programs);
+customElements.define('app-programs', Programs);

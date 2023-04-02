@@ -22,7 +22,8 @@ namespace EDSU_SYSTEM.Controllers
         // GET: programs
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Programs.ToListAsync());
+            var programs = (from s in _context.Programs select s).Include(i => i.Departments).ThenInclude(i => i.Faculties).ToList();
+            return View(programs);
         }
 
         // GET: programs/Details/5
@@ -46,6 +47,8 @@ namespace EDSU_SYSTEM.Controllers
         // GET: programs/Create
         public IActionResult Create()
         {
+
+            ViewData["Departments"] = new SelectList(_context.Departments, "Id", "Name");
             return View();
         }
 
@@ -54,15 +57,13 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameOfProgram")] UgProgram program)
+        public async Task<IActionResult> Create(UgProgram program)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(program);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(program);
+            
         }
 
         // GET: programs/Edit/5

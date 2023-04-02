@@ -8,30 +8,32 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace EDSU_SYSTEM.Controllers
 {
     public class ProjectProgressController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ProjectProgressController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public ProjectProgressController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _userManager = userManager;
-            _context = context;
+            _context = context; 
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: projectProgress
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UgProgresses.Include(u => u.Programs).Include(u => u.Students).Include(u => u.Supervisors);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.UgProgresses.Include(u => u.Students).ThenInclude(u => u.Students).Include(u => u.Supervisors).ThenInclude(u => u.Lecturers);
+            return View(applicationDbContext.ToList());
         }
         public async Task<IActionResult> History()
         {
             var applicationDbContext = _context.UgProgresses.Include(u => u.Programs).Include(u => u.Students).Include(u => u.Supervisors);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.ToListAsync());   
         }
 
         // GET: projectProgress/Details/5
@@ -70,18 +72,41 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,StudentId,Title,Program,FileName,SupervisorId,Ranking,Comment,CreatedAt,UpdatedAt")] UgProgress ugProgress)
+        public async Task<IActionResult> Create(IFormFile uplaod, UgProgress ugProgress)
         {
-            if (ModelState.IsValid)
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+            var student = (from s in _context.Students where s.Id == userId select s.SchoolEmailAddress).FirstOrDefault();
+            try
             {
+                if (uplaod != null && uplaod.Length > 0)
+                {
+                    var uploadDir = @"files/Ugprojectprogress";
+                    var fileName = Path.GetFileNameWithoutExtension(uplaod.FileName);
+                    var extension = Path.GetExtension(uplaod.FileName);
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+                    fileName = student + DateTime.Now.Millisecond;
+
+                    fileName = fileName + extension;
+                    var path = Path.Combine(webRootPath, uploadDir, fileName);
+                    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                    {
+                        uplaod.CopyTo(fs);
+                        ugProgress.FileName = fileName;
+
+                    }
+                }
+                ugProgress.StudentId = userId;
                 _context.Add(ugProgress);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(History));
             }
-            ViewData["Program"] = new SelectList(_context.Programs, "Id", "Id", ugProgress.Program);
-            ViewData["StudentId"] = new SelectList(_context.UgStudentSupervisors, "Id", "Id", ugProgress.StudentId);
-            ViewData["SupervisorId"] = new SelectList(_context.UgStudentSupervisors, "Id", "Id", ugProgress.SupervisorId);
-            return View(ugProgress);
+            catch (Exception)
+            {
+                return RedirectToAction("badreq", "error");
+                throw;
+            }
+          
         }
 
         // GET: projectProgress/Edit/5

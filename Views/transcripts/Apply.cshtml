@@ -7,7 +7,6 @@
 }
 <div class="main-container" id="container">
 <partial name="_StudentDashboardPartial" />
-<div id="PlaceHolderHere"></div>
 <!--  BEGIN CONTENT AREA  -->
 <div id="content" class="main-content">
     <div class="layout-px-spacing">
@@ -19,7 +18,7 @@
 
                 <div class="widget-one p-3">
                     <h2>Personal Details</h2>
-                    <form class="needs-validation" novalidate asp-action="Create" enctype="multipart/form-data" method="post">
+                        <form class="needs-validation" novalidate asp-action="Apply" enctype="multipart/form-data" method="post">
                         <div class="form-row">
                             <div class="col-md-4 mb-4">
                                 <div class="form-group">
@@ -71,9 +70,12 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-4">
                                 <div class="form-group">
-                                    <label asp-for="Programme" class="control-label"></label>
-                                    <input asp-for="Programme" class="form-control" />
-                                    <span asp-validation-for="Programme" class="text-danger"></span>
+                                     <label asp-for="Programme" class="control-label"></label>
+                                        <select asp-for="Programme" class="form-control" asp-items="ViewBag.programme">
+                                            <option value="Nil">- Choose -</option>
+                                           
+                                        </select>
+                                        <span asp-validation-for="Programme" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-4">
@@ -95,8 +97,12 @@
                             <div class="col-md-4 mb-4">
                                 <div class="form-group">
                                     <label asp-for="AppliedBefore" class="control-label">Have you aplied before?</label>
-                                    <input asp-for="AppliedBefore" class="form-control" />
-                                    <span asp-validation-for="AppliedBefore" class="text-danger"></span>
+                                        <select asp-for="AppliedBefore" class="form-control">
+                                            <option value="Nil">- Choose -</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <span asp-validation-for="AppliedBefore" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-4">
@@ -181,14 +187,7 @@
 
         </div>
     </div>
-    <div class="footer-wrapper">
-        <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
-        </div>
-        <div class="footer-section f-section-2">
-            <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-        </div>
-    </div>
+    
 </div>
 <!--  END CONTENT AREA  -->
     </div>

@@ -24,10 +24,17 @@ namespace EDSU_SYSTEM.Controllers
         // GET: busaryClearances
         public async Task<IActionResult> Index()
         {
-          
+            var studentIds = _context.BursaryClearances.Select(b => b.StudentId).ToList();
+            var students = _context.Students.Where(s => studentIds.Contains(s.Id)).Include(i => i.Departments).Include(i => i.Levels).ToList();
+
+            return View(students);
+            
+        }
+        public async Task<IActionResult> Students()
+        {
             var applicationDbContext = _context.BursaryClearances.Include(b => b.Payments).ThenInclude(i => i.Sessions).Include(b => b.Students);
             return View(await applicationDbContext.ToListAsync());
-        } 
+        }
         public async Task<IActionResult> Preview(string? id)
         {
             try
@@ -43,7 +50,9 @@ namespace EDSU_SYSTEM.Controllers
                 //ViewBag.programme = student.Programs.NameOfProgram;
                 ViewBag.session = student.Sessions.Name;
                 ViewBag.level = student.Levels.Name;
-                var clearance = (from s in _context.BursaryClearances where s.StudentId == userId && s.Sessions.Name == id select s).Include(i => i.Payments).ToList();
+                var clearance = (from s in _context.BursaryClearances where s.StudentId == userId && s.Sessions.Name == id select s).Include(i => i.Hostels).Include(i => i.Payments).ThenInclude(i => i.OtherFees).ThenInclude(i => i.Sessions).ToList();
+                //var hostel = (from s in _context.HostelPayments where s.)
+               
                 if (clearance.Count() == 0)
                 {
                     return RedirectToAction("resourcenotfound", "error");
@@ -64,23 +73,17 @@ namespace EDSU_SYSTEM.Controllers
             return View(await sessions.ToListAsync());
         }
         // GET: busaryClearances/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
-            if (id == null || _context.BursaryClearances == null)
+            ViewBag.student = id;
+            var clearances = (from c in _context.BursaryClearances where c.Students.SchoolEmailAddress == id select c).Include(i => i.Payments).ThenInclude(i => i.OtherFees).ToList();
+            
+            if (clearances == null)
             {
-                return NotFound();
+                return RedirectToAction("PageNotFound", "error");
             }
 
-            var busaryClearance = await _context.BursaryClearances
-                .Include(b => b.Payments)
-                .Include(b => b.Students)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (busaryClearance == null)
-            {
-                return NotFound();
-            }
-
-            return View(busaryClearance);
+            return View(clearances);
         }
 
         // GET: busaryClearances/Create

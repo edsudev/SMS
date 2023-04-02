@@ -22,21 +22,14 @@
                                     <th>
                                         Title
                                     </th>
-                                    <th>
-                                        Program
-                                    </th>
-                                    <th>
-                                        File
-                                    </th>
+                                   
                                     <th>
                                         Supervisor
                                     </th>
                                     <th>
                                         Student
                                     </th>
-
-                                    <th>Ranking</th>
-                                    <th>Comment</th>
+                                   
                                     <th>Submitted on</th>
                                     <th>Actions</th>
                                 </tr>
@@ -46,29 +39,15 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.UserId)
-                                        </td>
-                                        <td>
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Programs.Id)
+                                            @Html.DisplayFor(modelItem => item.Supervisors.Lecturers.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.FileName)
+                                            @Html.DisplayFor(modelItem => item.Students.Students.Fullname)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Supervisors.Id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Students.Id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Ranking)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Comment)
-                                        </td>
+                                        
                                         <td>
                                             @Html.DisplayFor(modelItem => item.CreatedAt)
                                         </td>

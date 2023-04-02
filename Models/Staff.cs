@@ -10,7 +10,9 @@ namespace EDSU_SYSTEM.Models
         public string? StaffId { get; set; }
         public string? Type { get; set; }
         //Intended Position
-        public string? Position { get; set; }
+        [ForeignKey("Positions")]
+        public int? Position { get; set; }
+        public Position? Positions { get; set; }
         //Intended Faculty
         [ForeignKey("Faculties")]
         public int? FacultyId { get; set; }

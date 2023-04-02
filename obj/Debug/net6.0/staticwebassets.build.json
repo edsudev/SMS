@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GyeHhNt4j+qnbdniZcvY6ZfyxvYnydRNv1B6x8JAmv8=",
+  "Hash": "A73o+k7rXtH8ZWsl73nmV3YJ/utDfTNZRBurFfa8nMI=",
   "Source": "EDSU-SYSTEM",
   "BasePath": "_content/EDSU-SYSTEM",
   "Mode": "Default",
@@ -3468,6 +3468,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\activities\\a.png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/activities/a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\activities\\a.png"
+    },
+    {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\applicantUploads\\jamb\\65209266FG.pdf",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
@@ -3517,6 +3534,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\applicantUploads\\passports\\11111.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\applicantUploads\\passports\\333333.jpg",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/applicantUploads/passports/333333.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\applicantUploads\\passports\\333333.jpg"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\applicantUploads\\passports\\65209266FG.jpg",
@@ -3621,6 +3655,40 @@
       "OriginalItemSpec": "wwwroot\\files\\exam.xlsx"
     },
     {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\file\\2022-07-05 (1).png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/magazines/file/2022-07-05 (1).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\file\\2022-07-05 (1).png"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\image\\2022-07-05 (1).png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/magazines/image/2022-07-05 (1).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\image\\2022-07-05 (1).png"
+    },
+    {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\OER\\courseware\\main\\a.png",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
@@ -3655,6 +3723,23 @@
       "OriginalItemSpec": "wwwroot\\files\\OER\\courseware\\synopsis\\a.png"
     },
     {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\Ugprojectprogress\\ugcsc22.Student3@edouniversity.edu.ng532.png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/Ugprojectprogress/ugcsc22.Student3@edouniversity.edu.ng532.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\Ugprojectprogress\\ugcsc22.Student3@edouniversity.edu.ng532.png"
+    },
+    {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\vacancyUploads\\passport\\avatar.png",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
@@ -3670,6 +3755,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\vacancyUploads\\passport\\avatar.png"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\vacancyUploads\\passport\\Csc.Lecturer@edouniversity.edu.ng.jpg",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/vacancyUploads/passport/Csc.Lecturer@edouniversity.edu.ng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\vacancyUploads\\passport\\Csc.Lecturer@edouniversity.edu.ng.jpg"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\vacancyUploads\\passport\\Lecturer.2@edouniversity.edu.ng.png",
@@ -3774,6 +3876,40 @@
       "OriginalItemSpec": "wwwroot\\images\\exeat.png"
     },
     {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\images\\help.svg",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "images/help.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\help.svg"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\images\\hg5w1tqy.png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "images/hg5w1tqy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\hg5w1tqy.png"
+    },
+    {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\images\\Maintenance.gif",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
@@ -3789,6 +3925,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Maintenance.gif"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\images\\nocourses.svg",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "images/nocourses.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\nocourses.svg"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\images\\NoData.svg",
@@ -3857,6 +4010,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\wallet.svg"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\js\\hostelpayment.js",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "js/hostelpayment.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\hostelpayment.js"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\js\\paystack.js",

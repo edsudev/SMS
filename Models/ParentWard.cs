@@ -1,10 +1,16 @@
-﻿namespace EDSU_SYSTEM.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EDSU_SYSTEM.Models
 {
     public class ParentWard
     {
         public int? Id { get; set; }
-        public string? Student { get; set; }
-        public string? Parent { get; set; }
-        public DateTime? CretaedAt { get; set; }
+        public int? StudentId { get; set; }
+        [ForeignKey("students")]
+        public Student? Students { get; set; }
+        [ForeignKey("Parents")]
+        public int? ParentId { get; set; }
+        public Parent? Parents { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

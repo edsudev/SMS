@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\activity.cshtml" />
     <Content Remove="Views\Home\nav.cshtml" />
     <Content Remove="Views\Home\news_detail.cshtml" />
     <Content Remove="Views\Home\tuition.cshtml" />
@@ -20,6 +19,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14">
       <PrivateAssets>all</PrivateAssets>
@@ -63,10 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\activity.cshtml" />
     <None Include="Views\Home\nav.cshtml" />
     <None Include="Views\Home\news_detail.cshtml" />
     <None Include="Views\Home\tuition.cshtml" />
+    <None Include="wwwroot\images\nocourses.svg" />
     <None Include="wwwroot\portal\images\.DS_Store" />
     <None Include="wwwroot\portal\images\newsletter\newsletter.svg" />
     <None Include="wwwroot\portal\images\programs\.DS_Store" />
@@ -587,6 +588,13 @@
     <None Include="wwwroot\portal\sass\plugins\table\datatable\datatables.scss" />
     <None Include="wwwroot\portal\sass\plugins\table\datatable\dt-global_style.scss" />
     <None Include="wwwroot\portal\sass\plugins\tagInput\tags-input.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\files\magazines\file\" />
+    <Folder Include="wwwroot\files\magazines\image\" />
+    <Folder Include="wwwroot\files\activities\" />
+    <Folder Include="wwwroot\files\Ugprojectprogress\" />
   </ItemGroup>
 
 </Project>

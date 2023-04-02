@@ -40,6 +40,15 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.UgApplicants;
             return View(await applicationDbContext.ToListAsync());
          
+        } 
+        public async Task<IActionResult> Undergraduate()
+        {
+            return View();
+         
+        }
+        public IActionResult Scholarships()
+        {
+            return View();
         }
         public async Task<IActionResult> List(string? id)
         {
@@ -695,18 +704,18 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("Index", "admissions");
 
         }
-        public IActionResult ClearApplicant(string? id)
-        {
-            var applicants = _context.Students.Where(x => x.StudentId == id).FirstOrDefault();
-            List<Faculty> f = new();
-            f = (from c in _context.Faculties select c).ToList();
-            ViewBag.message2 = f;
+        //public IActionResult ClearApplicant(string? id)
+        //{
+        //    var applicants = _context.Students.Where(x => x.StudentId == id).FirstOrDefault();
+        //    List<Faculty> f = new();
+        //    f = (from c in _context.Faculties select c).ToList();
+        //    ViewBag.message2 = f;
 
-            return PartialView("_clearancePartial", applicants);
-        }
+        //    return PartialView("_clearancePartial", applicants);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ClearApplicant(string? id, Student student)
         {
             //Get the person who performed this action
@@ -716,9 +725,10 @@ namespace EDSU_SYSTEM.Controllers
                 var applicant = await _context.UgApplicants.FirstOrDefaultAsync(x => x.ApplicantId == id);
                 //change the cleared status to true in the applicants table
                 applicant.Cleared = true;
-                var Session = (from T in _context.Sessions
-                               where T.IsActive == true
-                               select T).ToList();
+            var Session = (from T in _context.Sessions
+                           where T.IsActive == true
+                           where T.IsActive == true
+                           select T).ToList();
                 var dept = (from g in _context.Departments where g.Id == applicant.AdmittedInto select g).ToList();
                 //Moving Applicant to student table
                 student.ApplicantId = applicant.Id;
@@ -761,21 +771,17 @@ namespace EDSU_SYSTEM.Controllers
                 _context.Add(student);
                 await _context.SaveChangesAsync();
 
-                var user = new ApplicationUser
-                {
-                    Email = student.SchoolEmailAddress,
-                    UserName = student.SchoolEmailAddress,
-                    StudentsId = student.Id,
-                    Type = 1,
-                    EmailConfirmed = true
-                };
-                var r = await userManager.CreateAsync(user, "Password@1");
-                if (r.Succeeded)
-                {
-                    Console.WriteLine("It worked");
-                }
-                Console.WriteLine("E no work");
-                return RedirectToAction("index", "admissions");
+            var user = new ApplicationUser
+            {
+                Email = student.SchoolEmailAddress,
+                UserName = student.SchoolEmailAddress,
+                StudentsId = student.Id,
+                Type = 1,
+                EmailConfirmed = true
+            };
+            var r = await userManager.CreateAsync(user, "Password@1");
+
+            return RedirectToAction("index", "admissions");
           
         }
 

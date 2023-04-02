@@ -1,5 +1,16 @@
-﻿<partial name="_Nav" />
+﻿@model IEnumerable<EDSU_SYSTEM.Models.LatestNews>
+<partial name="_Nav" />
+<style>
+    #text-content{
+        max-height: 3em;
+        overflow: hidden;
+    }
 
+        #text-content.expanded {
+            max-height: none;
+            overflow: visible;
+        }
+</style>
 <section class="news">
 
     <div class="heading">
@@ -14,19 +25,27 @@
             <div class="profile">
                 <div class="profile-name">
                     <img src="~/portal/images/news/profile-image.png" alt="a profile picture">
-                    <p>Otti Daniel</p>
+                    <p>Joshua Kimmich</p>
                 </div>
-                <p class="profile-description">Traditional lives on with graduates, friends and family in mind</p>
-                <p class="profile-text">Congratulations to all the graduands...</p>
-                <div class="estimate">
+                <p class="profile-description">SRC PRESIDENT</p>
+                <p class="profile-text" id="text-content" style="">
+                    Edo State University Uzuaire has
+                    bagged A Most Innovative Top Best Valuable
+                    University in Nigeria, 2017, award.
+                    The award was given to the University by the
+                    "Northern Achievers International Magazine"
+                    in Kaduna.
+                </p>
+                
+               @* <div class="estimate">
                     <p>Nov 5</p>
                     <div class="round"></div>
                     <p>24 min read</p>
                     <div class="round"></div>
                     <span class="desc">Greetings</span>
                 </div>
-
-                <button>Read More</button>
+*@
+                <button id="read-more-btn">Read more</button>
             </div>
 
         </div>
@@ -42,87 +61,35 @@
     </div>
 
     <div class="latest-news-card">
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
-        <div class="latest-news-card-body">
-            <img src="~/portal/images/news/group-picture.png" alt="">
-            <h1>UNIVERSITY</h1>
-            <p class="text-heading">EDO UNIVERSITY IYAMHO BAGS AREWA</p>
-            <p class="text-details">
-                Edo State University Uzuaire has
-                bagged A Most Innovative Top Best Valuable
-                University in Nigeria, 2017, award.
-                The award was given to the University by the
-                "Northern Achievers International Magazine"
-                in Kaduna.
-            </p>
-        </div>
+        @foreach (var item in Model.Where(x => x.isActive == true))
+        {
+            <div class="latest-news-card-body">
+                <img src="~/portal/images/news/group-picture.png" alt="">
+                <p class="text-heading">@item.Title.ToUpper()</p>
+                <p class="text-details">
+                    @item.Body
+                </p>
+            </div>
+        }
     </div>
 
 </section>
 
 <app-newsletter></app-newsletter>
 <partial name="_Footer"/>
+<script>
+    var content = document.getElementById('text-content');
+    var button = document.getElementById('read-more-btn');
+    var buttonText = button.innerHTML;
+
+    button.addEventListener('click', function () {
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            button.innerHTML = buttonText;
+        } else {
+            content.classList.add('expanded');
+            button.innerHTML = 'Read less';
+        }
+    });
+</script>
+

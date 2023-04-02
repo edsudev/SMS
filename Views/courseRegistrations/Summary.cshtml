@@ -102,7 +102,11 @@
                                                              @foreach (var item in Model)
                                                                 {
                                                                 <tr>
-                                                                    <td>1</td>
+                                                                    <td>
+                                                                    
+                                                                        @ViewBag.SerialNumbers
+                                                                    
+                                                                    </td>
                                                                     <td class="">@item.Courses.Code</td>
                                                                     <td class="">@item.Courses.Title</td>
                                                                     <td class="">@item.Courses.CreditUnit</td>

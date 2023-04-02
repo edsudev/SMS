@@ -42,11 +42,7 @@
             <a asp-action="scholarships" asp-controller="admissions">
                 Scholarship
             </a>
-           
-            <a asp-action="about" asp-controller="home">
-                Tuition
-            </a>
-            <a asp-action="index" asp-controller="fees">
+            <a asp-action="fees" asp-controller="home">
                 Fees
             </a>
         </div>
@@ -64,10 +60,10 @@
             </a>
            
             <a asp-action="partners" asp-controller="home">
-                Partner
+                Partners
             </a>
-            <a href="">
-                Directories
+            <a asp-action="directories" asp-controller="home">
+                Staff Directories
             </a>
         </div>
 
@@ -110,7 +106,7 @@
                     Resources
                 </h3>
                
-                <a asp-action="events" asp-controller="home">
+                <a asp-action="help" asp-controller="home">
                     Help Center
                 </a>
                 <a asp-action="events" asp-controller="home">
@@ -118,9 +114,9 @@
                 </a>
                 
                 <a asp-action="partners" asp-controller="home">
-                    Partner
+                    Partners
                 </a>
-                <a href="">
+                <a asp-action="directories" asp-controller="home">
                     Staff Directories
                 </a>
             </div>

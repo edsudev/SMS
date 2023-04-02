@@ -82,17 +82,24 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: vacancies/Create
+        public async Task<IActionResult> Academic()
+        {
+            var applicationDbContext = _context.VacancyLists
+                .Include(i => i.Departments).ThenInclude(i => i.Faculties).Include(i => i.Positions) ;
+            return View(await applicationDbContext.ToListAsync());
+            
+        }
         public IActionResult Academic_apply()
         {
-            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Name");
-            ViewData["Position"] = new SelectList(_context.Positions.Where(i=>i.Type == VacancyType.Academic), "Id", "Name");
+           
             return View();
+            
         }
-        public IActionResult NonAcademic_Apply()
+        public async Task<IActionResult> NonAcademic()
         {
-            ViewData["Unit"] = new SelectList(_context.UnitNames, "Id", "Name");
-            ViewData["Position"] = new SelectList(_context.Positions.Where(i=>i.Type == VacancyType.NonAcademic), "Id", "Name");
-            return View();
+            var applicationDbContext = _context.VacancyLists
+                .Include(i => i.Units).Include(i => i.Positions);
+            return View(await applicationDbContext.ToListAsync());
         }
         // POST: vacancies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

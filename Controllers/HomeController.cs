@@ -21,6 +21,8 @@ namespace EDSU_SYSTEM.Controllers
         public IActionResult Index()
         {
             ViewBag.Slider = _context.Sliders.Where(i => i.isActive == true).ToList();
+            ViewBag.News = _context.LatestNews.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(3).ToList();
+            ViewBag.Activities = _context.Activities.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(2).ToList();
             return View();
         }
 
@@ -30,7 +32,7 @@ namespace EDSU_SYSTEM.Controllers
         } 
         public IActionResult Programs()
         {
-            var programs = (from s in _context.Programs select s).ToList();
+            var programs = (from s in _context.Programs where s.Active == true select s).Include(i => i.Departments).ThenInclude(i => i.Faculties).ToList();
             
             return View(programs);
         }
@@ -40,17 +42,44 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult News()
         {
-            return View();
+            var news = _context.LatestNews.ToList();
+            return View(news);
         }
         public IActionResult Gallery()
         {
             return View();
         }
-         public IActionResult Event()
+        public IActionResult Help()
         {
             return View();
         }
-         public IActionResult Magazine()
+        public IActionResult Partners()
+        {
+            return View();
+        }
+        public IActionResult Fees()
+        {
+            return View();
+        }
+        public IActionResult Directories()
+        {
+            return View();
+        }
+        
+        public IActionResult Faqs()
+        {
+            return View();
+        }
+        public IActionResult Activities()
+        {
+            ViewBag.Activities2 = _context.Activities.Where(i => i.isActive == true).OrderByDescending(r => r.Id).Take(6).ToList();
+            return View();
+        }
+        public IActionResult Events()
+        {
+            return View();
+        }
+         public IActionResult Magazines()
         {
             ViewBag.magazine = _context.Magazines.ToList();
             return View();
