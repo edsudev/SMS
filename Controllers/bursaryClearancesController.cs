@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
+    [Authorize]
     public class BursaryClearancesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -35,6 +37,7 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.BursaryClearances.Include(b => b.Payments).ThenInclude(i => i.Sessions).Include(b => b.Students);
             return View(await applicationDbContext.ToListAsync());
         }
+      //  [Authorize(Roles = "student")]
         public async Task<IActionResult> Preview(string? id)
         {
             try
@@ -66,6 +69,7 @@ namespace EDSU_SYSTEM.Controllers
             }
             
         }
+      //  [Authorize(Roles = "student")]
         public async Task<IActionResult> History()
         {
 
@@ -84,6 +88,31 @@ namespace EDSU_SYSTEM.Controllers
             }
 
             return View(clearances);
+        }
+        // GET: busaryClearances/Create
+      //  [Authorize(Roles = "student")]
+        public IActionResult Offline()
+        {
+            ViewData["SessionId"] = new SelectList(_context.Sessions, "Id", "Name");
+            return View();
+        }
+
+        // POST: busaryClearances/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      //  [Authorize(Roles = "student")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Offline(OfflinePaymentClearance offlinePayment)
+        {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var user = loggedInUser.StudentsId;
+            offlinePayment.StudentId = user;
+            offlinePayment.CreatedAt = DateTime.Now;
+           _context.Add(offlinePayment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+          
         }
 
         // GET: busaryClearances/Create

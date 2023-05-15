@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EDSU_SYSTEM.Controllers
 {
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CoursesController(ApplicationDbContext context)
+        public CoursesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: courses
@@ -24,6 +27,13 @@ namespace EDSU_SYSTEM.Controllers
         {
             var applicationDbContext = _context.Courses.Include(c => c.Departments).Include(c => c.Levels).Include(c => c.Semesters);
             return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> MyCourses()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var staff = loggedInUser.StaffId;
+            var courses = (from s in _context.CourseAllocations where s.LecturerId == staff && s.Courses.Semesters.IsActive == true && s.Courses.Sessions.IsActive == true select s).ToList();
+            return View(courses);
         }
 
         // GET: courses/Details/5

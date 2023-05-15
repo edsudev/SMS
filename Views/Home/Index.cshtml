@@ -44,7 +44,9 @@
                     </h3>
                 </div>
                 <p>
-                    The library is the heart and lifeline of any citadel of learning. We also have an E-library where resources are made available at the comfort of your hostels.
+                Edo State University library provide a dedicated professional and responsive library across the campus. 
+                Our informational resources of print and online/offline resources support the teaching and research activities of the institution. 
+                @*Our printed collections consist of around 10,000.00 books with unlimited online book and journals in our libraries.*@
                 </p>
             </div>
 
@@ -68,7 +70,8 @@
                     </h3>
                 </div>
                 <p>
-                    The library is the heart and lifeline of any citadel of learning. We also have an E-library where resources are made available at the comfort of your hostels.
+                At Edo state university, we use the canvas lms which is a learning management system (LMS) developed by Instructure to provide a platform 
+                for educators and institutions to create and deliver online courses, manage learning content, and assess student performance.
                 </p>
             </div>
         </div>
@@ -81,8 +84,7 @@
             <div class="">
                 <h2>Upcoming Activity</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    Below are two most anticipated upcoming activities (For more, click the Load more 👉)
                 </p>
             </div>
 
@@ -97,12 +99,15 @@
         @foreach (var item in ViewBag.Activities)
         {
                 <div class="activity-card">
-                    <img src="~/portal/images/index/convocation.png" alt="edo university background image">
+                <img src="~/files/activities/@item.Image" alt="Image" style="width:200px"; height="200px">
                     <div class="activity-card-text">
                     <h3>@item.Text</h3>
-                        <p>
+                    <p>
                         @item.Body
-                        </p>
+                    </p>
+                    <p class="font-weight-bold text-primary">
+                        Date: @item.Month  @item.Day,  @item.Year
+                    </p>
                     </div>
                 </div>
              }
@@ -130,8 +135,7 @@
             <div class="">
                 <h2>Latest News</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                Below are the top three latest news about EDSU  (For more, click the Load more 👉)
                 </p>
             </div>
 
@@ -145,7 +149,7 @@
         @foreach (var item in ViewBag.News)
         {
             <div class="latest-news-card-body">
-                <img src="./images/news/group-picture.png" alt="">
+                @*<img src="~/files/activities/@item." alt="">*@
                 <p class="tag">Date Posted: @item.CreatedAt.ToLongDateString()</p>
                 <h3 class="text-heading">@item.Title.ToUpper()</h3>
                 <p class="text-details">

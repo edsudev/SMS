@@ -17,6 +17,9 @@ namespace EDSU_SYSTEM.Models
         [ForeignKey("Staffs")]
         public int? StaffId { get; set; }
         public Staff? Staffs { get; set; }
+        [ForeignKey("ConversionStudents")]
+        public int? ConversionStudent { get; set; }
+        public ConversionStudent? ConversionStudents { get; set; }
         // Type 1 is for UG students
         // Type 2 is for Staffs
         // Type 3 is for PG Students

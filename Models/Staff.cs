@@ -8,7 +8,10 @@ namespace EDSU_SYSTEM.Models
        //Acad Staff Application
         public int? Id { get; set; }
         public string? StaffId { get; set; }
-        public string? Type { get; set; }
+        public string? Bio { get; set; }
+        [ForeignKey("Types")]
+        public int? Type { get; set; }
+        public TypeOfStaff? Types { get; set; }
         //Intended Position
         [ForeignKey("Positions")]
         public int? Position { get; set; }
@@ -21,10 +24,12 @@ namespace EDSU_SYSTEM.Models
         [ForeignKey("Departments")]
         public int? DepartmentId { get; set; }
         public Department? Departments { get; set; }
-        public string? Name { get; set; }
+        public string? Surname { get; set; }
+        public string? FirstName { get; set; }
+        public string? MiddleName { get; set; }
         public string? Email { get; set; }
         public string? SchoolEmail { get; set; }
-        public DateTime? DOB { get; set; }
+        public string? DOB { get; set; }
         public Religion? Religion { get; set; }
         public string? MaritalStatus { get; set; }
         public string? Sex { get; set; }
@@ -39,6 +44,7 @@ namespace EDSU_SYSTEM.Models
         public Lga? LGAs { get; set; }
         public string? Phone { get; set; }
         public string? ContactAddress { get; set; }
+        public string? HomeAddress { get; set; }
         public string? HighestQualification { get; set; }
         public string? FieldOfStudy { get; set; }
         public string? AreaOfSpecialization { get; set; }
@@ -48,6 +54,7 @@ namespace EDSU_SYSTEM.Models
         public int? YearsOfExperience { get; set; }
         public string? CertUpload { get; set; }
         public string? CVUpload { get; set; }
+        public string? BirthCert { get; set; }
         public string? Picture { get; set; }
         //Add createdAt and UpdatedAt
         public DateTime? CreatedAt { get; set; }

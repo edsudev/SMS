@@ -21,6 +21,9 @@
                 <a class="btn btn-dark mr-1" asp-action="index" asp-controller="pgstudents">Dashboard</a>
             }@if (user != null && user.Type == 4)
             {
+                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="conversionstudents">Dashboard</a>
+            }@if (user != null && user.Type == 5)
+            {
                 <a class="btn btn-dark mr-1" asp-action="index" asp-controller="parents">Dashboard</a>
             }
         

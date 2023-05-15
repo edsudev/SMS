@@ -1,0 +1,57 @@
+﻿@model EDSU_SYSTEM.Models.Parent
+@using static EDSU_SYSTEM.Models.Enum
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="main-container" id="container">
+    <partial name="_ParentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                        <div class="col-md-6 mx-auto mt-5 widget-one widget">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <select asp-for="Title" class="form-control" asp-items="Html.GetEnumSelectList<Title>()"></select>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone" class="control-label"></label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label"></label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

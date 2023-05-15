@@ -8,21 +8,35 @@
                 <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
             </div>
             <div class="modal-body">
-                
-                <form asp-action="Edit" enctype="multipart/form-data">
-                    <input asp-for="Id" hidden/>
-                    <div class="form-group">
-                        <img class="" src="~/files/vacancyUploads/passport/@Model.Picture" height="150" />
-                        <input asp-for="Picture" type="file"  class="form-control" />
-                        <h6>@Model.Name's Information </h6>
+                 <form asp-action="Upload" enctype="multipart/form-data" method="post">
+                    <input asp-for="Id" hidden />
+                    <div class="col-md-3 btn btn-success">
+                        <label asp-for="Picture" class="control-label">Upload Passport</label>
+                        <input asp-for="Picture" class="form-control" type="file" name="passport" />
+                        <span asp-validation-for="Picture" class="text-danger"></span>
                     </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+                <form asp-action="Edit">
+                    <input asp-for="Id" hidden/>
+                    
                     <h5>PERSONAL INFORMATION:</h5>
                     <div class="form-row">
                         
                         <div class="col-md-4">
-                            <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Surname" class="control-label"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="MiddleName" class="control-label"></label>
+                            <input asp-for="MiddleName" class="form-control" />
+                            <span asp-validation-for="MiddleName" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
                             <label asp-for="DOB" class="control-label"></label>

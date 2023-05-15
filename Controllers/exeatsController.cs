@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using QRCoder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -33,6 +34,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(await _context.Exeats.ToListAsync());
         }
         // GET: exeats
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> History()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -89,6 +91,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(exeat);
         }
         // GET: exeats/Create
+       // [Authorize(Roles = "student")]
         public IActionResult Apply()
         {
             ViewData["HallId"] = new SelectList(_context.Hostels, "Id", "Name");
@@ -98,6 +101,7 @@ namespace EDSU_SYSTEM.Controllers
         // POST: exeats/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      //  [Authorize(Roles = "student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Apply(Exeat exeat)
@@ -143,8 +147,6 @@ namespace EDSU_SYSTEM.Controllers
                     }
                 }
             }
-
-
             return View();
         }
         // GET: exeats/Edit/5

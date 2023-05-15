@@ -11,6 +11,7 @@ using static EDSU_SYSTEM.Models.Enum;
 using Microsoft.AspNetCore.Identity;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -30,6 +31,7 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.Evaluations.Include(e => e.Courses).Include(e => e.Grades1).Include(e => e.Lecturers);
             return View(await applicationDbContext.ToListAsync());
         }
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);

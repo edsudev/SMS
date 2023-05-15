@@ -1,4 +1,4 @@
-﻿@model Staff
+﻿@model Vacancy
 
 <div class="modal fade" id="addCourseware">
     <div class="modal-dialog">
@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form asp-action="Employ">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ApplicantId" />
                     <label asp-for="FacultyId" class="control-label">Faculty</label>
                     <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
 

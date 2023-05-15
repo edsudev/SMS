@@ -1,5 +1,6 @@
-﻿<div class="main-container" id="container">
-<partial name="_StudentDashboardPartial" />
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+<div class="main-container" id="container">
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
 
@@ -15,6 +16,27 @@
                                     <strong>Error!</strong> This is most probably a bad request
                                 </div>
                                 <h6 class="text-center">Contact the ICT Team for support</h6>
+                                <div class="mx-auto">
+                                    @{
+                                        var user = UserManager.GetUserAsync(ViewContext.HttpContext.User).Result;
+                                    }
+                                    @if (user != null && user.Type == 1)
+                                    {
+                                        <a class="btn btn-dark mr-1" asp-action="index" asp-controller="students">Home</a>
+                                    }@if (user != null && user.Type == 2)
+                                    {
+                                        <a class="btn btn-dark mr-1" asp-action="index" asp-controller="staffs">Home</a>
+                                    }@if (user != null && user.Type == 3)
+                                    {
+                                        <a class="btn btn-dark mr-1" asp-action="index" asp-controller="pgstudents">Home</a>
+                                    }@if (user != null && user.Type == 4)
+                                    {
+                                        <a class="btn btn-dark mr-1" asp-action="index" asp-controller="conversionstudents">Home</a>
+                                    }@if (user != null && user.Type == 5)
+                                    {
+                                        <a class="btn btn-dark mr-1" asp-action="index" asp-controller="parents">Home</a>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

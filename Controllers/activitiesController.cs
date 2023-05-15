@@ -110,7 +110,7 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("Id,Text,Body,Day,Month,Year,Image,isActive")] Activities activities)
+        public async Task<IActionResult> Edit(int? id, IFormFile image, Activities activities)
         {
             if (id != activities.Id)
             {
@@ -121,6 +121,22 @@ namespace EDSU_SYSTEM.Controllers
             {
                 try
                 {
+                    if (image != null && image.Length > 0)
+                    {
+                        var uploadDir = @"files/activities";
+                        var fileName = Path.GetFileNameWithoutExtension(image.FileName);
+                        var extension = Path.GetExtension(image.FileName);
+                        var webRootPath = _hostingEnvironment.WebRootPath;
+                        //fileName = applicants.UTMENumber + extension;
+                        fileName = fileName + extension;
+                        var path = Path.Combine(webRootPath, uploadDir, fileName);
+                        using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                        {
+                            image.CopyTo(fs);
+                            activities.Image = fileName;
+
+                        }
+                    }
                     _context.Update(activities);
                     await _context.SaveChangesAsync();
                 }

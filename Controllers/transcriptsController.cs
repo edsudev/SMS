@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Models;
 using EDSU_SYSTEM.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -26,6 +27,7 @@ namespace EDSU_SYSTEM.Controllers
         {
               return View(await _context.Transcripts.ToListAsync());
         }
+        //[Authorize(Roles = "student")]
         public async Task<IActionResult> History()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -51,20 +53,22 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(transcript);
         }
+      //  [Authorize(Roles = "student")]
         public IActionResult Requirements()
         {
             return View();
         }
+      //  [Authorize(Roles = "student")]
         public IActionResult Apply()
         {
 
             ViewData["programme"] = new SelectList(_context.Programs, "Id", "NameOfProgram");
             return View();
         }
-
-    // POST: transcripts/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      //  [Authorize(Roles = "student")]
+        // POST: transcripts/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Apply(Transcript transcript)

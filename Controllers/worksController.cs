@@ -117,7 +117,7 @@ namespace EDSU_SYSTEM.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_edit");
+            return PartialView("_edit", work);
         }
         // GET: works/Edit/5
         public async Task<IActionResult> Act(int? id)
@@ -134,10 +134,59 @@ namespace EDSU_SYSTEM.Controllers
             }
             return PartialView("_act",work);
         }
+        public async Task<IActionResult> Acknowledge(int? id)
+        {
+            if (id == null || _context.Works == null)
+            {
+                return NotFound();
+            }
+
+            var work = await _context.Works.FindAsync(id);
+            if (work == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_acknowledge",work);
+        }
 
         // POST: works/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Acknowledge(int id)
+        {
+            var work = await _context.Works.FindAsync(id);
+            try
+            {
+                var WorkToUpdate = await _context.Works
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+                if (await TryUpdateModelAsync<Work>(WorkToUpdate, "", c => c.Acknowledgment))
+                {
+                    try
+                    {
+                        work.UpdatedAt = DateTime.Now;
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+
+                        ModelState.AddModelError("", "Unable to save changes. " +
+                            "Try again, and if the problem persists, " +
+                            "see your system administrator.");
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+
+            }
+            return View();
+
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)

@@ -271,7 +271,6 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\staticw
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\Views\Shared\_Footer.cshtml.rz.scp.css
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
-C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\Views\Shared\_Nav - Copy.cshtml.rz.scp.css
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\Views\Shared\_Nav.cshtml.rz.scp.css
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\Views\Shared\_Programs.cshtml.rz.scp.css
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Debug\net6.0\scopedcss\bundle\EDSU-SYSTEM.styles.css
@@ -432,7 +431,6 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\Sy
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Data.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.Contracts.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.Debug.dll
-C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.DiagnosticSource.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.EventLog.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.FileVersionInfo.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Diagnostics.Process.dll
@@ -537,8 +535,6 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\Sy
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.Encoding.CodePages.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.Encoding.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.Encoding.Extensions.dll
-C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.Encodings.Web.dll
-C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.Json.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Text.RegularExpressions.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Threading.Channels.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\refs\System.Threading.dll
@@ -571,3 +567,11 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\Microso
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\CanvasApi.Client.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\RestClient.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\RestSharp.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\TiberHealth.Serializer.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

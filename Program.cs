@@ -70,6 +70,20 @@ public class Startup
             options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             options.IdleTimeout = TimeSpan.FromMinutes(30);
         });
+        //services.Configure<IdentityOptions>(options =>
+        //{
+        //    options.Password.RequireDigit = false;
+        //    options.Password.RequireLowercase = false;
+        //    options.Password.RequireUppercase = false;
+        //    options.Password.RequireNonAlphanumeric = false;
+        //    options.Password.RequiredLength = 6;
+        //});
+
+        //services.AddIdentity<ApplicationUser, IdentityRole>()
+        //        .AddEntityFrameworkStores<ApplicationDbContext>()
+        //        .AddDefaultTokenProviders();
+
+
         services.AddMvc();
     }
 }

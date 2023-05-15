@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using static EDSU_SYSTEM.Models.Enum;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -71,48 +72,69 @@ namespace EDSU_SYSTEM.Controllers
             //var records = _context.Results.Where
             return View(result);
         }
-        public async Task<List<Result>> ImportEXAM(string id, IFormFile file, Result result)
+        public class ExamRecordViewModel
         {
-            var session = (from s in _context.Sessions where s.IsActive == true select s.Id).FirstOrDefault();
-            var records = (from c in _context.Results where c.CourseId == id && c.SessionId == session select c).ToList();
-            var list = new List<Result>();
+            public string StudentId { get; set; }
+            public string CourseId { get; set; }
+            public double Score { get; set; }
+        }
+        public async Task<IActionResult> ImportEXAM(string id, IFormFile file)
+        {
+            // Read the Excel file into a byte array
+            byte[] fileBytes;
             using (var stream = new MemoryStream())
             {
                 await file.CopyToAsync(stream);
-                using (var package = new ExcelPackage(stream))
-                {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                    var rowcount = worksheet.Dimension.Rows;
-                    //The row is starting from 2 because the first row is the header
-                    for (int i = 2; i <= rowcount; i++)
-                    {
-                        var course = (from c in _context.Courses where c.Code == id select c).FirstOrDefault();
-                        try
-                        {
-                            var test = new Result
-                            {
-                                Exam = ((double)worksheet.Cells[i, 1].Value),
-                                CreatedAt = DateTime.Now,
-                                CourseId = course.Code,
-                            };
-                           // _context.Results.Add(test);
-                            _context.SaveChanges();
-                        }
-                        catch (Exception)
-                        {
-
-                            throw;
-                        }
-                       
-                    }
-                }
-
+                fileBytes = stream.ToArray();
             }
-            return list;
+
+            // Parse the Excel data into the ViewModel
+            var examRecords = new List<ExamRecordViewModel>();
+            using (var package = new ExcelPackage(new MemoryStream(fileBytes)))
+            {
+                var worksheet = package.Workbook.Worksheets[0];
+                var rowCount = worksheet.Dimension.Rows;
+                for (int row = 2; row <= rowCount; row++)
+                {
+                    var examRecord = new ExamRecordViewModel();
+                    examRecord.StudentId = worksheet.Cells[row, 1].Value?.ToString();
+                    examRecord.Score = ((double)worksheet.Cells[row, 2].Value);
+                    examRecords.Add(examRecord);
+                }
+            }
+
+            for (int i = 0; i < examRecords.Count; i++)
+            {
+                var examRecord = examRecords[i];
+                var existingResult = await _context.Results.FirstOrDefaultAsync(r => r.StudentId == examRecord.StudentId && r.CourseId == examRecord.CourseId);
+                if (existingResult != null)
+                {
+                    existingResult.Exam = examRecord.Score;
+                    // Update any other properties as needed
+                    _context.Results.Update(existingResult);
+                }
+                else
+                {
+                    var result = new Result
+                    {
+                        StudentId = examRecord.StudentId,
+                        CourseId = examRecord.CourseId,
+                        Exam = examRecord.Score
+                    };
+                    _context.Results.Add(result);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            // Redirect back to the view
+            return RedirectToAction(nameof(Index));
         }
-        // GET: results
+
+       
         public async Task<IActionResult> Index()
         {
+            ViewBag.err = TempData["err"];
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var id = loggedInUser.StaffId;
             var staff = (from c in _context.Staffs where c.Id == id select c.DepartmentId).FirstOrDefault();
@@ -124,17 +146,69 @@ namespace EDSU_SYSTEM.Controllers
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var id = loggedInUser.StaffId;
-            var staff = (from c in _context.Staffs where c.Id == id select c).FirstOrDefault();
-            var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l.LevelId).FirstOrDefault();
-            var courses = (from c in _context.CourseAllocations where c.LecturerId == staff.Id select c).Include(i => i.Courses).ThenInclude(i => i.Semesters);
-            return View(await courses.ToListAsync());
+            try
+            {
+                var staff = (from c in _context.Staffs where c.Id == id select c).FirstOrDefault();
+                var AdviserLevel = (from l in _context.LevelAdvisers where l.StaffId == id select l.LevelId).FirstOrDefault();
+                var courses = (from c in _context.CourseAllocations where c.LecturerId == staff.Id select c).Include(i => i.Courses).ThenInclude(i => i.Semesters);
+                return View(await courses.ToListAsync());
+            }
+            catch (Exception)
+            {
+                TempData["NoCourses"] = "Oops! It seems you do not have any courses.";
+                return RedirectToAction("Index", "staffs");
+                throw;
+            }
+            
         }
 
         // GET: results/Details/5
-        public async Task<IActionResult> Preview(int? id)
+        public async Task<IActionResult> Preview(string? id)
         {
+            try
+            {
+                var studentInfo = (from f in _context.Students where f.SchoolEmailAddress == id select f).Include(x => x.Programs).
+                Include(x => x.Departments).Include(x => x.Faculties).Include(x => x.Levels).FirstOrDefault();
+                ViewBag.parentName = studentInfo.ParentName;
+                ViewBag.name = studentInfo.Fullname;
+                ViewBag.matno = studentInfo.MatNumber;
+                ViewBag.program = studentInfo.Programs.NameOfProgram;
+                ViewBag.department = studentInfo.Departments.Name;
+                ViewBag.faculty = studentInfo.Faculties.Name;
+                ViewBag.level = studentInfo.Levels.Name;
 
-            return View();
+                // Getting Result
+
+                var result = _context.Results.Where(r => r.StudentId == studentInfo.MatNumber).ToList();
+                foreach (var item in result)
+                {
+                    var total = item.CA + item.Exam;
+                    //var grade = "";
+                    if (total >= 70)
+                    {
+                        ViewBag.grade = "A";
+                    }
+                    else if (total <= 69 || total >= 59)
+                    {
+                        ViewBag.grade = "B";
+                    }
+                    var course = _context.Courses.FirstOrDefault(x => x.Code == item.CourseId);
+                    ViewBag.courseId = course.Code;
+                    ViewBag.coursetitle = course.Title;
+                    ViewBag.courseUnit = course.CreditUnit;
+                    ViewBag.status = course.Status;
+                }
+                return View(result);
+            }
+            catch (Exception)
+            {
+                TempData["err"] = "A problem Occured, Kindly contact Admin";
+                return RedirectToAction(nameof(Index));
+                throw;
+            }
+
+            
+
         }
 
         // GET: results/Create
@@ -142,6 +216,7 @@ namespace EDSU_SYSTEM.Controllers
         {
             return View();
         }
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> Assessment()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);

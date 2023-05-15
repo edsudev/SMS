@@ -1,0 +1,66 @@
+﻿@model EDSU_SYSTEM.Models.OfflinePaymentClearance
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StudentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="row layout-top-spacing">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                    <div class="widget">
+                        <div class="widget-content widget-content-area p-3">
+                            <form asp-action="Offline">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Amount" class="control-label">Amount</label>
+                                    <input asp-for="Amount" class="form-control" />
+                                    <span asp-validation-for="Amount" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="OrderId" class="control-label">Transaction ID</label>
+                                    <input asp-for="OrderId" class="form-control" placeholder="BXT-00000000000" />
+                                    <span asp-validation-for="OrderId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Mode" class="control-label"></label>
+                                    <select asp-for="Mode" class="form-control basic">
+                                        <option>- SELECT -</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="POS">POS</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PaymentDate" class="control-label">Payment Date</label>
+                                    <input asp-for="PaymentDate" class="form-control" />
+                                    <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="SessionId" class="control-label">Session</label>
+                                    <select asp-for="SessionId" class="form-control basic" asp-items="ViewBag.SessionId">
+                                        <option>- SELECT -</option>
+                                    </select>
+                                    <span asp-validation-for="SessionId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ConversionStudent>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Matriculation No.</th>
+                                    <th>Email</th>
+
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>@item.Fullname</td>
+                                        <td>@item.MatNumber</td>
+                                        <td>@item.SchoolEmailAddress</td>
+
+                                        <td class="text-center">
+                                            @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Level Adviser"))
+                                        {*@
+                                            <a asp-action="pendingreg" asp-route-id="@item.SchoolEmailAddress" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="View Courses">
+                                                <div class="icon-container">
+                                                    <i data-feather="eye"></i>
+                                                </div>
+                                            </a>
+                                            @*}*@
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Matriculation No</th>
+                                    <th>Email</th>
+
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

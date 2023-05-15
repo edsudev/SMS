@@ -13,7 +13,7 @@ namespace EDSU_SYSTEM.Models
         //Response by works Dept
         public string? Response { get; set; }
         //By complainant
-        public string? Acknowledgment { get; set; }
+        public WorksStatusAcknowledgment? Acknowledgment { get; set; }
         public WorksStatus? Status { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }

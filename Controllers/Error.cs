@@ -26,6 +26,10 @@ namespace EDSU_SYSTEM.Controllers
         {
             return View();
         }
+        public ActionResult ServiceUnavailable()
+        {
+            return View();
+        }
 
         // GET: Error/Details/5
         public ActionResult Details(int id)

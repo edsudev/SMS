@@ -1,0 +1,46 @@
+﻿@model ConversionStudent
+@using static EDSU_SYSTEM.Models.Enum
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCourseware">Clear Student</h4>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="ClearApplicant">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <h6>Are you sure you want to clear this applicant?</h6>
+                    <h6>⚠️This applicant would be moved to the student list.</h6>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger" data-save="modal">Confirm</button>
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+                @*<form asp-action="ClearApplicant" enctype="multipart/form-data">
+                    <div>
+                        <label asp-for="Faculty" class="control-label">Faculty</label>
+                        <select asp-for="Faculty" class="form-control" asp-items="@(new SelectList(ViewBag.message2, "Id", "Name"))">
+                            <option value="null">Choose Faculty</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Religion" class="control-label"></label>
+                        <select asp-for="Religion" class="form-control" asp-items="Html.GetEnumSelectList<Religion>()">
+                            <option value="null">Choose Religion</option>
+                        </select> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary" data-save="modal">Clear Now</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+            
+                 </form>*@
+               
+            </div>
+            
+        </div>
+    </div>
+</div>

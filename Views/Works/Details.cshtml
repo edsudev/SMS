@@ -71,7 +71,7 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-@if (Model.Status == WorksStatus.Completed)
+@if (Model.Status == WorksStatus.Done)
 		{
 			<form style="display:inline;" method="post">
 				<input hidden name="Id" value="@Model.Id">

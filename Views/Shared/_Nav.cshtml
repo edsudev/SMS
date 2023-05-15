@@ -64,6 +64,7 @@
                     <a class="dropdown-item" asp-controller="admissions" asp-action="undergraduate">Undergraduate</a>
                     <a class="dropdown-item" asp-controller="pgadmissions" asp-action="postgraduate">Post Graduate</a>
                     <a class="dropdown-item" asp-controller="conversions" asp-action="conversion">Conversion</a>
+                    <a class="dropdown-item" asp-controller="order" asp-action="credit">Pay Fees</a>
                 </div>
             </div>
         </li>
@@ -120,6 +121,13 @@
                 </a>
             </div>
         </li>
+        @*<li class="nav-item">
+            <div class="dropdown nav-link ">
+                <a class="dropdown-toggle" asp-action="credit" asp-controller="order" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Payment
+                </a>
+            </div>
+        </li>*@
     </ul>
     <partial name="_LoginPartial" />
 </nav>

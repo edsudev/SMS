@@ -1,0 +1,73 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ParentWard>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-container" id="container">
+    <partial name="_ParentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <a class="btn btn-dark" asp-action="create">Add Parent</a>
+                    Parent/Guardian's Profile
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover non-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Mat Number
+                                    </th>
+                                    <th>
+                                        Department
+                                    </th>
+                                    <th>
+                                        Level
+                                    </th>
+                                   
+                                    
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.Fullname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.MatNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.Departments.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.Levels.Name)
+                                        </td>
+                                        
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="home" asp-route-id="@item.ParentId">Child/Ward</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

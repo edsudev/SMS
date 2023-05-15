@@ -1,103 +1,173 @@
 ﻿@model EDSU_SYSTEM.Models.Vacancy
-
 @{
     ViewData["Title"] = "Create";
 }
-<div class="container">
-<div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
-    <div class="statbox widget box box-shadow">
-        <div class="text-center">
-            <nav class="breadcrumb-two" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.Id">Personal Info.</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="Step2" asp-route-id="@Model.Id">Discipline</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.Id">Upload</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.Id">Summary</a></li>
-                </ol>
-            </nav>
-        </div>
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
+
+            <ul class="navbar-item theme-brand flex-row  text-center">
+                <li class="nav-item theme-logo">
+                    <a asp-action="index" asp-controller="home">
+
+                        <img src="~/logo.png" class="navbar-logo" alt="logo" />
+                    </a>
+                </li>
+                <li class="nav-item theme-text">
+                    <a asp-action="index" asp-controller="home"> EDO STATE UNIVERSITY UZAIRUE  </a>
+                </li>
+            </ul>
+
+        </header>
     </div>
-</div>
-@*SECTION*@
- <div class="admin-data-content layout-top-spacing">
-    <div class="row layout-top-spacing">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
-            <div class="widget-content-area br-4 p-3">
-                <div class="widget-one">
-                    <form class="needs-validation" novalidate  asp-action="Step2" enctype="multipart/form-data">
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="HighestQualification" class="control-label">Highest Qualification</label>
-                                <input asp-for="HighestQualification" class="form-control" placeholder="PhD, BSc, HND, etc..."/>
-                                <span asp-validation-for="HighestQualification" class="text-danger"></span>
-                                </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Vacancy Applicant</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+
+            <nav id="sidebar">
+                <div class="shadow-bottom"></div>
+
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <li class="menu">
+                        <a asp-action="step1" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Step 1</span>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="FieldOfStudy" class="control-label">Field Of Study</label>
-                                    <input asp-for="FieldOfStudy" class="form-control" />
-                                    <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
-                                </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step2" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                                <span>Step 2</span>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="AreaOfSpecialization" class="control-label">Area Of Specialization</label>
-                                    <input asp-for="AreaOfSpecialization" class="form-control" placeholder="Audit, Data Analysis"/>
-                                    <span asp-validation-for="AreaOfSpecialization" class="text-danger"></span>
-                                </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step3" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                                <span>Step 3</span>
                             </div>
+                        </a>
+                    </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one p-3">
+                            <form class="needs-validation" novalidate asp-action="Step2" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="HighestQualification" class="control-label">Highest Qualification</label>
+                                            <input asp-for="HighestQualification" class="form-control" placeholder="PhD, BSc, HND, etc..." />
+                                            <span asp-validation-for="HighestQualification" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="FieldOfStudy" class="control-label">Field Of Study</label>
+                                            <input asp-for="FieldOfStudy" class="form-control" />
+                                            <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="AreaOfSpecialization" class="control-label">Area Of Specialization</label>
+                                            <input asp-for="AreaOfSpecialization" class="form-control" placeholder="Audit, Data Analysis" />
+                                            <span asp-validation-for="AreaOfSpecialization" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label">
+                                                <label asp-for="WorkedInHigherInstuition" class="control-label">Have you worked in an Higer institution?</label>
+                                                <input class="form-check-input form-control" asp-for="WorkedInHigherInstuition" />
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="CurrentPlaceOfWork" class="control-label">Current Place Of Work</label>
+                                            <input asp-for="CurrentPlaceOfWork" class="form-control" />
+                                            <span asp-validation-for="CurrentPlaceOfWork" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="PositionAtCurrentPlaceOfWork" class="control-label">Position At Current Place Of Work</label>
+                                            <input asp-for="PositionAtCurrentPlaceOfWork" class="form-control" placeholder="Lecturer, System Analyst, Driver" />
+                                            <span asp-validation-for="PositionAtCurrentPlaceOfWork" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="YearsOfExperience" class="control-label">Years Of Experience</label>
+                                            <input asp-for="YearsOfExperience" class="form-control" />
+                                            <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button class="btn btn-primary mt-3" type="submit">Proceed</button>
+
+                            </form>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group form-check">
-                                    <label class="form-check-label">
-                                            <label asp-for="WorkedInHigherInstuition" class="control-label">Have you worked in an Higer institution?</label>
-                                            <input class="form-check-input form-control" asp-for="WorkedInHigherInstuition" />
-                                            
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="CurrentPlaceOfWork" class="control-label">Current Place Of Work</label>
-                                    <input asp-for="CurrentPlaceOfWork" class="form-control" />
-                                    <span asp-validation-for="CurrentPlaceOfWork" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="PositionAtCurrentPlaceOfWork" class="control-label">Position At Current Place Of Work</label>
-                                    <input asp-for="PositionAtCurrentPlaceOfWork" class="form-control" placeholder="Lecturer, System Analyst, Driver"/>
-                                    <span asp-validation-for="PositionAtCurrentPlaceOfWork" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="YearsOfExperience" class="control-label">Years Of Experience</label>
-                                    <input asp-for="YearsOfExperience" class="form-control" />
-                                    <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <button class="btn btn-primary mt-3" type="submit">Proceed</button>
-                            
-                    </form>
+                    </div>
                 </div>
+
             </div>
         </div>
-                
     </div>
-                                
+    <!--  END CONTENT AREA  -->
 </div>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<!-- END MAIN CONTAINER -->
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

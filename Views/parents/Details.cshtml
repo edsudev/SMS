@@ -1,60 +1,93 @@
 ﻿@model EDSU_SYSTEM.Models.Parent
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Performance";
 }
 
-<h1>Details</h1>
+<div class="main-container" id="container">
+    <partial name="_ParentDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                   
+                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-one">
+                            <h5 class="">@ViewBag.StudentName's Continous Assessment/Attendance</h5>
+                            @*********************************************************************@
+                            @*Scroll down to the buttom to see this chart's script*@
+                            @*********************************************************************@
+                            <div id="chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div>
-    <h4>Parent</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-    </dl>
+    </div>
+    <!--  END CONTENT AREA  -->
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<!-- END MAIN CONTAINER -->
+
+
+<script>
+    var options = {
+        chart: {
+            height: 350,
+            type: 'bar',
+            toolbar: {
+                show: true,
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        // colors: ['#888ea8', '#4361ee'],
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+            name: 'Test Score',
+            data: @Html.Raw(ViewBag.grade)
+                }, {
+            name: 'Attendance',
+            data: @Html.Raw(ViewBag.grade)
+                }],
+        xaxis: {
+            categories: @Html.Raw(ViewBag.courses)
+                },
+        yaxis: {
+            title: {
+                text: 'Percentage(%)'
+            },
+            min: 0,
+            max: 100
+        },
+        fill: {
+            opacity: 1
+
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + "%"
+                }
+            }
+        }
+    }
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+    console.log(@Html.Raw(ViewBag.grade))
+</script>
+

@@ -85,13 +85,39 @@ namespace EDSU_SYSTEM.Controllers
             var json2 = JsonConvert.SerializeObject(totalGradesList);
             Console.WriteLine(json2);
             ViewBag.Percentage = json2;
+
+
+            //Results not found!....
+            ViewBag.Results = TempData["NoCourses"];
             return View();
         }
         public async Task<IActionResult> AllStaffs()
         {
-            var applicationDbContext = _context.Staffs.Include(i => i.Positions);
+            var applicationDbContext = _context.Staffs.Include(i => i.Departments).Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
         }
+        //public async Task<IActionResult> Stats()
+        //{
+        //    var male = (from c in _context.Students where c.Sex == "Male" select c).ToList();
+        //    var female = (from c in _context.Students where c.Sex == "Female" select c).ToList();
+        //    ViewBag.MaleStudents = male.Count();
+        //    ViewBag.FemaleStudents = female.Count();
+
+        //    //Staffs
+        //    var maleStaffs = (from c in _context.Staffs where c.Sex == "Male" select c).ToList();
+        //    var femaleStaffs = (from c in _context.Staffs where c.Sex == "Female" select c).ToList();
+        //    ViewBag.MaleStaffs = maleStaffs.Count();
+        //    ViewBag.FemaleStaffs = femaleStaffs.Count();
+
+        //    var department = (from c in _context.Departments select c).ToList();
+        //    ViewBag.dpt = department;
+        //    foreach (var item in department)
+        //    {
+        //        var male1 = (from c in _context.Students where c.Department == item.Id select c).ToList();
+        //        ViewBag.DeptStudents = male1.Count();
+        //    }
+        //    return View();
+        //}
         public async Task<IActionResult> Stats()
         {
             var male = (from c in _context.Students where c.Sex == "Male" select c).ToList();
@@ -105,15 +131,18 @@ namespace EDSU_SYSTEM.Controllers
             ViewBag.MaleStaffs = maleStaffs.Count();
             ViewBag.FemaleStaffs = femaleStaffs.Count();
 
-            var department = (from c in _context.Departments select c).ToList();
-            ViewBag.dpt = department;
-            foreach (var item in department)
+            var departments = (from c in _context.Departments select c).ToList();
+            var deptStudentsCounts = new Dictionary<string, int>();
+            foreach (var dept in departments)
             {
-                var male1 = (from c in _context.Students where c.Department == item.Id select c).ToList();
-                ViewBag.DeptStudents = male1.Count();
+                var deptStudents = (from c in _context.Students where c.Department == dept.Id select c).ToList();
+                deptStudentsCounts[dept.Name] = deptStudents.Count();
             }
+            ViewBag.DeptStudentsCounts = deptStudentsCounts;
+
             return View();
         }
+
         // GET: students/Details/5
         public async Task<IActionResult> Profile()
         {
@@ -127,11 +156,12 @@ namespace EDSU_SYSTEM.Controllers
                 .Include(s => s.Nationalities)
                 .Include(s => s.States)
                 .FirstOrDefault();
+            
             return View(staff);
         }
        
         // GET: staffs/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Staffs == null)
             {
@@ -144,7 +174,7 @@ namespace EDSU_SYSTEM.Controllers
                 .Include(s => s.LGAs)
                 .Include(s => s.Nationalities)
                 .Include(s => s.States)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.SchoolEmail == id);
             if (staff == null)
             {
                 return NotFound();
@@ -152,7 +182,12 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(staff);
         }
-
+        // Staff Directory/Details
+        public IActionResult Directory(string id)
+        {
+            var staff = _context.Staffs.Include(x => x.Positions).FirstOrDefault(x => x.SchoolEmail == id);
+            return View(staff);
+        }
         // GET: staffs/Create
         public IActionResult Create()
         {
@@ -166,7 +201,7 @@ namespace EDSU_SYSTEM.Controllers
 
         // POST: staffs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see http:/sta/go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Position,FacultyId,DepartmentId,FirstName,LastName,OtherName,Email,SchoolEmail,DOB,Sex,NationalityId,StateId,LGAId,Phone,ContactAddress,HighestQualification,FieldOfStudy,AreaOfSpecialization,WorkedInHigherInstuition,CurrentPlaceOfWork,PositionAtCurrentPlaceOfWork,YearsOfExperience,CertUpload,CVUpload,Picture,CreatedAt,UpdatedAt,IsEmployed,EmployedBy,ORCID,ResearcherId,GoogleScholar,ResearchGate,Academia,LinkedIn,Mendeley,Scopus")] Staff staff)
@@ -186,7 +221,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: staffs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.Staffs == null)
             {
@@ -211,42 +246,13 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormFile picture, Staff staff)
+        public async Task<IActionResult> Edit(int id, Staff staff)
         {
             var applicants = await _context.Staffs.FindAsync(id);
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-            if (id != staff.Id)
-            {
-                return NotFound();
-            }
             try
             {
-                if (picture != null && picture.Length > 0)
-                {
-                    var uploadDir = @"files/vacancyUploads/passport";
-                    var fileName = Path.GetFileNameWithoutExtension(picture.FileName);
-                    var extension = Path.GetExtension(picture.FileName);
-                    var webRootPath = _hostingEnvironment.WebRootPath;
-                    fileName = staff.SchoolEmail + extension;
-
-                    //fileName = fileName + extension;
-                    var path = Path.Combine(webRootPath, uploadDir, fileName);
-                    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
-                    {
-                        picture.CopyTo(fs);
-                        staff.Picture = fileName;
-
-                    }
-                }
-                //var StaffToUpdate = await _context.Staffs
-                //.FirstOrDefaultAsync(c => c.Id == id);
-
                 if (await TryUpdateModelAsync<Staff>(applicants, "", 
-                    c => c.Picture, c => c.Name, c => c.DOB, c => c.Sex, 
+                    c => c.Picture, c => c.Surname, c => c.FirstName, c => c.MiddleName, c => c.DOB, c => c.Sex, 
                     c => c.Phone, c => c.Email, c => c.SchoolEmail,
                     c => c.ContactAddress, c => c.NationalityId, c => c.StateId, 
                     c => c.LGAId,c => c.Type, c => c.FacultyId, c => c.DepartmentId, 
@@ -272,7 +278,7 @@ namespace EDSU_SYSTEM.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction("profile", "staffs", new { id });
+                    return RedirectToAction("profile", "staffs");
                 }
             }
             catch (Exception ex)
@@ -281,8 +287,40 @@ namespace EDSU_SYSTEM.Controllers
                 ex.ToString();
                 return RedirectToAction("badreq", "error");
             }
-            return RedirectToAction("profile", "staffs", new { id });
+            return RedirectToAction("profile", "staffs");
 
+        }
+        public async Task<IActionResult> Upload(IFormFile passport, int id, Staff staff)
+        {
+            var staffData = await _context.Staffs.FindAsync(id);
+            if (passport != null && passport.Length > 0)
+            {
+                var uploadDir = @"files/vacancyUploads/passport";
+                var fileName = Path.GetFileNameWithoutExtension(passport.FileName);
+                var extension = Path.GetExtension(passport.FileName);
+                var webRootPath = _hostingEnvironment.WebRootPath;
+                fileName = staff.SchoolEmail + extension;
+
+                var path = Path.Combine(webRootPath, uploadDir, fileName);
+                using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                {
+                    passport.CopyTo(fs);
+                    staff.Picture = fileName;
+
+                }
+
+                try
+                {
+                    _context.Update(staff);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                    return RedirectToAction("badreq", "error");
+                }
+            }
+            return RedirectToAction(nameof(Profile));
         }
 
         // GET: staffs/Delete/5
@@ -405,7 +443,7 @@ namespace EDSU_SYSTEM.Controllers
                     var fileName = Path.GetFileNameWithoutExtension(passport.FileName);
                     var extension = Path.GetExtension(passport.FileName);
                     var webRootPath = _hostingEnvironment.WebRootPath;
-                    fileName = staff.Name + extension;
+                    fileName = staff.SchoolEmail + extension;
 
                     //fileName = fileName + extension;
                     var path = Path.Combine(webRootPath, uploadDir, fileName);

@@ -113,8 +113,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(maxLength: 256, nullable: false),
-                    RoleId = table.Column<string>(maxLength: 256, nullable: false)
+                    UserId = table.Column<string>(maxLength: 128, nullable: false),
+                    RoleId = table.Column<string>(maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,9 +137,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(maxLength: 256, nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 256, nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: false),
+                    UserId = table.Column<string>(maxLength: 64, nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 64, nullable: false),
+                    Name = table.Column<string>(maxLength: 64, nullable: false),
                     Value = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>

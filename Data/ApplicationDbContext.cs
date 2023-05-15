@@ -19,6 +19,12 @@ namespace EDSU_SYSTEM.Data
             modelBuilder.Entity<CourseRegistration>()
                 .HasIndex(c => new { c.StudentId, c.CourseId })
                 .IsUnique(true);
+            modelBuilder.Entity<ConversionCourseReg>()
+                .HasIndex(c => new { c.StudentId, c.CourseId })
+                .IsUnique(true);
+            modelBuilder.Entity<PgCourseReg>()
+                .HasIndex(c => new { c.StudentId, c.CourseId })
+                .IsUnique(true);
             //A student shouldn't evaluate one lecturer on one course twice
             modelBuilder.Entity<Evaluation>()
                 .HasIndex(c => new { c.StudentId, c.LecturerId, c.SessionId, c.CourseId })
@@ -29,6 +35,12 @@ namespace EDSU_SYSTEM.Data
                 .IsUnique(true);
             modelBuilder.Entity<Result>()
                 .HasIndex(c => new { c.StudentId, c.CourseId, c.SessionId })
+                .IsUnique(true); 
+            modelBuilder.Entity<BursaryClearedStudents>()
+                .HasIndex(c => new { c.StudentId, c.SessionId })
+                .IsUnique(true);
+            modelBuilder.Entity<ParentWard>()
+                .HasIndex(c => new { c.StudentId, c.ParentId })
                 .IsUnique(true);
             base.OnModelCreating(modelBuilder);
 
@@ -42,6 +54,7 @@ namespace EDSU_SYSTEM.Data
         public DbSet<EDSU_SYSTEM.Models.SsceSubjects>? SsceSubjects { get; set; }
         public DbSet<EDSU_SYSTEM.Models.SSCEGrade>? SSCEGrades { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Transcript>? Transcripts { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.TypeOfStaff>? Types { get; set; }
         public DbSet<EDSU_SYSTEM.Models.PgProgress>? PgProgresses { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Work>? Works { get; set; }
         public DbSet<EDSU_SYSTEM.Models.OerCourseware>? OerCoursewares { get; set; }
@@ -50,6 +63,7 @@ namespace EDSU_SYSTEM.Data
         public DbSet<EDSU_SYSTEM.Models.OerStudentProject>? OerStudentProjects { get; set; }
         public DbSet<EDSU_SYSTEM.Models.OerTextbook>? OerTextbooks { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Exeat>? Exeats { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.VacationExeat>? VacationExeats { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Student>? Students { get; set; }
         public DbSet<EDSU_SYSTEM.Models.Lga>? Lgas { get; set; }
         public DbSet<EDSU_SYSTEM.Models.States>? States { get; set; }
@@ -94,17 +108,31 @@ namespace EDSU_SYSTEM.Data
         public DbSet<EDSU_SYSTEM.Models.BursaryClearance>? BursaryClearances { get; set; }
         public DbSet<EDSU_SYSTEM.Models.BursaryClearedStudents>? BursaryClearedStudents { get; set; }
         public DbSet<EDSU_SYSTEM.Models.BursaryClearanceFresher>? BursaryClearancesFreshers { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.Parent> Parent { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.ParentWard> ParentWards { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.SubDepartment> SubDepartments { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.HostelPayment> HostelPayments { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.VacancyList> VacancyLists { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.LatestNews> LatestNews { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.NewsSubcriptionEmail> NewsSubcriptionEmails { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.Slider> Sliders { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.Magazine> Magazines { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.Event> Events { get; set; }
-        public DbSet<EDSU_SYSTEM.Models.Activities> Activities { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.Parent>? Parent { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ParentWard>? ParentWards { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.SubDepartment>? SubDepartments { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.HostelPayment>? HostelPayments { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.VacancyList>? VacancyLists { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.LatestNews>? LatestNews { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.NewsSubcriptionEmail>? NewsSubcriptionEmails { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.Slider>? Sliders { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.Magazine>? Magazines { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.Event>? Events { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.Activities>? Activities { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.AllFees>? AllFees { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.CreditWallet>? CreditWallets { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.OfflinePaymentClearance>? OfflinePaymentClearances { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionApplicant>? ConversionApplicants { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionResult>? ConversionResults { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionProjectProgress>? ConversionProjectProgresses { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionStudent>? ConversionStudents { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionMainWallet>? ConversionMainWallets { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionSubWallet>? ConversionSubWallets { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionStudentSupervisor>? ConversionStudentSupervisors { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionCourse>? ConversionCourses { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionCourseReg>? ConversionCourseRegs { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ConversionProgram>? ConversionPrograms { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.PgCourseReg>? PgCourseRegs { get; set; }
 
 
     }

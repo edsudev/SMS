@@ -4,7 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<div id="PlaceHolderHere"></div>
 <div class="main-container" id="container">
     <partial name="_StaffDashboardPartial" />
     <!--  BEGIN CONTENT AREA  -->
@@ -42,7 +41,7 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Supervisors.Lecturers.Name)
+                                            @Html.DisplayFor(modelItem => item.Supervisors.Lecturers.Surname + " " +item.Supervisors.Lecturers.FirstName )
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Students.Students.Fullname)

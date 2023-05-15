@@ -56,7 +56,7 @@ namespace EDSU_SYSTEM.Controllers
             {
                 return View();
             } 
-                return View();
+                //return View();
 
         }
         // GET: vacancies/Details/5
@@ -89,17 +89,19 @@ namespace EDSU_SYSTEM.Controllers
             return View(await applicationDbContext.ToListAsync());
             
         }
-        public IActionResult Academic_apply()
-        {
-           
-            return View();
-            
-        }
+        
         public async Task<IActionResult> NonAcademic()
         {
             var applicationDbContext = _context.VacancyLists
                 .Include(i => i.Units).Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
+        }
+        public IActionResult Academic_apply(string id)
+        {
+            ViewBag.err = TempData["err"];
+            var position = (from d in _context.Positions where d.Name == id select d.Id).FirstOrDefault();
+            TempData["position"] = position;
+            return View();
         }
         // POST: vacancies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -108,27 +110,34 @@ namespace EDSU_SYSTEM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Vacancy vacancy)
         {
-           
+            if (vacancy.Email == null || vacancy.Password == null)
+            {
+                TempData["err"] = "Make sure to fill all required fields";
+                return RedirectToAction(nameof(Academic_apply));
+            }
             Random r = new();
             var session = (from s in _context.Sessions where s.IsActive == true select s).ToList();
             foreach (var item in session)
             {
                 vacancy.ApplicantId = "EDSU-V-" + item.suffix + "-" + DateTime.Now.Millisecond;
             }
+            vacancy.Position = (int?)TempData["position"];
+            //vacancy.Type = VacancyType.Academic;
             _context.Add(vacancy);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-          
+            var id = vacancy.ApplicantId;
+            return RedirectToAction("step1", "vacancies", new { id });
+            
         }
 
-        public async Task<IActionResult> Step1(int? id)
+        public async Task<IActionResult> Step1(string? id)
         {
             if (id == null || _context.Vacancies == null)
             {
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancies.FindAsync(id);
+            var vacancy = await _context.Vacancies.FirstOrDefaultAsync(i => i.ApplicantId == id);
             if (vacancy == null)
             {
                 return NotFound();
@@ -140,15 +149,55 @@ namespace EDSU_SYSTEM.Controllers
             ViewData["StateId"] = new SelectList(_context.States, "Id", "Name", vacancy.StateId);
             return View(vacancy);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Step1(string id, int a)
+        {
+            var vacancy = await _context.Vacancies.FirstOrDefaultAsync(i => i.ApplicantId == id);
 
-        public async Task<IActionResult> Step2(int? id)
+            if (id == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var vacancyToUpdate = await _context.Vacancies
+                .FirstOrDefaultAsync(c => c.ApplicantId == id);
+
+                if (await TryUpdateModelAsync<Vacancy>(vacancyToUpdate, "", c => c.Type, c => c.LastName,
+                    c => c.FirstName, c => c.OtherName,
+                c => c.DOB, c => c.Sex, c => c.Phone,c => c.Email, c => c.ContactAddress, c => c.NationalityId,c => c.StateId, c => c.LGAId
+                ))
+                {
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+
+                        ModelState.AddModelError("", "Unable to save changes. " +
+                            "Try again, and if the problem persists, " +
+                            "see your system administrator.");
+                    }
+                    return RedirectToAction("Step2", "vacancies", new { id });
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+
+            }
+            return RedirectToAction("Step2", "vacancies", new { id });
+        }
+        public async Task<IActionResult> Step2(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancies.FindAsync(id);
+            var vacancy = await _context.Vacancies.FirstOrDefaultAsync(i => i.ApplicantId == id);
             if (vacancy == null)
             {
                 return NotFound();
@@ -158,9 +207,9 @@ namespace EDSU_SYSTEM.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Step2(int id)
+        public async Task<IActionResult> Step2(string? id, int a)
         {
-            var vacancy = await _context.Vacancies.FindAsync(id);
+            var vacancy = await _context.Vacancies.FirstOrDefaultAsync(i => i.ApplicantId == id);
 
             if (id == null)
             {
@@ -169,7 +218,7 @@ namespace EDSU_SYSTEM.Controllers
             try
             {
                 var vacancyToUpdate = await _context.Vacancies
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.ApplicantId == id);
 
                 if (await TryUpdateModelAsync<Vacancy>(vacancyToUpdate, "", c => c.HighestQualification, c => c.FieldOfStudy,
                     c => c.AreaOfSpecialization, c => c.WorkedInHigherInstuition,
@@ -186,7 +235,7 @@ namespace EDSU_SYSTEM.Controllers
                             "Try again, and if the problem persists, " +
                             "see your system administrator.");
                     }
-                    return RedirectToAction("Step3", "Applicants", new { id });
+                    return RedirectToAction("Step3", "vacancies", new { id });
                 }
             }
             catch (Exception ex)
@@ -194,17 +243,17 @@ namespace EDSU_SYSTEM.Controllers
                 ex.ToString();
 
             }
-            return View();
+            return RedirectToAction("Step3", "vacancies", new { id });
 
         }
-        public async Task<IActionResult> Step3(int id)
+        public async Task<IActionResult> Step3(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancies.FindAsync(id);
+            var vacancy = await _context.Vacancies.FirstOrDefaultAsync(i => i.ApplicantId == id);
             if (vacancy == null)
             {
                 return NotFound();
@@ -288,7 +337,7 @@ namespace EDSU_SYSTEM.Controllers
                             "Try again, and if the problem persists, " +
                             "see your system administrator.");
                     }
-                    return RedirectToAction("Step3", "Applicants", new { id });
+                    return RedirectToAction("Step3", "vacancies", new { id });
                 }
             }
             catch (Exception ex)
@@ -299,9 +348,9 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
-        public IActionResult Employ(int? id)
+        public IActionResult Employ(string? id)
         {
-            var applicants = _context.Staffs.Where(x => x.Id == id).FirstOrDefault();
+            var applicants = _context.Vacancies.Where(x => x.ApplicantId == id).FirstOrDefault();
 
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Name");
@@ -311,13 +360,27 @@ namespace EDSU_SYSTEM.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Employ(int id, Staff staff)
+        public async Task<IActionResult> Employ(string id, Staff staff, Vacancy vacancy)
         {
-            var applicant = await _context.Vacancies.FindAsync(id);
+            var applicant = await _context.Vacancies.FirstOrDefaultAsync(i=>i.ApplicantId == id);
 
-                staff.Name = applicant.LastName + applicant.FirstName;
+                staff.FirstName = applicant.LastName;
+            staff.Surname = applicant.FirstName;
+            staff.MiddleName = applicant.OtherName;
                 staff.SchoolEmail = applicant.LastName + "." + applicant.FirstName + "@edouniversity.edu.ng";
-                
+            staff.NationalityId = applicant.NationalityId;
+            staff.StateId = applicant.StateId;
+            staff.LGAId = applicant.LGAId;
+            //staff.DOB = applicant.DOB;
+           // staff.MaritalStatus = applicant.MaritalStatus;
+            staff.Email = applicant.Email;
+            staff.Phone = applicant.Phone;
+            staff.Picture = applicant.Picture;
+            staff.Sex = applicant.Sex;
+            staff.Religion = applicant.Religion;
+            staff.FacultyId = vacancy.FacultyId;
+            staff.DepartmentId = vacancy.DepartmentId;
+            staff.Position = vacancy.Position;
                 _context.Staffs.Add(staff);
                 await _context.SaveChangesAsync();
                 var user = new ApplicationUser

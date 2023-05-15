@@ -1,4 +1,4 @@
-﻿@model EDSU_SYSTEM.Models.Result
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Result>
 
 @{
     ViewData["Title"] = "Preview";
@@ -55,7 +55,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-6">
-                                                                <p><span class=" inv-subtitle">MR. & Mrs. Sanni</span></p>
+                                                                <p><span class=" inv-subtitle">Mr. & Mrs. @ViewBag.parentName</span></p>
                                                                 <p><span class=" inv-subtitle">Dear Sir/Ma.</span></p>
                                                                 <p><span class=" inv-subtitle">2021/2022 ACADEMIC SESSION RESULT</span></p>
                                                                 <p><span class="">I forward to you the result of courses taught and examinations 
@@ -77,12 +77,12 @@
                                                             </div>
 
                                                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-sm-4 col-6">
-                                                                <p><span class=" inv-subtitle">SANNI Abdulfatai Eneojoh</span></p>
-                                                                <p><span class=" inv-subtitle">FSC/CSC/01600219</span></p>
-                                                                <p><span class=" inv-subtitle">BSc Computer Science</span></p>
-                                                                <p><span class=" inv-subtitle">Computer Science</span></p>
-                                                                <p><span class=" inv-subtitle">Science </span></p>
-                                                                <p><span class=" inv-subtitle">400</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.name</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.matno</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.program</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.department</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.faculty </span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.level</span></p>
                                                             </div>
 
                                                         </div>
@@ -91,7 +91,7 @@
 
                                                     <div class="inv--product-table-section">
                                                         <div class="col-12">
-                                                            <p class="inv-to text-center">APPROVED REGISTERED COURSES</p>
+                                                            <p class="inv-to text-center">ACADEMIC SEMESTER RESULT</p>
                                                         </div>
                                                         <div class="table-responsive">
                                                             <table class="table">
@@ -100,21 +100,22 @@
                                                                         <th scope="col">COURSE CODE</th>
                                                                         <th scope="col">COURSE TITLE</th>
                                                                         <th scope="col">CREDIT</th>
+                                                                        <th scope="col">STATUS</th>
                                                                         <th scope="col">GRADE</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                   @* @foreach (var item in Model)
+                                                                    @foreach (var item in Model)
                                                                     {
                                                                         <tr>
-                                                                            <td>1</td>
-                                                                            <td class="">@item.Courses.Code</td>
-                                                                            <td class="">@item.Courses.Title</td>
-                                                                            <td class="">@item.Courses.CreditUnit</td>
-                                                                            <td class="">@item.Courses.Status</td>
-                                                                            <td class="">@item.Status</td>
+                                                                            @*<td>1</td>*@
+                                                                            <td class="">@ViewBag.courseId</td>
+                                                                            <td class="">@ViewBag.coursetitle</td>
+                                                                            <td class="">@ViewBag.courseUnit</td>
+                                                                            <td class="">@ViewBag.status</td>
+                                                                            <td class="">@ViewBag.grade</td>
                                                                         </tr>
-                                                                    }*@
+                                                                    }
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -139,7 +140,7 @@
 
                                                         <div class="row mt-4">
                                                             <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                                <p>POWERED BY: EDSU ICT TEAM.</p>
+                                                                <p>POWERED BY: EDSU ICT UNIT.</p>
                                                             </div>
                                                         </div>
 

@@ -23,7 +23,7 @@
                         <div class="text-center user-info">
 
                                 <img src="~/files/vacancyUploads/passport/@Model.Picture" alt="avatar" style="height:150px; width:150px" />
-                            <p class="">@Model.Name</p>
+                            <p class="">@Model.Surname</p>
                         </div>
                         <div class="user-info-list">
 
@@ -71,7 +71,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Nationalities.Name</p>
+                                    @*<p>@Model.Nationalities.Name</p>*@
+                                        @if (Model.Nationalities != null)
+                                        {
+                                            @Model.Nationalities.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
 
                                 </div>
                             </div>
@@ -82,7 +90,16 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.States.Name</p>
+                                    @if (Model.States != null)
+                                    {
+                                        @Model.States.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+
+                                    @*<p>@Model.States.Name</p>*@
 
                                 </div>
                             </div>
@@ -93,7 +110,16 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.LGAs.Name</p>
+                                    @if (Model.LGAs != null)
+                                    {
+                                        @Model.LGAs.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+
+                                    @*<p>@Model.LGAs.Name</p>*@
                                 </div>
                             </div>
 

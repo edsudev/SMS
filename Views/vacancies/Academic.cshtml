@@ -30,7 +30,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Departments.Name)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Departments.Faculties.Name)</td>
                                 <td class="">
-                                    <a asp-action="academic_apply" asp-controller="vacancies" class="btn btn-outline-primary">Apply</a>
+                                    <a asp-action="academic_apply" asp-controller="vacancies" asp-route-id="@item.Positions.Name" class="btn btn-outline-primary">Apply</a>
                                 </td>
                             </tr>
                         }

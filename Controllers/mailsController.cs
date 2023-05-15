@@ -117,15 +117,13 @@ namespace EDSU_SYSTEM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Mail mail)
         {
-            if (ModelState.IsValid)
-            {
+           
                 mail.From = (string?)TempData["email"]; 
                 mail.CreatedAt = DateTime.Now;
                 _context.Add(mail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(mail);
+           
         } 
         [HttpPost]
         [ValidateAntiForgeryToken]

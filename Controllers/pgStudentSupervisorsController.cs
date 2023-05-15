@@ -49,7 +49,7 @@ namespace EDSU_SYSTEM.Controllers
         // GET: pgStudentSupervisors/Create
         public IActionResult Create()
         {
-            ViewData["Supervisor"] = new SelectList(_context.Staffs, "Id", "Name");
+            ViewData["Supervisor"] = new SelectList(_context.Staffs, "Id", "SchoolEmail");
             ViewData["Student"] = new SelectList(_context.PostGraduateStudents, "Id", "Fullname");
             return View();
         }

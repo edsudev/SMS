@@ -1,0 +1,33 @@
+﻿@model ConversionCourseReg
+@using static EDSU_SYSTEM.Models.Enum
+<div class="modal fade" id="addCourseware">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCourseware">Reject Course</h5>
+                <button class="close" type="button" data-dismiss="modal"><span>X</span></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Reject">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="" hidden asp-for="Id" />
+                    <h6>You're about to reject this course</h6>
+                    <h6>Kindly drop a comment for the student to guide him/her</h6>
+                    <div class="form-group">
+                        <label asp-for="Comment" class="control-label"></label>
+                        <textarea asp-for="Comment" class="form-control"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-save="modal">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                     </div>
+                 </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+

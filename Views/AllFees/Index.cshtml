@@ -1,0 +1,143 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.AllFees>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <a asp-action="UsersMigrate" asp-controller="students" class="btn btn-primary">Migrate</a>
+                    <a asp-action="create" class="btn btn-dark mb-1">Create New</a>
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover non-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Departments)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Levels)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sessions)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tuition)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tuition2)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LMS)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EDHIS)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SRC)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Acceptance)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Medical)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Causion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sports)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ICT)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Library)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IdentityCard)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Registration)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Departments.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Levels.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sessions.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tuition)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tuition2)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LMS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EDHIS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SRC)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Acceptance)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Medical)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Causion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sports)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ICT)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Library)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdentityCard)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Registration)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+

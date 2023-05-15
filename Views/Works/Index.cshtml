@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<div id="PlaceHolderHere"></div>
 <div class="main-container" id="container">
     <partial name="_StaffDashboardPartial" />
     <!--  BEGIN CONTENT AREA  -->
@@ -29,6 +29,9 @@
                                         @Html.DisplayNameFor(model => model.Status)
                                     </th>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.Acknowledgment)
+                                    </th>
+                                    <th>
                                         Request Date
                                     </th>
                                    
@@ -46,7 +49,7 @@
                                             @Html.DisplayFor(modelItem => item.Complain)
                                         </td>
                                         <td>
-                                            @if (item.Status == WorksStatus.Completed)
+                                            @if (item.Status == WorksStatus.Done)
                                             {
                                                 <span class="text-right badge badge-success">Completed</span>
                                             }
@@ -57,6 +60,20 @@
                                             else
                                             {
                                                 <span class="badge badge-danger"> Pending </span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.Acknowledgment == WorksStatusAcknowledgment.Satisfied)
+                                            {
+                                                <span class="text-right badge badge-success">Satisfied</span>
+                                            }
+                                            else if (item.Acknowledgment == WorksStatusAcknowledgment.Not_Satisfied)
+                                            {
+                                                <span class="badge badge-danger"> Not Satisfied </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning"> NULL </span>
                                             }
                                         </td>
                                         <td>
@@ -73,16 +90,17 @@
                                                 <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Delete" data-target="#addItem tooltip" data-url="@Url.Action($"Delete/{item.Id}")">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                                 </a>
-                                                <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Reject" data-url="@Url.Action($"Edit/{item.Id}")">
-                                                    Reject
-                                                </a>
                                                 
                                             }
                                             <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Act on complain" data-url="@Url.Action($"Act/{item.Id}")">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                             </a>
-                                            @*<a class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Act on request" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Edit/{item.Id}")">
-                                        </a>*@
+                                            @if (item.Status == WorksStatus.Done)
+                                            {
+                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Acknowledge" data-url="@Url.Action($"Acknowledge/{item.Id}")">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                </a>
+                                            }
                                         </td>
                                     </tr>
 

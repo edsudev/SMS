@@ -72,8 +72,16 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Nationalities.Name</p>
-                                    
+                                    @*<p>@Model.Nationalities.Name</p>*@
+                                    @if (Model.Nationalities != null)
+                                        {
+                                            @Model.Nationalities.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
                                 </div>
                             </div>
                             <div class="item-timeline">
@@ -83,7 +91,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.States.Name</p>
+                                    @if (Model.States != null)
+                                        {
+                                            @Model.States.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
                                     
                                 </div>
                             </div>
@@ -94,7 +110,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.LGAs.Name</p>
+                                    @if (Model.LGAs != null)
+                                        {
+                                            @Model.LGAs.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
                                 </div>
                             </div>
                             
@@ -118,7 +142,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Faculties.Name</p>
+                                    @if (Model.Faculties != null)
+                                        {
+                                            @Model.Faculties.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
 
                                 </div>
                             </div>
@@ -129,7 +161,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Departments.Name</p>
+                                    @if (Model.Departments != null)
+                                        {
+                                            @Model.Departments.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
 
                                 </div>
                             </div>
@@ -140,7 +180,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Levels.Name</p>
+                                    @if (Model.Levels != null)
+                                        {
+                                            @Model.Levels.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
                                 </div>
                             </div>
                             <div class="item-timeline">
@@ -150,7 +198,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Sessions.Name</p>
+                                    @if (Model.Sessions != null)
+                                        {
+                                            @Model.Sessions.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+
                                 </div>
                             </div>
                         </div>

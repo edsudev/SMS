@@ -1,0 +1,119 @@
+﻿@model EDSU_SYSTEM.Models.ConversionSubWallet
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ConversionSubWallet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicantId" class="control-label"></label>
+                <select asp-for="ApplicantId" class ="form-control" asp-items="ViewBag.ApplicantId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="WalletId" class="control-label"></label>
+                <input asp-for="WalletId" class="form-control" />
+                <span asp-validation-for="WalletId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pic" class="control-label"></label>
+                <input asp-for="Pic" class="form-control" />
+                <span asp-validation-for="Pic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegNo" class="control-label"></label>
+                <input asp-for="RegNo" class="form-control" />
+                <span asp-validation-for="RegNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditBalance" class="control-label"></label>
+                <input asp-for="CreditBalance" class="form-control" />
+                <span asp-validation-for="CreditBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Debit" class="control-label"></label>
+                <input asp-for="Debit" class="form-control" />
+                <span asp-validation-for="Debit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tuition" class="control-label"></label>
+                <input asp-for="Tuition" class="form-control" />
+                <span asp-validation-for="Tuition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FortyPercent" class="control-label"></label>
+                <input asp-for="FortyPercent" class="form-control" />
+                <span asp-validation-for="FortyPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SixtyPercent" class="control-label"></label>
+                <input asp-for="SixtyPercent" class="form-control" />
+                <span asp-validation-for="SixtyPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LMS" class="control-label"></label>
+                <input asp-for="LMS" class="form-control" />
+                <span asp-validation-for="LMS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcceptanceFee" class="control-label"></label>
+                <input asp-for="AcceptanceFee" class="form-control" />
+                <span asp-validation-for="AcceptanceFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SRC" class="control-label"></label>
+                <input asp-for="SRC" class="form-control" />
+                <span asp-validation-for="SRC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EDHIS" class="control-label"></label>
+                <input asp-for="EDHIS" class="form-control" />
+                <span asp-validation-for="EDHIS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SessionId" class="control-label"></label>
+                <select asp-for="SessionId" class ="form-control" asp-items="ViewBag.SessionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <select asp-for="Level" class ="form-control" asp-items="ViewBag.Level"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" class ="form-control" asp-items="ViewBag.Department"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

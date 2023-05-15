@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EDSU_SYSTEM.Data;
+using EDSU_SYSTEM.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EDSU_SYSTEM.Models;
-using EDSU_SYSTEM.Data;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net;
-using Microsoft.AspNetCore.Identity;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -26,6 +21,7 @@ namespace EDSU_SYSTEM.Controllers
             
         }
         // GET: wallets
+     //   [Authorize(Roles = "student")]
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -34,11 +30,13 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.UgMainWallets.Where(x => x.WalletId == student).FirstOrDefaultAsync();
             return View(await applicationDbContext);
         }
+        //[Authorize(Roles = "student")]
         public async Task<IActionResult> History(string id)
         {
             var applicationDbContext = (from f in _context.Payments where f.Wallets.WalletId == id select f).Include(i => i.Wallets).Include(i => i.Wallets.Levels).Include(i => i.Sessions);
             return View(await applicationDbContext.ToListAsync());
         }
+      //  [Authorize(Roles = "student")]
         public async Task<IActionResult> Debts()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -56,6 +54,108 @@ namespace EDSU_SYSTEM.Controllers
             return View(wallet);
 
         }
+        public async Task<IActionResult> Credit(string id)
+        {
+            TempData["Wallet"] = id;
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+            ViewBag.name = (from s in _context.Students where s.Id == userId select s.SchoolEmailAddress).FirstOrDefault();
+            return View();
+        }
+
+        // POST: order/Credit
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Credit(CreditWallet creditWallet, UgMainWallet ugMainWallet)
+        {
+            
+            Random r = new();
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StudentsId;
+             
+            creditWallet.Wallet = (string?)TempData["Wallet"];
+            //creditWallet.StudentId = userId;
+            creditWallet.Status = "Pending";
+            creditWallet.PaymentDate = DateTime.Now;
+            creditWallet.OrderId = "EDSU-" + r.Next(10000000) + DateTime.Now.Millisecond;
+            _context.Add(creditWallet);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("checkout","wallets", new {creditWallet.OrderId});
+        }
+        // GET: wallets/Checkout/5
+        public async Task<IActionResult> Checkout(string? orderid)
+        {
+            var paymentToGet = await _context.CreditWallets
+                .FirstOrDefaultAsync(x => x.OrderId == orderid);
+            if (orderid == null || _context.Payments == null)
+            {
+                return NotFound();
+            }
+            if (paymentToGet == null)
+            {
+                return NotFound();
+            }
+            return View(paymentToGet);
+        }
+
+        public async Task<IActionResult> UpdateWallet(string data)
+        {
+            try
+            {
+                //This updates the status of the credit payment that was just made to approved
+                var creditRow = (from c in _context.CreditWallets where c.OrderId == data select c).FirstOrDefault();
+                creditRow.Status = "Approved";
+
+                if (creditRow.Status == "Approved")
+                {
+                    //while this updates the credit column of the student wallet to the amount that was paid
+                    var WalletCredit = await _context.UgMainWallets.Where(d => d.UTME == creditRow.UTME).FirstOrDefaultAsync();
+                    WalletCredit.CreditBalance += creditRow.Amount;
+                }
+                await _context.SaveChangesAsync();
+                //Tempdata doesnt have the capability to accept objects or to serialize objects.
+                //As a result, you need to do this yourself
+                TempData["PaymentAmount"] = JsonConvert.SerializeObject(creditRow.Amount);
+                TempData["PaymentRef"] = creditRow.OrderId;
+                TempData["PaymentDate"] = creditRow.PaymentDate;
+                TempData["PaymentEmail"] = creditRow.Email;
+               // TempData["PaymentWalletId"] = creditRow.Wallets.WalletId;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        ///Payment Receipt
+        //public IActionResult Receipt()
+        //{
+        //    ViewBag.Amount = TempData["PaymentAmount"];
+        //    ViewBag.PaymentRef = TempData["PaymentRef"];
+        //    ViewBag.Date = TempData["PaymentDate"];
+        //    ViewBag.Email = TempData["PaymentEmail"];
+        //    ViewBag.WalletId = TempData["PaymentWalletId"];
+
+        //    return View();
+        //}
+
+
+        /// <summary>
+        /// /////////////////////////////////////////////////
+        /// 
+        /// 
+        /// 
+        /// Here Downwards is not being used!
+        /// But it was kept incase we decide to start doing individual payments instead of internal paymenst
+        /// 
+        /// 
+        /// 
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET: wallets/Create
         public IActionResult Create()
         {
@@ -78,25 +178,8 @@ namespace EDSU_SYSTEM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
-            return View(mainWallet);
-        }
 
-        // GET: wallets/Edit/5
-        public async Task<IActionResult> Checkout(string? paymentRef)
-        {
-            
-            var paymentToGet = await _context.Payments
-                .FirstOrDefaultAsync(x => x.Ref == paymentRef);
-            if (paymentRef == null || _context.Payments == null)
-            {
-                return NotFound();
-            }
-            if (paymentToGet == null)
-            {
-                return NotFound();
-            }
-            return View(paymentToGet);
+            return View(mainWallet);
         }
 
         // POST: wallets/Edit/5
@@ -131,7 +214,7 @@ namespace EDSU_SYSTEM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-           
+
             return View(mainWallet);
         }
 
@@ -168,7 +251,7 @@ namespace EDSU_SYSTEM.Controllers
             {
                 _context.UgSubWallets.Remove(subWallet);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -178,12 +261,12 @@ namespace EDSU_SYSTEM.Controllers
         }
         private bool MyWalletExists(int? id)
         {
-          return _context.UgSubWallets.Any(e => e.Id == id);
+            return _context.UgSubWallets.Any(e => e.Id == id);
         }
 
         //////////////////////////////////////////////////////////////
         ////////////////////TRANSACTION MODULES//////////////////////
-       
+
         //Initiating Acceptance payment
         public async Task<IActionResult> OptionAcceptance(string id, Payment payment, Student student)
         {
@@ -284,7 +367,7 @@ namespace EDSU_SYSTEM.Controllers
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
-           
+
             Random r = new();
             //Payment is created just before it returns the view
             ViewBag.Name = wallet.Name;
@@ -439,14 +522,14 @@ namespace EDSU_SYSTEM.Controllers
         public async Task<IActionResult> OptionHostel(string id, HostelPayment payment)
         {
             //Using Viewbag to display list of other fees and session from their respective tables table.
-            
+
             ViewData["Hostel"] = new SelectList(_context.Hostels, "Id", "Name");
-            
+
             var wallet = await _context.UgSubWallets
                 .FirstOrDefaultAsync(m => m.WalletId == id);
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StudentsId;
-            
+
             Random r = new();
             //Payment is created just before it returns the view
             ViewBag.Name = wallet.Name;
@@ -471,7 +554,7 @@ namespace EDSU_SYSTEM.Controllers
             try
             {
                 var PaymentToUpdate = await _context.HostelPayments.FirstOrDefaultAsync(i => i.Ref == Ref);
-                
+
                 if (await TryUpdateModelAsync<HostelPayment>(PaymentToUpdate, "", c => c.Email, c => c.HostelType))
                 {
                     try
@@ -502,9 +585,9 @@ namespace EDSU_SYSTEM.Controllers
         }
         public async Task<IActionResult> HostelCheckout(string Ref)
         {
-            
+
             var paymentToUpdate = _context.HostelPayments.Where(i => i.Ref == Ref).Include(i => i.HostelFees).FirstOrDefault();
-            
+
             if (Ref == null || _context.HostelPayments == null)
             {
                 return NotFound();
@@ -532,7 +615,7 @@ namespace EDSU_SYSTEM.Controllers
             payment.SessionId = wallet.SessionId;
             payment.WalletId = wallet.Id;
             payment.Status = "Pending";
-            payment.Ref = "EDSU-" + r.Next(10000000) +DateTime.Now.Millisecond;
+            payment.Ref = "EDSU-" + r.Next(10000000) + DateTime.Now.Millisecond;
             payment.PaymentDate = DateTime.Now;
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
@@ -551,7 +634,7 @@ namespace EDSU_SYSTEM.Controllers
             {
                 var PaymentToUpdate = await _context.Payments.FirstOrDefaultAsync(x => x.Ref == Ref);
                 //var OtherRef = Ref;
-                
+
                 if (await TryUpdateModelAsync<Payment>(PaymentToUpdate, "", c => c.Email, c => c.OtherFeesDesc))
                 {
                     try
@@ -594,7 +677,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(paymentToUpdate);
         }
-        
+
         //Proceed to payment Gateway
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -603,7 +686,7 @@ namespace EDSU_SYSTEM.Controllers
             try
             {
                 //var order = (from x in _context.Payments where x.Ref == Ref select x.Wallets.WalletId).FirstOrDefault();
-                
+
                 var PaymentToUpdate = await _context.Payments
                .FirstOrDefaultAsync(c => c.Ref == Ref);
                 var paymentRef = Ref;
@@ -636,21 +719,22 @@ namespace EDSU_SYSTEM.Controllers
         //This is for returning student as the wallet activation for fresh students is done in the applicant controller
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ActivateWallets(string id, UgSubWallet subWallet, Applicant applicant)
+        public async Task<IActionResult> ActivateWallets( UgSubWallet subWallet, Applicant applicant)
         {
 
             var session = (from s in _context.Sessions where s.IsActive == true select s).ToList();
+           
             //Since this module only activates wallet for freshers, regardless of the level
             //you're admitted to, you'd pay the amount the 100l are paying for that session
-            var TuitionFee = (from t in _context.Fees
+            var fee = (from t in _context.AllFees
                               where t.DepartmentId == applicant.AdmittedInto &&
                               t.Sessions.Id == applicant.YearOfAdmission
-                              select t.Level1).Sum();
+                              select t).FirstOrDefault();
 
-            subWallet.LMS = (decimal)15000.00;
-            subWallet.SRC = (decimal)2500.00;
+            subWallet.LMS = fee.LMS;
+            subWallet.SRC = fee.SRC;
 
-            subWallet.Tuition = TuitionFee;
+            subWallet.Tuition = fee.Tuition;
             if (applicant.ModeOfEntry == "Transfer")
             {
                 subWallet.Tuition2 = subWallet.Tuition;
@@ -757,13 +841,13 @@ namespace EDSU_SYSTEM.Controllers
 
                 throw;
             }
-            
+
 
         }
         //Updating the payment record and creating tempdata for receipt
         public async Task<IActionResult> UpdatePayment(string data, BursaryClearance bursaryClearance)
         {
-           
+
             var walletId = TempData["walletId"];
             //var paymentDescription = payments.Type;
 
@@ -805,7 +889,7 @@ namespace EDSU_SYSTEM.Controllers
                             wallet.FortyPercent = 0;
                         }
                         break;
-                     case "Tuition(60%)":
+                    case "Tuition(60%)":
                         if (payments.Status == "Approved")
                         {
                             var wallet = await _context.UgSubWallets.FirstOrDefaultAsync(i => i.WalletId == walletId);
@@ -834,7 +918,8 @@ namespace EDSU_SYSTEM.Controllers
                         }
                         break;
                     case "EDHIS":
-                        if (payments.Status == "Approved"){
+                        if (payments.Status == "Approved")
+                        {
                             var wallet = await _context.UgSubWallets.FirstOrDefaultAsync(i => i.WalletId == walletId);
                             var newDebit = wallet.Debit - wallet.EDHIS;
                             wallet.Debit = newDebit;
@@ -910,7 +995,7 @@ namespace EDSU_SYSTEM.Controllers
                 bursaryClearance.CreatedAt = DateTime.Now;
                 _context.BursaryClearances.Add(bursaryClearance);
                 await _context.SaveChangesAsync();
-               
+
 
                 TempData["PaymentSession"] = session.Name;
                 TempData["PaymentRef"] = payments.Ref;
@@ -961,9 +1046,9 @@ namespace EDSU_SYSTEM.Controllers
             TempData["PaymentDescription"] = payment.Type;
             TempData["PaymentWalletId"] = wlt.WalletId;
             return RedirectToAction("receipt", new { id });
-           //return View(payment);
+            //return View(payment);
         }
-       
+
         //Payment Receipt
         public IActionResult Receipt()
         {

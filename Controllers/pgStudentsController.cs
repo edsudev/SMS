@@ -25,6 +25,22 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.PostGraduateStudents;
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> Allstudents()
+        {
+            var applicationDbContext = _context.PostGraduateStudents.Include(c => c.Applicants).Include(c => c.Departments).Include(c => c.Faculties).Include(c => c.LGAs).Include(c => c.Levels).Include(c => c.Nationalities).Include(c => c.Sessions).Include(c => c.Staffs).Include(c => c.States).Include(c => c.YearOfAdmissions);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> Graduated()
+        {
+            var applicationDbContext = _context.PostGraduateStudents.Where(x => x.StudentStatus == 2).Include(c => c.Applicants).Include(c => c.Departments).Include(c => c.Faculties).Include(c => c.LGAs).Include(c => c.Levels).Include(c => c.Nationalities).Include(c => c.Sessions).Include(c => c.Staffs).Include(c => c.States).Include(c => c.YearOfAdmissions);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> Expelled()
+        {
+            var applicationDbContext = _context.PostGraduateStudents.Where(x => x.StudentStatus == 3).Include(c => c.Applicants).Include(c => c.Departments).Include(c => c.Faculties).Include(c => c.LGAs).Include(c => c.Levels).Include(c => c.Nationalities).Include(c => c.Sessions).Include(c => c.Staffs).Include(c => c.States).Include(c => c.YearOfAdmissions);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
 
         // GET: pgStudents/Details/5
         public async Task<IActionResult> Details(int? id)

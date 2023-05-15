@@ -48,7 +48,7 @@
                                             </td>
 
                                             <td>
-                                                <a asp-action="OptionAcceptance" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="acceptance" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
 
                                         </tr>
@@ -67,7 +67,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionTuitionTransfer" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="tuitiontransfer" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
 
                                         </tr>
@@ -84,7 +84,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionTuition" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="tuition" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
 
                                         </tr>
@@ -102,7 +102,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionTuition60" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="tuition60" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
 
                                         </tr>
@@ -120,7 +120,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionTuition40" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="tuition40" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
 
                                         </tr>
@@ -139,7 +139,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionLMS" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="lms" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
                                         </tr>
                                     }
@@ -156,7 +156,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionEDHIS" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                    <a asp-action="edhis" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
                                         </tr>
                                     }
@@ -173,7 +173,7 @@
                                                 <h6 class="">@item.Sessions.Name</h6>
                                             </td>
                                             <td>
-                                                <a asp-action="OptionSRC" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                    <a asp-action="src" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
                                             </td>
                                         </tr>
                                     }
@@ -184,7 +184,7 @@
                                         <td>Make your choice in the next page</td>
                                         <td>👉</td>
                                         <td>
-                                            <a asp-action="OptionHostel" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                                <a asp-action="hostel" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
 
                                         </td>
                                     </tr>
@@ -195,7 +195,7 @@
                                         <td>Pick other payment in the next page</td>
                                         <td>👉</td>
                                         <td>
-                                            <a asp-action="OptionOthers" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
+                                            <a asp-action="others" asp-controller="wallets" asp-route-id="@item.WalletId" class="btn btn-primary">Proceed</a>
 
                                         </td>
                                     </tr>

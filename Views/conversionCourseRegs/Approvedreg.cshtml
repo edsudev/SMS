@@ -1,0 +1,73 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ConversionCourseReg>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="html5-extension" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Course Code</th>
+                                    <th>Course Title</th>
+                                    <th>Credit</th>
+                                    <th>Semester</th>
+                                    <th>Date Registered</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Courses.Code</td>
+                                        <td>@item.Courses.Title</td>
+                                        <td>@item.Courses.CreditUnit</td>
+                                        <td>@item.Courses.Semesters.Name</td>
+                                        <td>@item.CreatedAt</td>
+                                        <td>@item.Status</td>
+                                        <td class="text-center">
+                                            @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Level Adviser"))
+                                            {*@
+                                                
+                                            
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                </a>
+                                            @* }*@
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Course Code</th>
+                                    <th>Course Title</th>
+                                    <th>Credit</th>
+                                    <th>Semester</th>
+                                    <th>Date Registered</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+

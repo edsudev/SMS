@@ -69,10 +69,23 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Max,Min,LevelId,SemesterId,DepartmentId,SessionId")] CreditUnit creditUnit)
+        public async Task<IActionResult> Create(CreditUnit creditUnit)
         {
-            if (ModelState.IsValid)
+            var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = loggedInUser.StaffId;
+            var staffdpt = _context.Staffs.Where(x => x.Id == userId).Select(x => x.DepartmentId).FirstOrDefault();
+            var Lastcredit = (from s in _context.CreditUnits
+                                 where s.LevelId == creditUnit.LevelId &&
+                                 s.DepartmentId == staffdpt && s.SessionId == creditUnit.SessionId
+                                 select s.Max).FirstOrDefault();
+            if (creditUnit.Max > 50 || ( creditUnit.Max + Lastcredit > 50))
             {
+                ViewBag.err = "There was an attempt to exceed the maximum credit unit for the session. For more info, contact the ICT.";
+                return View();
+            }
+            else
+            {
+                creditUnit.DepartmentId = staffdpt;
                 _context.Add(creditUnit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

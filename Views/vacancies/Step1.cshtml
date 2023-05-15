@@ -3,134 +3,207 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="container">
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
 
+            <ul class="navbar-item theme-brand flex-row  text-center">
+                <li class="nav-item theme-logo">
+                    <a asp-action="index" asp-controller="home">
 
-<div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
-    <div class="statbox widget box box-shadow">
-        <div class="text-center">
-            <nav class="breadcrumb-two" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a asp-action="Step1" asp-route-id="@Model.Id">Personal Info.</a></li>
-                    <li class="brea dcrumb-item" aria-current="page"><a asp-action="Step2" asp-route-id="@Model.Id">Discipline</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Step3" asp-route-id="@Model.Id">Upload</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.Id">Summary</a></li>
-                </ol>
-            </nav>
-        </div>
+                        <img src="~/logo.png" class="navbar-logo" alt="logo" />
+                    </a>
+                </li>
+                <li class="nav-item theme-text">
+                    <a asp-action="index" asp-controller="home"> EDO STATE UNIVERSITY UZAIRUE  </a>
+                </li>
+            </ul>
+
+        </header>
     </div>
-</div>
-@*SECTION*@
-<div class="admin-data-content layout-top-spacing">
-    <div class="row layout-top-spacing">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
-            <div class="widget-content-area br-4 p-3">
-                <div class="widget-one">
-                    <form class="needs-validation" novalidate asp-action="Create">
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="Type" class="control-label">Category</label>
-                                    <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<VacancyType>()">
-                                        <option value="">-- SELECT --</option>
-                                    </select>
-                                    <span asp-validation-for="Type" class="text-danger"></span>
-                                </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Vacancy Applicant</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+
+            <nav id="sidebar">
+                <div class="shadow-bottom"></div>
+
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <li class="menu">
+                        <a asp-action="step1" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Step 1</span>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="LastName" class="control-label">Last Name</label>
-                                    <input asp-for="LastName" class="form-control" />
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
-                                </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step2" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                                <span>Step 2</span>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="FirstName" class="control-label">First Name</label>
-                                    <input asp-for="FirstName" class="form-control" />
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                                </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step3" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                                <span>Step 3</span>
                             </div>
+                        </a>
+                    </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one p-3">
+                            <form class="needs-validation" novalidate asp-action="step1">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Type" class="control-label">Category</label>
+                                            <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<VacancyType>()">
+                                                <option value="">-- SELECT --</option>
+                                            </select>
+                                            <span asp-validation-for="Type" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="LastName" class="control-label">Last Name</label>
+                                            <input asp-for="LastName" class="form-control" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="FirstName" class="control-label">First Name</label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="OtherName" class="control-label">Other Name</label>
+                                            <input asp-for="OtherName" class="form-control" />
+                                            <span asp-validation-for="OtherName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" class="form-control" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="DOB" class="control-label"></label>
+                                            <input asp-for="DOB" class="form-control" />
+                                            <span asp-validation-for="DOB" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Sex" class="control-label"></label>
+                                            <select asp-for="Sex" class="form-control">
+                                                <option value="null">-- SELECT --</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Femlae</option>
+                                                <option value="Other">Other(s)</option>
+                                            </select>
+                                            <span asp-validation-for="Sex" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="Phone" class="control-label"></label>
+                                            <input asp-for="Phone" class="form-control" />
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="ContactAddress" class="control-label">Contact Address</label>
+                                            <input asp-for="ContactAddress" class="form-control" />
+                                            <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="NationalityId" class="control-label">Nationality</label>
+                                            <select asp-for="NationalityId" class="form-control basic" asp-items="ViewBag.NationalityId"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="StateId" class="control-label">State</label>
+                                            <select asp-for="StateId" class="form-control basic" asp-items="ViewBag.StateId"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label asp-for="LGAId" class="control-label">LGA</label>
+                                            <select asp-for="LGAId" class="form-control basic" asp-items="ViewBag.LGAId"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary mt-3" type="submit">Proceed</button>
+                            </form>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="OtherName" class="control-label">Other Name</label>
-                                    <input asp-for="OtherName" class="form-control" />
-                                    <span asp-validation-for="OtherName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="Email" class="control-label"></label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="DOB" class="control-label"></label>
-                                    <input asp-for="DOB" class="form-control" />
-                                    <span asp-validation-for="DOB" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="Sex" class="control-label"></label>
-                                    <select asp-for="Sex" class="form-control">
-                                        <option value="null">-- SELECT --</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Femlae</option>
-                                        <option value="Other">Other(s)</option>
-                                    </select>
-                                    <span asp-validation-for="Sex" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="Phone" class="control-label"></label>
-                                    <input asp-for="Phone" class="form-control" />
-                                    <span asp-validation-for="Phone" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="ContactAddress" class="control-label">Contact Address</label>
-                                    <input asp-for="ContactAddress" class="form-control" />
-                                    <span asp-validation-for="ContactAddress" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="NationalityId" class="control-label">Nationality</label>
-                                    <select asp-for="NationalityId" class="form-control" asp-items="ViewBag.NationalityId"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="StateId" class="control-label">State</label>
-                                    <select asp-for="StateId" class="form-control" asp-items="ViewBag.StateId"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="form-group">
-                                    <label asp-for="LGAId" class="control-label">LGA</label>
-                                    <select asp-for="LGAId" class="form-control" asp-items="ViewBag.LGAId"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary mt-3" type="submit">Proceed</button>
-                    </form>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+    <!--  END CONTENT AREA  -->
 </div>
-</div>
+<!-- END MAIN CONTAINER -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

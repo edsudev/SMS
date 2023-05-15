@@ -32,11 +32,16 @@
                                         <h4>Departmental Students</h4>
                                         <div class="d-flex b-skills">
                                             <div class="">
-                                                @foreach (var item in ViewBag.dpt)
+                                                @*@foreach (var item in ViewBag.dpt)
                                                 {
                                                 <h5>@item.Name : <span class="badge outline-badge-info">@ViewBag.DeptStudents</span></h5>
                                                
+                                                }*@
+                                                @foreach (var kvp in ViewBag.DeptStudentsCounts)
+                                                {
+                                                    <p>@kvp.Key: <span class="badge outline-badge-info">@kvp.Value</span></p>
                                                 }
+
                                             </div>
                                         </div>
 

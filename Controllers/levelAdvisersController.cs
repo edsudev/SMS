@@ -50,7 +50,7 @@ namespace EDSU_SYSTEM.Controllers
         public IActionResult Create()
         {
             ViewData["LevelId"] = new SelectList(_context.Levels, "Id", "Name");
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "Name");
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "SchoolEmail");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace EDSU_SYSTEM.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LevelId"] = new SelectList(_context.Levels, "Id", "Name", levelAdviser.LevelId);
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "Name", levelAdviser.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "SchoolEmail", levelAdviser.StaffId);
             return View(levelAdviser);
         }
 
@@ -86,7 +86,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
             ViewData["LevelId"] = new SelectList(_context.Levels, "Id", "Name", levelAdviser.LevelId);
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "Name", levelAdviser.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "SchoolEmail", levelAdviser.StaffId);
             return View(levelAdviser);
         }
 
@@ -123,7 +123,7 @@ namespace EDSU_SYSTEM.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LevelId"] = new SelectList(_context.Levels, "Id", "Name", levelAdviser.LevelId);
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "Name", levelAdviser.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "Id", "SchoolEmail", levelAdviser.StaffId);
             return View(levelAdviser);
         }
 

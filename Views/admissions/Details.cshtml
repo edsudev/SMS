@@ -27,9 +27,89 @@
                                     Othername: @Model.OtherName
                                 </div>
                                 <div class="col-md-3">
-                                    DOB: @Model.OtherName
+                                    DOB: @Model.DOB
                                 </div>
-                            </div><br />
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Sex: @Model.Sex
+                                </div>
+                                <div class="col-md-3">
+                                    Marital Status: @Model.MaritalStatus
+                                </div>
+                                <div class="col-md-3">
+                                    Place of Birth: @Model.PlaceOfBirth
+                                </div>
+                                <div class="col-md-3">
+                                    Address: @Model.ContactAddress
+                                </div>
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Home Address: @Model.PermanentHomeAddress
+                                </div>
+                                <div class="col-md-3">
+                                    Nationality:
+                                     @if (Model.Nationalities != null)
+                                    {
+                                        @Model.Nationalities.Name
+                                        
+                                    }
+                                    else
+                                    {
+                                         @("N/A")
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    State:
+                                     @if (Model.States != null)
+                                    {
+                                         @Model.States.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    LGA: @if (Model.LGAs != null)
+                                    {
+                                         @Model.LGAs.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+                                </div>
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Phone: @Model.PhoneNumber
+                                </div>
+                                <div class="col-md-3">
+                                    Alt. Phone: @Model.AltPhoneNumber
+                                </div>
+                                <div class="col-md-3">
+                                    Primary School: @Model.PrimarySchool
+                                </div>
+                                <div class="col-md-3">
+                                    Sec. School: @Model.SecondarySchool
+                                </div>
+                            </div><br /><hr/>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Mode Of Entry: @Model.ModeOfEntry
+                                </div>
+                                <div class="col-md-3">
+                                    Email: @Model.Email
+                                </div>
+                                <div class="col-md-3">
+                                    UTME: @Model.UTMENumber
+                                </div>
+                               @* <div class="col-md-3">
+                                    DOB: @Model.OtherName
+                                </div>*@
+                            </div><br /><hr/>
 
                             <div class="row">
                                 <div class="col-md-2">
@@ -72,18 +152,19 @@
                                             <h6>Cleared</h6>
                                         }else
                                         {
-                                            <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Activate Wallet" data-url="@Url.Action($"ClearApplicant/{Model.ApplicantId}")">
+                                            <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Clear Applicant" data-url="@Url.Action($"ClearApplicant/{Model.ApplicantId}")">
                                                 Clearance
                                             </a>
                                         }
                                         
                                 </div>
-                                }
                                 <div class="col-md-2">
                                     <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Activate Wallet" data-url="@Url.Action($"ActivateWallet/{Model.ApplicantId}")">
-                                        Activate Wallet
+                                        Wallet
                                     </a>
                                 </div>
+                                }
+                                
                                 <div class="col-md-2">
                                     <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Reject Application" data-url="@Url.Action($"Reject/{Model.Id}")">
                                         Reject
@@ -99,6 +180,7 @@
                                         Delete
                                     </a>
                                 </div>
+
                                 <div class="col-md-2">
                                     <a class="btn btn-outline-primary" asp-action="index">
                                         Back to list

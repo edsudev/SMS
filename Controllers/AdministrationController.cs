@@ -97,52 +97,58 @@ namespace EDSU_SYSTEM.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> EditUserRole(string id)
+        public async Task<IActionResult> EditUsersInRole(string roleId)
         {
-            ViewBag.roleId = id;
-            var role = await roleManager.FindByIdAsync(id);
-            
+            ViewBag.roleId = roleId;
+
+            var role = await roleManager.FindByIdAsync(roleId);
+
             if (role == null)
             {
-                return View("Error");
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
             }
+
             var model = new List<UserRoleVM>();
 
             foreach (var user in userManager.Users)
             {
-                var userRoleVM = new UserRoleVM
+                var userRoleViewModel = new UserRoleVM
                 {
                     UserId = user.Id,
-                    UserName = user.UserName,
-                    IsSelected =true
-                    
+                    UserName = user.UserName
                 };
-                //if (await userManager.IsInRoleAsync(user, role.Name))
-                //{
-                //    userRoleVM.IsSelected = true;
-                //}
-                //else
-                //{
-                //    userRoleVM.IsSelected = false;
-                //}
-                model.Add(userRoleVM);
-            };
+
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRoleViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRoleViewModel.IsSelected = false;
+                }
+
+                model.Add(userRoleViewModel);
+            }
+
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditUserRole(List<UserRoleVM> model, string id)
+        public async Task<IActionResult> EditUsersInRole(List<UserRoleVM> model, string roleId)
         {
-            var role = await roleManager.FindByIdAsync(id);
+            var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
-                return View("Error");
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
             }
+
             for (int i = 0; i < model.Count; i++)
             {
                 var user = await userManager.FindByIdAsync(model[i].UserId);
 
-                IdentityResult result;
+                IdentityResult result = null;
 
                 if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                 {
@@ -156,18 +162,17 @@ namespace EDSU_SYSTEM.Controllers
                 {
                     continue;
                 }
+
                 if (result.Succeeded)
                 {
                     if (i < (model.Count - 1))
                         continue;
                     else
-                        return RedirectToAction("index", "administration");
-                   
-                };
-                
+                        return RedirectToAction("EditRole", new { Id = roleId });
+                }
             }
-            return RedirectToAction("Edit", new { Id = id });
-        }
 
+            return RedirectToAction("EditRole", new { Id = roleId });
+        }
     }
 }

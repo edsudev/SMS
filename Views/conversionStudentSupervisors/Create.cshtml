@@ -1,0 +1,51 @@
+﻿@model EDSU_SYSTEM.Models.ConversionStudentSupervisor
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6 p-3">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Student" class="control-label">Student</label>
+                                <select asp-for="Student" class="form-control basic" asp-items="ViewBag.Student"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Supervisor" class="control-label">Supervisor</label>
+                                <select asp-for="Supervisor" class="form-control basic" asp-items="ViewBag.Supervisor"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SupervisorRole" class="control-label">Supervisor Role</label>
+                                <select asp-for="SupervisorRole" class="form-control basic">
+                                    <option value="role">Role</option>
+                                    <option value="Chief">Chief Supervisor</option>
+                                    <option value="Co">Co. Supervisor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

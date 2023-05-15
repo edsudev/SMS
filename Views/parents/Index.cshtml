@@ -1,39 +1,42 @@
-﻿@model IEnumerable<EDSU_SYSTEM.Models.Parent>
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ParentWard>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="main-container" id="container">
-    <partial name="_StaffDashboardPartial" />
+    <partial name="_ParentDashboardPartial" />
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
             <div class="row layout-spacing">
+
                 <!-- Content -->
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
-                    <a class="btn btn-dark" asp-action="create">Add Child</a>
-                    Parent/Guardian's Profile
+                    <div>
+                        <p><span class="text-bold">Name:</span> @ViewBag.Name</p>
+                        <p><span class="font-bold">Email:</span>@ViewBag.Email</p>
+                        <p><span class="font-bold">Phone:</span>@ViewBag.Phone</p>
+                        <p><span class="font-bold">Address:</span>@ViewBag.Address</p>
+                    </div>
+                    List of Child/Ward(s)
                     <div class="widget-content widget-content-area br-6">
                         <table id="html5-extension" class="table table-hover non-hover">
                             <thead>
                                 <tr>
                                     <th>
-                                        Parent ID
+                                        Child Name
                                     </th>
                                     <th>
-                                        Full Name
+                                        Mat No
                                     </th>
                                     <th>
-                                        Email
+                                        Department
                                     </th>
                                     <th>
-                                        Phone
+                                        Level
                                     </th>
-                                    <th>
-                                       Address
-                                    </th>
-                                    
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -42,25 +45,20 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ParentId)
+                                            @Html.DisplayFor(modelItem => item.Students.Fullname)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Title)
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            @Html.DisplayFor(modelItem => item.Students.MatNumber)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
+                                            @Html.DisplayFor(modelItem => item.Students.Departments.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Phone)
+                                            @Html.DisplayFor(modelItem => item.Students.Levels.Name)
                                         </td>
+
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Address)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-action="ward" asp-route-id="@item.ParentId">Child/Ward</a>
+                                            <a asp-action="details" asp-route-id="@item.Students.SchoolEmailAddress" class="btn btn-primary">View</a>
                                         </td>
                                     </tr>
                                 }

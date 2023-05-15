@@ -1,9 +1,9 @@
 ﻿namespace EDSU_SYSTEM.Models
 {
-    public class AdmissionWalletVM
+    public class ConversionAdmissionWalletVM
     {
-        public UgMainWallet? MainWallet { get; set; }
-        public Applicant? Applicant { get; set; }
+        public ConversionMainWallet? MainWallet { get; set; }
+        public ConversionApplicant? Applicant { get; set; }
        
      }
 }

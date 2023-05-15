@@ -38,7 +38,12 @@ namespace EDSU_SYSTEM.Models
         {
             Pending,
             In_Progress,
-            Completed
+            Done
+        }
+        public enum WorksStatusAcknowledgment
+        {
+            Satisfied,
+            Not_Satisfied
         }
         public enum Status
         {

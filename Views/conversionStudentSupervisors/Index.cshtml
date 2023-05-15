@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ConversionStudentSupervisor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <a asp-action="create">Create</a>
+                    <div class="widget-content widget-content-area br-6">
+                        <h5 class="text-center">Project Students</h5>
+                        <table id="html5-extension" class="table table-hover non-hover" style="z-index: 1000">
+                            <thead>
+                                <tr>
+<th>
+                @Html.DisplayNameFor(model => model.Students)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lecturers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupervisorRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Students.Fullname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lecturers.Surname)
+                                            @Html.DisplayFor(modelItem => item.Lecturers.FirstName)
+                                            @Html.DisplayFor(modelItem => item.Lecturers.MiddleName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupervisorRole)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UpdatedAt)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

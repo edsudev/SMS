@@ -3,59 +3,69 @@
 @{
     ViewData["Title"] = "Index";
 }
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div class="admin-data-content layout-top-spacing">
-    <div class="row layout-top-spacing" id="cancel-row">
-        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-            <div class="widget-content widget-content-area br-6">
-                <table id="html5-extension" class="table table-hover non-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Program</th>
-                            <th>Student</th>
-                            <th>Supervisor</th>
-                            <th>Rank</th>
-                            
 
-                            <th class="dt-no-sorting">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Programs.NameOfProgram)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Students.Students.Fullname)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Supervisors.Supervisor)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Ranking)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
-                                
-                                <td class="text-center">
-                                    <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </a>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <h5 class="text-center">Project Students</h5>
+                        <table id="html5-extension" class="table table-hover non-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Program</th>
+                                    <th>Student</th>
+                                    <th>Supervisor</th>
+                                    <th>Rank</th>
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
-                                            <button class="dropdown-item" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Edit/{item.Id}")">
-                                                Edit
-                                            </button>
-                                            <button class="dropdown-item" type="button" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Documents/{item.Id}")">
-                                                Documents
-                                            </button>
 
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    <th class="dt-no-sorting">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Programs.NameOfProgram)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Students.Students.Fullname)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Supervisors.Supervisor)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Ranking)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+
+                                        <td class="text-center">
+                                            <div class="dropdown">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                                                    <button class="dropdown-item" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Edit/{item.Id}")">
+                                                        Edit
+                                                    </button>
+                                                    <button class="dropdown-item" type="button" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action($"Documents/{item.Id}")">
+                                                        Documents
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
+    <!--  END CONTENT AREA  -->
 </div>
+<!-- END MAIN CONTAINER -->

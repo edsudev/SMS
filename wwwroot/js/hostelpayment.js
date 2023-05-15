@@ -25,7 +25,7 @@ function payWithPaystack(e) {
                 // Make an AJAX call to your server with the reference to verify the transaction
                 $.ajax({
                     type: 'POST',
-                    url: '/wallets/HostelUpdate',
+                    url: '/order/HostelUpdate',
                     //contentType: 'application/json', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
                     data: { data: data },
                     success: function () {

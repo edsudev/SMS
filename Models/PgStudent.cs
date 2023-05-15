@@ -8,13 +8,13 @@ namespace EDSU_SYSTEM.Models
         public int? Id { get; set; }
         [ForeignKey("Applicants")]
         public int? ApplicantId { get; set; }
-        public Applicant? Applicants { get; set; }
+        public PgApplicant? Applicants { get; set; }
         public string? StudentId { get; set; }
         //Student info
         public string? Picture { get; set; }
         public string? Fullname { get; set; }
         public string? Sex { get; set; }
-        public DateTime? DOB { get; set; }
+        public string? DOB { get; set; }
         public Religion? Religion { get; set; }
         public string? Phone { get; set; }
         public string? AltPhoneNumber { get; set; }
@@ -37,9 +37,17 @@ namespace EDSU_SYSTEM.Models
         public string? NextOfKinRelationship { get; set; }
         public string? NextOfKinPhone { get; set; }
         public string? NextOfKinAddress { get; set; }
+        //Parent/guardian Info
+        public string? ParentName { get; set; }
+        public string? ParentOccupation { get; set; }
+        public string? ParentPhone { get; set; }
+        public string? ParentAltPhone { get; set; }
+        public string? ParentEmail { get; set; }
+        public string? ParentAddress { get; set; }
         //Academic Info
         public string? SchoolEmailAddress { get; set; }
         public string? MatNumber { get; set; }
+        public string? UTMENumber { get; set; }
         [ForeignKey("Faculties")]
         public int? Faculty { get; set; }
         public Faculty? Faculties { get; set; }
@@ -65,5 +73,10 @@ namespace EDSU_SYSTEM.Models
         public Staff? Staffs { get; set; }
         //This checks if the student is still our student
         public bool? IsStillAStudent { get; set; }
+        //Checks if you're still a student, graduated or rusticated
+        // 1 student
+        // 2 Graduate
+        // 3 Rusticated/Expelled
+        public int? StudentStatus { get; set; }
     }
 }

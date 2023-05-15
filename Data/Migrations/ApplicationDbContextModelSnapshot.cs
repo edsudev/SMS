@@ -16,7 +16,7 @@ namespace EDSU_SYSTEM.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Activities", b =>
@@ -99,6 +99,71 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.ToTable("AdmissionLetters");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.AllFees", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Acceptance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Causion")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("EDHIS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ICT")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("IdentityCard")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("LMS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Library")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Medical")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Registration")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("SRC")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Sports")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Tuition")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Tuition2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("LevelId");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("AllFees");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.Applicant", b =>
                 {
                     b.Property<int?>("Id")
@@ -132,8 +197,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("DirectEntryUpload")
                         .HasColumnType("longtext");
@@ -442,6 +507,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("ConversionStudent")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -498,6 +566,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConversionStudent");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -619,9 +689,832 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasIndex("SessionId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentId", "SessionId")
+                        .IsUnique();
 
                     b.ToTable("BursaryClearedStudents");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionApplicant", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdmittedInto")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AltPhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ApplicantId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ApplicantionId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BirthCertUpload")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("Cleared")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ContactAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CourseChoseInJamb")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DirectEntryUpload")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstChoice")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("Indigine")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("JambUpload")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("LGAId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LGAUpload")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("LevelAdmittedTo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MaritalStatus")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModeOfEntry")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("NationalityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NoOfSittings")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OtherName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentAlternatePhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentFullName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentOccupation")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentPhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PassportUpload")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PermanentHomeAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlaceOfBirth")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PreviousGrade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PreviousInstitution")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PreviousLevel")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PrimarySchool")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ProgrameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Screened")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("SecondChoice")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SecondarySchool")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Number")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject1")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject1Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject2")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject2Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject3")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject3Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject4")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject4Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject5")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject5Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject6")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject6Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject7")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject7Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject8")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject8Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject9")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Subject9Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Type")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce1Year")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce2Number")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce2Subject1")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject1Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject2")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject2Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject3")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject3Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject4")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject4Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject5")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject5Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject6")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject6Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject7")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject7Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject8")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject8Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Subject9")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Ssce2Subject9Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ssce2Type")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ssce2Year")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StateOfOriginId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ThirdChoice")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UTMENumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UTMESubject1")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("UTMESubject1Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UTMESubject2")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("UTMESubject2Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UTMESubject3")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("UTMESubject3Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UTMESubject4")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("UTMESubject4Score")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UTMETotal")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("YearOfAdmission")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdmittedInto");
+
+                    b.HasIndex("LGAId");
+
+                    b.HasIndex("LevelAdmittedTo");
+
+                    b.HasIndex("NationalityId");
+
+                    b.HasIndex("ProgrameId");
+
+                    b.HasIndex("StateOfOriginId");
+
+                    b.HasIndex("YearOfAdmission");
+
+                    b.ToTable("ConversionApplicants");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionCourse", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("CreditUnit")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProgrammeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Semester")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("Level");
+
+                    b.HasIndex("ProgrammeId");
+
+                    b.HasIndex("Semester");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("ConversionCourses");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionCourseReg", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseRegId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DateApproved")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId", "CourseId")
+                        .IsUnique();
+
+                    b.ToTable("ConversionCourseRegs");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionMainWallet", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("BulkDebitBalanace")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("CreditBalance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("WalletId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.ToTable("ConversionMainWallets");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionProgram", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Active")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NameOfProgram")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("ConversionPrograms");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionProjectProgress", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Program")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Ranking")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SupervisorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Program");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SupervisorId");
+
+                    b.ToTable("ConversionProjectProgresses");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionResult", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CA")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CourseId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Exam")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Total")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Upgrade")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConversionResults");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionStudent", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("AltPhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Cleared")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("ClearedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("CurrentSession")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Department")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("Faculty")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Fullname")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("IsStillAStudent")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("LGAId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MaritalStatus")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MatNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModeOfAdmission")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("NationalityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ParentAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentAltPhone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentOccupation")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentPhone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PermanentHomeAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlaceOfBirth")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ProgrameId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Religion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SchoolEmailAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StateOfOriginId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StudentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UTMENumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("YearOfAdmission")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.HasIndex("ClearedBy");
+
+                    b.HasIndex("CurrentSession");
+
+                    b.HasIndex("Department");
+
+                    b.HasIndex("Faculty");
+
+                    b.HasIndex("LGAId");
+
+                    b.HasIndex("Level");
+
+                    b.HasIndex("NationalityId");
+
+                    b.HasIndex("ProgrameId");
+
+                    b.HasIndex("StateOfOriginId");
+
+                    b.HasIndex("YearOfAdmission");
+
+                    b.ToTable("ConversionStudents");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionStudentSupervisor", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("Student")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Supervisor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SupervisorRole")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Student");
+
+                    b.HasIndex("Supervisor");
+
+                    b.ToTable("ConversionStudentSupervisors");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionSubWallet", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("AcceptanceFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("CreditBalance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal?>("Debit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Department")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("EDHIS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("FortyPercent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("LMS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Pic")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RegNo")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("SRC")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("SixtyPercent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal?>("Tuition")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("WalletId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.HasIndex("Department");
+
+                    b.HasIndex("Level");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("ConversionSubWallets");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Countries", b =>
@@ -665,6 +1558,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("Semester")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
@@ -682,6 +1578,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("Level");
 
                     b.HasIndex("Semester");
+
+                    b.HasIndex("SessionId");
 
                     b.ToTable("Courses");
                 });
@@ -797,6 +1695,38 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("SessionId");
 
                     b.ToTable("CreditUnits");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.CreditWallet", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UTME")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Wallet")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreditWallets");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Department", b =>
@@ -1127,6 +2057,9 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.Property<string>("Reason")
                         .HasColumnType("longtext");
+
+                    b.Property<bool?>("ReturnStatus")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -1786,6 +2719,45 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.ToTable("OerTextbooks");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.OfflinePaymentClearance", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Mode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("OfflinePaymentClearances");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.OtherFees", b =>
                 {
                     b.Property<int?>("Id")
@@ -1858,14 +2830,12 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("students")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.HasIndex("students");
+                    b.HasIndex("StudentId", "ParentId")
+                        .IsUnique();
 
                     b.ToTable("ParentWards");
                 });
@@ -1959,8 +2929,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("CurrentQualification")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
@@ -2255,6 +3225,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("Semester")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
@@ -2275,7 +3248,51 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasIndex("Semester");
 
+                    b.HasIndex("SessionId");
+
                     b.ToTable("PgCourses");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.PgCourseReg", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseRegId")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DateApproved")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId", "CourseId")
+                        .IsUnique();
+
+                    b.ToTable("PgCourseRegs");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.PgMainWallet", b =>
@@ -2446,8 +3463,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("CurrentSession")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("Department")
                         .HasColumnType("int");
@@ -2494,6 +3511,24 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("NextOfkinName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ParentAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentAltPhone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentOccupation")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentPhone")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("PermanentHomeAddress")
                         .HasColumnType("longtext");
 
@@ -2519,6 +3554,12 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StudentId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StudentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UTMENumber")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("YearOfAdmission")
@@ -2724,6 +3765,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
@@ -2812,6 +3856,12 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("AreaOfSpecialization")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BirthCert")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("CVUpload")
                         .HasColumnType("longtext");
 
@@ -2827,8 +3877,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("CurrentPlaceOfWork")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
@@ -2845,10 +3895,16 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("GoogleScholar")
                         .HasColumnType("longtext");
 
                     b.Property<string>("HighestQualification")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("HomeAddress")
                         .HasColumnType("longtext");
 
                     b.Property<bool?>("IsEmployed")
@@ -2866,7 +3922,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Mendeley")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("MiddleName")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("NationalityId")
@@ -2911,8 +3967,11 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Surname")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -2936,6 +3995,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("Position");
 
                     b.HasIndex("StateId");
+
+                    b.HasIndex("Type");
 
                     b.ToTable("Staffs");
                 });
@@ -2981,8 +4042,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<int?>("CurrentSession")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("DOB")
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("Department")
                         .HasColumnType("int");
@@ -3305,6 +4366,23 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.ToTable("Transcripts");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.TypeOfStaff", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("TypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Types");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.UgMainWallet", b =>
                 {
                     b.Property<int?>("Id")
@@ -3331,6 +4409,9 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.Property<bool?>("Status")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UTME")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("WalletId")
                         .HasColumnType("longtext");
@@ -3748,14 +4829,78 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.ToTable("VacancyLists");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.VacationExeat", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("AltParentPhone")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ChiefPortalStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("Dean")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DepartureDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Destination")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ExeatId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("GatePass")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Hall")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HallMasterStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MatNo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ParentPhone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Hall");
+
+                    b.ToTable("VacationExeats");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.Work", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Acknowledgment")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("Acknowledgment")
+                        .HasColumnType("int");
 
                     b.Property<string>("CC")
                         .HasColumnType("longtext");
@@ -3770,6 +4915,9 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Location")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MainStatus")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Response")
@@ -3936,6 +5084,27 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Faculties");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.AllFees", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("LevelId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("Levels");
+
+                    b.Navigation("Sessions");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.Applicant", b =>
                 {
                     b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
@@ -3983,6 +5152,10 @@ namespace EDSU_SYSTEM.Data.Migrations
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.ApplicationUser", b =>
                 {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionStudent", "ConversionStudents")
+                        .WithMany()
+                        .HasForeignKey("ConversionStudent");
+
                     b.HasOne("EDSU_SYSTEM.Models.Parent", "Parents")
                         .WithMany()
                         .HasForeignKey("Parent");
@@ -3998,6 +5171,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
                         .WithMany()
                         .HasForeignKey("StudentsId");
+
+                    b.Navigation("ConversionStudents");
 
                     b.Navigation("Parents");
 
@@ -4077,6 +5252,255 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Students");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionApplicant", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("AdmittedInto");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Lga", "LGAs")
+                        .WithMany()
+                        .HasForeignKey("LGAId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("LevelAdmittedTo");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Countries", "Nationalities")
+                        .WithMany()
+                        .HasForeignKey("NationalityId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.UgProgram", "Programs")
+                        .WithMany()
+                        .HasForeignKey("ProgrameId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.States", "States")
+                        .WithMany()
+                        .HasForeignKey("StateOfOriginId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "YearOfAdmissions")
+                        .WithMany()
+                        .HasForeignKey("YearOfAdmission");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("LGAs");
+
+                    b.Navigation("Levels");
+
+                    b.Navigation("Nationalities");
+
+                    b.Navigation("Programs");
+
+                    b.Navigation("States");
+
+                    b.Navigation("YearOfAdmissions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionCourse", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("Level");
+
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionProgram", "Programme")
+                        .WithMany()
+                        .HasForeignKey("ProgrammeId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Semester", "Semesters")
+                        .WithMany()
+                        .HasForeignKey("Semester");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("Levels");
+
+                    b.Navigation("Programme");
+
+                    b.Navigation("Semesters");
+
+                    b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionCourseReg", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionCourse", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionStudent", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionMainWallet", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionApplicant", "Applicants")
+                        .WithMany()
+                        .HasForeignKey("ApplicantId");
+
+                    b.Navigation("Applicants");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionProgram", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Departments");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionProjectProgress", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionProgram", "Programs")
+                        .WithMany()
+                        .HasForeignKey("Program");
+
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionStudentSupervisor", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionStudentSupervisor", "Supervisors")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId");
+
+                    b.Navigation("Programs");
+
+                    b.Navigation("Students");
+
+                    b.Navigation("Supervisors");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionStudent", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionApplicant", "Applicants")
+                        .WithMany()
+                        .HasForeignKey("ApplicantId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Staff", "Staffs")
+                        .WithMany()
+                        .HasForeignKey("ClearedBy");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("CurrentSession");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("Department");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Faculty", "Faculties")
+                        .WithMany()
+                        .HasForeignKey("Faculty");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Lga", "LGAs")
+                        .WithMany()
+                        .HasForeignKey("LGAId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("Level");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Countries", "Nationalities")
+                        .WithMany()
+                        .HasForeignKey("NationalityId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.UgProgram", "Programs")
+                        .WithMany()
+                        .HasForeignKey("ProgrameId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.States", "States")
+                        .WithMany()
+                        .HasForeignKey("StateOfOriginId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "YearOfAdmissions")
+                        .WithMany()
+                        .HasForeignKey("YearOfAdmission");
+
+                    b.Navigation("Applicants");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("Faculties");
+
+                    b.Navigation("LGAs");
+
+                    b.Navigation("Levels");
+
+                    b.Navigation("Nationalities");
+
+                    b.Navigation("Programs");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Staffs");
+
+                    b.Navigation("States");
+
+                    b.Navigation("YearOfAdmissions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionStudentSupervisor", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionStudent", "Students")
+                        .WithMany()
+                        .HasForeignKey("Student");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Staff", "Lecturers")
+                        .WithMany()
+                        .HasForeignKey("Supervisor");
+
+                    b.Navigation("Lecturers");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ConversionSubWallet", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.ConversionApplicant", "Applicants")
+                        .WithMany()
+                        .HasForeignKey("ApplicantId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("Department");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Level", "Levels")
+                        .WithMany()
+                        .HasForeignKey("Level");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Applicants");
+
+                    b.Navigation("Departments");
+
+                    b.Navigation("Levels");
+
+                    b.Navigation("Sessions");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.Course", b =>
                 {
                     b.HasOne("EDSU_SYSTEM.Models.Department", "Departments")
@@ -4091,11 +5515,17 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Semester");
 
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
                     b.Navigation("Departments");
 
                     b.Navigation("Levels");
 
                     b.Navigation("Semesters");
+
+                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.CourseAllocation", b =>
@@ -4476,6 +5906,21 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("EDSU_SYSTEM.Models.OfflinePaymentClearance", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("EDSU_SYSTEM.Models.OtherFees", b =>
                 {
                     b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
@@ -4493,7 +5938,7 @@ namespace EDSU_SYSTEM.Data.Migrations
 
                     b.HasOne("EDSU_SYSTEM.Models.Student", "Students")
                         .WithMany()
-                        .HasForeignKey("students");
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Parents");
 
@@ -4578,6 +6023,10 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Semester");
 
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
                     b.Navigation("Departments");
 
                     b.Navigation("Levels");
@@ -4585,11 +6034,34 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Programme");
 
                     b.Navigation("Semesters");
+
+                    b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.PgCourseReg", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.PgCourse", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.HasOne("EDSU_SYSTEM.Models.PgStudent", "Students")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.PgMainWallet", b =>
                 {
-                    b.HasOne("EDSU_SYSTEM.Models.Applicant", "Applicants")
+                    b.HasOne("EDSU_SYSTEM.Models.PgApplicant", "Applicants")
                         .WithMany()
                         .HasForeignKey("ApplicantId");
 
@@ -4628,7 +6100,7 @@ namespace EDSU_SYSTEM.Data.Migrations
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.PgStudent", b =>
                 {
-                    b.HasOne("EDSU_SYSTEM.Models.Applicant", "Applicants")
+                    b.HasOne("EDSU_SYSTEM.Models.PgApplicant", "Applicants")
                         .WithMany()
                         .HasForeignKey("ApplicantId");
 
@@ -4766,6 +6238,10 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("StateId");
 
+                    b.HasOne("EDSU_SYSTEM.Models.TypeOfStaff", "Types")
+                        .WithMany()
+                        .HasForeignKey("Type");
+
                     b.Navigation("Departments");
 
                     b.Navigation("Faculties");
@@ -4777,6 +6253,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Positions");
 
                     b.Navigation("States");
+
+                    b.Navigation("Types");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Student", b =>
@@ -5044,6 +6522,15 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Positions");
 
                     b.Navigation("Units");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.VacationExeat", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Hostel", "Hostels")
+                        .WithMany()
+                        .HasForeignKey("Hall");
+
+                    b.Navigation("Hostels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

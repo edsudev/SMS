@@ -348,4 +348,8 @@
         <!--  END CONTENT AREA  -->
     </div>
     <!-- END MAIN CONTAINER -->
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

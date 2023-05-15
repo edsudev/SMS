@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using static EDSU_SYSTEM.Models.Enum;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.AspNetCore.Authorization;
+
 namespace EDSU_SYSTEM.Controllers
 {
     public class CourseRegistrationsController : Controller
@@ -23,17 +25,29 @@ namespace EDSU_SYSTEM.Controllers
             _userManager = userManager;
             _context = context;
         }
-
+        //[Authorize(Roles = "student")]
         // GET: courseRegistrations
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
-            var userId = loggedInUser.StudentsId;
-            var courses = (from c in _context.CourseRegistrations where c.StudentId == userId select c).Include(c => c.Courses).ThenInclude(c => c.Semesters).Include(c => c.Students);
-            ViewData["student"] = userId;
+            var ugStudent = loggedInUser.StudentsId;
+            var conversionStudent = loggedInUser.ConversionStudent;
+            if (ugStudent != null)
+            {
+                var courses = (from c in _context.CourseRegistrations where c.StudentId == ugStudent select c).Include(c => c.Courses).ThenInclude(c => c.Semesters).Include(c => c.Students);
+                ViewData["student"] = ugStudent;
+                return View(await courses.ToListAsync());
+            }
+            else
+            {
+                var courses = (from c in _context.CourseRegistrations where c.StudentId == conversionStudent select c).Include(c => c.Courses).ThenInclude(c => c.Semesters).Include(c => c.Students);
+                ViewData["student"] = conversionStudent;
+                return View(await courses.ToListAsync());
+            }
             
-            return View(await courses.ToListAsync());
+            
         }
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> History()
         {
             
@@ -52,7 +66,11 @@ namespace EDSU_SYSTEM.Controllers
             var Levelstudents = new List<Student>();
             foreach (var item in AdviserLevel)
             {
-                var students = (from c in _context.Students where c.Department == staff && c.Level == item.LevelId select c).ToList();
+                var students = (from c in _context.Students where c
+                                .Department == staff && 
+                                c.Level == item.LevelId
+                                && _context.CourseRegistrations.Any(cr => cr.StudentId == c.Id && cr.Status == MainStatus.Pending)
+                                select c).ToList();
                 Levelstudents.AddRange(students);
             }
             return View(Levelstudents);
@@ -66,12 +84,14 @@ namespace EDSU_SYSTEM.Controllers
             var Levelstudents = new List<Student>();
             foreach (var item in AdviserLevel)
             {
-                var students = (from c in _context.Students where c.Department == staff && c.Level == item.LevelId select c).ToList();
+                var students = (from c in _context.Students where c.Department == staff && c.Level == item.LevelId  && 
+                                _context.CourseRegistrations.Any(cr => cr.StudentId == c.Id && cr.Status == MainStatus.Approved) select c).ToList();
                 Levelstudents.AddRange(students);
             }
             return View(Levelstudents);
 
         }
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> Summary(string id)
         {
             try
@@ -104,12 +124,6 @@ namespace EDSU_SYSTEM.Controllers
                 var TotalCredit = (from c in approvedCourses select c.Courses.CreditUnit).ToList();
                 ViewBag.sum = TotalCredit.Sum();
                 
-                //for (int i = 1; i <= approvedCourses; i++)
-                //{
-                //    ViewBag.SerialNumbers = i;
-                //    Console.Write(ViewBag.SerialNumbers);
-                //    //serialNumbers.Add(i);
-                //}
                 
                 if (approvedCourses.Count() == 0)
                 {
@@ -244,7 +258,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(courseRegistration);
         }
-
+      //  [Authorize(Roles = "student")]
         // GET: courseRegistrations/Create
         public async Task<IActionResult> First()
         {
@@ -283,6 +297,7 @@ namespace EDSU_SYSTEM.Controllers
             }
             
         }
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> Second()
         {
             try
@@ -337,7 +352,7 @@ namespace EDSU_SYSTEM.Controllers
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", courseRegistration.StudentId);
             return View(courseRegistration);
         }
-       
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> AddCourse(string id, CourseRegistration courseRegistration)
         {
             try
@@ -432,7 +447,7 @@ namespace EDSU_SYSTEM.Controllers
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", courseRegistration.StudentId);
             return View(courseRegistration);
         }
-
+     //   [Authorize(Roles = "student")]
         // GET: courseRegistrations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -452,7 +467,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return PartialView("_delete",courseRegistration);
         }
-
+     //   [Authorize(Roles = "student")]
         // POST: courseRegistrations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

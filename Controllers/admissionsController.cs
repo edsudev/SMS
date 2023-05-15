@@ -30,6 +30,26 @@ namespace EDSU_SYSTEM.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+        /// <summary>
+        /// ////////////////////////////////////
+        /// This is to create user profile the aspnet users table from the students table
+        /// To be deleted after migration
+        /// /////////////////////////////////////////
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+
+        
+
+
+
+
+
+
+
+
+
 
         // GET: admissions
         public async Task<IActionResult> Index()
@@ -43,6 +63,7 @@ namespace EDSU_SYSTEM.Controllers
         } 
         public async Task<IActionResult> Undergraduate()
         {
+            ViewBag.err = TempData["err"];
             return View();
          
         }
@@ -103,7 +124,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
 
-            var applicant = await _context.UgApplicants
+            var applicant = await _context.UgApplicants.Include(x => x.Nationalities).Include(x => x.States).Include(x => x.LGAs)
                 .FirstOrDefaultAsync(m => m.ApplicantId == id);
             if (applicant == null)
             {
@@ -127,13 +148,13 @@ namespace EDSU_SYSTEM.Controllers
         public async Task<IActionResult> Register(Applicant applicant, string pword, string cpword)
         {
 
-            if (pword != cpword)
+            if (pword != cpword || (pword == null))
             {
-                return View();
-                ModelState.AddModelError("", "Your error message goes here");
+                TempData["err"] = "Something went wrong, make sure you provide data as required!";
+                return RedirectToAction(nameof(Undergraduate));
             }
             applicant.Password = pword;
-            applicant.ApplicantId = Guid.NewGuid().ToString();
+            applicant.ApplicantId =Guid.NewGuid().ToString() + DateTime.Now.Millisecond;
             var id = applicant.ApplicantId;
             _context.Add(applicant);
             await _context.SaveChangesAsync();
@@ -704,31 +725,24 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("Index", "admissions");
 
         }
-        //public IActionResult ClearApplicant(string? id)
-        //{
-        //    var applicants = _context.Students.Where(x => x.StudentId == id).FirstOrDefault();
-        //    List<Faculty> f = new();
-        //    f = (from c in _context.Faculties select c).ToList();
-        //    ViewBag.message2 = f;
-
-        //    return PartialView("_clearancePartial", applicants);
-        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ClearApplicant(string? id, Student student)
         {
             //Get the person who performed this action
-                var loggedInUser = await userManager.GetUserAsync(HttpContext.User);
-                var userId = loggedInUser.StaffId;
+            //var loggedInUser = await userManager.GetUserAsync(HttpContext.User);
+            //var userId = loggedInUser.StaffId;
 
+            try
+            {
                 var applicant = await _context.UgApplicants.FirstOrDefaultAsync(x => x.ApplicantId == id);
                 //change the cleared status to true in the applicants table
                 applicant.Cleared = true;
-            var Session = (from T in _context.Sessions
-                           where T.IsActive == true
-                           where T.IsActive == true
-                           select T).ToList();
+                var Session = (from T in _context.Sessions
+                               where T.IsActive == true
+                               where T.IsActive == true
+                               select T).ToList();
                 var dept = (from g in _context.Departments where g.Id == applicant.AdmittedInto select g).ToList();
                 //Moving Applicant to student table
                 student.ApplicantId = applicant.Id;
@@ -752,6 +766,7 @@ namespace EDSU_SYSTEM.Controllers
                 student.ParentAltPhone = applicant.ParentAlternatePhoneNumber;
                 student.ParentEmail = applicant.ParentEmail;
                 student.ParentAddress = applicant.ParentAddress;
+                student.StudentStatus = 1;
                 foreach (var item in Session)
                 {
                     student.SchoolEmailAddress = applicant.Surname + item.suffix + "." + applicant.FirstName + "@edouniversity.edu.ng";
@@ -766,22 +781,29 @@ namespace EDSU_SYSTEM.Controllers
                 student.Level = applicant.LevelAdmittedTo;
                 student.ModeOfAdmission = applicant.ModeOfEntry;
                 student.Cleared = true;
-                student.ClearedBy = userId;
+                //student.ClearedBy = userId;
                 student.CreatedAt = DateTime.Now;
                 _context.Add(student);
                 await _context.SaveChangesAsync();
 
-            var user = new ApplicationUser
-            {
-                Email = student.SchoolEmailAddress,
-                UserName = student.SchoolEmailAddress,
-                StudentsId = student.Id,
-                Type = 1,
-                EmailConfirmed = true
-            };
-            var r = await userManager.CreateAsync(user, "Password@1");
+                var user = new ApplicationUser
+                {
+                    Email = student.SchoolEmailAddress,
+                    UserName = student.SchoolEmailAddress,
+                    StudentsId = student.Id,
+                    Type = 1,
+                    EmailConfirmed = true
+                };
+                var r = await userManager.CreateAsync(user, "Password@1");
 
-            return RedirectToAction("index", "admissions");
+                return RedirectToAction("index", "admissions");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+                
           
         }
 
@@ -800,23 +822,22 @@ namespace EDSU_SYSTEM.Controllers
 
             //Since this module only activates wallet for freshers, regardless of the level
             //you're admitted to, you'd pay the amount the 100l are paying for that session
-            var TuitionFee = (from t in _context.Fees
-                                where t.DepartmentId == applicant.AdmittedInto
-                                select t.Level1).Sum();
+            var fee = (from s in _context.AllFees where s.DepartmentId == applicant.AdmittedInto select s).FirstOrDefault();
+            var TuitionFee = fee.Tuition;
             myWallet.Name = applicant.Surname + " " + applicant.FirstName + " " + applicant.OtherName;
             myWallet.ApplicantId = applicant.Id;
             myWallet.Pic = applicant.PassportUpload;
             myWallet.RegNo = applicant.UTMENumber;
             myWallet.Level = applicant.LevelAdmittedTo;
             myWallet.Department = applicant.AdmittedInto;
-            myWallet.EDHIS = (decimal)20000.00;
-            myWallet.LMS = (decimal)25000.00;
-            myWallet.SRC = (decimal)2500.00;
-            myWallet.AcceptanceFee = (decimal)25000.00;
+            myWallet.EDHIS = fee.EDHIS;
+            myWallet.LMS = fee.LMS;
+            myWallet.SRC = fee.SRC;
+            myWallet.AcceptanceFee = fee.Acceptance;
             myWallet.Tuition = TuitionFee;
             //If applicant is a transfer student and if the he/she belongs to either MBBS, BNSc, Law.
             //The integer values below are the IDs of MBBS, BNSc and Law respectively in the Departments table.
-            if (applicant.ModeOfEntry == "Transfer" && (applicant.AdmittedInto == 5 || applicant.AdmittedInto == 6))
+            if (applicant.ModeOfEntry == "Transfer" && (applicant.AdmittedInto == 5 || applicant.AdmittedInto == 6 || applicant.AdmittedInto == 9))
             {
                 myWallet.Tuition2 = myWallet.Tuition;
             }
@@ -852,7 +873,7 @@ namespace EDSU_SYSTEM.Controllers
             await _context.SaveChangesAsync();
 
 
-            return RedirectToAction("wallet", "admissions", new {id});
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: admissions/Edit/5

@@ -18,13 +18,13 @@
                         <div class="widget-one p-3">
                             <div class="row">
                                 <div class="col-md-3">
-                                    Surname: @Model.Name
+                                    Surname: @Model.Surname
                                 </div>
                                 <div class="col-md-3">
-                                    FirstName: @Model.SchoolEmail
+                                    FirstName: @Model.FirstName
                                 </div>
                                 <div class="col-md-3">
-                                    Othername: @Model.Email
+                                    Othername: @Model.MiddleName
                                 </div>
                                 <div class="col-md-3">
                                     DOB: @Model.DOB
@@ -33,10 +33,26 @@
                             <hr/>
                             <div class="row">
                                 <div class="col-md-3">
-                                    Type: @Model.Type
+                                    Type:
+                                    @if (Model.Types != null)
+                                    {
+                                        @Model.Types.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
                                 </div>
                                 <div class="col-md-3">
-                                    Position: @Model.Position
+                                    Position: 
+                                    @if (Model.Positions != null)
+                                    {
+                                        @Model.Positions.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
                                 </div>
                                 <div class="col-md-3">
                                     Phone: @Model.Phone 
@@ -78,16 +94,16 @@
                             <hr />
                             <div class="row">
                                 <div class="col-md-3">
-                                    ORCID: @Model.Academia
+                                    Academia: @Model.Academia
                                 </div>
                                 <div class="col-md-3">
-                                   Researcher ID: @Model.LinkedIn
+                                   LinkedIn: @Model.LinkedIn
                                 </div>
                                 <div class="col-md-3">
-                                    Google Scholar: @Model.Mendeley 
+                                    Mendeley: @Model.Mendeley 
                                 </div>
                                 <div class="col-md-3">
-                                    Research Gate: @Model.Scopus
+                                   Scopus: @Model.Scopus
                                 </div>
                             </div>
                             <hr />
@@ -144,232 +160,3 @@
     <!--  END CONTENT AREA  -->
 </div>
 <!-- END MAIN CONTAINER -->
-
-
-<div>
-    <h4>Staff</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Position)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Position)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Faculties)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Faculties.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Departments)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Departments.Id)
-        </dd>
-       
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SchoolEmail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SchoolEmail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nationalities)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nationalities.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.States)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.States.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LGAs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LGAs.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HighestQualification)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HighestQualification)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FieldOfStudy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FieldOfStudy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreaOfSpecialization)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreaOfSpecialization)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkedInHigherInstuition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkedInHigherInstuition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CurrentPlaceOfWork)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CurrentPlaceOfWork)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PositionAtCurrentPlaceOfWork)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PositionAtCurrentPlaceOfWork)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearsOfExperience)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearsOfExperience)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CertUpload)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CertUpload)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CVUpload)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CVUpload)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsEmployed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsEmployed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmployedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmployedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ORCID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ORCID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ResearcherId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ResearcherId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GoogleScholar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GoogleScholar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ResearchGate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ResearchGate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Academia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Academia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinkedIn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LinkedIn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mendeley)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mendeley)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Scopus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Scopus)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

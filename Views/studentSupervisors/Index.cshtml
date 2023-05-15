@@ -45,7 +45,9 @@
                                             @Html.DisplayFor(modelItem => item.Students.Fullname)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Lecturers.Name)
+                                            @Html.DisplayFor(modelItem => item.Lecturers.Surname)
+                                            @Html.DisplayFor(modelItem => item.Lecturers.FirstName)
+                                            @Html.DisplayFor(modelItem => item.Lecturers.MiddleName)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.SupervisorRole)

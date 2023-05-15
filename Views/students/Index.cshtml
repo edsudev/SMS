@@ -30,7 +30,7 @@
                     <div class="widget-heading">
                         <div class="wallet-usr-info">
                             <div class="usr-name">
-                                <span> @Model.MainWallet.Applicants.Departments.Name</span>
+                                    <span> @ViewBag.Department</span>
                             </div>
                             <div class="add">
                                 <a asp-action="debts" asp-controller="wallets" asp-route-id="@Model.MainWallet.WalletId"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></a>
@@ -141,14 +141,12 @@
                                         <tr>
                                             <td>@item.Courses.Courses.Code</td>
                                             <td>@item.Courses.Courses.Title</td>
-                                            <td>@item.Staffs.Staff.Name</td>
+                                            <td>@item.Staffs.Staff.Surname</td>
                                             <td>@item.Venue</td>
                                             <td>@item.Day</td>
                                             <td>@item.Time</td>
                                         </tr>
                                     }
-                                   
-                                   
                                 </tbody>
                             </table>
                         </div>

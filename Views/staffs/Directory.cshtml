@@ -1,0 +1,151 @@
+﻿@model EDSU_SYSTEM.Models.Staff
+<partial name="_Nav" />
+<style>
+    #text-content {
+        max-height: 3em;
+        overflow: hidden;
+    }
+
+        #text-content.expanded {
+            max-height: none;
+            overflow: visible;
+        }
+</style>
+<section class="news">
+
+    <div class="heading">
+        <h1>Staff Directory</h1>
+    </div>
+    <div >
+        <div class="col-xl-12 col-lg-12 col-md-12 col-12 mx-auto layout-spacing">
+            <div class="widget-content-area br-4 p-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Surname:</span>  @Model.Surname
+                        </div>
+                        <div class="col-md-3">
+                            <span style="font-weight:bold">Firstname:</span> @Model.FirstName
+                        </div>
+                        <div class="col-md-3">
+                            <span style="font-weight:bold">Othername(s):</span> @Model.MiddleName
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Phone:</span> @Model.Phone
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Type:</span> 
+                        @if (Model.Types != null)
+                        {
+                            @Model.Types.Name
+                        }
+                        else
+                        {
+                            @("N/A")
+                        }
+                        </div>
+                        <div class="col-md-3">
+                            <span style="font-weight:bold">Position:</span>
+                        @if (Model.Positions != null)
+                        {
+                            @Model.Positions.Name
+                        }
+                        else
+                        {
+                            @("N/A")
+                        }
+                        </div>
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">Email:</span> @Model.Email
+                    </div>
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">EDSU-Email:</span> @Model.SchoolEmail
+                    </div>
+                        
+                    </div>
+                    <hr />
+                    <div class="row">
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">Department:</span>
+                        @if (Model.Departments != null)
+                        {
+                            @Model.Departments.Name
+                        }
+                        else
+                        {
+                            @("N/A")
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">Contact Address:</span> @Model.ContactAddress
+                    </div>
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">Contact Address:</span> @Model.ContactAddress
+                    </div>
+                    <div class="col-md-3">
+                        <span style="font-weight:bold">Contact Address:</span> @Model.ContactAddress
+                    </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Highest Degree:</span> @Model.HighestQualification
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Fied Of Study:</span> @Model.FieldOfStudy
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">AOS:</span> @Model.AreaOfSpecialization
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Current Place of Work:</span> @Model.CurrentPlaceOfWork
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">ORCID:</span> @Model.ORCID
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Research ID:</span> @Model.ResearcherId
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Google Scholar:</span> @Model.GoogleScholar
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">ResearchGate:</span> @Model.ResearchGate
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span style="font-weight:bold">Academia:</span> @Model.Academia
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">LinkedIn:</span> @Model.LinkedIn
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Mendeley:</span> @Model.Mendeley
+                        </div>
+                        <div class="col-md-3">
+                        <span style="font-weight:bold">Scopus:</span> @Model.Scopus
+                        </div>
+                    </div>
+                    <hr />
+                 
+                <hr />
+                        
+            </div>
+        </div>
+    </div>
+   
+    <!--  END CONTENT AREA  -->
+
+
+</section>
+
+<partial name="_Footer" />
+
+

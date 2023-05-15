@@ -1,0 +1,33 @@
+﻿@model Work
+@using static EDSU_SYSTEM.Models.Enum
+
+
+<div class="modal fade" id="addItem">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="fs2Basic">
+           
+             <div class="modal-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="modal"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <h6>The Work's Unit has completed your request.<br/>
+                Are you satisfied with the work done?    
+                </h6>
+                <form asp-action="Acknowledge">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Acknowledgment" class="control-label"></label>
+                        <select asp-for="Acknowledgment" class="form-control" asp-items="Html.GetEnumSelectList<WorksStatusAcknowledgment>()">
+                        </select>
+                        <span asp-validation-for="Acknowledgment" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-primary" data-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-success" data-save="modal">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

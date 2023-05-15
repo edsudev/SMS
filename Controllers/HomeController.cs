@@ -63,7 +63,8 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult Directories()
         {
-            return View();
+            var staffs = _context.Staffs.Include(x => x.Positions).Include(x => x.Departments).ToList();
+            return View(staffs);
         }
         
         public IActionResult Faqs()

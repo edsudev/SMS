@@ -29,6 +29,8 @@ namespace EDSU_SYSTEM.Models
         public MainStatus? HallMasterStatus { get; set; }
         public MainStatus? Dean { get; set; }
         public MainStatus? GatePass { get; set; }
+        //Checks when student is supposed to come back
+        public bool? ReturnStatus { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
 }

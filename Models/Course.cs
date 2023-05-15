@@ -20,6 +20,9 @@ namespace EDSU_SYSTEM.Models
         [ForeignKey("Semesters")]
         public int? Semester { get; set; }
         public Semester? Semesters { get; set; }
+        [ForeignKey("Sessions")]
+        public int? SessionId { get; set; }
+        public Session? Sessions { get; set; }
 
         public int? CreditUnit { get; set; }
         public CourseType? Status { get; set; }

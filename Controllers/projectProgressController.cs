@@ -9,6 +9,7 @@ using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -30,6 +31,7 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.UgProgresses.Include(u => u.Students).ThenInclude(u => u.Students).Include(u => u.Supervisors).ThenInclude(u => u.Lecturers);
             return View(applicationDbContext.ToList());
         }
+      //  [Authorize(Roles = "student")]
         public async Task<IActionResult> History()
         {
             var applicationDbContext = _context.UgProgresses.Include(u => u.Programs).Include(u => u.Students).Include(u => u.Supervisors);
@@ -58,18 +60,20 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: projectProgress/Create
+       // [Authorize(Roles = "student")]
         public async Task<IActionResult> Create()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var userId = loggedInUser.StudentsId;
-            var supervior = (from s in _context.UgStudentSupervisors where s.Student == userId select s.Lecturers.Name).ToList();
+            var supervior = (from s in _context.UgStudentSupervisors where s.Student == userId select s.Lecturers.Surname+s.Lecturers.FirstName).ToList();
             ViewData["SupervisorId"] = new SelectList(supervior);
             return View();
         }
 
         // POST: projectProgress/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      //  // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Authorize(Roles = "student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IFormFile uplaod, UgProgress ugProgress)

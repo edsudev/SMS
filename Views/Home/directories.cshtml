@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EDSU_SYSTEM.Models.LatestNews>
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Staff>
 <partial name="_Nav" />
 <style>
     #text-content{
@@ -14,15 +14,60 @@
 <section class="news">
 
     <div class="heading">
-        <h1>Staff Directories</h1>
+        <h1>Staff Directory</h1>
     </div>
+    <!-- Content -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto layout-top-spacing">
+        @*<h4 class="text-center">EDO STATE UNIVERSITY UZAIRUE, EDO STATE.</h4>*@
+        <div class="widget-content widget-content-area br-6">
+            <table id="html5-extension" class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Passport</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Department</th>
+                        <th>Position.</th>
 
+                        <th class="dt-no-sorting">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex">
+                                    <div class="usr-img-frame mr-2 rounded-circle">
+                                        <img alt="avatar" class="img-fluid rounded-circle" src="~/files/vacancyUploads/passport/@item.Picture">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @item.Surname.ToUpper()
+                                @*@Html.DisplayFor(modelItem => item.Surname)*@
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                                @Html.DisplayFor(modelItem => item.MiddleName)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.SchoolEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Departments.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Positions.Name)</td>
+                            <td>
+                                <a class="btn btn-outline-primary" asp-action="directory" asp-controller="staffs" asp-route-id="@item.SchoolEmail">View</a>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
     
 
 </section>
 
-
-<app-newsletter></app-newsletter>
 <partial name="_Footer"/>
 
 

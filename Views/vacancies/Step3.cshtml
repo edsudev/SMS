@@ -1,112 +1,184 @@
 ﻿@model EDSU_SYSTEM.Models.Vacancy
-
 @{
     ViewData["Title"] = "Create";
 }
-<div class="container">
-<div id="breadcrumbArrowed" class="col-xl-12 col-lg-12 layout-spacing">
-    <div class="statbox widget box box-shadow">
-        <div class="text-center">
-            <nav class="breadcrumb-two" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Step1" asp-route-id="@Model.Id">Personal Info.</a></li>
-                        <li class="breadcrumb-item" aria-current="page"><a asp-action="Step2" asp-route-id="@Model.Id">Discipline</a></li>
-                        <li class="breadcrumb-item active"><a asp-action="Step3" asp-route-id="@Model.Id">Upload</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Summary" asp-route-id="@Model.Id">Summary</a></li>
-                </ol>
-            </nav>
-        </div>
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
+
+            <ul class="navbar-item theme-brand flex-row  text-center">
+                <li class="nav-item theme-logo">
+                    <a asp-action="index" asp-controller="home">
+
+                        <img src="~/logo.png" class="navbar-logo" alt="logo" />
+                    </a>
+                </li>
+                <li class="nav-item theme-text">
+                    <a asp-action="index" asp-controller="home"> EDO STATE UNIVERSITY UZAIRUE  </a>
+                </li>
+            </ul>
+
+        </header>
     </div>
-</div>
-@*SECTION*@
- <div class="admin-data-content layout-top-spacing">
-    <div class="row layout-top-spacing">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
-            <div class="widget-content-area br-4 p-3">
-                <div class="widget-one">
-                        <h6 style="color:red">All files must be in PDF format and not more than 3mb in size.</h6>
-                    <div class="form-row">
-                        <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
-                            <div class="col-md-2 mt-2">
-                                @if (Model.Picture == "" || Model.Picture == null)
-                                {
-                                    <span class="text-danger">✕</span>
-                                }
-                                else
-                                {
-                                    <span class="text-success">✓</span>
-                                }
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label asp-for="Picture" class="control-label">Passport UPLOAD </label>
-                                    <input asp-for="Picture" type="file" class="form-control" name="pic" />
-                                    <span asp-validation-for="Picture" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary" type="submit">Upload</button>
-                            </div>
-                        </form>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Vacancy Applicant</span></li>
+                            </ol>
+                        </nav>
+
                     </div>
-                    <div class="form-row">
-                        <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
-                            <div class="col-md-2 mt-2">
-                                @if (Model.Picture == "" || Model.Picture == null)
-                                {
-                                    <span class="text-danger">✕</span>
-                                }
-                                else
-                                {
-                                    <span class="text-success">✓</span>
-                                }
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+
+            <nav id="sidebar">
+                <div class="shadow-bottom"></div>
+
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <li class="menu">
+                        <a asp-action="step1" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Step 1</span>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label asp-for="CertUpload" class="control-label">Certificate UPLOAD <i style="color:red">(All other credentials should be combined and submitted here)</i></label>
-                                    <input asp-for="CertUpload" type="file" class="form-control" name="cert" />
-                                    <span asp-validation-for="CertUpload" class="text-danger"></span>
-                                </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step2" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                                <span>Step 2</span>
                             </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary" type="submit">Upload</button>
+                        </a>
+                    </li>
+                    <li class="menu">
+                    <a asp-action="step3" asp-controller="vacancies" asp-route-id="@Model.ApplicantId" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                                <span>Step 3</span>
                             </div>
-                        </form>
-                    </div>
-                    <div class="form-row">
-                        <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
-                            <div class="col-md-2 mt-2">
-                                @if (Model.Picture == "" || Model.Picture == null)
-                                {
-                                    <span class="text-danger">✕</span>
-                                }
-                                else
-                                {
-                                    <span class="text-success">✓</span>
-                                }
+                        </a>
+                    </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one">
+                            <h6 style="color:red">All files must be in PDF format and not more than 3mb in size.</h6>
+                            <div class="form-row">
+                                <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
+                                    <div class="col-md-2 mt-2">
+                                        @if (Model.Picture == "" || Model.Picture == null)
+                                        {
+                                            <span class="text-danger">✕</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">✓</span>
+                                        }
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Picture" class="control-label">Passport UPLOAD </label>
+                                            <input asp-for="Picture" type="file" class="form-control" name="pic" />
+                                            <span asp-validation-for="Picture" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label asp-for="CVUpload" class="control-label">Curriculum Vitae UPLOAD</label>
-                                    <input asp-for="CVUpload" type="file" class="form-control" name="cv" />
-                                    <span asp-validation-for="CVUpload" class="text-danger"></span>
-                                </div>
+                            <div class="form-row">
+                                <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
+                                    <div class="col-md-2 mt-2">
+                                        @if (Model.Picture == "" || Model.Picture == null)
+                                        {
+                                            <span class="text-danger">✕</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">✓</span>
+                                        }
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="CertUpload" class="control-label">Certificate UPLOAD <i style="color:red">(All other credentials should be combined and submitted here)</i></label>
+                                            <input asp-for="CertUpload" type="file" class="form-control" name="cert" />
+                                            <span asp-validation-for="CertUpload" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary" type="submit">Upload</button>
+                            <div class="form-row">
+                                <form class="needs-validation col-md-6" novalidate asp-action="step3" enctype="multipart/form-data" method="post">
+                                    <div class="col-md-2 mt-2">
+                                        @if (Model.Picture == "" || Model.Picture == null)
+                                        {
+                                            <span class="text-danger">✕</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">✓</span>
+                                        }
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="CVUpload" class="control-label">Curriculum Vitae UPLOAD</label>
+                                            <input asp-for="CVUpload" type="file" class="form-control" name="cv" />
+                                            <span asp-validation-for="CVUpload" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> 
-    </div>                    
-</div>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

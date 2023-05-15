@@ -4,207 +4,157 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fullname)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fullname)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Religion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Religion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AltPhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AltPhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NationalityId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NationalityId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StateOfOriginId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StateOfOriginId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LGAId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LGAId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlaceOfBirth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlaceOfBirth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PermanentHomeAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PermanentHomeAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaritalStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaritalStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentOccupation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentOccupation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentAltPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentAltPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentEmail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentEmail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SchoolEmailAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SchoolEmailAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UTMENumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UTMENumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MatNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MatNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Faculty)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Faculty)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Level)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModeOfAdmission)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModeOfAdmission)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearOfAdmission)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearOfAdmission)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Department)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cleared)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cleared)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClearedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClearedBy)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-10 mx-auto layout-spacing">
+                    <div class="widget-content-area br-4 p-3">
+                        <div class="widget-one p-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Name:</span> @Model.Fullname
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Mat No:</span> @Model.MatNumber
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">UTME:</span> @Model.UTMENumber
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Department:</span> @if (Model.Departments != null)
+                                    {
+                                        @Model.Departments.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+                                </div>
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Sex:</span> @Model.Sex
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">DOB:</span> @Model.DOB
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Phone:</span> @Model.Phone
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Alt. Phone:</span> @Model.AltPhoneNumber
+                                </div>
+                            </div><br /><hr/>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Nationality:</span> @if (Model.Nationalities != null)
+                                        {
+                                            @Model.Nationalities.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">State:</span> @if (Model.States != null)
+                                        {
+                                            @Model.States.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">LGA:</span> @if (Model.LGAs != null)
+                                    {
+                                        @Model.LGAs.Name
+                                    }
+                                    else
+                                    {
+                                        @("N/A")
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Religion:</span> @Model.Religion
+                                </div>
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span style="font-weight:bold">Contact Address:</span> @Model.ContactAddress
+                                </div>
+                                <div class="col-md-4">
+                                    <span style="font-weight:bold">Home Address:</span> @Model.PermanentHomeAddress
+                                </div>
+                                <div class="col-md-4">
+                                    <span style="font-weight:bold">Place Of Birth:</span> @Model.PlaceOfBirth
+                                </div>
+                                
+                            </div><br /><hr />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Parent Name:</span> @Model.ParentName
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Parent Email:</span> @Model.ParentEmail
+                                </div>
+                                <div class="col-md-3">
+                                    <span style="font-weight:bold">Parent Phone:</span> @Model.Phone
+                                </div>
+                                <div class="col-md-3">
+                                   <span style="font-weight:bold">Parent Alt. Phone:</span> @Model.ParentAltPhone
+                                </div>
+                            </div><br /><hr />
+
+                            
+                            <div class="row">
+                               
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Print ID card" data-url="@Url.Action($"Reject/{Model.SchoolEmailAddress}")">
+                                        ID Card
+                                    </a>
+                                </div>
+                                @if (Model.StudentStatus == 1)
+                                {
+                                    <div class="col-md-2">
+                                        <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Graduate Student" data-url="@Url.Action($"Graduate/{Model.SchoolEmailAddress}")">
+                                            Graduate
+                                        </a>
+                                    </div>
+                                }else
+                                {
+                                    <div class="col-md-2">
+                                        <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Return to Student" data-url="@Url.Action($"Return/{Model.SchoolEmailAddress}")">
+                                            Return
+                                        </a>
+                                    </div>
+                                }
+                                
+                                
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary bs-tooltip" data-toggle="ajax-modal" data-placement="top" data-original-title="Rusticate Student" data-url="@Url.Action($"Delete/{Model.SchoolEmailAddress}")">
+                                        Rusticate
+                                    </a>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary" asp-action="index">
+                                        Back to list
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
 </div>

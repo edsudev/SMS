@@ -87,7 +87,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Code", courseAllocation.CourseId);
-            ViewData["LecturerId"] = new SelectList(_context.Staffs, "Id", "Name", courseAllocation.LecturerId);
+            ViewData["LecturerId"] = new SelectList(_context.Staffs, "Id", "SchoolEmail", courseAllocation.LecturerId);
             return View(courseAllocation);
         }
 

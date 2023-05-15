@@ -1,0 +1,80 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ConversionStudent>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-spacing">
+                <!-- Content -->
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto layout-top-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <h5 class="text-center">Edo State University Graduated Students' Biodata/Profile</h5>
+                        <table id="html5-extension" class="table table-hover non-hover" style="z-index: 1000">
+                            <thead>
+                                <tr>
+
+                                    <th>
+                                        Passport
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Mat. Num.
+                                    </th>
+                                    <th>
+                                        Department
+                                    </th>
+                                    <th>
+                                        Phone
+                                    </th>
+
+                                    <th>Level</th>
+                                    <th>Cleared</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="usr-img-frame mr-2">
+                                                    <img src="~/files/applicantuploads/passports/@item.Picture" alt="avatar" style="height:30px; width:30px" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Fullname)
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.MatNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Departments.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Levels.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Cleared)</td>
+
+                                        <td class="text-center">
+                                            <a asp-action="details" asp-route-id="@item.StudentId" class="btn btn-outline-primary">View</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->

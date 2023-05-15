@@ -1,0 +1,207 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.ConversionCourseReg>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<partial name="_CssLinks"/>
+<div class="admin-data-content layout-top-spacing">
+
+    <div class="row invoice layout-spacing">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 mx-auto">
+
+            <div class="doc-container">
+
+                <div class="row">
+
+                    <div class="col-xl-12">
+
+                        <div class="invoice-container">
+                            <div class="invoice-inbox">
+                                <div id="ct" class="">
+                                    <div class="invoice-00001">
+                                        <div class="content-section">
+                                            <div class="inv--head-section inv--detail-section">
+                                                <div class="d-flex">
+                                                    <div class=" mx-auto">
+                                                        <div class="d-flex">
+                                                            <img src="~/logo.png" style="width:100px; height:100px" class="mx-auto" alt="Logo" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mx-auto">
+                                                        <div class="">
+                                                            <h1 class="in-heading">EDO STATE UNIVERSITY UZAIRUE</h1><br/>
+                                                           <h4 class="text-center">Department of @ViewBag.dept</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="inv--detail-section inv--customer-detail-section">
+                                                
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">
+                                                        <p><span class=" inv-subtitle">@ViewBag.session SESSION</span></p>
+                                                    </div>
+
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-sm-4 col-6">
+                                                        <p><span class=" inv-subtitle">FIRST/SECOND SEMESTER</span></p>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-sm-4 col-6">
+                                                        <p><span class=" inv-subtitle">DATE: @DateTime.Now.ToLongDateString().ToUpper()</span></p>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="inv--detail-section inv--customer-detail-section">
+                                                
+                                                <div class="row">
+                                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">
+                                                        <p><span class=" inv-subtitle">Name:</span></p>
+                                                        <p><span class=" inv-subtitle">Email:</span></p>
+                                                        <p><span class=" inv-subtitle">Mat Number:</span></p>
+                                                        <p><span class=" inv-subtitle">Department:</span></p>
+                                                        <p><span class=" inv-subtitle">Programme: </span></p>
+                                                        <p><span class=" inv-subtitle">Level: </span></p>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-sm-4 col-6">
+                                                        <p><span class=" inv-subtitle">@ViewBag.name</span></p>
+                                                        <p><span class=" inv-subtitle">@ViewBag.email</span></p>
+                                                        <p><span class=" inv-subtitle">@ViewBag.mat</span></p>
+                                                        <p><span class=" inv-subtitle">@ViewBag.dept</span></p>
+                                                        <p><span class=" inv-subtitle">@ViewBag.program </span></p>
+                                                        <p><span class=" inv-subtitle">@ViewBag.level </span></p>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="inv--product-table-section">
+                                                <div class="col-12">
+                                                    <p class="inv-to text-center">APPROVED REGISTERED COURSES</p>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead class="">
+                                                            <tr>
+                                                                <th scope="col">S.No</th>
+                                                                <th scope="col">Course Code</th>
+                                                                <th scope="col">Title</th>
+                                                                <th scope="col">Credit Unit</th>
+                                                                <th scope="col">Course Status</th>
+                                                                <th scope="col">Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                             @foreach (var item in Model)
+                                                                {
+                                                                <tr>
+                                                                    <td>
+                                                                    
+                                                                        @ViewBag.SerialNumbers
+                                                                    
+                                                                    </td>
+                                                                    <td class="">@item.Courses.Code</td>
+                                                                    <td class="">@item.Courses.Title</td>
+                                                                    <td class="">@item.Courses.CreditUnit</td>
+                                                                    <td class="">@item.Courses.Status</td>
+                                                                    <td class="">@item.Status</td>
+                                                                </tr>
+                                                                }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="inv--total-amounts">
+
+                                                <div class="row mt-4">
+                                                    <div class="col-sm-5 col-12 order-sm-0 order-1">
+                                                    </div>
+                                                    <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                                        <div class="text-sm-right">
+                                                            <div class="row">
+                                                                <div class="col-sm-8 col-7">
+                                                                    <p class="">Min Credit Load: </p>
+                                                                </div>
+                                                                <div class="col-sm-4 col-5">
+                                                                    <p class="">@ViewBag.min</p>
+                                                                </div>
+                                                                <div class="col-sm-8 col-7">
+                                                                    <p class="">Max Credit Load: </p>
+                                                                </div>
+                                                                <div class="col-sm-4 col-5">
+                                                                    <p class="">@ViewBag.max</p>
+                                                                </div>
+                                                                <div class="col-sm-8 col-7 grand-total-title">
+                                                                    <h4 class="">Total Credit : </h4>
+                                                                </div>
+                                                                <div class="col-sm-4 col-5 grand-total-amount">
+                                                                    
+                                                                    <h4 class="">@ViewBag.sum</h4>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="inv--note">
+
+                                                <div class="row mt-4">
+                                                    <div class="col-sm-12 col-12 order-sm-0 order-1">
+                                                        <p>POWERED BY: EDSU ICT TEAM.</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-12">
+
+                        <div class="invoice-actions-btn">
+
+                            <div class="invoice-action-btn">
+
+                                <div class="row">
+                                    
+                                    <div class="col-xl-6 col-md-3 col-sm-6">
+                                        <a href="javascript:void(0);" class="btn btn-secondary btn-print  action-print">Print</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<partial name="_JsLinks" />

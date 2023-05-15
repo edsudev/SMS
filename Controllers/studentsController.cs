@@ -11,9 +11,12 @@ using System.Collections;
 using Microsoft.AspNetCore.Identity;
 using static EDSU_SYSTEM.Models.Enum;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using OfficeOpenXml.Style;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
+   
     public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,14 +28,126 @@ namespace EDSU_SYSTEM.Controllers
             _userManager = userManager;
             _context = context;
         }
+        /// <summary>
+        /// Endpoint to create wallet for already existing students
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        public async Task<IActionResult> UsersMigrate()
+        {
+            try
+            {
+                var staffs = (from s in _context.ConversionStudents select s).ToList();
+                foreach (var item in staffs)
+                {
+                    try
+                    {
+                        var user = new ApplicationUser
+                        {
+                            Email = item.SchoolEmailAddress,
+                            UserName = item.SchoolEmailAddress,
+                            StaffId = item.Id,
+                            Type = 4,
+                            EmailConfirmed = true
+                        };
+                        var r = await _userManager.CreateAsync(user, "EDSU"+item.SchoolEmailAddress);
+                    }
+                    catch (Exception)
+                    {
 
+                        throw;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+
+            return View();
+        }
+        public async Task<IActionResult> WalletMigrate(ConversionMainWallet mainWallet)
+        {
+            var students = (from s in _context.ConversionStudents select s).ToList();
+            foreach (var item in students)
+            {
+                try
+                {
+                    mainWallet.Id = item.Id;
+                    //mainWallet.UTME = item.UTMENumber;
+                    mainWallet.Name = item.Fullname;
+                    mainWallet.CreditBalance = 0;
+                    mainWallet.BulkDebitBalanace = 0;
+                    mainWallet.Status = true;
+                    mainWallet.WalletId = item.UTMENumber;
+                    mainWallet.DateCreated = DateTime.Now;
+                    _context.ConversionMainWallets.Add(mainWallet);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+
+            return View();
+        }
+        //For migrated Students
+        public async Task<IActionResult> ActivateWallet(string? id, UgSubWallet myWallet)
+        {
+            var students = (from s in _context.Students select s).ToList();
+            foreach (var item in students)
+            {
+                var session = await _context.Sessions.FirstOrDefaultAsync(s => s.IsActive == true);
+                myWallet.SessionId = session.Id;
+
+                myWallet.Name = item.Fullname;
+                myWallet.Pic = item.Picture;
+                myWallet.RegNo = item.UTMENumber;
+                myWallet.Level = item.Level ;
+                myWallet.Department = item.Department;
+                myWallet.CreditBalance = 0;
+                myWallet.WalletId = item.UTMENumber;
+                myWallet.DateCreated = DateTime.Now;
+                myWallet.Status = true;
+                _context.Add(myWallet);
+                await _context.SaveChangesAsync();
+                //////////////////////////////////
+
+                //FirstOrDefaultAsync works when the id coming in is not of type int.
+                //FindAsync works when the id coming in and the one being compared with is also int.
+
+                if (myWallet.WalletId == null)
+                {
+                    return NotFound();
+                }
+
+                var WalletToUpdate = await _context.UgMainWallets
+                .FirstOrDefaultAsync(c => c.WalletId == myWallet.WalletId);
+
+                WalletToUpdate.BulkDebitBalanace = myWallet.Debit;
+                WalletToUpdate.Status = true;
+                WalletToUpdate.DateUpdated = DateTime.Now;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        //[Authorize(Roles ="student")]
         // GET: students
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var userId = loggedInUser.StudentsId;
-            var student = (from c in _context.Students where c.Id == userId select c).Include(i => i.Applicants).FirstOrDefault();
-            var wallet = (from c in _context.UgMainWallets where c.Id == student.ApplicantId select c).Include(i=>i.Applicants).ThenInclude(i => i.Departments).FirstOrDefault();
+            var student = (from c in _context.Students where c.Id == userId select c).Include(i => i.Departments).FirstOrDefault();
+            var wallet = (from c in _context.UgMainWallets where c.UTME == student.UTMENumber select c).Include(i=>i.Applicants).ThenInclude(i => i.Departments).FirstOrDefault();
+            ViewBag.Name = wallet.Name;
+            ViewBag.Department = student.Departments.Name;
             var approvedCourses = (from c in _context.CourseRegistrations
                                    where c.StudentId == userId &&
                             c.Status == MainStatus.Approved &&
@@ -41,12 +156,7 @@ namespace EDSU_SYSTEM.Controllers
             var timetable = (from c in _context.TimeTables where c.Courses.Courses.DepartmentId == student.Department && c.Courses.Courses.Level ==
                              student.Level
                                    select c).Include(c => c.Courses).ThenInclude(c => c.Courses).Include(c => c.Staffs).ThenInclude(c => c.Staff).ToList();
-            var model = new StudentDashboardVM
-            {
-                MainWallet = wallet,
-                Courses = approvedCourses,
-                TimeTables = timetable
-            };
+            
             //After getting the courses from coursereg and Scores from Results table, we sorted them using the course code before serializing them
             //so that the courses can align with the courses since they are coming from the same table.
             var grades = (from g in _context.Results where g.StudentId == student.MatNumber select g).ToList();
@@ -63,13 +173,36 @@ namespace EDSU_SYSTEM.Controllers
             ViewBag.courses = json;
             ViewBag.grade = json2;
 
-           
+            var model = new StudentDashboardVM
+            {
+                MainWallet = wallet,
+                Courses = approvedCourses,
+                TimeTables = timetable
+            };
+
             return View(model);
            
         }
         public async Task<IActionResult> Allstudents()
         {
+            ViewBag.err = TempData["err"];
             var applicationDbContext = _context.Students.Include(s => s.Departments)
+                .Include(s => s.Levels);
+            return View(await applicationDbContext.ToListAsync());
+           
+        }
+        public async Task<IActionResult> Graduated()
+        {
+            ViewBag.err = TempData["err"];
+            var applicationDbContext = _context.Students.Where(x => x.StudentStatus == 2).Include(s => s.Departments)
+                .Include(s => s.Levels);
+            return View(await applicationDbContext.ToListAsync());
+           
+        } 
+        public async Task<IActionResult> Expelled()
+        {
+            ViewBag.err = TempData["err"];
+            var applicationDbContext = _context.Students.Where(x => x.StudentStatus == 3).Include(s => s.Departments)
                 .Include(s => s.Levels);
             return View(await applicationDbContext.ToListAsync());
            
@@ -193,6 +326,53 @@ namespace EDSU_SYSTEM.Controllers
             }
             return View();
         }
+        //Graduate Student by changing their status
+        public async Task<IActionResult> Graduate(string id, Student student)
+        {
+            try
+            {
+                var graduate = _context.Students.FirstOrDefault(x => x.SchoolEmailAddress == id);
+                if (graduate == null)
+                {
+                    TempData["err"]= "Student Record not found!";
+                    return RedirectToAction(nameof(Allstudents));
+                }
+                graduate.StudentStatus = 2;
+                _context.Students.Update(graduate);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("allstudents", "students");
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("badreq", "error");
+                throw;
+            }
+        }
+        //Graduate Student by changing their status
+        public async Task<IActionResult> Return(string id, Student student)
+        {
+            try
+            {
+                var graduate = _context.Students.FirstOrDefault(x => x.SchoolEmailAddress == id);
+                if (graduate == null)
+                {
+                    TempData["err"]= "Student Record not found!";
+                    return RedirectToAction(nameof(Allstudents));
+                }
+                graduate.StudentStatus = 1;
+                _context.Students.Update(graduate);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("allstudents", "students");
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("badreq", "error");
+                throw;
+            }
+        }
+        //[Authorize(Roles = "student")]
         // GET: students/Details/5
         public async Task<IActionResult> Profile()
         {
@@ -211,7 +391,7 @@ namespace EDSU_SYSTEM.Controllers
             //Console.WriteLine(student.Fullname);
             return View(student);
         } 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Students == null)
             {
@@ -226,7 +406,7 @@ namespace EDSU_SYSTEM.Controllers
                 .Include(s => s.Nationalities)
                 .Include(s => s.Sessions)
                 .Include(s => s.States)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.SchoolEmailAddress == id);
             if (student == null)
             {
                 return NotFound();
@@ -279,7 +459,7 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
 
-            var student = (from c in _context.Students where c.Id == id select c).Include(i => i.Staffs).FirstOrDefault();
+            var student = (from c in _context.Students where c.Id == id select c).FirstOrDefault();
             if (student == null)
             {
                 return NotFound();
@@ -301,33 +481,47 @@ namespace EDSU_SYSTEM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Student student)
         {
+            
             if (id != student.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                try
+                var studentToUpdate = await _context.Students
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+                if (await TryUpdateModelAsync<Student>(student, "", 
+                    c => c.Fullname, c => c.DOB, c => c.Sex, c => c.Religion, c => c.Phone, 
+                    c => c.AltPhoneNumber, c => c.Email, c => c.NationalityId, c => c.StateOfOriginId, c => c.LGAId, 
+                    c => c.PlaceOfBirth, c => c.ContactAddress,c => c.PermanentHomeAddress, c => c.MaritalStatus, c => c.ParentName,
+                    c => c.ParentOccupation, c => c.ParentPhone, c => c.ParentAltPhone,c => c.ParentEmail, c => c.ParentAddress,
+                    c => c.SchoolEmailAddress, c => c.UTMENumber, c => c.MatNumber, c => c.Faculty, c => c.Level, 
+                    c => c.ModeOfAdmission, c => c.YearOfAdmission, c => c.Department, c => c.CurrentSession, c => c.IsStillAStudent,
+                    c => c.ProgrameId, c => c.StudentStatus
+                    ))
                 {
-                    student.Cleared = true;
-                    _context.Update(student);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StudentExists(student.Id))
+                    try
                     {
-                        return NotFound();
+                        student.Cleared = true;
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+
+                        ModelState.AddModelError("", "Unable to save changes. " +
+                            "Try again, and if the problem persists, " +
+                            "see your system administrator.");
                     }
+                    return RedirectToAction(nameof(Profile));
                 }
-                return RedirectToAction(nameof(Profile));
             }
-            ViewData["Department"] = new SelectList(_context.Departments, "Id", "Id", student.Department);
+            catch (Exception ex)
+            {
+                ex.ToString();
+
+            }
+             ViewData["Department"] = new SelectList(_context.Departments, "Id", "Id", student.Department);
             ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Id", student.Faculty);
             ViewData["LGAId"] = new SelectList(_context.Lgas, "Id", "Id", student.LGAId);
             ViewData["Level"] = new SelectList(_context.Levels, "Id", "Id", student.Level);

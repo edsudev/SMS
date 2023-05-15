@@ -12,6 +12,7 @@ namespace EDSU_SYSTEM.Models
         public int? ApplicantId { get; set; }
         public Applicant? Applicants { get; set; }
         public string? Name { get; set; }
+        public string? UTME { get; set; }
         
         [Column(TypeName = "decimal(18,2)")]
         public decimal? CreditBalance { get; set; }

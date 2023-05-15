@@ -1,0 +1,65 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Session>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="PlaceHolderHere"></div>
+<div class="main-container" id="container">
+<partial name="_StudentDashboardPartial" />
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <h4>Course Registration History</h4>
+        <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget">
+                    <div class="widget-content widget-content-area">
+                        <table id="html5-extension" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Session </th>
+
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>@item.Name</td>
+
+
+                                        <td class="text-center">
+                                            @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Level Adviser"))
+                                        {*@
+                                            <a asp-action="Summary" asp-route-id="@item.Name" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="View Courses">
+                                                <div class="icon-container">
+                                                    <i data-feather="eye"></i>
+                                                </div>
+                                            </a>
+                                            @*}*@
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Session</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--  END CONTENT AREA  -->
+    </div>
+<!-- END MAIN CONTAINER -->

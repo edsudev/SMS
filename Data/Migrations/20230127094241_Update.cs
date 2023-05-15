@@ -10,20 +10,20 @@ namespace EDSU_SYSTEM.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //migrationBuilder.DropIndex(
-            //    name: "IX_Evaluations_StudentId",
-            //    table: "Evaluations");
+            migrationBuilder.DropIndex(
+                name: "IX_Evaluations_StudentId",
+                table: "Evaluations");
 
-            //migrationBuilder.DropIndex(
-            //    name: "IX_CourseAllocations_LecturerId",
-            //    table: "CourseAllocations");
+            migrationBuilder.DropIndex(
+                name: "IX_CourseAllocations_LecturerId",
+                table: "CourseAllocations");
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "ToDoId",
-            //    table: "Todos",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "ToDoId",
+                table: "Todos",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.AlterColumn<string>(
                 name: "StudentId",
@@ -47,87 +47,87 @@ namespace EDSU_SYSTEM.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "ResultId",
-            //    table: "Results",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "ResultId",
+                table: "Results",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.AddColumn<int>(
-            //    name: "SessionId",
-            //    table: "Results",
-            //    type: "int",
-            //    nullable: false,
-            //    defaultValue: 0);
+            migrationBuilder.AddColumn<int>(
+                name: "SessionId",
+                table: "Results",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "EvaluationId",
-            //    table: "Evaluations",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "EvaluationId",
+                table: "Evaluations",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "CourseId",
-            //    table: "Courses",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "CourseId",
+                table: "Courses",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "CourseRegId",
-            //    table: "CourseRegistrations",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "CourseRegId",
+                table: "CourseRegistrations",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.AddColumn<string>(
-            //    name: "CourseAllocationId",
-            //    table: "CourseAllocations",
-            //    type: "longtext",
-            //    nullable: true)
-            //    .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.AddColumn<string>(
+                name: "CourseAllocationId",
+                table: "CourseAllocations",
+                type: "longtext",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.CreateTable(
-            //    name: "TimeTables",
-            //    columns: table => new
-            //    {
-            //        Id = table.Column<int>(type: "int", nullable: false)
-            //            .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-            //        TimeTableId = table.Column<string>(type: "longtext", nullable: true)
-            //            .Annotation("MySql:CharSet", "utf8mb4"),
-            //        Venue = table.Column<string>(type: "longtext", nullable: true)
-            //            .Annotation("MySql:CharSet", "utf8mb4"),
-            //        CourseId = table.Column<int>(type: "int", nullable: false),
-            //        LecturerId = table.Column<int>(type: "int", nullable: false),
-            //        Time = table.Column<TimeOnly>(type: "time(6)", nullable: false),
-            //        Day = table.Column<int>(type: "int", nullable: false),
-            //        CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-            //        UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-            //    },
-            //constraints: table =>
-            //{
-            //    table.PrimaryKey("PK_TimeTables", x => x.Id);
-            //    table.ForeignKey(
-            //        name: "FK_TimeTables_CourseAllocations_CourseId",
-            //        column: x => x.CourseId,
-            //        principalTable: "CourseAllocations",
-            //        principalColumn: "Id",
-            //        onDelete: ReferentialAction.Cascade);
-            //    table.ForeignKey(
-            //        name: "FK_TimeTables_CourseAllocations_LecturerId",
-            //        column: x => x.LecturerId,
-            //        principalTable: "CourseAllocations",
-            //        principalColumn: "Id",
-            //        onDelete: ReferentialAction.Cascade);
-            //})
-            //.Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.CreateTable(
+                name: "TimeTables",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TimeTableId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Venue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    LecturerId = table.Column<int>(type: "int", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time(6)", nullable: false),
+                    Day = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_TimeTables", x => x.Id);
+                table.ForeignKey(
+                    name: "FK_TimeTables_CourseAllocations_CourseId",
+                    column: x => x.CourseId,
+                    principalTable: "CourseAllocations",
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.Cascade);
+                table.ForeignKey(
+                    name: "FK_TimeTables_CourseAllocations_LecturerId",
+                    column: x => x.LecturerId,
+                    principalTable: "CourseAllocations",
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.Cascade);
+            })
+            .Annotation("MySql:CharSet", "utf8mb4");
 
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Results_SessionId",
-            //    table: "Results",
-            //    column: "SessionId");
+            migrationBuilder.CreateIndex(
+                name: "IX_Results_SessionId",
+                table: "Results",
+                column: "SessionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Results_StudentId_CourseId_SessionId",
