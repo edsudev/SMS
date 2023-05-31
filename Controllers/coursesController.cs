@@ -32,7 +32,7 @@ namespace EDSU_SYSTEM.Controllers
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var staff = loggedInUser.StaffId;
-            var courses = (from s in _context.CourseAllocations where s.LecturerId == staff && s.Courses.Semesters.IsActive == true && s.Courses.Sessions.IsActive == true select s).ToList();
+            var courses = (from s in _context.CourseAllocations where s.LecturerId == staff && s.Courses.Semesters.IsActive == true && s.Courses.Sessions.IsActive == true select s).Include(x => x.Courses).ThenInclude(x => x.Semesters).ToList();
             return View(courses);
         }
 

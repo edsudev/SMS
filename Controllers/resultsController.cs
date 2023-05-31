@@ -172,7 +172,7 @@ namespace EDSU_SYSTEM.Controllers
                 ViewBag.parentName = studentInfo.ParentName;
                 ViewBag.name = studentInfo.Fullname;
                 ViewBag.matno = studentInfo.MatNumber;
-                ViewBag.program = studentInfo.Programs.NameOfProgram;
+               // ViewBag.program = studentInfo.Programs.NameOfProgram;
                 ViewBag.department = studentInfo.Departments.Name;
                 ViewBag.faculty = studentInfo.Faculties.Name;
                 ViewBag.level = studentInfo.Levels.Name;
@@ -206,8 +206,6 @@ namespace EDSU_SYSTEM.Controllers
                 return RedirectToAction(nameof(Index));
                 throw;
             }
-
-            
 
         }
 
@@ -248,7 +246,6 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult Myresult()
         {
-           
             return RedirectToAction("resourcenotfound", "error");
         }
 
@@ -272,14 +269,14 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: results/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> students(string? id)
         {
             if (id == null || _context.CourseAllocations == null)
             {
                 return NotFound();
             }
-            var course = (from i in _context.CourseAllocations where i.Id == id select i).Include(i => i.Courses).FirstOrDefault();
-            var result = (from f in _context.Results where f.CourseId == course.Courses.Title select f);
+            var course = (from i in _context.CourseAllocations where i.Courses.Code == id select i).Include(i => i.Courses).FirstOrDefault();
+            var result = (from f in _context.Results where f.CourseId == course.Courses.Code select f);
 
             
             if (result == null)

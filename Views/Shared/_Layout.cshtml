@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,24 +94,24 @@
     <script src="~/plugins/select2/custom-select2.js"></script>
     <script src="~/assets/js/apps/invoice-preview.js"></script>
     <script src="~/plugins/highlight/highlight.pack.js"></script>
-   
-<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-<script src="~/plugins/apex/apexcharts.min.js"></script>
-<script src="~/assets/js/dashboard/dash_1.js"></script>
-<!-- NOTE TO: Use Copy CSV Excel PDF Print Options in the DataTable You Must Include These Files  -->
-<!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
 
-<script src="~/plugins/table/datatable/datatables.js"></script>
-<!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
-<script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
-<script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
-<script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
-<script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="~/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/assets/js/dashboard/dash_1.js"></script>
+    <!-- NOTE TO: Use Copy CSV Excel PDF Print Options in the DataTable You Must Include These Files  -->
+    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
+
+    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
 
 
-@*PORTAL FOOTER COMPONENT*@
+    @*PORTAL FOOTER COMPONENT*@
 
-<script src="~/portal/js/Nav-component.js"></script>
+    <script src="~/portal/js/Nav-component.js"></script>
     <script src="~/portal/js/programs/select.js"></script>
     <script src="~/portal/js/programs/programs.js"></script>
     <script src="~/portal/js/programs/searchbox.js"></script>
@@ -151,35 +151,35 @@
     </script>
 
 
-<script>
-    // ===============
-    //    Javascript
-    // ===============
+    <script>
+        // ===============
+        //    Javascript
+        // ===============
 
-    window.addEventListener('load', function () {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-</script>
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    </script>
 
-<script src="~/plugins/font-icons/feather/feather.min.js"></script>
-<script type="text/javascript">
-    feather.replace();
-</script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/js/paystack.js" asp-append-version="true"></script>
-<script src="~/js/hostelpayment.js" asp-append-version="true"></script>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="~/plugins/font-icons/feather/feather.min.js"></script>
+    <script type="text/javascript">
+        feather.replace();
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/paystack.js" asp-append-version="true"></script>
+    <script src="~/js/hostelpayment.js" asp-append-version="true"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="~/plugins/apex/apexcharts.min.js"></script>
     <script src="~/plugins/apex/custom-apexcharts.js"></script>
 

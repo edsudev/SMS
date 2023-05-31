@@ -20,11 +20,11 @@ namespace EDSU_SYSTEM.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
-
+       
         // GET: Magazines
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Magazines.ToListAsync());
+              return View(await _context.Magazines?.ToListAsync());
         }
 
         // GET: Magazines/Details/5
@@ -66,8 +66,7 @@ namespace EDSU_SYSTEM.Controllers
                     var fileName = Path.GetFileNameWithoutExtension(file.FileName);
                     var extension = Path.GetExtension(file.FileName);
                     var webRootPath = _hostingEnvironment.WebRootPath;
-                    //fileName = applicants.UTMENumber + extension;
-
+                    
                     fileName = fileName + extension;
                     var path = Path.Combine(webRootPath, uploadDir, fileName);
                     using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
@@ -80,11 +79,10 @@ namespace EDSU_SYSTEM.Controllers
                 if (img != null && img.Length > 0)
                 {
                     var uploadDir = @"files/magazines/image";
-                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    var extension = Path.GetExtension(file.FileName);
+                    var fileName = Path.GetFileNameWithoutExtension(img.FileName);
+                    var extension = Path.GetExtension(img.FileName);
                     var webRootPath = _hostingEnvironment.WebRootPath;
-                    //fileName = applicants.UTMENumber + extension;
-
+                    
                     fileName = fileName + extension;
                     var path = Path.Combine(webRootPath, uploadDir, fileName);
                     using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))

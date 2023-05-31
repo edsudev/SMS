@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.newsletter {
+    background-color: #203B93;
+    background-image: url('../images/newsletter/newsletter.svg');
+    width: 85%;
+    margin: 20px auto 20px auto;
+    height: 350px;
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter-text {
+    margin-bottom: 2rem;
+}
+
+.newsletter-text h1 {
+    text-align: center;
+    margin: auto;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-weight: 600;
+    font-size: xx-large;
+    width: 70%;
+}
+
+.email .newsletter-input {
+    padding: 10px 0;
+    border: none;
+    border-bottom: 2px solid white;
+    background: none !important;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email .newsletter-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none !important;
+    caret-color: #fff;
+}
+
+.email .newsletter-input input::placeholder {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.email .newsletter-input button {
+    background: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: background-color 0.3s, padding 0.3s, border-radius 0.3s;
+}
+
+.email .newsletter-input button:hover {
+    background-color: #64DD17;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 7px;
+}
+@media all and (max-width: 768px) {
+    .newsletter {
+        width: 85%;
+        height: 350px;
+    }
+}
+
+@media all and (max-width: 648px) {
+    .newsletter {
+        width: 85%;
+        height: 300px;
+    }
+
+    .newsletter-text h1 {
+        font-size: x-large;
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 420px) {
+    .newsletter {
+        width: 85%;
+        height: 200px;
+    }
+
+    .newsletter-text {
+        margin-bottom: 1rem;
+    }
+
+    .newsletter-text h1 {
+        font-size: medium;
+        width: 80%;
+    }
+
+    .email .newsletter-input {
+        width: 70%;
+    }
+
+    .email .newsletter-input input::placeholder {
+        font-size: xx-small;
+    }
+
+    .email .newsletter-input button {
+        font-size: x-small;
+    }
+}

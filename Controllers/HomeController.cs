@@ -7,22 +7,30 @@ using System.Diagnostics;
 
 namespace EDSU_SYSTEM.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-
-        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _logger = logger;
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
+        public FileResult DownloadMagazine(string name)
+        {
+            string path = Path.Combine(this._hostingEnvironment.WebRootPath, "files/magazines/file/") + name;
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
 
+            return File(bytes, "application/octet-stream", name);
+        }
         public IActionResult Index()
         {
-            ViewBag.Slider = _context.Sliders.Where(i => i.isActive == true).ToList();
-            ViewBag.News = _context.LatestNews.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(3).ToList();
-            ViewBag.Activities = _context.Activities.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(2).ToList();
+            ViewBag.Slider = _context.Sliders?.Where(i => i.isActive == true).ToList();
+            ViewBag.News = _context.LatestNews?.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(3).ToList();
+            ViewBag.Activities = _context.Activities?.Where(i => i.isActive ==  true).OrderByDescending(r => r.Id).Take(2).ToList();
             return View();
         }
 
@@ -42,7 +50,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult News()
         {
-            var news = _context.LatestNews.ToList();
+            var news = _context.LatestNews?.ToList();
             return View(news);
         }
         public IActionResult Gallery()
@@ -63,7 +71,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult Directories()
         {
-            var staffs = _context.Staffs.Include(x => x.Positions).Include(x => x.Departments).ToList();
+            var staffs = _context.Staffs?.Include(x => x.Positions).Include(x => x.Departments).ToList();
             return View(staffs);
         }
         
@@ -73,7 +81,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult Activities()
         {
-            ViewBag.Activities2 = _context.Activities.Where(i => i.isActive == true).OrderByDescending(r => r.Id).Take(6).ToList();
+            ViewBag.Activities2 = _context.Activities?.Where(i => i.isActive == true).OrderByDescending(r => r.Id).Take(6).ToList();
             return View();
         }
         public IActionResult Events()
@@ -82,7 +90,7 @@ namespace EDSU_SYSTEM.Controllers
         }
          public IActionResult Magazines()
         {
-            ViewBag.magazine = _context.Magazines.ToList();
+            ViewBag.magazine = _context.Magazines?.ToList();
             return View();
         }
 

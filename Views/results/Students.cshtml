@@ -1,0 +1,74 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Result>
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="row layout-top-spacing">
+                <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                    <div class="widget-content widget-content-area br-6">
+                        <table id="example" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>STUDENT MAT NO.</th>
+                                    <th>CA</th>
+                                    <th>EXAM</th>
+                                    <th>TOTAL</th>
+                                    <th>GRADE</th>
+                                    <th>UPGRADE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <form asp-action="Edit">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="@item.Id" />
+                                            <td>@item.StudentId</td>
+                                            <td>@item.CA</td>
+                                            <td>@item.Exam</td>
+                                            <td>@item.Total</td>
+                                            <td>@item.Grade</td>
+                                            <td><input asp-for="@item.Upgrade" id="row-1-position" class="form-control" name="row-1-position"></td>
+                                            <td><input type="submit" class="form-control btn-dark" value="submit"></td>
+                                         </form>
+                                    </tr>
+                                }
+                                
+                               
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>CA</th>
+                                    <th>EXAM</th>
+                                    <th>TOTAL</th>
+                                    <th>GRADE</th>
+                                    <th>UPGRADE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

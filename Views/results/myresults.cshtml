@@ -1,0 +1,198 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.Result>
+
+@{
+    ViewData["Title"] = "Preview";
+}
+
+<div class="main-container" id="container">
+    <partial name="_StaffDashboardPartial" />
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="row invoice layout-spacing">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12">
+
+                    <div class="doc-container">
+
+                        <div class="row">
+
+                            <div class="col-xl-12">
+
+                                <div class="invoice-container">
+                                    <div class="invoice-inbox">
+                                        <div id="ct" class="">
+                                            <div class="invoice-00001">
+                                                <div class="content-section">
+                                                    <div class="inv--head-section inv--detail-section">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-xl-11 col-lg-11 col-md-11 mx-auto">
+                                                                <div class="d-flex">
+                                                                    <img src="~/logo.png" style="width:150px; height:150px" class="mx-auto" alt="Logo" />
+                                                                    <span>
+                                                                        <h1 class="in-heading">EDO STATE UNIVERSITY UZAIRUE</h1><br />
+                                                                        <h1 class="">EDO STATE, NIGERIA.</h1><br />
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h6 class="text-center">Office of the Registrar</h6>
+                                                    </div>
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">OUR REF: REG/RO/CIR/09/VOL1/39</span></p>
+                                                            </div>
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">@DateTime.Now.ToLongDateString()</span></p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">Mr. & Mrs. @ViewBag.parentName</span></p>
+                                                                <p><span class=" inv-subtitle">Dear Sir/Ma.</span></p>
+                                                                <p><span class=" inv-subtitle">2021/2022 ACADEMIC SESSION RESULT</span></p>
+                                                                <p><span class="">I forward to you the result of courses taught and examinations 
+                                                                    held in the 2021/2022 Academic Session for you child/ward.</span></p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">Name:</span></p>
+                                                                <p><span class=" inv-subtitle">Mat Number:</span></p>
+                                                                <p><span class=" inv-subtitle">Programme: </span></p>
+                                                                <p><span class=" inv-subtitle">Department:</span></p>
+                                                                <p><span class=" inv-subtitle">Faculty: </span></p>
+                                                                <p><span class=" inv-subtitle">Level: </span></p>
+                                                            </div>
+
+                                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">@ViewBag.name</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.matno</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.program</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.department</span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.faculty </span></p>
+                                                                <p><span class=" inv-subtitle">@ViewBag.level</span></p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--product-table-section">
+                                                        <div class="col-12">
+                                                            <p class="inv-to text-center">ACADEMIC SEMESTER RESULT</p>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead class="">
+                                                                    <tr>
+                                                                        <th scope="col">COURSE CODE</th>
+                                                                        <th scope="col">COURSE TITLE</th>
+                                                                        <th scope="col">CREDIT</th>
+                                                                        <th scope="col">STATUS</th>
+                                                                        <th scope="col">GRADE</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model)
+                                                                    {
+                                                                        <tr>
+                                                                            @*<td>1</td>*@
+                                                                            <td class="">@ViewBag.courseId</td>
+                                                                            <td class="">@ViewBag.coursetitle</td>
+                                                                            <td class="">@ViewBag.courseUnit</td>
+                                                                            <td class="">@ViewBag.status</td>
+                                                                            <td class="">@ViewBag.grade</td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-6">
+                                                                <p><span class=" inv-subtitle">Remark: Good Result</span></p>
+                                                                <p><span class=" inv-subtitle">Your child/ward has satisfied the examiners in all the courses 
+                                                                    registered for in the 2021/2022 Academic Session and has earned all the assigned credits. 
+                                                                    Your child/ward is to proceed to the next level of his/her study for the next Academic Session
+                                                                    <br />Thank You.<br/><br/>
+                                                                    Habib I. Ekhalefo<br/>
+                                                                    Ag. Registrar
+                                                                </span></p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="inv--note">
+
+                                                        <div class="row mt-4">
+                                                            <div class="col-sm-12 col-12 order-sm-0 order-1">
+                                                                <p>POWERED BY: EDSU ICT UNIT.</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-12">
+
+                                <div class="invoice-actions-btn">
+
+                                    <div class="invoice-action-btn">
+
+                                        <div class="row">
+
+                                            <div class="col-xl-6 col-md-3 col-sm-6">
+                                                <a href="javascript:void(0);" class="btn btn-secondary btn-print  action-print">Print</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <!--  END CONTENT AREA  -->
+</div>
+<!-- END MAIN CONTAINER -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -1,0 +1,128 @@
+/* Overall CSS (Body) */
+.widget {
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px;
+}
+.widget-content-area { border-radius: 6px; }
+        .daterangepicker.dropdown-menu {
+            z-index: 1059;
+        }
+#wrapper{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 230%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px 0px;
+}
+
+/* CSS for the Header */
+#heading{
+    background-image: url('../images/about/faintBG.png');
+    background-size: cover;
+    width: auto;
+    height: 350px;
+    position: relative;
+}
+#heading #span {
+    text-align: center;
+    position: relative;
+    top:20%;
+}
+#heading #span h2{
+    font-size: 30px;
+    font-weight: bolder;
+    font-family: 'Oswald';
+}
+
+/* CSS for the calender */
+#wrapper #content{
+    height: 70%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 30px;
+    background-color: #ffffff00;
+    padding: 20px;
+    /* border: 2px solid red; */
+    position: relative;
+    bottom: 3%;
+    right:9%;
+}
+/* --------------------------------- */
+/* CSS for the activities */
+#wrapper #activity_section{
+    height: 130%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 30px;
+    background-color: #ffffff;
+    padding: 25px;
+    /* border: 2px solid red; */
+}
+#wrapper #activity_section #span {
+    text-align: center;
+}
+#wrapper #activity_section #span h2{
+    font-size: 30px;
+    font-weight: bolder;
+    font-family: 'Oswald';
+}
+
+#wrapper #activity_section #activity{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    flex-direction:row;
+    gap: 30px;
+    margin-top:20px;
+}
+#wrapper #activity_section #activity section{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    gap: 20px;
+    align-items: center;
+}
+#wrapper #activity_section #activity h2{
+    font-size: 18px;
+    font-weight: bolder;
+    font-family: 'Oswald';
+}
+#wrapper #activity_section #activity section div p, 
+#wrapper #activity_section #span p{
+    font-size: 13px;
+    color: #544E5D;
+    font-weight: 300;
+    font-family: "Poppins";
+}
+#wrapper #activity_section #activity section img{
+    width: 30%;
+    height: 95%;
+}
+#wrapper #activity_section #activity p b{
+    color: #203B93;
+    font-weight: 600;
+    font-family: "poppins";
+}
+#wrapper #activity_section button{
+    padding: 10px;
+    background-color: #203B93;
+    border: none;
+    border-radius: 6px;
+    color:white;
+    font-family: "poppins";
+    width: 20%;
+    position: relative;
+    top:10%;
+    left: 40%;
+}

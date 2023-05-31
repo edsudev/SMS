@@ -37,20 +37,22 @@ namespace EDSU_SYSTEM.Controllers
         {
             try
             {
-                var staffs = (from s in _context.ConversionStudents select s).ToList();
-                foreach (var item in staffs)
+                var users = (from s in _context.Staffs select s).ToList();
+                foreach (var item in users)
                 {
                     try
                     {
                         var user = new ApplicationUser
                         {
-                            Email = item.SchoolEmailAddress,
-                            UserName = item.SchoolEmailAddress,
+                            Email = item.SchoolEmail,
+                            UserName = item.SchoolEmail,
                             StaffId = item.Id,
-                            Type = 4,
+                            PhoneNumber = item.Phone,
+                            PhoneNumberConfirmed = true,
+                            Type = 2,
                             EmailConfirmed = true
                         };
-                        var r = await _userManager.CreateAsync(user, "EDSU"+item.SchoolEmailAddress);
+                        var r = await _userManager.CreateAsync(user, "EDSU1"+item.SchoolEmail);
                     }
                     catch (Exception)
                     {

@@ -243,8 +243,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\nav.cshtml" />
-    <None Include="Views\Home\news_detail.cshtml" />
+    <None Include="Views\Home\Nav.cshtml" />
+    <None Include="Views\Home\News_detail.cshtml" />
     <None Include="Views\Home\tuition.cshtml" />
     <None Include="wwwroot\images\nocourses.svg" />
     <None Include="wwwroot\portal\images\.DS_Store" />

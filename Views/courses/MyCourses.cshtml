@@ -24,7 +24,6 @@
                                     <th>Credit Unit</th>
                                     <th>Status</th>
                                     <th>Department</th>
-                                    <th class="dt-no-sorting">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,12 +52,7 @@
                                             @Html.DisplayFor(modelItem => item.Courses.Departments.Name)
                                         </td>
 
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                            <a class="" data-toggle="ajax-modal" data-url="@Url.Action($"Delete/{item.Id}")">
-                                                Delete
-                                            </a>
-                                        </td>
+                                        
                                     </tr>
                                 }
                             </tbody>

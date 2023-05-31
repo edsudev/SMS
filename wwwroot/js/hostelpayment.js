@@ -1,11 +1,11 @@
-﻿////////////////////
+﻿
 const HostelPaymentForm = document.getElementById('HostelPaymentForm');
 HostelPaymentForm.addEventListener("submit", payWithPaystack, false);
 function payWithPaystack(e) {
     e.preventDefault();
 
     let handler = PaystackPop.setup({
-        key: 'pk_test_18de9362e665b126982fc285e8f819fd74862be6', // Replace with your public key
+        key: 'pk_live_3dc19f7455b757896bf2f41fe78162bd1d06c1ad', // Replace with your public key
         // first_name: document.getElementById("first-name").value,
         //  last_name: document.getElementById("last-name").value,
         email: document.getElementById("email-address").value,
