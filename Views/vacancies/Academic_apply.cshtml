@@ -23,7 +23,7 @@
                     must be valid and active as EDSU will communicate with you via them.
                 </p>
                 <p class="text-danger">- The email and password you provide in this form will be used to access your vacancy application dashboard.</p>
-                <form class="needs-validation" novalidate asp-action="create">
+                <form class="needs-validation" validate asp-action="Academic_apply">
                     <div class="row layout-top-spacing d-flex justify-content-center p-4">
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
                             <h5 class="text-center">Personal Data</h5>
@@ -48,7 +48,7 @@
                                 <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                        @*<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
                             <h5 class="text-center">Application Data</h5>
                             <div class="form-group">
                                 <label asp-for="Type">Category</label>
@@ -57,19 +57,17 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="DepartmentId">Department</label>
-                                <select asp-for="DepartmentId" class="form-control basic" asp-items="ViewBag.Department">
-                                    <option>Select</option>
-                                </select>
+                                <input asp-for="DepartmentId" class="form-control" valu />
                                 <span asp-validation-for="DepartmentId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Position">Position you wish to apply for</label>
-                                <select asp-for="Position" class="form-control basic" asp-items="ViewBag.position">
+                                <select asp-for="Position" class="form-control basic" asp-items="ViewBag.PositionId">
                                     <option>Select</option>
                                 </select>
                                 <span asp-validation-for="Position" class="text-danger"></span>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
                             <h5 class="text-center">Account Data</h5>
                             <div class="form-group">
@@ -79,12 +77,12 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Password"></label>
-                                <input asp-for="Password" class="form-control" placeholder="Password"/>
+                                <input asp-for="Password" class="form-control" type="password" placeholder="Password" name="pword" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Password"></label>
-                                <input asp-for="Password" class="form-control" Placeholder="Re-enter Password" />
+                                <input asp-for="Password" class="form-control" type="password" Placeholder="Re-enter Password" name="cpword" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                          

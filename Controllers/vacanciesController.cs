@@ -96,11 +96,12 @@ namespace EDSU_SYSTEM.Controllers
                 .Include(i => i.Units).Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
         }
-        public IActionResult Academic_apply(string id)
+        public IActionResult Academic_apply(string position, string department, Vacancy vacancy)
         {
             ViewBag.err = TempData["err"];
-            var position = (from d in _context.Positions where d.Name == id select d.Id).FirstOrDefault();
-            TempData["position"] = position;
+            TempData["position"] = (from d in _context.Positions where d.Name == position select d.Id).FirstOrDefault();
+            TempData["department"] = (from d in _context.Departments where d.Name == department select d.Id).FirstOrDefault();
+
             return View();
         }
         // POST: vacancies/Create
@@ -108,26 +109,41 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Vacancy vacancy)
+        public async Task<IActionResult> Academic_apply(Vacancy vacancy, string pword, string cpword)
         {
-            if (vacancy.Email == null || vacancy.Password == null)
+            try
             {
-                TempData["err"] = "Make sure to fill all required fields";
-                return RedirectToAction(nameof(Academic_apply));
+                if (pword != cpword || (pword == null))
+                {
+                    TempData["err"] = "Something went wrong, make sure you provide data as required!";
+                    return RedirectToAction(nameof(Academic_apply));
+                }
+                
+                var emailExist = (from s in _context.Vacancies where s.Email == vacancy.Email select s.Id).FirstOrDefault();
+                if (emailExist == null)
+                {
+                    Random r = new();
+                    var session = (from s in _context.Sessions where s.IsActive == true select s).ToList();
+                    foreach (var item in session)
+                    {
+                        vacancy.ApplicantId = "EDSU-V-" + item.suffix + "-" + DateTime.Now.Millisecond;
+                    }
+                    vacancy.Position = (int?)TempData["position"];
+                    vacancy.DepartmentId = (int?)TempData["department"];
+                    vacancy.Type = VacancyType.Academic;
+                    _context.Add(vacancy);
+                    await _context.SaveChangesAsync();
+                    var id = vacancy.ApplicantId;
+                    return RedirectToAction("step1", "vacancies", new { id });
+                }
             }
-            Random r = new();
-            var session = (from s in _context.Sessions where s.IsActive == true select s).ToList();
-            foreach (var item in session)
+            catch (Exception)
             {
-                vacancy.ApplicantId = "EDSU-V-" + item.suffix + "-" + DateTime.Now.Millisecond;
+                TempData["err"] = "There was a problem with your application. Contact the ICT unit";
+                throw;
+                
             }
-            vacancy.Position = (int?)TempData["position"];
-            //vacancy.Type = VacancyType.Academic;
-            _context.Add(vacancy);
-            await _context.SaveChangesAsync();
-            var id = vacancy.ApplicantId;
-            return RedirectToAction("step1", "vacancies", new { id });
-            
+            return View();
         }
 
         public async Task<IActionResult> Step1(string? id)

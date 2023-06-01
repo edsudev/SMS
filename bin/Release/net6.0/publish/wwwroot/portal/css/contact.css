@@ -1,0 +1,257 @@
+/* How to use the font
+
+h1{
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+*/
+*{
+    /* border: 1px solid; */
+    margin: 0;
+    box-sizing: border-box;
+}
+.oswald{
+    font-family: 'Oswald', sans-serif;
+    font-style: normal;
+}
+.poppins{
+    font-style: normal;
+    font-family: 'Poppins', sans-serif;
+}
+.almost-full{
+    width: 80%;
+}
+.full{
+    width: 80%;
+}
+@media screen and (min-width:760px){
+    .body{
+        background-color: #EEEEEE;
+        /* text-align: center; */
+    }
+    .body h1{
+        font-size: 60px;
+        font-weight: 600;
+        line-height: 60px;
+        color: #06040A;
+        text-align: center;
+        margin-top: 50px;
+    }
+    .body .contact-details{
+        padding-top: 20px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 28px;
+        color: #544E5D;
+        width: 545px;
+        margin: auto;
+    }
+
+    .messagebox{
+        /* height: 897px; */
+        max-width: 60%;
+        margin:50px auto 100px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0px 23px 49px rgba(0, 0, 0, 0.26);
+        text-align: left;
+        padding: 50px;
+        /* margin-bottom: 200px; */
+    }
+    .messagebox h3{
+        font-size: 34px;
+        font-weight: 600;
+        line-height: 50px;
+    }
+    .messagebox .seperateinput{
+        display: flex;
+        margin: 50px 0;
+    }
+    .messagebox .conditions{
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0;
+        width: 80%;
+    }
+    .messagebox .conditions div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .messagebox .seperateinput div{
+        width: 50%;
+    }
+    .bottomless{
+        border: none;
+        border-bottom: 2px solid #203B93;
+        outline: none;
+        /* height: auto; */
+        height: 40px;
+    }
+    .messagebox label{
+        display: block;
+        color: #544E5D;
+    }
+    .conditions button{
+        width:250px;
+        height:69px;
+        background-color:#203B93;
+        box-shadow:0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius:14px;
+        color:#ffffff;
+        border:none;
+        outline:none;
+        font-weight:700;
+    }
+    .contact-icons{
+        width: 70%;
+        text-align: left;
+        display: flex;
+        margin: auto;
+        gap: 20px;
+    }
+    .icon-box{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        /* width: 504px; */
+    }
+    .icon{
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background-color: #203B93;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon i{
+        color: #ffffff;
+    }
+    .icon-box p{
+        /* font-family: 'Poppins'; */
+        /* font-style: normal; */
+        /* font-weight: 500; */
+        /* font-size: 18px; */
+        /* line-height: 36px; */
+        width: 70%;
+        /* background-color: #203B93; */
+    }
+}
+@media screen and (max-width:480px) and (min-width:320px){
+    .body{
+    }
+    .body h1{
+        font-size: 60px;
+        font-weight: 600;
+        line-height: 60px;
+        color: #06040A;
+        text-align: center;
+        margin-top: 50px;
+        /* margin: auto; */
+        /* width: 100%; */
+    }
+    .body input,textarea{
+        padding: 10px;
+    }
+    .body .contact-details{
+        padding-top: 20px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 28px;
+        color: #544E5D;
+        width: 90%;
+        margin: auto;
+        text-align: center;
+    }
+    .messagebox{
+        /* height: 897px; */
+        max-width: 100%;
+        margin:50px auto 70px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0px 23px 49px rgba(0, 0, 0, 0.26);
+        text-align: left;
+        padding: 30px;
+        /* margin-bottom: 200px; */
+    }
+    .messagebox h3{
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 50px;
+        /* text-align: center; */
+    }
+    .seperateinput div{
+        margin-bottom: 20px;
+        /* background-color: #203B93; */
+        /* display: flex; */
+        /* justify-content: space-between; */
+    }
+    .messagebox div label{
+        display: block;
+    }
+    .bottomless{
+        /* border: none; */
+        border: 1px solid #203B93;
+        outline: none;
+        height: 40px;
+        width: 80%;
+        outline: none;
+        border-radius: 6px;
+    }
+    .conditions{
+        text-align: center;
+    }
+    .conditions div{
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        margin: 10px 0 20px;
+    }
+    .conditions button{
+        width:250px;
+        height:69px;
+        background-color:#203B93;
+        box-shadow:0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius:14px;
+        color:#ffffff;
+        border:none;
+        outline:none;
+        font-weight:700;
+    }
+    .contact-icons{
+        /* background-color: #410ea6; */
+        width: 85%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    /*
+    .icon-box{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 504px;
+    } */
+    /* .icon{
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background-color: #203B93;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon i{
+        color: #ffffff;
+    } */
+    /* .icon-box p{ */
+        /* font-family: 'Poppins'; */
+        /* font-style: normal; */
+        /* font-weight: 500; */
+        /* font-size: 18px; */
+        /* line-height: 36px; */
+        /* width: 70%; */
+        /* background-color: #203B93; */
+    /* } */
+}

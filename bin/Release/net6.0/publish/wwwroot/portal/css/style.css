@@ -1,0 +1,373 @@
+.body{
+    background-color: #ffffff;
+}
+*{
+    /* border: 1px solid; */
+}
+@media screen and (min-width:760px){
+    .why-choose-us{
+        background-color: #F9F9FA;
+        padding: 100px 0;
+        margin-bottom: 50px;
+    }
+    .why-choose-us h1{
+        text-align: center;
+        font-family: 'Oswald',sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 71px;
+        color: #06040A;
+        margin-bottom: 50px;
+    }
+    
+    .why-choose-us .container{
+        width: 80%;
+        margin: auto;
+        display: flex;
+        /* gap: 25px; */
+        justify-content: space-between;
+    }
+    .why-choose-us .container .card{
+        width: 30%;
+        padding: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 7px 22px rgba(143, 134, 196, 0.07);
+        border-radius: 14px;
+    }
+    .why-choose-us .container .card:hover{
+        box-shadow: 0px 19px 29px rgba(62, 53, 120, 0.14);
+    }
+    .why-choose-us .container .card .header{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    .why-choose-us .container .card .header .header-icon{
+        width: 48px;
+        height: 48px;
+        background-color: #64DD17;
+        border-radius: 50%;
+    }
+    .why-choose-us .container .card .header h3{
+        font-family: 'Oswald',sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+    }
+    
+    
+    .upcoming-activity{
+        width: 85%;
+        margin: auto;
+        margin-bottom: 100px;
+    }
+    
+    .upcoming-activity-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .upcoming-activity-details .text h2 {
+        font-family: 'Oswald', sans-serif;
+        color: #06040A;
+        /* font-family: 'Oswald'; */
+        font-style: normal;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 71px;
+    }
+    .upcoming-activity-details .text p {
+        font-family: 'Poppins', sans-serif;
+        color: #06040A;
+        width: 60%;
+        /* font-size: small; */
+        padding: 15px 0;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    .upcoming-activity-details .activity-button a{
+        border: 1px solid #203B93;
+        border-radius: 7px;
+        color: #203B93;
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        font-size: small;
+        font-weight: bold;
+        padding: 10px 25px;
+        letter-spacing: 0.5px;
+        transition: 0.3s linear;
+    }
+    
+    .upcoming-activity-details .activity-button a:hover {
+        background-color: #203B93;
+        border: none;
+        color: #fff;
+    }
+    
+    .upcoming-activity .upcoming-activity-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    
+    .activity-card {
+        width: 50%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .activity-card .activity-card-text {
+        padding-left: 20px;
+    }
+    
+    .activity-card .activity-card-text h3 {
+        font-family: 'Oswald', sans-serif;
+        color: #06040A;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 34px;
+    }
+    
+    .activity-card .activity-card-text p {
+        /* font-size: x-small; */
+        width: 90%;
+        color: #06040A;
+        font-family: 'Poppins', sans-serif;
+        padding: 5px 0;
+        font-weight: 400;
+    }
+    
+    .activity-card .activity-card-text a {
+        color: #203B93;
+        font-weight: bold;
+    }
+    
+    .activity-card img {
+        width: 300px;
+    }
+    
+    .tour {
+        width: 85%;
+        margin: auto;
+        margin-top: 4rem;
+        margin-bottom: 100px;
+    }
+    .tour .tour-text h2 {
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        color: #06040A;
+        text-align: center;
+    }
+    
+    .tour .tour-video iframe{
+        display: block;
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+        margin: 25px auto 0 auto;
+    }
+    
+    .news{
+        width: 85%;
+        margin: auto;
+        margin-bottom: 100px;
+    }
+}
+@media screen and (max-width:480px) and (min-width:320px){
+    .why-choose-us{
+        background-color: #F9F9FA;
+        padding: 50px 0;
+        margin-bottom: 50px;
+    }
+    .why-choose-us h1{
+        text-align: center;
+        font-family: 'Oswald',sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 71px;
+        color: #06040A;
+        margin-bottom: 30px;
+    }
+
+    .why-choose-us .container{
+        width: 100%;
+        margin: auto;
+        /* display: flex; */
+        /* gap: 25px; */
+        justify-content: space-between;
+    }
+    .why-choose-us .container .card{
+        width: 90%;
+        margin: auto;
+        /* padding: 20px; */
+        background: #FFFFFF;
+        box-shadow: 0px 7px 22px rgba(143, 134, 196, 0.07);
+        border-radius: 14px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .why-choose-us .container .card:hover{
+        box-shadow: 0px 19px 29px rgba(62, 53, 120, 0.14);
+    }
+    .why-choose-us .container .card .header{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    .why-choose-us .container .card .header .header-icon{
+        width: 48px;
+        height: 48px;
+        background-color: #64DD17;
+        border-radius: 50%;
+    }
+    .why-choose-us .container .card .header h3{
+        font-family: 'Oswald',sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+    }
+
+    .upcoming-activity{
+        width: 90%;
+        margin: auto;
+        margin-bottom: 100px;
+    }
+
+    .upcoming-activity-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .upcoming-activity-details .text{
+        width: 70%;
+    }
+    .upcoming-activity-details .text h2 {
+        font-family: 'Oswald', sans-serif;
+        color: #06040A;
+        /* font-family: 'Oswald'; */
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 40px;
+    }
+    .upcoming-activity-details .text p {
+        font-family: 'Poppins', sans-serif;
+        color: #06040A;
+        /* width: 60%; */
+        /* font-size: small; */
+        /* padding: 15px 0; */
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .upcoming-activity-details .activity-button a{
+        border: 1px solid #203B93;
+        border-radius: 7px;
+        color: #203B93;
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        font-size: small;
+        font-weight: bold;
+        padding: 15px 10px;
+        letter-spacing: 0.5px;
+        transition: 0.3s linear;
+    }
+
+    /* .upcoming-activity-details .activity-button a:hover {
+        background-color: #203B93;
+        border: none;
+        color: #fff;
+    } */
+
+    .upcoming-activity .upcoming-activity-card {
+        /* display: flex; */
+        align-items: center;
+        /* justify-content: space-between; */
+        margin-top: 30px;
+        /* width: 95%; */
+        margin: auto;
+    }
+
+    .activity-card {
+        width: 100%;
+        /* display: flex; */
+        align-items: center;
+        margin: auto;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding: 10px;
+    }
+
+    .activity-card img{
+        width: 100%;
+        /* margin: auto; */
+    }
+
+    .activity-card .activity-card-text {
+        /* padding-left: 20px; */
+    }
+
+    .activity-card .activity-card-text h3 {
+        font-family: 'Oswald', sans-serif;
+        color: #06040A;
+        font-weight: 500;
+        font-size: 25px;
+        line-height: 34px;
+    }
+
+    .activity-card .activity-card-text p {
+        /* font-size: x-small; */
+        /* width: 90%; */
+        color: #06040A;
+        font-family: 'Poppins', sans-serif;
+        padding: 5px 0;
+        font-weight: 400;
+    }
+
+    .activity-card .activity-card-text a {
+        color: #203B93;
+        font-weight: bold;
+    }
+
+    /* .activity-card img {
+        width: 300px;
+    } */
+
+    .tour {
+        width: 85%;
+        margin: auto;
+        margin-top: 4rem;
+        margin-bottom: 100px;
+    }
+    .tour .tour-text h2 {
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        color: #06040A;
+        text-align: center;
+    }
+
+    .tour .tour-video iframe{
+        display: block;
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+        margin: 25px auto 0 auto;
+    }
+
+    .news{
+        width: 90%;
+        margin: auto;
+        margin-bottom: 100px;
+    }
+}

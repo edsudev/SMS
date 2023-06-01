@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LiMGuUXHP5xo6gjaVgbOkiksqJEo66r4gErcJTCVFls=",
+  "Hash": "EoniRoI07+Ymy6d+DzTbSdFvM+zPtqwuiBvDkrdyPpQ=",
   "Source": "EDSU-SYSTEM",
   "BasePath": "_content/EDSU-SYSTEM",
   "Mode": "Default",
@@ -3757,12 +3757,12 @@
       "OriginalItemSpec": "wwwroot\\files\\exam.xlsx"
     },
     {
-      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\file\\2022-07-05 (1).png",
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\file\\Fatai sanni.pdf",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
       "BasePath": "_content/EDSU-SYSTEM",
-      "RelativePath": "files/magazines/file/2022-07-05 (1).png",
+      "RelativePath": "files/magazines/file/Fatai sanni.pdf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -3771,15 +3771,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\magazines\\file\\2022-07-05 (1).png"
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\file\\Fatai sanni.pdf"
     },
     {
-      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\image\\2022-07-05 (1).png",
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\file\\gloria.pdf",
       "SourceId": "EDSU-SYSTEM",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
       "BasePath": "_content/EDSU-SYSTEM",
-      "RelativePath": "files/magazines/image/2022-07-05 (1).png",
+      "RelativePath": "files/magazines/file/gloria.pdf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -3788,7 +3788,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\magazines\\image\\2022-07-05 (1).png"
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\file\\gloria.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\image\\interfacultysports.jpg",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/magazines/image/interfacultysports.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\image\\interfacultysports.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\magazines\\image\\Logo - Copy.png",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "files/magazines/image/Logo - Copy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\magazines\\image\\Logo - Copy.png"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\files\\OER\\courseware\\main\\a.png",
@@ -14635,6 +14669,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\portal\\images\\index\\Frame4.JPG"
+    },
+    {
+      "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\portal\\images\\index\\IMG_0554.JPG",
+      "SourceId": "EDSU-SYSTEM",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\",
+      "BasePath": "_content/EDSU-SYSTEM",
+      "RelativePath": "portal/images/index/IMG_0554.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\portal\\images\\index\\IMG_0554.JPG"
     },
     {
       "Identity": "C:\\Users\\SANNI PHATAII\\Desktop\\EDSU-Project\\EDSU-SYSTEM\\wwwroot\\portal\\images\\index\\Logo.png",
