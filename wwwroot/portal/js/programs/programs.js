@@ -5,7 +5,7 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Accountancy, B.Sc</h2>
+                    <h2>Accountancy,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -13,25 +13,25 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Animal and Environmental Biology, B.Sc</h2>
+                    <h2>Animal and Environmental Biology,  </h2>
                     <p>Faculty of Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Banking and Finance, B.Sc</h2>
+                    <h2>Banking and Finance,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -39,7 +39,7 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -47,19 +47,19 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>BioChemistry, B.Sc</h2>
+                    <h2>BioChemistry,  </h2>
                     <p>Faculty of Applied Health Science
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Business Administration, B.Sc</h2>
+                    <h2>Business Administration,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -67,19 +67,19 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Chemical Engineering, B.Eng</h2>
+                    <h2>Chemical Engineering,  </h2>
                     <p>Faculty of Engineering
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -87,38 +87,38 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Civil Engineering, B.Eng</h2>
+                    <h2>Civil Engineering,  </h2>
                     <p>Faculty of Engineering
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Computer Science, B.Sc</h2>
+                    <h2>Computer Science,  </h2>
                     <p>Faculty of 
                         Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Computer Engineering, B.Eng</h2>
+                    <h2>Computer Engineering,  </h2>
                     <p>Faculty of Engineering
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -126,7 +126,7 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Economics, B.Sc</h2>
+                    <h2>Economics,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -134,13 +134,13 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Entrepreneurship, B.Sc</h2>
+                    <h2>Entrepreneurship,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -148,13 +148,13 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>English Language, B.A</h2>
+                    <h2>English Language,</h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -162,7 +162,7 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -170,7 +170,7 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>History & International Studies, B.A</h2>
+                    <h2>History & International Studies,</h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -178,33 +178,33 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Human Anatomy, B.Sc</h2>
+                    <h2>Human Anatomy,  </h2>
                     <p>Faculty of
                         Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Industrial Chemistry, B.Sc</h2>
+                    <h2>Industrial Chemistry,  </h2>
                     <p>Faculty of
                         Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -212,7 +212,7 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Mass Communication, B.Sc</h2>
+                    <h2>Mass Communication,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -220,31 +220,31 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Mechanical, Engineering, B.Eng</h2>
+                    <h2>Mechanical Engineerin,  </h2>
                     <p>Faculty of Engineering
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Microbiology, BSc</h2>
-                    <p>Faculty of 
+                    <h2>Microbiology</h2>
+                    <p>Faculty of Science
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -252,19 +252,19 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Medical Lab. Science,BLMS</h2>
+                    <h2>Medical Lab. Science</h2>
                     <p>Faculty of Basic Medical Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Peace and Conflict Studies , B.Sc</h2>
+                    <h2>Peace and Conflict Studies   </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -272,20 +272,20 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Physics with Electronics, B.Sc</h2>
+                    <h2>Physics with Electronics </h2>
                     <p>Faculty of 
                         Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -293,31 +293,31 @@ class Programs extends HTMLElement {
         <div id="courses">
             <section>
                 <span id="span_1">
-                    <h2>Nursing, BNSc</h2>
+                    <h2>Nursing</h2>
                     <p>Faculty of Applied Health Science
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Physiology, B.Sc</h2>
+                    <h2>Physiology,  </h2>
                     <p>Faculty of Basic Medical Sciences
                     </p>
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Political Science &Public Administration, B.Sc</h2>
+                    <h2>Political Science &Public Administration,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -325,7 +325,7 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>
@@ -340,13 +340,13 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
 
             <section>
                 <span id="span_1">
-                    <h2>Sociology, B.Sc</h2>
+                    <h2>Sociology,  </h2>
                     <p>Faculty of Arts, Management
                         & Social
                         Sciences
@@ -354,7 +354,7 @@ class Programs extends HTMLElement {
                 </span>
                 <span id="span_2">
                     <a href="#">Show More</a>
-                    <img src="~/portal/images/programs/icons/circles.png"/>
+                    <img src="../../portal/images/programs/icons/circles.png"/>
                 </span>
             </section>
         </div>

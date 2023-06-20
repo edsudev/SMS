@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
+using static QRCoder.PayloadGenerator;
+using Mail = EDSU_SYSTEM.Models.Mail;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -15,11 +17,12 @@ namespace EDSU_SYSTEM.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public MailsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public MailsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _userManager = userManager;
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: mails
@@ -40,7 +43,7 @@ namespace EDSU_SYSTEM.Controllers
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StaffId;
             var staffEmail = (from s in _context.Staffs where s.Id == user select s.SchoolEmail).FirstOrDefault();
-            var sentMails = (from m in _context.Mails where m.From == staffEmail select m).Include(c => c.StaffTo);
+            var sentMails = (from m in _context.Mails where m.From == staffEmail select m).Include(c => c.To);
               return View(await sentMails.ToListAsync());
         } 
         public async Task<IActionResult> Spam()
@@ -48,21 +51,21 @@ namespace EDSU_SYSTEM.Controllers
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StaffId;
             var staffEmail = (from s in _context.Staffs where s.Id == user select s.SchoolEmail).FirstOrDefault();
-            var sentMails = (from m in _context.Mails where m.From == staffEmail select m).Include(c => c.StaffTo);
+            var sentMails = (from m in _context.Mails where m.From == staffEmail select m).Include(c => c.To);
               return View(await sentMails.ToListAsync());
         } 
         public async Task<IActionResult> Inbox()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StaffId;
-            var staffEmail = (from s in _context.Staffs where s.Id == user select s.Id).FirstOrDefault();
+            var staffEmail = (from s in _context.Staffs where s.Id == user select s.SchoolEmail).FirstOrDefault();
             var incomingMails = (from m in _context.Mails where m.To == staffEmail select m);
             return View(await incomingMails.ToListAsync());
         }public async Task<IActionResult> Draft()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StaffId;
-            var staffEmail = (from s in _context.Staffs where s.Id == user select s.Id).FirstOrDefault();
+            var staffEmail = (from s in _context.Staffs where s.Id == user select s.SchoolEmail).FirstOrDefault();
             var incomingMails = (from m in _context.Mails where m.To == staffEmail select m);
             return View(await incomingMails.ToListAsync());
         }
@@ -70,7 +73,7 @@ namespace EDSU_SYSTEM.Controllers
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
             var user = loggedInUser.StaffId;
-            var staffEmail = (from s in _context.Staffs where s.Id == user select s.Id).FirstOrDefault();
+            var staffEmail = (from s in _context.Staffs where s.Id == user select s.SchoolEmail).FirstOrDefault();
             var incomingMails = (from m in _context.Mails where m.To == staffEmail select m);
             return View(await incomingMails.ToListAsync());
         }
@@ -83,8 +86,8 @@ namespace EDSU_SYSTEM.Controllers
                 return NotFound();
             }
             var mail = (from m in _context.Mails where m.Id == id select m)
-                .Include(c => c.StaffThrough).Include(c => c.StaffThrough2)
-                .Include(c => c.StaffThrough3).FirstOrDefault();
+                .Include(c => c.Through).Include(c => c.Through2)
+                .Include(c => c.Through3).FirstOrDefault();
             //var mail = await _context.Mails
             //    .FirstOrDefaultAsync(m => m.Id == id);
             if (mail == null)
@@ -115,16 +118,40 @@ namespace EDSU_SYSTEM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Mail mail)
+        public async Task<IActionResult> Create(IFormFile file, Mail mail)
         {
-           
-                mail.From = (string?)TempData["email"]; 
+            try
+            {
+                if (file != null && file.Length > 0)
+                {
+                    var uploadDir = @"files/mails";
+                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    var extension = Path.GetExtension(file.FileName);
+                    var webRootPath = _hostingEnvironment.WebRootPath;
+
+                    fileName = fileName + extension;
+                    var path = Path.Combine(webRootPath, uploadDir, fileName);
+                    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                    {
+                        file.CopyTo(fs);
+                        mail.File = fileName;
+
+                    }
+                }
+                
+                mail.From = (string?)TempData["email"];
                 mail.CreatedAt = DateTime.Now;
                 _context.Add(mail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-           
-        } 
+            }
+            catch (Exception)
+            {
+                return NotFound();
+                throw;
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Draft(Mail mail)

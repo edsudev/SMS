@@ -1,126 +1,100 @@
-﻿@model EDSU_SYSTEM.Models.Mail
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<div class="main-container" id="container">
-    <partial name="_StaffDashboardPartial" />
-    <!--  BEGIN CONTENT AREA  -->
-    <div id="content" class="main-content">
-        <div class="layout-px-spacing">
-            <div class="row layout-spacing">
-
-                <!-- Content -->
-                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 mx-auto layout-top-spacing">
-                    <div class="widget-content widget-content-area br-6 row">
-                        <div class="border-right col-2">
-                            <div class="col-md-12 col-sm-12 col-12 text-center mail-btn-container">
-                                <a class="btn btn-dark my-4" data-toggle="ajax-modal" data-target="#addCourseware" data-url="@Url.Action("Create")">
-                                    <i data-feather="plus"></i>
-                                </a>
-                                <div class="mail-sidebar-scroll">
-                                    <ul class="nav nav-pills d-block" id="pills-tab" role="tablist">
-                                        <li class="pb-2 pt-1 border-bottom border-top text-center">
-                                            <a asp-action="index" class="list-actions text-primary"  id="mailInbox">
-                                                <i data-feather="inbox"></i><br /><span class="icon-name"> Inbox</span>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 border-bottom text-center">
-                                            <a asp-action="important" class="list-actions text-dark" id="important">
-                                                <i data-feather="star"></i><br /><span class="icon-name">Important</span>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 border-bottom text-center">
-                                            <a asp-action="draft" class="nav-link list-actions text-dark" id="draft">
-                                                <i data-feather="mail"></i><br /><span class="icon-name"> Draft</span>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 border-bottom text-center">
-                                            <a asp-action="sent" class="nav-link list-actions text-dark" id="sentmail">
-                                                <i data-feather="send"></i><br /><span class="icon-name"> Sent Mail</span>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 border-bottom text-center">
-                                            <a asp-action="spam" class="nav-link list-actions text-dark" id="spam">
-                                                <i data-feather="alert-octagon"></i><br /><span class="icon-name"> Spam</span>
-                                            </a>
-                                        </li>
-                                        <li class="py-2 text-center">
-                                            <a asp-action="trash" class="nav-link list-actions text-dark" id="trashed">
-                                                <i data-feather="trash"></i><br /><span class="icon-name"> Trash</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+﻿@model Mail
+@using static EDSU_SYSTEM.Models.Enum
+<!-- Modal -->
+<div class="modal fade" id="composeMailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="modal"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <div class="compose-box">
+                    <div class="compose-content">
+                        <form asp-action ="Create" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-form">
+                                        <p>From:</p>
+                                        <input asp-for="From" disabled value="@ViewBag.email" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-form">
+                                        <p>To:</p>
+                                        <input asp-for="To" placeholder="john.doe@edouniversity.edu.ng" class="form-control" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class=" col-10">
-                            <form asp-action="Create" enctype="multipart/form-data">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="From" class="control-label">From:</label>
-                                        <input asp-for="From" disabled value="@ViewBag.email" class="form-control basic" />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="To" class="control-label">To:</label>
-                                        <input asp-for="To" class="form-control" placeholder="john.doe@edouniversity.edu.ng" />
-                                       
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-form">
+                                        <input asp-for="Through" placeholder="Through: john.doe@edouniversity.edu.ng" class="form-control" />
+
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="Through2" class="control-label">Through (Optional):</label>
-                                         <select asp-for="Through2" class="form-control basic">
-                                             <option>Select</option>
-                                         </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="Through2" class="control-label">Through (Optional):</label>
-                                         <select asp-for="Through2" class="form-control basic">
-                                             <option>Select</option>
-                                             <option>Select</option>
-                                         </select>
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-form">
+                                        <input asp-for="Through2" placeholder="Through: john.doe@edouniversity.edu.ng" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label asp-for="Through2" class="control-label">Through (Optional):</label>
-                                    <select asp-for="Through2" class="form-control basic">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="Subject" class="control-label">Subject:</label>
-                                        <input asp-for="Subject" class="form-control" />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label asp-for="File" class="control-label">Attach File:</label>
-                                        <input asp-for="File" class="form-control" type="file" name="upload"/>
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-form">
+                                        <input asp-for="Through3" placeholder="Through: john.doe@edouniversity.edu.ng" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="Message" class="control-label">Message:</label>
-                                    <textarea asp-for="Message" class="form-control"></textarea>
+                            </div>
+
+                           @* <div class="row">
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-to">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        <div class="">
+                                            <input type="email" id="m-to" placeholder="To" class="form-control">
+                                            <span class="validation-text"></span>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <input type="submit" value="Send" class="btn btn-primary" />
-                                    <input type="submit" value="Save" class="btn btn-warning" />
-                                    <input type="submit" value="Discard" class="btn btn-danger" />
+                                <div class="col-md-6">
+                                    <div class="d-flex mb-4 mail-cc">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+                                        <div>
+                                            <input type="text" id="m-cc" placeholder="Cc" class="form-control">
+                                            <span class="validation-text"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>*@
+
+                            <div class="d-flex mb-4 mail-subject">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <div class="w-100">
+                                    <input type="text" asp-for="Subject" id="m-subject" placeholder="Subject" class="form-control">
+                                    <span class="validation-text"></span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <input type="file" name="file" class="form-control-file" id="mail_File_attachment" multiple="multiple">
+                            </div>
+                            <div class="d-flex mt-5 mb-4 mail-subject">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <div class="w-100 h-100">
+                                    <textarea type="text" asp-for="Message" id="m-subject" placeholder="Message" class="form-control"></textarea>
+                                    <span class="validation-text"></span>
+                                </div>
+                            </div>
+<div class="modal-footer">
+                                @*<button id="btn-save" class="btn float-left"> Save</button>*@
+
+                <button class="btn" data-dismiss="modal"> <i class="flaticon-delete-1"></i> Discard</button>
+
+      <button id="btn-send" class="btn"> Send</button>
+            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
-    <!--  END CONTENT AREA  -->
 </div>
-<!-- END MAIN CONTAINER -->
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+

@@ -13,7 +13,7 @@
                 <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
                     <div class="bio layout-spacing ">
                         <div class="widget-content widget-content-area br-4 p-3">
-                            <h3 class="text-center">EDSU STUDENTS STATS</h3>
+                            <h3 class="text-center">EDSU STAFF/STUDENTS STATS</h3>
                             <div class="bio-skill-box">
                                 <div class="row">
                                     <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
@@ -21,22 +21,29 @@
                                         <div class="d-flex b-skills">
                                             <div class="">
                                                 <h5>Male Students: <span class="badge outline-badge-info">@ViewBag.MaleStudents</span></h5>
-                                                <br/>
+                                               
                                                 <h5>Female Students: <span class="badge outline-badge-info">@ViewBag.FemaleStudents</span></h5>
                                             </div>
                                         </div>
 
                                     </div>
+                                    <div class="col-12 col-xl-6 col-lg-12 mb-xl-0 mb-5 ">
+                                        <h4>All Staff</h4>
+                                        <div class="d-flex b-skills">
+                                           
+                                            <div class="">
+                                                <h5>Male Staff: <span class="badge outline-badge-info">@ViewBag.MaleStaff</span></h5>
+                                                <h5>Female Staff: <span class="badge outline-badge-info">@ViewBag.FemaleStaff</span></h5>
 
+                                            </div>
+                                        </div>
+
+                                    </div>
                                     <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
                                         <h4>Departmental Students</h4>
                                         <div class="d-flex b-skills">
                                             <div class="">
-                                                @*@foreach (var item in ViewBag.dpt)
-                                                {
-                                                <h5>@item.Name : <span class="badge outline-badge-info">@ViewBag.DeptStudents</span></h5>
                                                
-                                                }*@
                                                 @foreach (var kvp in ViewBag.DeptStudentsCounts)
                                                 {
                                                     <p>@kvp.Key: <span class="badge outline-badge-info">@kvp.Value</span></p>
@@ -47,28 +54,17 @@
 
                                     </div>
 
-                                    <div class="col-12 col-xl-6 col-lg-12 mb-xl-0 mb-5 ">
-                                        <h4>All Staffs</h4>
+                                    
+
+                                    <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
+                                        <h4>Academic/Non-Academic Staff</h4>
                                         <div class="d-flex b-skills">
-                                            <div>
-                                            </div>
                                             <div class="">
-                                                <h5>Male Staffs: <span class="badge outline-badge-info">@ViewBag.MaleStaffs</span></h5>
-                                                <h5>Female Staffs: <span class="badge outline-badge-info">@ViewBag.FemaleStaffs</span></h5>
                                                 
-                                            </div>
-                                        </div>
+                                                <h5>Academic: <span class="badge outline-badge-info">@ViewBag.AcadStaff</span></h5>
+                                                <h5>Non-Academic: <span class="badge outline-badge-info">@ViewBag.NonAcadStaff</span></h5>
 
-                                    </div>
 
-                                    <div class="col-12 col-xl-6 col-lg-12 mb-xl-0 mb-0 ">
-
-                                        <div class="d-flex b-skills">
-                                            <div>
-                                            </div>
-                                            <div class="">
-                                                <h5></h5>
-                                                <p>@ViewBag.FemaleStudents</p>
                                             </div>
                                         </div>
 

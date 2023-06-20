@@ -1,0 +1,92 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.LatestNews>
+<partial name="_Nav" />
+<style>
+    #text-content{
+        max-height: 3em;
+        overflow: hidden;
+    }
+
+        #text-content.expanded {
+            max-height: none;
+            overflow: visible;
+        }
+</style>
+<section class="news">
+
+    <div class="heading">
+        <h1>News</h1>
+    </div>
+
+    <div class="news-details">
+
+        <div class="featured">
+
+            <img src="~/portal/images/news/news-image.png" alt="students of the university">
+            <div class="profile">
+                <div class="profile-name">
+                    <p>Mr. Osasenaga Joshua</p>
+                </div>
+                
+                <div class="scrollable-div" style="height: 300px; overflow-y: auto">
+                    <p class="profile-description">SRC PRESIDENT</p>
+                    <p class="profile-text" id="text-content" style="">
+                        Good day my dear student! It is with great pleasure and honor that I stand before you today as the Student Representative Council President of this world class Institution. On behalf of the Student Representative Council, I would like to extend a warm welcome to each and every one of you.
+                        It is a privilege to serve as the voice and representative of our vibrant and diverse student community. I am humbled by the opportunity to work alongside such brilliant minds and enthusiastic individuals who make up our Student Representative Council.
+                        Our time at Edo State University Uzairue is not just about academic pursuits; it is a transformative phase of our lives. We are here to learn, grow, and embrace new experiences that will shape our futures. Let us take a moment to reflect on the remarkable journey that lies ahead of us.
+                        Together, we have the power to create our dream environment that fosters academic excellence, personal growth, and a sense of belonging. As your student president, I promise to dedicate myself wholeheartedly to this mission. I will strive to be a proactive advocate for your needs and concerns, working tirelessly to ensure we all have a world class experience in this world class institution.
+                        It is important for us to remember that we are not just students but also ambassadors of our institution. We have the opportunity to leave a lasting impact on our community, both within these walls and beyond. Let us seize every chance to make positive changes, engage in meaningful conversations, and contribute to the betterment of society.
+                        In the remaining part of this academic academic year, I encourage all of you to actively participate in various clubs, organizations, and events that align with your interests and passions. These extracurricular activities provide avenues for personal growth, leadership development, and forging lifelong friendships. They enrich our time here and help us become well-rounded individuals.
+                        Lastly, I want to emphasize the importance of collaboration and unity. Together, we can achieve great things. I urge you to embrace diversity, celebrate our differences, and foster an environment of mutual respect. Let us create a space where everyone feels heard, valued, and supported.
+                        I am confident that, with our collective efforts and shared vision, we can make this academic year one filled with memorable accomplishments and profound growth. Thank you for your trust, and I am excited to embark on this incredible journey alongside each and every one of you.
+                    </p>
+                    <button id="read-more-btn">Read more</button>
+                </div>
+                
+                
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="latest-news">
+
+    <div class="latest-news-heading">
+        <h1>Latest News</h1>
+    </div>
+
+    <div class="latest-news-card">
+        @foreach (var item in Model.Where(x => x.isActive == true))
+        {
+            <div class="latest-news-card-body">
+                <img src="~/portal/images/news/group-picture.png" alt="">
+                <p class="text-heading">@item.Title.ToUpper()</p>
+                <p class="text-details">
+                    @item.Body
+                </p>
+            </div>
+        }
+    </div>
+
+</section>
+
+<app-newsletter></app-newsletter>
+<partial name="_Footer"/>
+<script>
+    var content = document.getElementById('text-content');
+    var button = document.getElementById('read-more-btn');
+    var buttonText = button.innerHTML;
+
+    button.addEventListener('click', function () {
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            button.innerHTML = buttonText;
+        } else {
+            content.classList.add('expanded');
+            button.innerHTML = 'Read less';
+        }
+    });
+</script>
+

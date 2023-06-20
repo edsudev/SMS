@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EDSU_SYSTEM.Areas.Identity.Pages.Account
 {
@@ -73,22 +74,32 @@ namespace EDSU_SYSTEM.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null, string returnUrl1 = null, string returnUrl2 = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl1 = null, string remoteError = null)
         {
-            returnUrl ??= Url.Content("~/Identity/Account/Login");
+           
             returnUrl1 ??= Url.Content("~/");
-            returnUrl2 ??= Url.Content("~/staffs");
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+           ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             //if (ModelState.IsValid)
             //{
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                ModelState.AddModelError(string.Empty, "Error loading external login information");
+                return Page();
+            }
+            //var externalSignInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+            //    info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            //if (externalSignInResult.Succeeded)
+            //{
+            //    return LocalRedirect(returnUrl1);
+            //}
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                
                 return LocalRedirect(returnUrl1);
             }
                 if (result.RequiresTwoFactor)

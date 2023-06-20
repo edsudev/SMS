@@ -1,23 +1,12 @@
-﻿using CanvasApi.Client.Users.Models;
-using EDSU_SYSTEM.Data;
-using EDSU_SYSTEM.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using EDSU_SYSTEM.Data;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Numeric;
-using RestSharp;
-using RestSharp.Authenticators;
-using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace EDSU_SYSTEM.Controllers
 {
-    
+
     public class Canvas : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -151,7 +140,7 @@ namespace EDSU_SYSTEM.Controllers
             
             var currentSession = _context.Sessions.FirstOrDefault(x => x.IsActive == true);
             var courses = (from s in _context.CourseRegistrations where s.Students.SchoolEmailAddress == id && s.SessionId == currentSession.Id && s.Status == Models.Enum.MainStatus.Approved select s.Courses.Code).ToList();
-            var student = (from x in users where x.Email == id select x.Id).FirstOrDefault();
+            var student = (from x in users where x.Email == id select x.Email).FirstOrDefault();
             Console.WriteLine("This is the student ID: " + student);
 
             using (var client = new HttpClient())

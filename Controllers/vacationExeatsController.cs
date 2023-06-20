@@ -9,6 +9,7 @@ using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using static EDSU_SYSTEM.Models.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -48,14 +49,14 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(vacationExeat);
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         // GET: vacationExeats/Create
         public IActionResult Create()
         {
             ViewData["HallId"] = new SelectList(_context.Hostels, "Id", "Name");
             return View();
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         // POST: vacationExeats/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -83,6 +84,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction(nameof(History));
 
         }
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);

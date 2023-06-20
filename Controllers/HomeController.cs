@@ -86,7 +86,8 @@ namespace EDSU_SYSTEM.Controllers
         }
         public IActionResult Events()
         {
-            return View();
+            var events = (from s in _context.Events select s).ToList();
+            return View(events);
         }
          public IActionResult Magazines()
         {

@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var configuration = builder.Configuration;
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -18,6 +20,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
 
+
 builder.Services.AddControllersWithViews()
           .AddNewtonsoftJson();
 builder.Services.AddMvc()
@@ -25,6 +28,21 @@ builder.Services.AddMvc()
 //builder.Services.AddMvc()
 //            .AddCharts();
 
+services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+services.AddAuthentication()
+   .AddGoogle(options =>
+   {
+       options.ClientId = "1092598967837-61co2d54krtj4adc0onhoglnhol632u3.apps.googleusercontent.com";
+       options.ClientSecret = "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";
+   });
+
+services.AddMvc();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,9 +57,6 @@ var app = builder.Build();
 //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 //    app.UseHsts();
 //}
-
-
-
 
 
 app.UseHttpsRedirection();
@@ -60,31 +75,27 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddSession(options =>
-        {
-            options.Cookie.IsEssential = true;
-            options.Cookie.HttpOnly = true;
-            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
-        });
-        //services.Configure<IdentityOptions>(options =>
-        //{
-        //    options.Password.RequireDigit = false;
-        //    options.Password.RequireLowercase = false;
-        //    options.Password.RequireUppercase = false;
-        //    options.Password.RequireNonAlphanumeric = false;
-        //    options.Password.RequiredLength = 6;
-        //});
 
-        //services.AddIdentity<ApplicationUser, IdentityRole>()
-        //        .AddEntityFrameworkStores<ApplicationDbContext>()
-        //        .AddDefaultTokenProviders();
+//public class Startup
+//{
+//    public void ConfigureServices(IServiceCollection services)
+//    {
+       
+//        //services.Configure<IdentityOptions>(options =>
+//        //{
+//        //    options.Password.RequireDigit = false;
+//        //    options.Password.RequireLowercase = false;
+//        //    options.Password.RequireUppercase = false;
+//        //    options.Password.RequireNonAlphanumeric = false;
+//        //    options.Password.RequiredLength = 6;
+//        //});
+
+//        //services.AddIdentity<ApplicationUser, IdentityRole>()
+//        //        .AddEntityFrameworkStores<ApplicationDbContext>()
+//        //        .AddDefaultTokenProviders();
 
 
-        services.AddMvc();
-    }
-}
+
+       
+//    }
+//}

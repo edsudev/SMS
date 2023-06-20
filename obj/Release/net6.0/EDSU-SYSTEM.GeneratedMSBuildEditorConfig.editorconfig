@@ -851,6 +851,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVwcmVudXJlc2hpcHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Error/AuthError.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcQXV0aEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Error/BadReq.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcQmFkUmVxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -1019,6 +1023,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/About - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -1063,12 +1071,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYWdhemluZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/News - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdzIC0gQ29weS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/News.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/Partners.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQYXJ0bmVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/Programs - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9ncmFtcyAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/Home/Programs.cshtml]

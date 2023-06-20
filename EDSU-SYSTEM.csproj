@@ -17,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="CanvasApi.Client" Version="2.0.57" />
     <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
@@ -27,7 +28,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     <PackageReference Include="QRCoder" Version="1.4.1" />
@@ -775,7 +776,10 @@
     <Folder Include="wwwroot\files\magazines\image\" />
     <Folder Include="wwwroot\files\activities\" />
     <Folder Include="wwwroot\files\latestNews\" />
+    <Folder Include="wwwroot\files\mails\" />
     <Folder Include="wwwroot\files\Ugprojectprogress\" />
+    <Folder Include="wwwroot\portal\images\activity\" />
+    <Folder Include="wwwroot\portal\images\event\" />
   </ItemGroup>
 
   <ItemGroup>

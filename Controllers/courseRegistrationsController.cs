@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
+
+    [Authorize]
     public class CourseRegistrationsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,7 +27,7 @@ namespace EDSU_SYSTEM.Controllers
             _userManager = userManager;
             _context = context;
         }
-        //[Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         // GET: courseRegistrations
         public async Task<IActionResult> Index()
         {
@@ -47,7 +49,7 @@ namespace EDSU_SYSTEM.Controllers
             
             
         }
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History()
         {
             
@@ -55,7 +57,7 @@ namespace EDSU_SYSTEM.Controllers
            
             return View(await sessions.ToListAsync());
         }
-        //[Authorize(Roles = "Level Adviser")]
+        [Authorize(Roles = "levelAdviser")]
         // GET: My students
         public async Task<IActionResult> Pending()
         {
@@ -75,6 +77,7 @@ namespace EDSU_SYSTEM.Controllers
             }
             return View(Levelstudents);
         }
+        [Authorize(Roles = "levelAdviser")]
         public async Task<IActionResult> Approved()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -91,7 +94,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(Levelstudents);
 
         }
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student")]
         public async Task<IActionResult> Summary(string id)
         {
             try
@@ -206,7 +209,7 @@ namespace EDSU_SYSTEM.Controllers
             //var iid = courseRegistration.Students.SchoolEmailAddress;
             return RedirectToAction("pending", "courseregistrations");
         }
-        
+        [Authorize(Roles = "levelAdviser")]
         public async Task<IActionResult> Approve(string code, string student)
         {
              
@@ -258,7 +261,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(courseRegistration);
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         // GET: courseRegistrations/Create
         public async Task<IActionResult> First()
         {
@@ -270,7 +273,7 @@ namespace EDSU_SYSTEM.Controllers
                 .Include(c => c.Departments).Include(c => c.Semesters).Include(c => c.Levels);
 
             //Getting Credit unit Info
-            var creditunit = (from c in _context.CreditUnits where c.DepartmentId == student.Department && c.LevelId == student.Level select c).FirstOrDefault();
+            var creditunit = (from c in _context.CreditUnits where c.DepartmentId == student.Department && c.LevelId == student.Level && c.SemesterId == 1 select c).FirstOrDefault();
             ViewBag.max = creditunit.Max;
 
             var NoOfCoursesRegInFirstSemester = (from c in _context.CourseRegistrations where c.StudentId == userId.StudentsId && c.Courses.Semester == 1 select c).Include(c => c.Courses).ToList();
@@ -295,9 +298,9 @@ namespace EDSU_SYSTEM.Controllers
                 return RedirectToAction("badreq", "error");
                 throw;
             }
-            
+
         }
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Second()
         {
             try
@@ -308,7 +311,7 @@ namespace EDSU_SYSTEM.Controllers
                     .Include(c => c.Departments).Include(c => c.Semesters).Include(c => c.Levels);
 
                 //Getting Credit unit Info
-                var creditunit = (from c in _context.CreditUnits where c.DepartmentId == student.Department && c.LevelId == student.Level select c).FirstOrDefault();
+                var creditunit = (from c in _context.CreditUnits where c.DepartmentId == student.Department && c.LevelId == student.Level && c.SemesterId == 2 select c).FirstOrDefault();
                 ViewBag.max = creditunit.Max;
 
                 var NoOfCoursesRegInSecondSemester = (from c in _context.CourseRegistrations where c.StudentId == userId.StudentsId && c.Courses.Semester == 2 select c).Include(c => c.Courses).ToList();
@@ -335,24 +338,8 @@ namespace EDSU_SYSTEM.Controllers
 
         }
 
-        // POST: courseRegistrations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseId,StudentId,Comment,Status,CreatedAt,DateApproved")] CourseRegistration courseRegistration)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(courseRegistration);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", courseRegistration.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", courseRegistration.StudentId);
-            return View(courseRegistration);
-        }
-       // [Authorize(Roles = "student")]
+        
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> AddCourse(string id, CourseRegistration courseRegistration)
         {
             try
@@ -393,61 +380,8 @@ namespace EDSU_SYSTEM.Controllers
             }
             
         }
-        // GET: courseRegistrations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.CourseRegistrations == null)
-            {
-                return NotFound();
-            }
-
-            var courseRegistration = await _context.CourseRegistrations.FindAsync(id);
-            if (courseRegistration == null)
-            {
-                return NotFound();
-            }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", courseRegistration.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", courseRegistration.StudentId);
-            return View(courseRegistration);
-        }
-
-        // POST: courseRegistrations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseId,StudentId,Comment,Status,CreatedAt,DateApproved")] CourseRegistration courseRegistration)
-        {
-            if (id != courseRegistration.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(courseRegistration);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CourseRegistrationExists(courseRegistration.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", courseRegistration.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", courseRegistration.StudentId);
-            return View(courseRegistration);
-        }
-     //   [Authorize(Roles = "student")]
+       
+        [Authorize(Roles = "student, superAdmin")]
         // GET: courseRegistrations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -467,7 +401,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return PartialView("_delete",courseRegistration);
         }
-     //   [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         // POST: courseRegistrations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -1,10 +1,14 @@
 ﻿
 @model IEnumerable<EDSU_SYSTEM.Models.Slider>
-<partial name="_Nav" />
- 
+
+    <div class="nav row">
+        <app-navigaton class="col-md-11"></app-navigaton>
+        <partial name="_LoginPartial" class="col-md-1"/>
+    </div>
+
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="margin-top:20px;">
        
-        <div class="carousel-inner">
+        <div class="carousel-inner">        
              @{
             var first = true;
         }
@@ -80,7 +84,6 @@
         </div>
     </section>
 
-    <!-- Inu John's section -->
 
     <div class="widget-one upcoming-activity p-3">
         <div class="upcoming-activity-details row">
@@ -142,7 +145,7 @@
                 </p>
             </div>
 
-            <div class="activity-button col-md-2 col-2">
+            <div class="activity-button col-md-2 col-12">
             <a asp-action ="news" asp-controller="home" target="_blank">
                     Load More
                 </a>

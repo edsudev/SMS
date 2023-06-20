@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Create";
 }
-<partial name="_Nav"/>
+
+    <div class="nav row">
+        <app-navigaton class="col-md-11"></app-navigaton>
+        <partial name="_LoginPartial" class="col-md-1"/>
+    </div>
 <!--  BEGIN CONTENT AREA  -->
 
 <div id="fs2Basic" class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">

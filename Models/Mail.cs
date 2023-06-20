@@ -10,14 +10,14 @@ namespace EDSU_SYSTEM.Models
 
         public string? MailId { get; set; }    
         public string? From { get; set; }
-        [ForeignKey("StaffTo")]
-        public int? To { get; set; }
-        [ForeignKey("StaffThrough")]
-        public int? Through { get; set; }
-        [ForeignKey("StaffThrough2")]
-        public int? Through2 { get; set; }
-        [ForeignKey("StaffThrough3")]
-        public int? Through3 { get; set; }
+        
+        public string? To { get; set; }
+        
+        public string? Through { get; set; }
+        
+        public string? Through2 { get; set; }
+     
+        public string? Through3 { get; set; }
         public string? Subject { get; set; }
         public string? File { get; set; }
         //When forwarded, this status changes and that is the only time the "To" can see it
@@ -33,9 +33,6 @@ namespace EDSU_SYSTEM.Models
         public DateTime? UpdateDate { get; set; }
 
         //Foreign Keys
-        public Staff? StaffThrough { get; set; }
-        public Staff? StaffThrough2 { get; set; }
-        public Staff? StaffThrough3 { get; set; }
-        public Staff? StaffTo { get; set; }
+      
     }
 }

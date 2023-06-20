@@ -2214,8 +2214,8 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Acknowledgment")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("Acknowledgment")
+                        .HasColumnType("int");
 
                     b.Property<string>("CC")
                         .HasColumnType("longtext");
@@ -2395,17 +2395,17 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Subject")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("Through")
-                        .HasColumnType("int");
+                    b.Property<string>("Through")
+                        .HasColumnType("longtext");
 
-                    b.Property<int?>("Through2")
-                        .HasColumnType("int");
+                    b.Property<string>("Through2")
+                        .HasColumnType("longtext");
 
-                    b.Property<int?>("Through3")
-                        .HasColumnType("int");
+                    b.Property<string>("Through3")
+                        .HasColumnType("longtext");
 
-                    b.Property<int?>("To")
-                        .HasColumnType("int");
+                    b.Property<string>("To")
+                        .HasColumnType("longtext");
 
                     b.Property<bool?>("Trash")
                         .HasColumnType("tinyint(1)");
@@ -2414,14 +2414,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Through");
-
-                    b.HasIndex("Through2");
-
-                    b.HasIndex("Through3");
-
-                    b.HasIndex("To");
 
                     b.ToTable("Mails");
                 });
@@ -3808,7 +3800,7 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("isActive")
+                    b.Property<bool>("isActive")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
@@ -5820,33 +5812,6 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("Levels");
 
                     b.Navigation("Staffs");
-                });
-
-            modelBuilder.Entity("EDSU_SYSTEM.Models.Mail", b =>
-                {
-                    b.HasOne("EDSU_SYSTEM.Models.Staff", "StaffThrough")
-                        .WithMany()
-                        .HasForeignKey("Through");
-
-                    b.HasOne("EDSU_SYSTEM.Models.Staff", "StaffThrough2")
-                        .WithMany()
-                        .HasForeignKey("Through2");
-
-                    b.HasOne("EDSU_SYSTEM.Models.Staff", "StaffThrough3")
-                        .WithMany()
-                        .HasForeignKey("Through3");
-
-                    b.HasOne("EDSU_SYSTEM.Models.Staff", "StaffTo")
-                        .WithMany()
-                        .HasForeignKey("To");
-
-                    b.Navigation("StaffThrough");
-
-                    b.Navigation("StaffThrough2");
-
-                    b.Navigation("StaffThrough3");
-
-                    b.Navigation("StaffTo");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.OerConferencePaper", b =>

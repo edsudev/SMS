@@ -31,7 +31,7 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.UgProgresses.Include(u => u.Students).ThenInclude(u => u.Students).Include(u => u.Supervisors).ThenInclude(u => u.Lecturers);
             return View(applicationDbContext.ToList());
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History()
         {
             var applicationDbContext = _context.UgProgresses.Include(u => u.Programs).Include(u => u.Students).Include(u => u.Supervisors);
@@ -60,7 +60,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: projectProgress/Create
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Create()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -72,8 +72,8 @@ namespace EDSU_SYSTEM.Controllers
 
         // POST: projectProgress/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-      //  // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[Authorize(Roles = "student")]
+        //  // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "student, superAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IFormFile uplaod, UgProgress ugProgress)

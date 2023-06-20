@@ -143,8 +143,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Faculties.Name</p>
-
+                                    @*<p>@Model.Faculties.Name</p>*@
+                                    @if (Model.Faculties != null)
+                                        {
+                                            @Model.Faculties.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
                                 </div>
                             </div>
                             <div class="item-timeline">
@@ -154,8 +161,15 @@
                                 <div class="t-dot">
                                 </div>
                                 <div class="t-text">
-                                    <p>@Model.Departments.Name</p>
-
+                                    @*<p>@Model.Departments.Name</p>*@
+                                    @if (Model.Departments != null)
+                                        {
+                                            @Model.Departments.Name
+                                        }
+                                        else
+                                        {
+                                            @("N/A")
+                                        }
                                 </div>
                             </div>
                             <div class="item-timeline">

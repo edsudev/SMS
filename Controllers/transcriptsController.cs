@@ -27,7 +27,7 @@ namespace EDSU_SYSTEM.Controllers
         {
               return View(await _context.Transcripts.ToListAsync());
         }
-        //[Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -53,19 +53,19 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(transcript);
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public IActionResult Requirements()
         {
             return View();
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public IActionResult Apply()
         {
 
             ViewData["programme"] = new SelectList(_context.Programs, "Id", "NameOfProgram");
             return View();
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         // POST: transcripts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -83,7 +83,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction(nameof(History));
             
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         // GET: transcripts/Edit/5
         public IActionResult Edit(string? id)
         {

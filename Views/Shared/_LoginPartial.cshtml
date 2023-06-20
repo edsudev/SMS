@@ -1,47 +1,71 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+<style>
+    .cycle-letter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        background-color: grey;
+        color: white;
+        text-transform: uppercase;
+    }
 
-<ul class="d-flex">
-@if (SignInManager.IsSignedIn(User))
-{
-    
-    <li class="">
-            @{
-                var user = UserManager.GetUserAsync(ViewContext.HttpContext.User).Result;
-            }
-            @if (user != null && user.Type == 1)
-            {
-                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="students">Dashboard</a>
-            }@if (user != null && user.Type == 2)
-            {
-                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="staffs">Dashboard</a>
-            }@if (user != null && user.Type == 3)
-            {
-                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="pgstudents">Dashboard</a>
-            }@if (user != null && user.Type == 4)
-            {
-                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="conversionstudents">Dashboard</a>
-            }@if (user != null && user.Type == 5)
-            {
-                <a class="btn btn-dark mr-1" asp-action="index" asp-controller="parents">Dashboard</a>
-            }
-        
-        @*<a  class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>*@
-    </li>
-    <li class="">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="btn btn-link text-dark">Logout!</button>
-        </form>
-    </li>
-}
-else
-{
-        <li class="mr-3">
-            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-        <li class="">
-            <a class="btn btn-success" href="edouniversity.instructure.com">LMS</a>
-        </li>
-}
-</ul>
+
+</style>
+    <ul class="d-flex my-auto login" style="list-style:none">
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+            <li class="">
+                @{
+                    var user = UserManager.GetUserAsync(ViewContext.HttpContext.User).Result;
+                }
+                @if (user != null && user.Type == 1)
+                {
+                    <a class="" asp-action="index" asp-controller="students"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
+                }@if (user != null && user.Type == 2)
+                {
+                    <a class="" asp-action="index" asp-controller="staffs"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
+                }@if (user != null && user.Type == 3)
+                {
+                    <a class="" asp-action="index" asp-controller="pgstudents"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
+                }@if (user != null && user.Type == 4)
+                {
+                    <a class="" asp-action="index" asp-controller="conversionstudents"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
+                }@if (user != null && user.Type == 5)
+                {
+
+                    <a class="" asp-action="index" asp-controller="parents"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
+                }
+
+           @* <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                
+            </a>*@
+
+            </li>
+
+            <li class="">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    @*<button type="submit" class="btn btn-link text-dark">Logout!</button>*@
+                @*<div class="icon-container">
+                    <i data-feather="log-out"></i><span class="icon-name"></span>
+                </div>*@
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="mr-3">
+                <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+            @*<li class="">
+                <a class="btn btn-success" href="edouniversity.instructure.com">LMS</a>
+            </li>*@
+        }
+    </ul>
+
+

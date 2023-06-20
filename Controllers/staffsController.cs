@@ -10,9 +10,11 @@ using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
+    //[Authorize(Roles = "staff, superAdmin")]
     public class StaffsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -96,40 +98,24 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.Staffs.Include(i => i.Departments).Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
         }
-        //public async Task<IActionResult> Stats()
-        //{
-        //    var male = (from c in _context.Students where c.Sex == "Male" select c).ToList();
-        //    var female = (from c in _context.Students where c.Sex == "Female" select c).ToList();
-        //    ViewBag.MaleStudents = male.Count();
-        //    ViewBag.FemaleStudents = female.Count();
-
-        //    //Staffs
-        //    var maleStaffs = (from c in _context.Staffs where c.Sex == "Male" select c).ToList();
-        //    var femaleStaffs = (from c in _context.Staffs where c.Sex == "Female" select c).ToList();
-        //    ViewBag.MaleStaffs = maleStaffs.Count();
-        //    ViewBag.FemaleStaffs = femaleStaffs.Count();
-
-        //    var department = (from c in _context.Departments select c).ToList();
-        //    ViewBag.dpt = department;
-        //    foreach (var item in department)
-        //    {
-        //        var male1 = (from c in _context.Students where c.Department == item.Id select c).ToList();
-        //        ViewBag.DeptStudents = male1.Count();
-        //    }
-        //    return View();
-        //}
         public async Task<IActionResult> Stats()
         {
-            var male = (from c in _context.Students where c.Sex == "Male" select c).ToList();
-            var female = (from c in _context.Students where c.Sex == "Female" select c).ToList();
+            var male = (from c in _context.Students where c.Sex == "M" select c).ToList();
+            var female = (from c in _context.Students where c.Sex == "F" select c).ToList();
             ViewBag.MaleStudents = male.Count();
             ViewBag.FemaleStudents = female.Count();
 
             //Staffs
-            var maleStaffs = (from c in _context.Staffs where c.Sex == "Male" select c).ToList();
-            var femaleStaffs = (from c in _context.Staffs where c.Sex == "Female" select c).ToList();
-            ViewBag.MaleStaffs = maleStaffs.Count();
-            ViewBag.FemaleStaffs = femaleStaffs.Count();
+            var maleStaff = (from c in _context.Staffs where c.Sex == "M" select c).ToList();
+            var femaleStaff = (from c in _context.Staffs where c.Sex == "F" select c).ToList();
+            ViewBag.MaleStaff = maleStaff.Count();
+            ViewBag.FemaleStaff = femaleStaff.Count();
+
+            //Staffs
+            var AcademicStaff = (from c in _context.Staffs where c.Type == 5 select c).ToList();
+            var NonAcademicStaff = (from c in _context.Staffs where c.Type == 6 select c).ToList();
+            ViewBag.AcadStaff = AcademicStaff.Count();
+            ViewBag.NonAcadStaff = NonAcademicStaff.Count();
 
             var departments = (from c in _context.Departments select c).ToList();
             var deptStudentsCounts = new Dictionary<string, int>();
@@ -290,7 +276,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("profile", "staffs");
 
         }
-        public async Task<IActionResult> Upload(IFormFile passport, int id, Staff staff)
+        public async Task<IActionResult> Upload(IFormFile passport, int id)
         {
             var staffData = await _context.Staffs.FindAsync(id);
             if (passport != null && passport.Length > 0)
@@ -299,19 +285,19 @@ namespace EDSU_SYSTEM.Controllers
                 var fileName = Path.GetFileNameWithoutExtension(passport.FileName);
                 var extension = Path.GetExtension(passport.FileName);
                 var webRootPath = _hostingEnvironment.WebRootPath;
-                fileName = staff.SchoolEmail + extension;
+                fileName = staffData.SchoolEmail + extension;
 
                 var path = Path.Combine(webRootPath, uploadDir, fileName);
                 using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
                 {
                     passport.CopyTo(fs);
-                    staff.Picture = fileName;
+                    staffData.Picture = fileName;
 
                 }
 
                 try
                 {
-                    _context.Update(staff);
+                    _context.Update(staffData);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

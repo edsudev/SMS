@@ -66,10 +66,12 @@ namespace EDSU_SYSTEM.Areas.Identity.Pages.Account
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
-
+        
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
+            
             returnUrl = returnUrl ?? Url.Content("~/");
+
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
@@ -122,18 +124,19 @@ namespace EDSU_SYSTEM.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
-
-                var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
+                // var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email};
+                var users = _userManager.Users.ToList();
+                var result = (from s in users where s.UserName == Input.Email select s).FirstOrDefault();
+                //var result = await _userManager.CreateAsync(user);
+                if (result != null)
                 {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
+                   var a = await _userManager.AddLoginAsync(result, info);
+                    if (a.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
-                        var userId = await _userManager.GetUserIdAsync(user);
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var userId = await _userManager.GetUserIdAsync(result);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(result);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
@@ -145,20 +148,25 @@ namespace EDSU_SYSTEM.Areas.Identity.Pages.Account
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
-                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                        {
-                            return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
-                        }
+                        //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        //{
+                        //    return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
+                        //}
 
-                        await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+                        await _signInManager.SignInAsync(result, isPersistent: false, info.LoginProvider);
 
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                        TempData["err"] = "Something went wrong! Kindly check the email your provided. If problem persists, contact the ICT unit.";
+                        return RedirectToAction("autherror", "error");
                 }
+                //foreach (var error in result)
+                //{
+                //    ModelState.AddModelError(string.Empty, error.Description);
+                //}
             }
 
             ProviderDisplayName = info.ProviderDisplayName;

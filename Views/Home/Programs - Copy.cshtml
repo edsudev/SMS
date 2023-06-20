@@ -1,0 +1,464 @@
+﻿@model IEnumerable<EDSU_SYSTEM.Models.UgProgram>
+<app-navigaton class="app-nav"></app-navigaton>
+
+    <div id="overall_container">
+        <!-- Header -->
+        <div id="header">
+            <h1>
+                <b>PROGRAMS</b>
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                <br> sed do eiusmod tempor incididunt ut labore et dolore
+                <br> magna aliqua.
+            </p>
+        </div>
+
+        
+        <!-- Choose Programs -->
+        <div id="choose_program">
+            <div id="cp_header">
+                <h1>Choose Programs</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    <br> elit, sed do eiusmod tempor incididunt ut labore et
+                    <br> dolore magna aliqua
+                </p>
+            </div>
+            <div id="programs_list">
+                <!-- List 1 don't forget to make the list iterable 🤧-->
+                <div id="list1">
+                <img src="~/portal/images/programs/icons/programs_icon.png">
+                    <div id="p_text">
+                        <h2>Undergraduate</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur
+                            <br> adipiscing elit, sed do eiusmod tempor
+                            <br> incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- List 2 -->
+                <div id="list1">
+                <img src="~/portal/images/programs/icons/programs_icon.png">
+                    <div id="p_text">
+                        <h2>Postgraduate</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur
+                            <br> adipiscing elit, sed do eiusmod tempor
+                            <br> incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- List 3 -->
+                <div id="list1">
+                <img src="~/portal/images/programs/icons/programs_icon.png">
+                    <div id="p_text">
+                        <h2>Conversion</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur
+                            <br> adipiscing elit, sed do eiusmod tempor
+                            <br> incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div id="study">
+        <h2>What Do You Want To Study</h2>
+        <app-searchbox></app-searchbox>
+        <div id="course_wrap">
+            <div id="courses" class="row">
+                @foreach (var item in Model)
+               {
+                <section class="col-md-6 mx-auto">
+                    <span id="span_1">
+                        <h2>@item.NameOfProgram, B.Sc</h2>
+                        <p>
+                            @item.Departments.Faculties.Name;
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="" target="_blank">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+                }
+                
+
+               @* <section>
+                    <span id="span_1">
+                        <h2>Animal and Environmental Biology, B.Sc</h2>
+                        <p>
+                            Faculty of Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Banking and Finance, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>*@
+            </div>
+
+            @*<div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>BioChemistry, B.Sc</h2>
+                        <p>
+                            Faculty of Applied Health Science
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Business Administration, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Chemical Engineering, B.Eng</h2>
+                        <p>
+                            Faculty of Engineering
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Civil Engineering, B.Eng</h2>
+                        <p>
+                            Faculty of Engineering
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Computer Science, B.Sc</h2>
+                        <p>
+                            Faculty of
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Computer Engineering, B.Eng</h2>
+                        <p>
+                            Faculty of Engineering
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Economics, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Entrepreneurship, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>English Language, B.A</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>History & International Studies, B.A</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Human Anatomy, B.Sc</h2>
+                        <p>
+                            Faculty of
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Industrial Chemistry, B.Sc</h2>
+                        <p>
+                            Faculty of
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Mass Communication, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Mechanical, Engineering, B.Eng</h2>
+                        <p>
+                            Faculty of Engineering
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Microbiology, BSc</h2>
+                        <p>
+                            Faculty of
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Medical Lab. Science,BLMS</h2>
+                        <p>
+                            Faculty of Basic Medical Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Peace and Conflict Studies , B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Physics with Electronics, B.Sc</h2>
+                        <p>
+                            Faculty of
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Nursing, BNSc</h2>
+                        <p>
+                            Faculty of Applied Health Science
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Physiology, B.Sc</h2>
+                        <p>
+                            Faculty of Basic Medical Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Political Science &Public Administration, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>
+
+            <div id="courses">
+                <section>
+                    <span id="span_1">
+                        <h2>Plant Biology and Biotechnology, BSc</h2>
+                        <p>
+                            Faculty of
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+
+                <section>
+                    <span id="span_1">
+                        <h2>Sociology, B.Sc</h2>
+                        <p>
+                            Faculty of Arts, Management
+                            & Social
+                            Sciences
+                        </p>
+                    </span>
+                    <span id="span_2">
+                        <a href="#">Show More</a>
+                        <img src="~/portal/images/programs/icons/circles.png" />
+                    </span>
+                </section>
+            </div>*@
+        </div>
+
+    </div>
+
+    </div>
+    <app-newsletter></app-newsletter>
+<partial name="_Footer"/>

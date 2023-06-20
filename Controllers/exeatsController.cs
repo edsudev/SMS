@@ -34,7 +34,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(await _context.Exeats.ToListAsync());
         }
         // GET: exeats
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -91,7 +91,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(exeat);
         }
         // GET: exeats/Create
-       // [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public IActionResult Apply()
         {
             ViewData["HallId"] = new SelectList(_context.Hostels, "Id", "Name");
@@ -101,7 +101,7 @@ namespace EDSU_SYSTEM.Controllers
         // POST: exeats/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Apply(Exeat exeat)

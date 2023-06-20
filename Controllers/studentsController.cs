@@ -13,6 +13,8 @@ using static EDSU_SYSTEM.Models.Enum;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using OfficeOpenXml.Style;
 using Microsoft.AspNetCore.Authorization;
+using System.Drawing;
+using CanvasApi.Client.Users.Models;
 
 namespace EDSU_SYSTEM.Controllers
 {
@@ -22,44 +24,26 @@ namespace EDSU_SYSTEM.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
-        public StudentsController(UserManager<ApplicationUser> userManager, IWebHostEnvironment hostingEnvironment, ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public StudentsController(UserManager<ApplicationUser> userManager, UserManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment hostingEnvironment, ApplicationDbContext context)
         {
             _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
             _context = context;
         }
-        /// <summary>
-        /// Endpoint to create wallet for already existing students
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        public async Task<IActionResult> UsersMigrate()
+        public async Task<IActionResult> studentRole()
         {
             try
             {
-                var users = (from s in _context.Staffs select s).ToList();
+                var id = "4e8c6adc-ae5c-46e4-8618-e0b18f0841ba";
+                var users = _userManager.Users.Where(x => x.Type == 1).ToList();
+                var role = await _roleManager.FindByIdAsync(id);
                 foreach (var item in users)
                 {
-                    try
-                    {
-                        var user = new ApplicationUser
-                        {
-                            Email = item.SchoolEmail,
-                            UserName = item.SchoolEmail,
-                            StaffId = item.Id,
-                            PhoneNumber = item.Phone,
-                            PhoneNumberConfirmed = true,
-                            Type = 2,
-                            EmailConfirmed = true
-                        };
-                        var r = await _userManager.CreateAsync(user, "EDSU1"+item.SchoolEmail);
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
-
+                    await _userManager.AddToRoleAsync(item, role.Name);
                 }
             }
             catch (Exception)
@@ -67,7 +51,43 @@ namespace EDSU_SYSTEM.Controllers
 
                 throw;
             }
-            
+            return View();
+        }
+        public async Task<IActionResult> UsersMigrate()
+        {
+            try
+            {
+                var users = (from s in _context.Staffs where s.SchoolEmail == "dev.edostateuniversity@gmail.com" select s).FirstOrDefault();
+               
+                    try
+                    {
+                    
+                        var user = new ApplicationUser
+                        {
+                            Email = users.SchoolEmail,
+                            UserName = users.SchoolEmail,
+                            StaffId = users.Id,
+                            PhoneNumber = users.Phone,
+                            PhoneNumberConfirmed = true,
+                            Type = 2,
+                            EmailConfirmed = true
+                        };
+                        var r = await _userManager.CreateAsync(user, "Password@1");
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
 
             return View();
         }
@@ -140,7 +160,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        //[Authorize(Roles ="student")]
+        [Authorize(Roles ="student, superAdmin")]
         // GET: students
         public async Task<IActionResult> Index()
         {
@@ -374,7 +394,7 @@ namespace EDSU_SYSTEM.Controllers
                 throw;
             }
         }
-        //[Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         // GET: students/Details/5
         public async Task<IActionResult> Profile()
         {

@@ -1,7 +1,7 @@
 ﻿@model List<UserRoleVM>
 
 @{
-    var roleId = ViewBag.roleId;
+    var id = ViewBag.roleId;
     var roleName = ViewBag.roleName;
 }
 <div class="main-container" id="container">
@@ -13,34 +13,39 @@
                 <!-- Content -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mx-auto layout-top-spacing">
                     <div class="widget">
+                        <form method="POST">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Add or remove users from this role</h2>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Search users" id="searchInput">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="searchUsers()">Search</button>
+                                        </div>
+                                    </div>
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="form-check m-1 user-item">
+                                            <input type="hidden" asp-for="@item.UserId" />
+                                            <input type="hidden" asp-for="@item.UserName" />
+                                            <input asp-for="@item.IsSelected" class="form-check-input" />
+                                            <label class="form-check-label" asp-for="@item.IsSelected">
+                                                @item.UserName
+                                            </label>
+                                        </div>
+                                    }
 
-
-<form method="post">
-    <div class="card">
-        <div class="card-header">
-            <h2>Add or remove users from this role</h2>
-        </div>
-        <div class="card-body">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <div class="form-check m-1">
-                    <input type="hidden" asp-for="@Model[i].UserId" />
-                    <input type="hidden" asp-for="@Model[i].UserName" />
-                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
-                        @Model[i].UserName
-                    </label>
-                </div>
-            }
-        </div>
-        <div class="card-footer">
-            <input type="submit" value="Update" class="btn btn-primary"
-                   style="width:auto" />
-            <a asp-action="EditRole" asp-route-id="@roleId"
-               class="btn btn-primary" style="width:auto">Cancel</a>
-        </div>
-    </div>
-</form>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary form-control" type="submit">Update</button>
+                                    <a asp-action="EditRole" asp-route-id="@id" class="btn btn-primary" style="width:auto">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -48,4 +53,25 @@
     </div>
     <!--  END CONTENT AREA  -->
 </div>
-<!-- END MAIN CONTAINER -->               
+<!-- END MAIN CONTAINER -->
+
+<script>
+    function searchUsers() {
+        var input, filter, users, userItem, userName, i;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        users = document.getElementsByClassName("user-item");
+
+        for (i = 0; i < users.length; i++) {
+            userItem = users[i];
+            userName = userItem.getElementsByTagName("label")[0].textContent || userItem.getElementsByTagName("label")[0].innerText;
+
+            if (userName.toUpperCase().indexOf(filter) > -1) {
+                userItem.style.display = "";
+            } else {
+                userItem.style.display = "none";
+            }
+        }
+    }
+</script>
+

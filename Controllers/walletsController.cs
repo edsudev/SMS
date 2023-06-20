@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace EDSU_SYSTEM.Controllers
 {
+    [Authorize]
     public class WalletsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace EDSU_SYSTEM.Controllers
             
         }
         // GET: wallets
-     //   [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -30,13 +31,13 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.UgMainWallets.Where(x => x.WalletId == student).FirstOrDefaultAsync();
             return View(await applicationDbContext);
         }
-        //[Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> History(string id)
         {
             var applicationDbContext = (from f in _context.Payments where f.Wallets.WalletId == id select f).Include(i => i.Wallets).Include(i => i.Wallets.Levels).Include(i => i.Sessions);
             return View(await applicationDbContext.ToListAsync());
         }
-      //  [Authorize(Roles = "student")]
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Debts()
         {
             var loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -266,7 +267,7 @@ namespace EDSU_SYSTEM.Controllers
 
         //////////////////////////////////////////////////////////////
         ////////////////////TRANSACTION MODULES//////////////////////
-
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Acceptance payment
         public async Task<IActionResult> OptionAcceptance(string id, Payment payment, Student student)
         {
@@ -298,7 +299,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition payment
         public async Task<IActionResult> OptionTuitionTransfer(string id, Payment payment, Student student)
         {
@@ -330,6 +331,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition payment
         public async Task<IActionResult> OptionTuition(string id, Payment payment, Student student)
         {
@@ -361,7 +363,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition 60 Percent payment
         public async Task<IActionResult> OptionTuition60(string id, Payment payment, Student student)
         {
@@ -393,6 +395,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition 40 Percent payment
         public async Task<IActionResult> OptionTuition40(string id, Payment payment, Student student)
         {
@@ -424,6 +427,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating LMS payment
         public async Task<IActionResult> OptionLMS(string id, Payment payment, Student student)
         {
@@ -455,6 +459,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating SRC payment
         public async Task<IActionResult> OptionSRC(string id, Payment payment, Student student)
         {
@@ -486,6 +491,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating EDHIS payment
         public async Task<IActionResult> OptionEDHIS(string id, Payment payment, Student student)
         {
@@ -517,6 +523,7 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //GET: Other Payments
         //Initiating Other payments
         public async Task<IActionResult> OptionHostel(string id, HostelPayment payment)
@@ -546,6 +553,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(payment);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Hostel Payments
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -583,6 +591,7 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> HostelCheckout(string Ref)
         {
 
@@ -599,6 +608,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(paymentToUpdate);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //GET: Other Payments
         //Initiating Other payments
         public async Task<IActionResult> OptionOthers(string id, Payment payment, Student student)
@@ -625,6 +635,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(payment);
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Initiating Other Payments
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -663,6 +674,7 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> OthersCheckout(string Ref)
         {
             var paymentToUpdate = _context.Payments.Where(i => i.Ref == Ref).FirstOrDefault();
@@ -677,7 +689,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(paymentToUpdate);
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         //Proceed to payment Gateway
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -716,6 +728,7 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
+        //[Authorize(Roles = "student, superAdmin")]
         //This is for returning student as the wallet activation for fresh students is done in the applicant controller
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -789,7 +802,7 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
-
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> HostelUpdate(string data, BursaryClearance bursaryClearance)
         {
             try
@@ -844,6 +857,7 @@ namespace EDSU_SYSTEM.Controllers
 
 
         }
+        [Authorize(Roles = "student, superAdmin")]
         //Updating the payment record and creating tempdata for receipt
         public async Task<IActionResult> UpdatePayment(string data, BursaryClearance bursaryClearance)
         {
@@ -1015,7 +1029,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("Index", "Wallets");
         }
 
-
+        [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Verify(string? id)
         {
             if (id == null || _context.Payments == null)
@@ -1048,6 +1062,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("receipt", new { id });
             //return View(payment);
         }
+        [Authorize(Roles = "student, superAdmin")]
 
         //Payment Receipt
         public IActionResult Receipt()

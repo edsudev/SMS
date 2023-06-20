@@ -1,16 +1,9 @@
 ﻿@model IEnumerable<EDSU_SYSTEM.Models.LatestNews>
-<partial name="_Nav" />
-<style>
-    #text-content{
-        max-height: 3em;
-        overflow: hidden;
-    }
+<div class="nav row">
+    <app-navigaton class="col-md-11"></app-navigaton>
+    <partial name="_LoginPartial" class="col-md-1" />
+</div>
 
-        #text-content.expanded {
-            max-height: none;
-            overflow: visible;
-        }
-</style>
 <section class="news">
 
     <div class="heading">
@@ -21,12 +14,13 @@
 
         <div class="featured">
 
-            <img src="~/portal/images/news/news-image.png" alt="students of the university">
+            @*<img src="~/portal/images/news/news-image.png" alt="students of the university">*@
+            <img src="~/portal/images/news/src.jpg" />
             <div class="profile">
                 <div class="profile-name">
                     <p>Mr. Osasenaga Joshua</p>
                 </div>
-                
+
                 <div class="scrollable-div" style="height: 300px; overflow-y: auto">
                     <p class="profile-description">SRC PRESIDENT</p>
                     <p class="profile-text" id="text-content" style="">
@@ -39,10 +33,10 @@
                         Lastly, I want to emphasize the importance of collaboration and unity. Together, we can achieve great things. I urge you to embrace diversity, celebrate our differences, and foster an environment of mutual respect. Let us create a space where everyone feels heard, valued, and supported.
                         I am confident that, with our collective efforts and shared vision, we can make this academic year one filled with memorable accomplishments and profound growth. Thank you for your trust, and I am excited to embark on this incredible journey alongside each and every one of you.
                     </p>
-                    <button id="read-more-btn">Read more</button>
+                    @*<button id="read-more-btn">Read more</button>*@
                 </div>
-                
-                
+
+
             </div>
 
         </div>
@@ -50,7 +44,6 @@
     </div>
 
 </section>
-
 <section class="latest-news">
 
     <div class="latest-news-heading">
