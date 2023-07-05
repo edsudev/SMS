@@ -45,14 +45,14 @@ namespace EDSU_SYSTEM.Controllers
             }
             return View(model);
         }
-        [Authorize(Roles = "superAdmin")]
+       // [Authorize(Roles = "superAdmin")]
         public IActionResult Index()
         {
             var roles = roleManager.Roles;
             roleManager.Dispose();
             return View(roles);
         }
-        [Authorize(Roles = "superAdmin")]
+       // [Authorize(Roles = "superAdmin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -79,7 +79,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(model); 
         }
-        [Authorize(Roles = "superAdmin")]
+        //[Authorize(Roles = "superAdmin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditRoleVM model)
         {
@@ -105,7 +105,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(model); 
             }
         }
-        [Authorize(Roles = "superAdmin")]
+      //  [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> EditUserRole(string? id)
         {
             
@@ -148,7 +148,7 @@ namespace EDSU_SYSTEM.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "superAdmin")]
+     //   [Authorize(Roles = "superAdmin")]
         [HttpPost]
         public async Task<IActionResult> EditUserRole(List<UserRoleVM> model, string? id)
         {

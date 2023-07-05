@@ -174,10 +174,10 @@ namespace EDSU_SYSTEM.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reject(int? id, CourseRegistration course)
+        public async Task<IActionResult> Reject(int? id)
         {
             var coursereg = await _context.CourseRegistrations.FindAsync(id);
-            var courseRegistration = (from s in _context.CourseRegistrations where s.Id == id select s).Include(i => i.Students).Include(c => c.Courses).FirstOrDefault();
+            var course = (from s in _context.CourseRegistrations where s.Id == id select s).Include(i => i.Students).Include(c => c.Courses).FirstOrDefault();
 
             //await _context.CourseRegistrations.FirstOrDefaultAsync(i => i.Courses.Code == code && i.Students.SchoolEmailAddress == student);
             if (id == null)
@@ -418,7 +418,7 @@ namespace EDSU_SYSTEM.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Approved));
         }
 
         private bool CourseRegistrationExists(int? id)

@@ -556,3 +556,5 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\vi\Hu
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\zh-CN\Humanizer.resources.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\zh-Hans\Humanizer.resources.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\zh-Hant\Humanizer.resources.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\DotNetEnv.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\bin\Release\net6.0\Sprache.dll

@@ -65,8 +65,8 @@
 
 <div class="overlay"></div>
 <div class="search-overlay"></div>
- @if (SignInManager.IsSignedIn(User))
-    {
+@* @if (SignInManager.IsSignedIn(User))
+    {*@
         <!--  BEGIN SIDEBAR  -->
         <div class="sidebar-wrapper sidebar-theme">
 
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     }
-                     @if (User.IsInRole("staff") && User.IsInRole("entreprenureship") || User.IsInRole("superAdmin"))
+                    @if (User.IsInRole("staff") && User.IsInRole("entreprenureship") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
                             <a asp-action="index" asp-controller="entreprenureships" aria-expanded="false" class="dropdown-toggle">
@@ -231,7 +231,7 @@
                             </div>
                         </a>
                     </li>
-                    }
+                   }
                     
                     @if (User.IsInRole("staff") || User.IsInRole("superAdmin"))
                     {
@@ -324,7 +324,7 @@
 
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("pgLevelAdviser") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -347,7 +347,7 @@
 
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("levelAdviser") || User.IsInRole("conversionLevelAdviser") || User.IsInRole("pglevelAdviser") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -368,7 +368,7 @@
                                 </li>
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("bursaryAdmin") || User.IsInRole("superAdmin"))
                     {
 
@@ -391,7 +391,7 @@
                                 </li>
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -431,8 +431,8 @@
                                 </div>
                             </a>
                         </li>
-                    }
-                    @if (User.IsInRole("staff") && User.IsInRole("timetable"))
+                   }
+                    @if (User.IsInRole("staff") && User.IsInRole("timetable") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
                             <a asp-action="index" asp-controller="timetables" aria-expanded="false" class="dropdown-toggle">
@@ -528,7 +528,7 @@
                                 </li>
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("staff") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -579,7 +579,7 @@
                                 </li>
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("fees") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -603,7 +603,7 @@
                                 </li>
                             </ul>
                         </li>
-                    }
+                   }
                     @if (User.IsInRole("staff") && User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
@@ -638,7 +638,7 @@
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("staff") && User.IsInRole("evaluation") || User.IsInRole("superAdmin"))
+                    @if (User.IsInRole("staff") || User.IsInRole("superAdmin"))
                     {
                         <li class="menu">
                             <a href="#evaluations" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<div id="PlaceHolderHere"></div>
 <div class="main-container" id="container">
     <partial name="_StaffDashboardPartial" />
     <!--  BEGIN CONTENT AREA  -->
@@ -83,7 +83,7 @@
                                             @if (item.Status == WorksStatus.Pending)
                                             {
 
-                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Edit" data-url="@Url.Action($"Edit/{item.Id}")">
+                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Edit" data-target="#addItem tooltip" data-url="@Url.Action($"Edit/{item.Id}")">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                 </a>
                                                 <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Delete" data-target="#addItem tooltip" data-url="@Url.Action($"Delete/{item.Id}")">
@@ -94,12 +94,7 @@
                                             <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Act on complain" data-url="@Url.Action($"Act/{item.Id}")">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                             </a>
-                                            @if (item.Status == WorksStatus.Done)
-                                            {
-                                                <a class="bs-tooltip" data-toggle="ajax-modal" data-original-title="Acknowledge" data-url="@Url.Action($"Acknowledge/{item.Id}")">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                                </a>
-                                            }
+
                                         </td>
                                     </tr>
 

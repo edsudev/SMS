@@ -3,8 +3,13 @@ using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
+using DotNetEnv;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using System.Configuration;
 
 
+DotNetEnv.Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
@@ -38,8 +43,8 @@ services.AddSession(options =>
 services.AddAuthentication()
    .AddGoogle(options =>
    {
-       options.ClientId = "1092598967837-61co2d54krtj4adc0onhoglnhol632u3.apps.googleusercontent.com";
-       options.ClientSecret = "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";
+       options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
+       options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET");
    });
 
 services.AddMvc();
@@ -76,26 +81,18 @@ app.MapRazorPages();
 
 app.Run();
 
-//public class Startup
-//{
-//    public void ConfigureServices(IServiceCollection services)
-//    {
-       
-//        //services.Configure<IdentityOptions>(options =>
-//        //{
-//        //    options.Password.RequireDigit = false;
-//        //    options.Password.RequireLowercase = false;
-//        //    options.Password.RequireUppercase = false;
-//        //    options.Password.RequireNonAlphanumeric = false;
-//        //    options.Password.RequiredLength = 6;
-//        //});
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services, IHostEnvironment hostingEnvironment)
+    {
 
-//        //services.AddIdentity<ApplicationUser, IdentityRole>()
-//        //        .AddEntityFrameworkStores<ApplicationDbContext>()
-//        //        .AddDefaultTokenProviders();
+        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
+       .SetBasePath(hostingEnvironment.ContentRootPath)
+       .AddEnvironmentVariables();
 
+        IConfiguration configuration = configurationBuilder.Build();
 
-
-       
-//    }
-//}
+        // Add the configuration to the DI container
+        services.AddSingleton(configuration);
+    }
+}

@@ -290,6 +290,7 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTm
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\EDSU-SYSTEM.runtimeconfig.json
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\EDSU-SYSTEM.pdb
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\CanvasApi.Client.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\DotNetEnv.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\EPPlus.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\Humanizer.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\MessagePack.dll
@@ -362,6 +363,7 @@ C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTm
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\QRCoder.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\RestClient.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\RestSharp.dll
+C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\Sprache.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\System.Composition.AttributedModel.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\System.Composition.Convention.dll
 C:\Users\SANNI PHATAII\Desktop\EDSU-Project\EDSU-SYSTEM\obj\Release\net6.0\PubTmp\Out\System.Composition.Hosting.dll

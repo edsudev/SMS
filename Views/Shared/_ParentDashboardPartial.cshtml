@@ -65,32 +65,38 @@
 
         <div class="overlay"></div>
         <div class="search-overlay"></div>
-
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("pgStudent") || User.IsInRole("superAdmin"))
+    {
         <!--  BEGIN SIDEBAR  -->
         <div class="sidebar-wrapper sidebar-theme">
 
             <nav id="sidebar">
                 <div class=""></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
-            
-            <li class="menu">
-                <a asp-action="index" asp-controller="parents" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <i data-feather="user-plus"></i><span>Child/Ward(s)</span>
-                    </div>
-                </a>
-            </li>
-            <li class="menu">
-                <a asp-action="profile" asp-controller="parents" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <i data-feather="user-plus"></i><span>Profile</span>
-                    </div>
-                </a>
-            </li>
+
+                    <li class="menu">
+                        <a asp-action="index" asp-controller="parents" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <i data-feather="user-plus"></i><span>Child/Ward(s)</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a asp-action="profile" asp-controller="parents" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <i data-feather="user-plus"></i><span>Profile</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
 
             </nav>
 
         </div>
         <!--  END SIDEBAR  -->
-        <!--  BEGIN CONTENT AREA  -->
+    }
+
+}
+<!--  BEGIN CONTENT AREA  -->

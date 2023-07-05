@@ -22,8 +22,11 @@ namespace EDSU_SYSTEM.Controllers
         // GET: timeTables
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TimeTables.Include(t => t.Courses).ThenInclude(i => i.Courses).Include(t => t.Staffs).ThenInclude(i => i.Staff);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.TimeTables
+            .Include(t => t.Courses).ThenInclude(t=>t.Courses)
+            .Include(t => t.Staffs).ToList();
+            
+            return View(applicationDbContext);
         }
 
         // GET: timeTables/Details/5
@@ -49,11 +52,11 @@ namespace EDSU_SYSTEM.Controllers
         // GET: timeTables/Create
         public IActionResult Create()
         {
-            var s = (from d in _context.CourseAllocations select d.Courses).ToList();
+            var courses = (from d in _context.CourseAllocations select d.Courses).ToList();
             var lecturer = (from d in _context.CourseAllocations select d.Staff).ToList();
            
-            ViewData["CourseId"] = new SelectList(s, "Id", "Title"); 
-            ViewData["LecturerId"] = new SelectList(lecturer, "Id", "Name");
+            ViewData["CourseId"] = new SelectList(courses, "Id", "Title"); 
+            ViewData["LecturerId"] = new SelectList(lecturer, "Id", "SchoolEmail");
             return View();
         }
 
@@ -73,7 +76,7 @@ namespace EDSU_SYSTEM.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseId"] = new SelectList(_context.CourseAllocations, "Id", "Id", timeTable.CourseId);
-            ViewData["LecturerId"] = new SelectList(_context.CourseAllocations, "Id", "Id", timeTable.LecturerId);
+            ViewData["LecturerId"] = new SelectList(_context.Staffs.Where(x => x.Type == 5), "Id", "Name", timeTable.LecturerId);
             return View(timeTable);
         }
 
@@ -94,7 +97,7 @@ namespace EDSU_SYSTEM.Controllers
             var lecturer = (from d in _context.CourseAllocations select d.Staff).ToList();
 
             ViewData["CourseId"] = new SelectList(s, "Id", "Title");
-            ViewData["LecturerId"] = new SelectList(lecturer, "Id", "Name");
+            ViewData["LecturerId"] = new SelectList(lecturer, "Id", "SchoolEmail");
             return View(timeTable);
         }
 

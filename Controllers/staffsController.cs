@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
-    //[Authorize(Roles = "staff, superAdmin")]
     public class StaffsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +25,7 @@ namespace EDSU_SYSTEM.Controllers
             _userManager = userManager;
             _context = context;
         }
-
+        [Authorize(Roles = "staff, superAdmin")]
         // GET: staffs
         public async Task<IActionResult> Index()
         {
@@ -98,6 +97,7 @@ namespace EDSU_SYSTEM.Controllers
             var applicationDbContext = _context.Staffs.Include(i => i.Departments).Include(i => i.Positions);
             return View(await applicationDbContext.ToListAsync());
         }
+        [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> Stats()
         {
             var male = (from c in _context.Students where c.Sex == "M" select c).ToList();
@@ -128,7 +128,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View();
         }
-
+        [Authorize(Roles = "staff, superAdmin")]
         // GET: students/Details/5
         public async Task<IActionResult> Profile()
         {
@@ -230,6 +230,7 @@ namespace EDSU_SYSTEM.Controllers
         // POST: staffs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "staff, superAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Staff staff)
@@ -276,6 +277,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("profile", "staffs");
 
         }
+        [Authorize(Roles = "staff, superAdmin")]
         public async Task<IActionResult> Upload(IFormFile passport, int id)
         {
             var staffData = await _context.Staffs.FindAsync(id);
@@ -310,6 +312,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: staffs/Delete/5
+        [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Staffs == null)
@@ -331,7 +334,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(staff);
         }
-
+        [Authorize(Roles = "superAdmin")]
         // POST: staffs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -403,6 +406,7 @@ namespace EDSU_SYSTEM.Controllers
             return View();
 
         }
+        [Authorize(Roles = "staff, superAdmin")]
         public async Task<IActionResult> Documents(int? id)
         {
 
@@ -411,6 +415,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return PartialView("_documents", staff);
         }
+        [Authorize(Roles = "staff, superAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Documents(IFormFile passport, IFormFile cv, IFormFile certificate, Staff model)

@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 
 namespace EDSU_SYSTEM.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class WalletsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +22,13 @@ namespace EDSU_SYSTEM.Controllers
             _context = context;
             
         }
+        [HttpGet]
+        public IActionResult GetPaymentKey()
+        {
+            var paymentKey = Environment.GetEnvironmentVariable("PAYSTACK_TEST_KEY");
+            return Json(paymentKey);
+        }
+
         // GET: wallets
         [Authorize(Roles = "student, superAdmin")]
         public async Task<IActionResult> Index()
@@ -88,8 +96,8 @@ namespace EDSU_SYSTEM.Controllers
         // GET: wallets/Checkout/5
         public async Task<IActionResult> Checkout(string? orderid)
         {
-            var paymentToGet = await _context.CreditWallets
-                .FirstOrDefaultAsync(x => x.OrderId == orderid);
+            var paymentToGet = await _context.Payments
+                .FirstOrDefaultAsync(x => x.Ref == orderid);
             if (orderid == null || _context.Payments == null)
             {
                 return NotFound();
@@ -269,7 +277,7 @@ namespace EDSU_SYSTEM.Controllers
         ////////////////////TRANSACTION MODULES//////////////////////
         [Authorize(Roles = "student, superAdmin")]
         //Initiating Acceptance payment
-        public async Task<IActionResult> OptionAcceptance(string id, Payment payment, Student student)
+        public async Task<IActionResult> Acceptance(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -301,7 +309,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition payment
-        public async Task<IActionResult> OptionTuitionTransfer(string id, Payment payment, Student student)
+        public async Task<IActionResult> TuitionTransfer(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                 .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -331,9 +339,9 @@ namespace EDSU_SYSTEM.Controllers
             TempData["walletId"] = id;
             return View(paymentToGet);
         }
-        [Authorize(Roles = "student, superAdmin")]
+        //[Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition payment
-        public async Task<IActionResult> OptionTuition(string id, Payment payment, Student student)
+        public async Task<IActionResult> Tuition(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -365,7 +373,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition 60 Percent payment
-        public async Task<IActionResult> OptionTuition60(string id, Payment payment, Student student)
+        public async Task<IActionResult> Tuition60(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -397,7 +405,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating Tuition 40 Percent payment
-        public async Task<IActionResult> OptionTuition40(string id, Payment payment, Student student)
+        public async Task<IActionResult> Tuition40(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -429,7 +437,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating LMS payment
-        public async Task<IActionResult> OptionLMS(string id, Payment payment, Student student)
+        public async Task<IActionResult> LMS(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -461,7 +469,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating SRC payment
-        public async Task<IActionResult> OptionSRC(string id, Payment payment, Student student)
+        public async Task<IActionResult> SRC(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -493,7 +501,7 @@ namespace EDSU_SYSTEM.Controllers
         }
         [Authorize(Roles = "student, superAdmin")]
         //Initiating EDHIS payment
-        public async Task<IActionResult> OptionEDHIS(string id, Payment payment, Student student)
+        public async Task<IActionResult> EDHIS(string id, Payment payment, Student student)
         {
             var wallet = await _context.UgSubWallets
                  .FirstOrDefaultAsync(m => m.WalletId == id);
@@ -526,7 +534,7 @@ namespace EDSU_SYSTEM.Controllers
         [Authorize(Roles = "student, superAdmin")]
         //GET: Other Payments
         //Initiating Other payments
-        public async Task<IActionResult> OptionHostel(string id, HostelPayment payment)
+        public async Task<IActionResult> Hostel(string id, HostelPayment payment)
         {
             //Using Viewbag to display list of other fees and session from their respective tables table.
 
@@ -557,7 +565,7 @@ namespace EDSU_SYSTEM.Controllers
         //Initiating Hostel Payments
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OptionHostel(string Ref)
+        public async Task<IActionResult> Hostel(string Ref)
         {
             try
             {
@@ -611,7 +619,7 @@ namespace EDSU_SYSTEM.Controllers
         [Authorize(Roles = "student, superAdmin")]
         //GET: Other Payments
         //Initiating Other payments
-        public async Task<IActionResult> OptionOthers(string id, Payment payment, Student student)
+        public async Task<IActionResult> Others(string id, Payment payment, Student student)
         {
             //Using Viewbag to display list of other fees and session from their respective tables table.
             ViewData["otherFees"] = new SelectList(_context.OtherFees, "Id", "Name");
@@ -639,7 +647,7 @@ namespace EDSU_SYSTEM.Controllers
         //Initiating Other Payments
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OptionOthers(string Ref)
+        public async Task<IActionResult> Others(string Ref)
         {
             try
             {
@@ -701,7 +709,7 @@ namespace EDSU_SYSTEM.Controllers
 
                 var PaymentToUpdate = await _context.Payments
                .FirstOrDefaultAsync(c => c.Ref == Ref);
-                var paymentRef = Ref;
+                var orderid = Ref;
                 if (await TryUpdateModelAsync<Payment>(PaymentToUpdate, "", c => c.Email))
                 {
 
@@ -716,7 +724,7 @@ namespace EDSU_SYSTEM.Controllers
                             "Try again, and if the problem persists, " +
                             "see your system administrator.");
                     }
-                    return RedirectToAction("checkout", "wallets", new { paymentRef });
+                    return RedirectToAction("checkout", "wallets", new { orderid });
 
                 }
             }
@@ -857,7 +865,7 @@ namespace EDSU_SYSTEM.Controllers
 
 
         }
-        [Authorize(Roles = "student, superAdmin")]
+      //  [Authorize(Roles = "student, superAdmin")]
         //Updating the payment record and creating tempdata for receipt
         public async Task<IActionResult> UpdatePayment(string data, BursaryClearance bursaryClearance)
         {
@@ -986,7 +994,8 @@ namespace EDSU_SYSTEM.Controllers
                             wallet.AcceptanceFee = 0;
                         }
                         break;
-                }
+                    await _context.SaveChangesAsync();
+                 }
                 var session = (from s in _context.Sessions where s.Id == payments.SessionId select s).FirstOrDefault();
                 var wlt = (from e in _context.UgSubWallets where e.Id == payments.WalletId select e).FirstOrDefault();
                 var department = (from d in _context.Departments where d.Id == wlt.Department select d.Name).FirstOrDefault();

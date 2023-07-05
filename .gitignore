@@ -1,0 +1,4 @@
+﻿.env
+# Ignore the output directories
+/bin/
+/obj/

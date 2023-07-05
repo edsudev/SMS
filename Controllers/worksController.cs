@@ -203,7 +203,7 @@ namespace EDSU_SYSTEM.Controllers
                 var WorkToUpdate = await _context.Works
                 .FirstOrDefaultAsync(c => c.Id == id);
 
-                if (await TryUpdateModelAsync<Work>(WorkToUpdate, "", c => c.Response, c => c.Status))
+                if (await TryUpdateModelAsync<Work>(WorkToUpdate, "", c=>c.Location, c=> c.Complain, c => c.Response, c => c.Status))
                 {
                     try
                     {

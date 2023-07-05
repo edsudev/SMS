@@ -1,4 +1,5 @@
 ﻿using EDSU_SYSTEM.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -6,17 +7,11 @@ using System.Text;
 
 namespace EDSU_SYSTEM.Controllers
 {
-
+    [Authorize(Roles = "superAdmin")]
     public class Canvas : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        const string token = "13819~l0NzZI7bdk8V5p1uNgHgAQHuXFCTWsKYopkeLcDqAtKm56szgfBRWuxhuxyhQOv0";
-        const string testKey = "3m9sr9wH1ShA0CptyyjjSiRaJRWevULibq5EhgRLxManWaVeubtUlEWGeHPtluOE";
-        const string domain = "edouniversity.instructure.com"; 
-        const string baseUrl = "https://edouniversity.instructure.com";
-        const string apiUrl = "https://edouniversity.instructure.com/api/v1";
-        const string accountId = "1"; // EDSU account ID with Canvas
         const int perPage = 100; // Number of courses per page
         const int UserperPage = 100; // Number of users per page
         int currentPage = 1; // Start with the first page
@@ -26,18 +21,18 @@ namespace EDSU_SYSTEM.Controllers
         private readonly HttpClient client;
         public Canvas(ApplicationDbContext context)
         {
-            _context = context; 
+            _context = context;
             client = new HttpClient
             {
-                BaseAddress = new Uri(baseUrl)
+                BaseAddress = new Uri(Environment.GetEnvironmentVariable("CANVAS_BASE_URL"))
             };
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Environment.GetEnvironmentVariable("CANVAS_TOKEN"));
         }
         public async Task<IActionResult> GetCanvasUsers(string id)
         {
             string sisCourseId = id;
             Console.WriteLine(sisCourseId);
-            string url = $"https://{domain}/api/v1/courses/sis_course_id:{sisCourseId}/users?enrollment_type[]=student&include[]=enrollments&per_page=1000&access_token={token}";
+            string url = $"https://{Environment.GetEnvironmentVariable("CANVAS_DOMAIN")}/api/v1/courses/sis_course_id:{sisCourseId}/users?enrollment_type[]=student&include[]=enrollments&per_page=1000&access_token={Environment.GetEnvironmentVariable("CANVAS_TOKEN")}";
          
             HttpResponseMessage response = await client.GetAsync(url);
             //response.EnsureSuccessStatusCode();
@@ -55,7 +50,7 @@ namespace EDSU_SYSTEM.Controllers
 
             while (hasMoreUser)
             {
-                var url = $"{apiUrl}/accounts/{accountId}/users?per_page={UserperPage}&page={UsercurrentPage}&include[]=email";
+                var url = $"{Environment.GetEnvironmentVariable("CANVAS_API_URL")}/accounts/{Environment.GetEnvironmentVariable("CANVAS_ACCOUNT_ID")}/users?per_page={UserperPage}&page={UsercurrentPage}&include[]=email";
 
                 var response = await client.GetAsync(url);
 
@@ -93,7 +88,7 @@ namespace EDSU_SYSTEM.Controllers
 
             while (hasMore)
             {
-                var url = $"{apiUrl}/accounts/{accountId}/courses?per_page={perPage}&page={currentPage}&include[]=sis_course_id";
+                var url = $"{Environment.GetEnvironmentVariable("CANVAS_API_URL")}/accounts/{Environment.GetEnvironmentVariable("CANVAS_ACCOUNT_ID")}/courses?per_page={perPage}&page={currentPage}&include[]=sis_course_id";
 
                 var response = await client.GetAsync(url);
 
@@ -145,8 +140,8 @@ namespace EDSU_SYSTEM.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseUrl);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("CANVAS_BASE_URL"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Environment.GetEnvironmentVariable("CANVAS_TOKEN"));
 
                 foreach (var item in courses)
                 {
@@ -186,8 +181,8 @@ namespace EDSU_SYSTEM.Controllers
             
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseUrl);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("CANVAS_BASE_URL"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Environment.GetEnvironmentVariable("CANVAS_TOKEN"));
 
                 foreach (var item in courses)
                 {

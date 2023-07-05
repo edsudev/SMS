@@ -40,7 +40,6 @@ namespace EDSU_SYSTEM.Controllers
         /// 
 
 
-        
 
 
 
@@ -51,6 +50,7 @@ namespace EDSU_SYSTEM.Controllers
 
 
 
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         // GET: admissions
         public async Task<IActionResult> Index()
         {
@@ -71,6 +71,7 @@ namespace EDSU_SYSTEM.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> List(string? id)
         {
             ViewBag.currentSession = id;
@@ -621,16 +622,19 @@ namespace EDSU_SYSTEM.Controllers
             }
             return View(applicant);
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> Cancel(int? id)
         {
             var applicants = _context.UgApplicants.Where(x => x.Id == id).FirstOrDefault();
             return PartialView("_cancel", applicants);
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> Reject(int? id)
         {
             var applicants = _context.UgApplicants.Where(x => x.Id == id).FirstOrDefault();
             return PartialView("_reject", applicants);
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reject(int? id, int a)
@@ -658,6 +662,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("Index", "admissions");
 
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> Admit(int? id)
         {
             var applicants = _context.UgApplicants.Where(x => x.Id == id).FirstOrDefault();
@@ -666,6 +671,7 @@ namespace EDSU_SYSTEM.Controllers
             ViewData["LevelId"] = new SelectList(_context.Levels, "Id", "Name");
             return PartialView("_admissionPartial", applicants);
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Admit(int? id, UgMainWallet allwallet)
@@ -725,7 +731,7 @@ namespace EDSU_SYSTEM.Controllers
             return RedirectToAction("Index", "admissions");
 
         }
-
+        [Authorize(Roles = "staff, superAdmin, ugAdmission, ugClearance")]
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ClearApplicant(string? id, Student student)
@@ -806,6 +812,7 @@ namespace EDSU_SYSTEM.Controllers
                 
           
         }
+        [Authorize(Roles = "staff, superAdmin, ugAdmission, ugClearance")]
 
         //Upon activation of wallet, this module creates the first debt row in the 
         //wallets table and updates the applicants/student's Main wallet.
@@ -938,6 +945,7 @@ namespace EDSU_SYSTEM.Controllers
         }
 
         // GET: admissions/Delete/5
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.UgApplicants == null)
@@ -959,7 +967,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return PartialView("_delete",applicant);
         }
-
+        [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         // POST: admissions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -978,6 +986,7 @@ namespace EDSU_SYSTEM.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+       
         public async Task<IActionResult> Wallet(string id)
         {
             var applicant = await _context.UgApplicants.Where(x => x.ApplicantId == id).FirstOrDefaultAsync();

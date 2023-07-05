@@ -18,7 +18,7 @@ using CanvasApi.Client.Users.Models;
 
 namespace EDSU_SYSTEM.Controllers
 {
-   
+    [Authorize]
     public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -38,8 +38,8 @@ namespace EDSU_SYSTEM.Controllers
         {
             try
             {
-                var id = "4e8c6adc-ae5c-46e4-8618-e0b18f0841ba";
-                var users = _userManager.Users.Where(x => x.Type == 1).ToList();
+                var id = "3970d7df-4069-40ee-a778-57a181a8e2c5";
+                var users = _userManager.Users.Where(x => x.Type == 4).ToList();
                 var role = await _roleManager.FindByIdAsync(id);
                 foreach (var item in users)
                 {
@@ -175,9 +175,9 @@ namespace EDSU_SYSTEM.Controllers
                             c.Status == MainStatus.Approved &&
                             c.SessionId == student.CurrentSession
                                    select c).Include(c => c.Courses).ToList();
-            var timetable = (from c in _context.TimeTables where c.Courses.Courses.DepartmentId == student.Department && c.Courses.Courses.Level ==
+            var timetable = (from c in _context.TimeTables where c.DepartmetId == student.Department && c.LevelId ==
                              student.Level
-                                   select c).Include(c => c.Courses).ThenInclude(c => c.Courses).Include(c => c.Staffs).ThenInclude(c => c.Staff).ToList();
+                                   select c).Include(c => c.Courses).ThenInclude(s => s.Courses).ToList();
             
             //After getting the courses from coursereg and Scores from Results table, we sorted them using the course code before serializing them
             //so that the courses can align with the courses since they are coming from the same table.
@@ -187,7 +187,11 @@ namespace EDSU_SYSTEM.Controllers
 
             var CourseCode = (from c in sortedCourses select c.Courses.Code).ToList();
             var TestScores = (from v in sortedGrades select v.CA).ToList();
-
+            foreach (var item in CourseCode)
+            {
+                Console.WriteLine("This is it",item);
+            }
+           
             var json = JsonSerializer.Serialize(CourseCode);
             var json2 = JsonSerializer.Serialize(TestScores);
 
