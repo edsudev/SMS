@@ -16,7 +16,7 @@
 
 
 </style>
-    <ul class="d-flex my-auto login" style="list-style:none">
+    <ul class="my-auto login" style="list-style:none">
         @if (SignInManager.IsSignedIn(User))
         {
 
@@ -42,10 +42,7 @@
                     <a class="" asp-action="index" asp-controller="parents"><span class="cycle-letter">@User.Identity?.Name?[0]</span></a>
                 }
 
-           @* <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                
-            </a>*@
-
+          
             </li>
 
             <li class="">
@@ -62,9 +59,6 @@
             <li class="mr-3">
                 <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
             </li>
-            @*<li class="">
-                <a class="btn btn-success" href="edouniversity.instructure.com">LMS</a>
-            </li>*@
         }
     </ul>
 

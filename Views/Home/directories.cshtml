@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<EDSU_SYSTEM.Models.Staff>
-<div class="nav row">
+<div class="nav">
     <app-navigaton class="col-md-11"></app-navigaton>
     <partial name="_LoginPartial" class="col-md-1" />
 </div>
@@ -48,8 +48,7 @@
                                 </div>
                             </td>
                             <td>
-                                @item.Surname.ToUpper()
-                                @*@Html.DisplayFor(modelItem => item.Surname)*@
+                                @(string.IsNullOrEmpty(item.Surname) ? item.Surname : item.Surname.ToUpper())
                                 @Html.DisplayFor(modelItem => item.FirstName)
                                 @Html.DisplayFor(modelItem => item.MiddleName)
                             </td>
