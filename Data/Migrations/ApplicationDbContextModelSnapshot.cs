@@ -16,7 +16,7 @@ namespace EDSU_SYSTEM.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.15")
+                .HasAnnotation("ProductVersion", "6.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.Activities", b =>
@@ -493,6 +493,52 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.HasIndex("YearOfAdmission");
 
                     b.ToTable("UgApplicants");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ApplicationPayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModeOfAdmission")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ref")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("ApplicationPayments");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.ApplicationUser", b =>
@@ -5140,6 +5186,15 @@ namespace EDSU_SYSTEM.Data.Migrations
                     b.Navigation("States");
 
                     b.Navigation("YearOfAdmissions");
+                });
+
+            modelBuilder.Entity("EDSU_SYSTEM.Models.ApplicationPayment", b =>
+                {
+                    b.HasOne("EDSU_SYSTEM.Models.Session", "Sessions")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("EDSU_SYSTEM.Models.ApplicationUser", b =>

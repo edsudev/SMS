@@ -133,6 +133,7 @@ namespace EDSU_SYSTEM.Data
         public DbSet<EDSU_SYSTEM.Models.ConversionCourseReg>? ConversionCourseRegs { get; set; }
         public DbSet<EDSU_SYSTEM.Models.ConversionProgram>? ConversionPrograms { get; set; }
         public DbSet<EDSU_SYSTEM.Models.PgCourseReg>? PgCourseRegs { get; set; }
+        public DbSet<EDSU_SYSTEM.Models.ApplicationPayment>? ApplicationPayments { get; set; }
 
 
     }

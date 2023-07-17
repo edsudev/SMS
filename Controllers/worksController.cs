@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using EDSU_SYSTEM.Models;
 using EDSU_SYSTEM.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDSU_SYSTEM.Controllers
 {
+    [Authorize]
     public class worksController : Controller
     {
         private readonly ApplicationDbContext _context;

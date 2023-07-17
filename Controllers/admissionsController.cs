@@ -187,45 +187,53 @@ namespace EDSU_SYSTEM.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Step1(string id, int a)
+        public async Task<IActionResult> Step1(string id, Applicant applicant)
         {
-            var applicants = await _context.UgApplicants.FirstOrDefaultAsync(i => i.ApplicantId == id);
-
             if (id == null)
             {
                 return NotFound();
             }
-            try
-            {
-                var ApplicatantToUpdate = await _context.UgApplicants
-                .FirstOrDefaultAsync(c => c.ApplicantId == id);
 
-                if (await TryUpdateModelAsync<Applicant>(ApplicatantToUpdate, "", c => c.Surname, c => c.FirstName, c => c.OtherName,
-                    c => c.Sex, c => c.DOB, c => c.MaritalStatus, c => c.PlaceOfBirth,
-                    c => c.ContactAddress, c => c.PermanentHomeAddress, c => c.NationalityId, c => c.StateOfOriginId, c => c.LGAId,
-                    c => c.PhoneNumber, c => c.Email, c => c.PrimarySchool, c => c.SecondarySchool, c => c.Indigine, c => c.ModeOfEntry))
+            var applicantToUpdate = await _context.UgApplicants.FirstOrDefaultAsync(i => i.ApplicantId == id);
+
+            if (applicantToUpdate == null)
+            {
+                return NotFound();
+            }
+
+           
+                applicantToUpdate.Surname = applicant.Surname;
+                applicantToUpdate.FirstName = applicant.FirstName;
+                applicantToUpdate.OtherName = applicant.OtherName;
+                applicantToUpdate.Sex = applicant.Sex;
+                applicantToUpdate.DOB = applicant.DOB;
+                applicantToUpdate.MaritalStatus = applicant.MaritalStatus;
+                applicantToUpdate.PlaceOfBirth = applicant.PlaceOfBirth;
+                applicantToUpdate.ContactAddress = applicant.ContactAddress;
+                applicantToUpdate.PermanentHomeAddress = applicant.PermanentHomeAddress;
+                applicantToUpdate.NationalityId = applicant.NationalityId;
+                applicantToUpdate.StateOfOriginId = applicant.StateOfOriginId;
+                applicantToUpdate.LGAId = applicant.LGAId;
+                applicantToUpdate.PhoneNumber = applicant.PhoneNumber;
+                applicantToUpdate.Email = applicant.Email;
+                applicantToUpdate.PrimarySchool = applicant.PrimarySchool;
+                applicantToUpdate.SecondarySchool = applicant.SecondarySchool;
+                applicantToUpdate.Indigine = applicant.Indigine;
+                applicantToUpdate.ModeOfEntry = applicant.ModeOfEntry;
+
+                try
                 {
-                    try
-                    {
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-
-                        ModelState.AddModelError("", "Unable to save changes. " +
-                            "Try again, and if the problem persists, " +
-                            "see your system administrator.");
-                    }
-                    return RedirectToAction("Step2", "admissions", new { id });
+                    await _context.SaveChangesAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
+                catch (DbUpdateConcurrencyException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
 
-            }
-            return View();
-
+                return RedirectToAction("Step2", "admissions", new { id });
+            
         }
         // GET: Applicants/Step2/Id
         public async Task<IActionResult> Step2(string? id)

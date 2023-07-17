@@ -43,7 +43,7 @@ namespace EDSU_SYSTEM.Controllers
 
             return View(await sessions.ToListAsync());
         }
-        //[Authorize(Roles = "Level Adviser")]
+        //[Authorize(Roles = "levelAdviser")]
         // GET: My students
         public async Task<IActionResult> Pending()
         {
