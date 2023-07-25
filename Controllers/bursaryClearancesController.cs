@@ -9,10 +9,11 @@ using EDSU_SYSTEM.Data;
 using EDSU_SYSTEM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using static EDSU_SYSTEM.Models.Enum;
 
 namespace EDSU_SYSTEM.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class BursaryClearancesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,7 +31,6 @@ namespace EDSU_SYSTEM.Controllers
             var students = _context.Students.Where(s => studentIds.Contains(s.Id)).Include(i => i.Departments).Include(i => i.Levels).ToList();
 
             return View(students);
-            
         }
         public async Task<IActionResult> Students()
         {
@@ -79,15 +79,38 @@ namespace EDSU_SYSTEM.Controllers
         // GET: busaryClearances/Details/5
         public async Task<IActionResult> Details(string? id)
         {
-            ViewBag.student = id;
-            var clearances = (from c in _context.BursaryClearances where c.Students.SchoolEmailAddress == id select c).Include(i => i.Payments).ThenInclude(i => i.OtherFees).ToList();
-            
-            if (clearances == null)
+            try
             {
-                return RedirectToAction("PageNotFound", "error");
-            }
+                var student = (from s in _context.Students where s.SchoolEmailAddress == id select s).Include(i => i.Departments).FirstOrDefault();
+                ViewBag.name = student.Fullname;
+                ViewBag.mat = student.MatNumber;
+                ViewBag.department = student.Departments.Name;
+                ViewBag.email = student.SchoolEmailAddress;
+                var clearances = (from c in _context.BursaryClearances where c.Students.SchoolEmailAddress == id select c).Include(i => i.Payments).ThenInclude(i => i.OtherFees).ToList();
 
-            return View(clearances);
+                if (clearances == null)
+                {
+                    return RedirectToAction("PageNotFound", "error");
+                }
+
+                return View(clearances);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+        [HttpPost]
+        public async Task<IActionResult> Clearance(ClearanceRemark status, string email)
+        {
+            var student = (from v in _context.BursaryClearances where v.Students.SchoolEmailAddress == email select v).FirstOrDefault();
+
+           // student.rem = status;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
         // GET: busaryClearances/Create
       //  [Authorize(Roles = "student")]

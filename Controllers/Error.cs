@@ -8,6 +8,7 @@ namespace EDSU_SYSTEM.Controllers
         // GET: Error
         public ActionResult Badreq()
         {
+            ViewBag.err = TempData["err"];
             return View();
         }
         public ActionResult ResourceNotFound()

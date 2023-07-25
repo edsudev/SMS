@@ -616,19 +616,24 @@ namespace EDSU_SYSTEM.Controllers
         } 
         public async Task<IActionResult> Summary(string? id)
         {
+            
             if (id == null || _context.UgApplicants == null)
             {
                 return NotFound();
             }
-
-
             var applicant = await _context.UgApplicants.Include(i => i.Nationalities).Include(i => i.States).Include(i => i.LGAs).FirstOrDefaultAsync(i => i.ApplicantId == id);
-
             if (applicant == null)
             {
-                return NotFound();
+                ViewBag.err = "Applicant with this ID does not exist";
+                return RedirectToAction("badreq", "error");
             }
-            return View(applicant);
+            if (applicant.Paid == true)
+            {
+                return View(applicant);
+            }
+            TempData["err"] = "Make sure to have paid your application fee before attempting to access this resource.";
+            return RedirectToAction("badreq", "error");
+
         }
         [Authorize(Roles = "staff, superAdmin, ugAdmission")]
         public async Task<IActionResult> Cancel(int? id)

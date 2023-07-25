@@ -125,9 +125,12 @@ namespace EDSU_SYSTEM.Models
         }
         public enum ClearanceRemark
         {
-            Cleared,
-            Partial,
-            NotCleared
+            Pending,
+            Partial_Cleared,
+            Fully_Cleared,
+            Scholarship_Cleared,
+            Temp_Pass,
+            Not_Cleared
 
         }
     }

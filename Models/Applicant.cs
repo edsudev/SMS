@@ -160,6 +160,7 @@ namespace EDSU_SYSTEM.Models
         public int? YearOfAdmission { get; set; }
         public Session? YearOfAdmissions { get; set; }
         public bool? Cleared { get; set; }
+        public bool? Paid { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
     }
