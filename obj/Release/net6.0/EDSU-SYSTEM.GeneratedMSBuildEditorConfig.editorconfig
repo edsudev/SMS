@@ -367,6 +367,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxsRmVlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/ApplicationPayments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25QYXltZW50c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/ApplicationPayments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25QYXltZW50c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/ApplicationPayments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25QYXltZW50c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/ApplicationPayments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25QYXltZW50c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/ApplicationPayments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25QYXltZW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/BursaryClearances/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVyc2FyeUNsZWFyYW5jZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -1149,6 +1169,110 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/IctComplaints/_edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWN0Q29tcGxhaW50c1xfZWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Clearance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cQ2xlYXJhbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Debts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cRGVidHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Eligibility.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cRWxpZ2liaWxpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Feesdetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cRmVlc2RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/HostelReq.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cSG9zdGVsUmVxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Instructions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cSW5zdHJ1Y3Rpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Jupeb.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cSnVwZWIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/LMSreq.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cTE1TcmVxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Requirements.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cUmVxdWlyZW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/scholarships.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cc2Nob2xhcnNoaXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Step1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cU3RlcDEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Step2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cU3RlcDIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Step3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cU3RlcDMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Step4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cU3RlcDQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/Summary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/wallet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cd2FsbGV0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/_admissionPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cX2FkbWlzc2lvblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/_cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cX2NhbmNlbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/_clearancePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cX2NsZWFyYW5jZVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/_delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cX2RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/JupebAdmission/_reject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSnVwZWJBZG1pc3Npb25cX3JlamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/SANNI PHATAII/Desktop/EDSU-Project/EDSU-SYSTEM/Views/LatestNews/Create.cshtml]

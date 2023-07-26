@@ -63,7 +63,7 @@ class Navigatione extends HTMLElement {
                             <a class="dropdown-item" href="/admissions/undergraduate">Undergraduate</a>
                             <a class="dropdown-item" href="/pgadmissions/postgraduate">Post Graduate</a>
                             <a class="dropdown-item" href="/conversionadmissions/conversion">Conversion</a>
-                            <a class="dropdown-item" href="/admissions/jupeb">JUPEB</a>
+                            <a class="dropdown-item" href="/jupebadmission/jupeb">JUPEB</a>
                         </div>
                     </div>
                 </li>
@@ -113,16 +113,16 @@ class Navigatione extends HTMLElement {
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
+                 <li class="nav-item">
                     <div class="dropdown nav-link ">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Journal
+                        <a class="dropdown-toggle" href="https://odl.edouniversity.edu.ng" role="button">
+                            ODL
                         </a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown nav-link ">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a class="dropdown-toggle" href="https://edsuth.edouniversity.edu.ng"role="button">
                             EDSUTH
                         </a>
                     </div>
@@ -205,7 +205,7 @@ class Navigatione extends HTMLElement {
                             <a class="dropdown-item" href="/admissions/undergraduate">Undergraduate</a>
                             <a class="dropdown-item" href="/pgadmissions/postgraduate">Post Graduate</a>
                             <a class="dropdown-item" href="/conversionadmissions/conversion">Conversion</a>
-<a class="dropdown-item" href="/admissions/jupeb">JUPEB</a>
+                            <a class="dropdown-item" href="/jupebadmission/jupeb">JUPEB</a>
                         </div>
                     </div>
                 </li>
@@ -255,16 +255,17 @@ class Navigatione extends HTMLElement {
                         </div>
                     </div>
                 </li>
+                
                 <li class="nav-item">
                     <div class="dropdown nav-link ">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Journal
+                        <a class="dropdown-toggle" href="https://odl.edouniversity.edu.ng" role="button">
+                            ODL
                         </a>
                     </div>
                 </li>
-                <li class="nav-item">
+<li class="nav-item">
                     <div class="dropdown nav-link ">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a class="dropdown-toggle" href="https://edsuth.edouniversity.edu.ng" >
                             EDSUTH
                         </a>
                     </div>
